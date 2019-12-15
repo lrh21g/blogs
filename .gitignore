@@ -7,3 +7,4 @@ vuepress
 .vscode
 dist
 private-config.js
+deploy.sh
