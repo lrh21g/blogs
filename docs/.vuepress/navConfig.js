@@ -1,3 +1,9 @@
-module.exports = [
-  { text: 'CSS', link: '/css/' },
+module.exports = [{
+    text: 'CSS',
+    link: '/css/'
+  },
+  {
+    text: 'JavaScript',
+    link: '/javascript/'
+  },
 ]
