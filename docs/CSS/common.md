@@ -17,7 +17,9 @@
   text-overflow: ellipsis;
   word-break: break-all;
   white-space: pre-line;
+  /* autoprefixer: off */
   -webkit-box-orient: vertical;
+  /* autoprefixer: on */
   -webkit-line-clamp: @row;
 }
 ```
