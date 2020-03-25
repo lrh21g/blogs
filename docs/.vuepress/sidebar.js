@@ -13,5 +13,19 @@ module.exports = {
       'common',
       'hybrid'
     ]
+  }],
+  '/vue/': [{
+    title: 'Vue',
+    collapsable: false,
+    children: [
+      'common'
+    ]
+  }],
+  '/react/': [{
+    title: 'React',
+    collapsable: false,
+    children: [
+      'common'
+    ]
   }]
 }
