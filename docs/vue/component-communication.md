@@ -64,14 +64,22 @@ export default {
 + **provide祖先组件的实例, 然后在子孙组件中注入依赖**, 确定是实例上挂载很多没有必要的东西比如props，methods。
   
   ``` javascript
+  // provide
   export default {
     provide () { return { parentApp: this } }
+  }
+  // inject
+  export default {
+    inject: {
+      parentApp: { default: () => ({}) } // 函数式组件取值不一样
+    }
   }
   ```
 
 + **`Vue.observable` 优化响应式 provide（推荐）**
   
   ``` javascript
+  // provide
   export default {
     provide () {
       this.parentApp = Vue.observable({
@@ -82,7 +90,60 @@ export default {
       }
     }
   }
+  // inject
+  export default {
+    inject: {
+      parentApp: { default: () => ({}) } // 函数式组件取值不一样
+    }
+  }
   ```
+
+## `dispatch` / `broadcast` 方法（自行实现）
+
++ 在子组件调用 `dispatch` 方法，向上级指定的组件实例（最近的）上触发自定义事件，并传递数据，且该上级组件已预先通过 `$on` 监听了这个事件；
++ 在父组件调用 `broadcast` 方法，向下级指定的组件实例（最近的）上触发自定义事件，并传递数据，且该下级组件已预先通过 `$on` 监听了这个事件。
+
+``` javascript
+function broadcast(componentName, eventName, params) {
+  this.$children.forEach(child => {
+    const name = child.$options.name;
+
+    if (name === componentName) {
+      child.$emit.apply(child, [eventName].concat(params));
+    } else {
+      broadcast.apply(child, [componentName, eventName].concat([params]));
+    }
+  });
+}
+export default {
+  methods: {
+    // componentName: 用于【向上】递归遍历来寻找对应的组件
+    // eventName: 自定义事件名
+    // params: 需要传递的数据
+    dispatch(componentName, eventName, params) {
+      let parent = this.$parent || this.$root;
+      let name = parent.$options.name;
+
+      while (parent && (!name || name !== componentName)) {
+        parent = parent.$parent;
+
+        if (parent) {
+          name = parent.$options.name;
+        }
+      }
+      if (parent) {
+        parent.$emit.apply(parent, [eventName].concat(params));
+      }
+    },
+    // componentName: 用于【向下】递归遍历来寻找对应的组件
+    // eventName: 自定义事件名
+    // params: 需要传递的数据
+    broadcast(componentName, eventName, params) {
+      broadcast.call(this, componentName, eventName, params);
+    }
+  }
+};
+```
 
 ## `$parent` / `$children` & `ref`
 
@@ -93,7 +154,7 @@ export default {
 
 ## `findComponents` 系列方法
 
-### 向上找到最近的指定组件（`findComponentUpward`）
++ 向上找到最近的指定组件（`findComponentUpward`）
 
 ``` javascript
 // 由一个组件，向上找到最近的指定组件
@@ -112,7 +173,7 @@ function findComponentUpward (context, componentName) {
 export { findComponentUpward };
 ```
 
-### 向上找到所有的指定组件（findComponentsUpward）
++ 向上找到所有的指定组件（findComponentsUpward）
 
 ``` javascript
 // 由一个组件，向上找到所有的指定组件
@@ -132,7 +193,7 @@ function findComponentsUpward (context, componentName) {
 export { findComponentsUpward };
 ```
 
-### 向下找到最近的指定组件（findComponentDownward）
++ 向下找到最近的指定组件（findComponentDownward）
 
 ``` javascript
 // 由一个组件，向下找到最近的指定组件
@@ -160,7 +221,7 @@ function findComponentDownward (context, componentName) {
 export { findComponentDownward };
 ```
 
-### 向下找到所有指定的组件（findComponentsDownward）
++ 向下找到所有指定的组件（findComponentsDownward）
 
 ``` javascript
 // 由一个组件，向下找到所有指定的组件
@@ -176,7 +237,7 @@ function findComponentsDownward (context, componentName) {
 export { findComponentsDownward };
 ```
 
-### 找到指定组件的兄弟组件（findBrothersComponents）
++ 找到指定组件的兄弟组件（findBrothersComponents）
 
 ``` javascript
 // 由一个组件，找到指定组件的兄弟组件
