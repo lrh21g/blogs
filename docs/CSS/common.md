@@ -116,6 +116,57 @@
 }
 ```
 
+## 去除input默认填充的背景颜色
+
+``` css
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+```
+
+## 清除input[type=number]的默认样式
+
+``` css
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+```
+
+## 清除移动端 a 标签等点击区域变色
+
+``` css
+*{
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+}
+```
+
+## 避免ios滑动滚动条卡顿
+
+``` css
+*{
+  -webkit-overflow-scrolling : touch
+}
+```
+
+## 清楚移动端 `input` 样式
+
+``` css
+input{
+  border: none;
+  -moz-appearance:none;
+  -webkit-appearance : none ; /*解决ios上按钮的圆角问题*/
+  border-radius: 0; /*解决ios上输入框圆角问题*/
+  outline:medium; /*去掉鼠标点击的默认黄色边框*/
+  background-color: transparent;
+}
+```
+
 ## 3. 重置样式(reset.css)
 
 ``` css
@@ -146,3 +197,7 @@ body {font-family: Arial, "Microsoft Yahei", "Helvetica Neue", Helvetica, sans-s
 hr {height: .02rem;margin: .1rem 0;border: medium none;border-top: .02rem solid #cacaca;}
 a {color: #25a4bb;text-decoration: none;}
 ```
+
+参考:
+
++ [CSS-Tricks - 清楚默认样式](http://css-tricks.neatbang.com/reset/#reset)
