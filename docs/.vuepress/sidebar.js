@@ -18,7 +18,8 @@ module.exports = {
     title: 'Vue',
     collapsable: false,
     children: [
-      'common'
+      'common',
+      'component-communication'
     ]
   }],
   '/react/': [{
