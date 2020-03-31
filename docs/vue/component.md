@@ -16,7 +16,7 @@ docs/.vuepress/components/validator-form
 
 要在 `Form` 中逐一调用 `FormItem` 的验证方法，而 `Form` 和 `FormItem` 是独立的，**需要预先将 `FormItem` 的每个实例缓存在 `Form` 中**。当每个 `FormItem` 渲染时，将其自身（this）作为参数通过 dispatch 组件通信方法派发到 `Form` 组件中，然后通过一个数组缓存起来；同理当 `FormItem` 销毁时，将其从 `Form` 缓存的数组中移除。
 
-<validator-form-formIndex />
+<formValidator-formIndex />
 
 ## 全局提示组件
 

@@ -16,7 +16,7 @@
 
 <script>
   import iForm from './from';
-  import iFormItem from './from-item';
+  import iFormItem from './fromItem';
   import iInput from './input';
 
   export default {
