@@ -10,6 +10,7 @@ module.exports = {
     title: 'JavaScript',
     collapsable: false,
     children: [
+      'base',
       'common',
       'hybrid'
     ]
