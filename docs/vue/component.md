@@ -5,9 +5,9 @@
 组件目录
 
 ``` txt
-docs/.vuepress/components/validator-form
+docs/.vuepress/components/formValidator
   |--- formIndex.vue
-  |--- form-item.vue
+  |--- formItem.vue
   |--- form.vue
   |--- input.vue
 ```
@@ -41,3 +41,56 @@ docs/.vuepress/components/alert
 + `notification.js` 和 `alert.vue` 是可以复用的，如果还要开发其它同类的组件，比如二次确认组件 `$Confirm`, 只需要再写一个入口 `confirm.js`，并将 `alert.vue` 进一步封装，将 notices 数组的循环体写为一个新的组件，**通过配置来决定是渲染 Alert 还是 Confirm**，这在可维护性上是友好的。
 + 在 `notification.js` 的 new Vue 时，使用了 Render 函数来渲染 `alert.vue`，这是因为使用 template 在 runtime 的 Vue.js 版本下是会报错的。
 + 本例的 `content` 只能是字符串，如果要显示自定义的内容，除了用 `v-html 指令`，也能用 `Functional Render`。
+
+## 可用 Render 自定义列的表格组件
+
+组件目录
+
+``` txt
+docs/.vuepress/components/renderTable
+  |--- renderTableIndex.vue
+  |--- render.js
+  |--- table.vue
+```
+
+<renderTable-renderTableIndex />
+
+## 可用 slot-scope 自定义列的表格组件
+
+`slot(插槽)`: 用于分发内容。（常规的 `slot` 无法实现对组件循环体的每一项进行不同的内容分发）
+
+`slot-scope`: 本质上跟 `slot` 一样，只不过可以传递参数
+
++ 方案一: `slot-scope` 实现，同时兼容 `Render` 函数的旧用法。适用于组件层级简单的表格。
+
+  ``` txt
+  docs/.vuepress/components/slotScopeTable
+  |--- slotScopeTableIndex1.vue
+  |--- render.js
+  |--- tableRender1.vue -- Table组件
+  ```
+
+  <slotScopeTable-slotScopeTableIndex1 />
+
++ 方案二: 如果组件已经成型（某 API 基于 Render 函数），但一时间不方便支持 `slot-scope`，而使用者又想用，则可以使用此方案。一种 hack 方式，不推荐使用。
+
+  ``` txt
+  docs/.vuepress/components/slotScopeTable
+  |--- slotScopeTableIndex2.vue
+  |--- render.js
+  |--- tableRender2.vue -- Table组件
+  ```
+
+  <slotScopeTable-slotScopeTableIndex2 />
+
++ 方案三: 将 `slot-scope` 集成在 `Table组件` 中，并使用 `provide` / `inject` 进行数据传递，用于组件层级复杂的表格。不会破坏原有的任何内容，但会额外支持 `slot-scope` 用法，关键是改动简单。
+
+  ``` txt
+  docs/.vuepress/components/slotScopeTable
+  |--- slotScopeTableIndex3.vue
+  |--- render.js
+  |--- slot.js
+  |--- tableRender3.vue -- Table组件
+  ```
+
+  <slotScopeTable-slotScopeTableIndex3 />
