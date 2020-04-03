@@ -94,3 +94,24 @@ docs/.vuepress/components/renderTable
   ```
 
   <slotScopeTable-slotScopeTableIndex3 />
+
+## 树形控件（递归组件） — Tree
+
+递归组件的两个必要条件：
+
++ 要给组件设置 name；
++ 要有一个明确的结束条件
+
+这类组件一般都是**数据驱动型**的，父级有一个字段 children，然后递归。
+
+``` txt
+docs/.vuepress/components/tree
+|--- treeIndex.vue
+|--- tree.vue
+|--- node.vue
+
+docs/.vuepress/components/utils
+|--- assist.js
+```
+
+<tree-treeIndex />
