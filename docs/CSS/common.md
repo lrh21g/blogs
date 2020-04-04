@@ -116,7 +116,7 @@
 }
 ```
 
-## 去除input默认填充的背景颜色
+## 3. 去除input默认填充的背景颜色
 
 ``` css
 input:-webkit-autofill {
@@ -124,7 +124,7 @@ input:-webkit-autofill {
 }
 ```
 
-## 清除input[type=number]的默认样式
+## 4. 清除input[type=number]的默认样式
 
 ``` css
 input[type=number] {
@@ -138,7 +138,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ```
 
-## 清除移动端 a 标签等点击区域变色
+## 5. 清除移动端 a 标签等点击区域变色
 
 ``` css
 *{
@@ -146,7 +146,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ```
 
-## 避免ios滑动滚动条卡顿
+## 6. 避免ios滑动滚动条卡顿
 
 ``` css
 *{
@@ -154,7 +154,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ```
 
-## 清楚移动端 `input` 样式
+## 7. 清楚移动端 `input` 样式
 
 ``` css
 input{
@@ -167,7 +167,7 @@ input{
 }
 ```
 
-## 3. 重置样式(reset.css)
+## 8. 重置样式(reset.css)
 
 ``` css
 @charset "utf-8";
