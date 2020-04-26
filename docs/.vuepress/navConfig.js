@@ -4,7 +4,7 @@ module.exports = [{
   },
   {
     text: 'JavaScript',
-    link: '/javascript/common.html'
+    link: '/javascript/base.html'
   },
   {
     text: 'Vue',

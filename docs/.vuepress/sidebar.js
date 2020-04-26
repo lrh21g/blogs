@@ -10,9 +10,11 @@ module.exports = {
     title: 'JavaScript',
     collapsable: false,
     children: [
-      'base',
-      'common',
-      'hybrid'
+      'base', // JavaScript基础
+      'prototype', // 原型与继承
+      'scope', // 作用域
+      'common', // 通用封装
+      'hybrid' // 混合开发
     ]
   }],
   '/vue/': [{
