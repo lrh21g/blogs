@@ -87,7 +87,7 @@ JavaScript 引擎要复杂得多。例如，在语法分析和代码生成阶段
 
 ## 词法作用域
 
-**词法作用域就是定义在词法阶段的作用域**。即：**由在写代码时将变量和块作用域写在哪里来决定的**，因此当词法分析器处理代码时会保持作用域不变（大部分情况下是这样的）。
+**词法作用域就是定义在词法阶段的作用域**。即：**由在写代码时将变量和块作用域写在哪里来决定的，因此当词法分析器处理代码时会保持作用域不变（大部分情况下是这样的）。**
 
 **作用域查找会在找到第一个匹配的标识符时停止。在多层的嵌套作用域中可以定义同名的标识符，这叫作遮蔽效应（内部的标识符遮蔽了外部的标识符）** 。
 
@@ -222,6 +222,203 @@ JavaScript 引擎会在编译阶段进行数项的性能优化。其中有些优
   }
   ```
 
+## 执行上下文
+
+执行上下文（执行上下文环境）：**在执行代码之前，把将要用到的所有的变量都事先拿出来，有的直接赋值了，有的先用undefined占个空。**
+
++ 全局代码的上下文环境数据内容
+  | 环境数据                                               | 操作                          |
+  | :----------------------------------------------------- | :---------------------------- |
+  | 普通变量（包括函数表达式）<br/> 如：`var a = 10;`      | 声明（默认赋值为`undefined`） |
+  | 函数声明（包括函数表达式）<br/> 如：`function fn() {}` | 赋值                          |
+  | this                                                   | 赋值                          |
++ 函数体中的上下文环境数据内容：在全局代码上下文的环境数据的基础下，附加如下数据内容
+  | 环境数据             | 操作 |
+  | :------------------- | :--- |
+  | 参数                 | 赋值 |
+  | arguments            | 赋值 |
+  | 自由变量的取值作用域 | 赋值 |
+
+## 执行上下文栈
+
++ 执行全局代码时，会产生一个执行上下文环境
++ 每次调用函数都又会产生执行上下文环境
++ 当函数调用完成时，这个上下文环境以及其中的数据都会被消除，再重新回到全局上下文环境。**处于活动状态的执行上下文环境只有一个**。
+
+## 作用域和上下文环境
+
+**作用域中变量的值是在执行过程中产生的确定的，而作用域却是在函数创建时就确定了。**
+
+**如果要查找一个作用域下某个变量的值，就需要找到这个作用域对应的执行上下文环境，再在其中寻找变量的值。**
+
+## 自由变量与作用域链
+
+在`A作用域`中使用的`变量x`，却没有在`A作用域`中声明（即在其他作用域中声明的），对于`A作用域`来说，`变量x`就是一个**自由变量**。
+
+自由变量的取值需要到**创建**这个函数的那个作用域中取值。示例如下：
+
+``` javascript
+var x = 10;
+function fn() { console.log(x); }
+function show(f) {
+  var x = 20;
+  (function () {
+    f(); // 10
+  })();
+}
+show(fn)
+```
+
 ## 闭包
 
 **当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。**
+
+闭包产生的场景：
+
++ **函数作为返回值**
+  
+  ``` javascript
+  function fn() {
+    var max = 10;
+    return function bar(x) {
+      if (x > max) { console.log(x); }
+    }
+  }
+  var f1 = fn();
+  f1(15);
+  ```
+
++ **函数作为参数传递**
+
+  ``` javascript
+  var max = 10,
+      fn = function (x) {
+        if (x > max) { console.log(x); }
+      }
+  (function (f) {
+    var max = 100;
+    f(15);
+  })(fn);
+  // 执行 f(15) 时，max变量的取值是 10，而不是 100
+  // 要去创建这个函数的作用域取值，而不是“父作用域”
+  ```
+
+在定时器、事件监听器、Ajax 请求、跨窗口通信、Web Workers 或者任何其他的异步（或者同步）任务中，只要使用了回调函数，实际上就是在使用闭包！
+
+### 循环与闭包
+
+``` javascript
+for (var i = 1; i <= 5; i++) {
+  setTimeout(function timer() {
+    console.log(i);
+  }, i * 1000);
+}
+// 输出：6 6 6 6 6
+```
+
++ 原因：
+  + 条件首次成立时, `i` 的值是 `6`。因此，输出显示的是循环结束时 `i` 的最终值。
+    + 原因：延迟函数(`setTimeout`)的回调在循环结束时才执行
+  + 根据作用域工作原理，尽管循环中的五个函数都在各个迭代中分别定义，但是它们都**被封锁在一个共享的全局作用域中**，因此实际上只有一个 `i`
++ 解决方法：
+  + 立即执行函数
+
+    立即执行函数（IIFE）会为每个迭代都生成一个新的作用域，使得延迟函数的回调可以将新的作用域封闭在每个迭代内部，每个迭代中都会含有一个具有正确值的变量提供访问。
+
+    ``` javascript
+    for (var i = 1; i <= 5; i++) {
+      (function (j) {
+        setTimeout(function timer() {
+          console.log(j)
+        }, j * 1000)
+      })(i);
+    }
+    ```
+
+  + `let`：
+
+    `let` 可以用来劫持块作用域，并且在这个块作用域中声明一个变量。本质上这是将一个块作用域转换成一个可以被关闭的作用域。
+
+    ``` javascript
+    for (let i = 1; i <= 5; i++) {
+      setTimeout(function timer() {
+        console.log(i)
+      }, i * 1000)
+    }
+    ```
+
+### 模块模式
+
+模块模式需要具备两个必要条件：
+
++ 必须有外部的封闭函数，该函数必须至少被调用一次（每次调用都会创建一个新的模块实例）。
++ 封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或者修改私有的状态。
+
+基于函数的模块并不是一个能被稳定识别的模式（编译器无法识别），它们的API 语义只有在运行时才会被考虑进来。因此可以在运行时修改一个模块的API
+
+``` javascript
+// CoolModule 为独立的模块创建器，可以被调用任意多次，每次调用都会创建一个新的模块实例
+// 模块也是普通的函数，可以接受参数
+function CoolModule(id) {
+  function identify() { console.log(id); }
+  return { identify: identify };
+}
+var foo1 = CoolModule("foo 1")
+```
+
+``` javascript
+// 当只需要一个实例时，可以使用 立即执行函数 来实现单例模式
+// 通过在模块实例的内部保留对 公共API 对象的内部引用，可以从内部对模块实例进行修改，包括添加或删除方法和属性，以及修改它们的值。
+var foo = (function CoolModule(id) {
+  function change() {
+    // 修改公用API
+    publicAPI.identify = identify2;
+  }
+  function identify1() { console.log( id ); }
+  function identify2() { console.log( id.toUpperCase() ); }
+
+  var publicAPI = {
+    change: change,
+    identify: identify1
+  }
+  return publicAPI
+})("foo module");
+foo.identify(); // foo module
+foo.change();
+foo.identify(); // FOO MODULE
+```
+
+``` javascript
+// 为了模块的定义引入了包装函数（可以传入任何依赖），并且将返回值，也就是模块的API，储存在一个根据名字来管理的模块列表中。
+var MyModules = (function Manager() {
+  var modules = {};
+  function define(name, deps, impl) {
+    for (var i = 0; i < deps.length; i++) {
+      deps[i] = modules[deps[i]];
+      modules[name] = impl.apply(impl, deps);
+    }
+  }
+  function get(name) {
+    return modules[name];
+  }
+  return {
+    define: define,
+    get: get
+  }
+})();
+MyModules.define("bar", [], function() {
+  function hello(who) {
+    return "let me introduce：" + who;
+  }
+  return {
+    hello: hello
+  };
+})
+var bar = MyModules.get("bar");
+console.log(bar.hellow("hippo")); // Let me introduce: hippo
+```
+
+ES6 模块机制：
+
++ ES6 中为模块增加了一级语法支持。但通过模块系统进行加载时，ES6 会将文件当作独立的模块来处理。每个模块都可以导入其他模块或特定的API 成员，同样也可以导出自己的API 成员。
++ ES6 的模块没有“行内”格式，必须被定义在独立的文件中（一个文件一个模块）。浏览器或引擎有一个默认的“模块加载器”（可以被重载，但这远超出了我们的讨论范围）可以在导入模块时异步地加载模块文件。
