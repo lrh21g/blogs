@@ -273,6 +273,8 @@ show(fn)
 
 **当函数可以记住并访问所在的词法作用域时，就产生了闭包，即使函数是在当前词法作用域之外执行。**
 
+函数在执行后，通常函数的整个内部作用域都被销毁，引擎通过垃圾回收机制用来释放不再使用的内存空间。而闭包可以阻止其被销毁，内部作用域依然存在，没有被回收。
+
 闭包产生的场景：
 
 + **函数作为返回值**
@@ -422,3 +424,227 @@ ES6 模块机制：
 
 + ES6 中为模块增加了一级语法支持。但通过模块系统进行加载时，ES6 会将文件当作独立的模块来处理。每个模块都可以导入其他模块或特定的API 成员，同样也可以导出自己的API 成员。
 + ES6 的模块没有“行内”格式，必须被定义在独立的文件中（一个文件一个模块）。浏览器或引擎有一个默认的“模块加载器”（可以被重载，但这远超出了我们的讨论范围）可以在导入模块时异步地加载模块文件。
+
+## this
+
+当一个函数被调用时，会创建一个活动记录（也称为执行上下文）。执行上下文会包含函数在哪里被调用（调用栈）、函数的调用方法、传入的参数等信息。**`this` 就是执行上下文的其中一个属性，会在函数执行过程中用到。**
+
+`this` 既不指向函数自身也不指向函数的词法作用域
+
+**`this` 实际上是在函数被调用时发生的绑定，它指向什么完全取决于函数在哪里被调用。**
+
+### 调用位置
+
+调用位置就是函数在代码中被调用的位置（而不是声明的位置）。最重要的是要**分析调用栈**（就是为了到达当前执行位置所调用的所有函数）
+
+### 绑定规则
+
++ 默认绑定
+
+  **严格模式下，绑定到 `undefined`；否则绑定到全局对象 `window`。**
+
+  场景：独立函数调用（不带任何修饰的函数调用）、无法应用其他规则时应用默认绑定。
++ 隐式绑定
+  + 当函数引用有**上下文对象**时，隐式绑定规则会把函数调用中的 `this` 绑定到这个上下文对象。**对象属性引用链中只有最顶层或者说最后一层会影响调用位置。**
+  
+    ``` javascript
+    function foo() { console.log( this.a ); }
+    var obj2 = { a: 42, foo: foo };
+    var obj1 = { a:2, obj2: obj2 };
+    obj1.obj2.foo(); // 42
+    ```
+  
+  + 隐式丢失：**`this`会应用默认绑定**（严格模式下，绑定到 `undefined`；否则绑定到全局对象 `window`。）
+    + 实际调用的是**函数本身**
+
+      ``` javascript
+      function foo() { console.log( this.a ); }
+      var obj = { a: 42, foo: foo };
+      var bar = obj.foo; // 函数别名
+      var a = "oops, global"; // a是全局对象的属性
+      bar(); // "oops, global"
+      ```
+
+    + 传入回调函数时
+
+      ``` javascript
+      function foo() { console.log( this.a ); }
+      function doFoo(fn) {
+        // fn 其实引用的是 foo
+        fn(); // <-- 调用位置
+      }
+      var obj = { a: 42, foo: foo };
+      var bar = obj.foo; // 函数别名
+      var a = "oops, global"; // a是全局对象的属性
+      bar(); // "oops, global"
+      ```
+
+    + 将函数传入JavaScript语言内置的函数，而不是传入自己声明的函数
+
+      ``` javascript
+      function foo() { console.log( this.a ); }
+      var obj = { a: 42, foo: foo };
+      var a = "oops, global"; // a是全局对象的属性
+      setTimeout(obj.foo, 100); // "oops, global"
+      ```
+  
+  + 显示绑定
+    + `call`、`apply`、`bind`
+      + `apply`、`call`、`bind` 三者都是用来改变函数的this对象的指向的；
+      + `apply`、`call`、`bind` 三者第一个参数都是this要指向的对象，也就是想指定的上下文；
+      + `apply`、`call`、`bind` 三者都可以利用后续参数传参；
+      + `bind` 是返回对应函数，便于稍后调用；`apply`、`call` 则是立即调用。
+    + 硬绑定：显式的强制绑定。（可解决`this`隐式丢失的问题）
+  
+      ``` javascript
+      // 硬绑定的典型应用场景：创建一个包裹函数，传入所有的参数并返回接收到的所有值
+      function foo(something) {
+        console.log(this.a, something);
+        return this.a + something;
+      }
+      var obj = { a: 2 };
+      var bar = function() { return foo.apply(obj, arguments); };
+      var b = bar(3); // 2 3
+      console.log(b); // 5
+
+      // ================================================================
+
+      // 创建一个 i 可以重复使用的辅助函数
+      function foo(something) {
+        console.log(this.a, something);
+        return this.a + something;
+      }
+      // 简单的辅助绑定函数
+      function bind(fn, obj) {
+        return function() {
+          return fn.apply(obj, arguments);
+        };
+      }
+      var bar = bind(foo, obj);
+      var b = bar(3); // 2 3
+      console.log(b); // 5
+      ```
+
+      由于硬绑定是一种非常常用的模式，所以在 ES5 中提供了内置的方法`Function.prototype.bind`，它的用法如下：
+
+      ``` javascript
+      function foo(something) {
+        console.log(this.a, something);
+        return this.a + something;
+      }
+      var obj = { a: 2 };
+      var bar = foo.bind(obj); // 2 3
+      console.log(b); // 5
+      ```
+
+    + API调用的“上下文”（可解决`this`隐式丢失的问题）
+
+      第三方库的许多函数，以及JavaScript语言和宿主环境中许多的内置函数，都提供了一个可选参数，通常称为“上下文”（context）,其作用和 `bind(...)` 一样，确保回调函数使用指定的 `this`
+
+      ``` javascript
+      function foo (el) { console.log(el, this.id); }
+      var obj = { id: "awesome" };
+      // 调用 foo(...) 时把 this 绑定到 obj
+      [1, 2, 3].forEach(foo, obj); // 1 awesome 2 awesome 3 awesome
+      ```
+  
+  + `new`绑定
+
+    使用 `new` 来调用函数，或者说发生构造函数调用时，会自动执行下面的操作。
+    1. 创建（或者说构造）一个全新的对象。
+    2. 这个新对象会被执行 `[[原型]]` 连接。
+    3. 这个新对象会绑定到函数调用的 `this` 。
+    4. 如果函数没有返回其他对象，那么 `new` 表达式中的函数调用会自动返回这个新对象。
+
+### 判断this
+
+根据优先级判断函数在某个调用位置应用哪条规则。可根据下面规则顺序判断：
+
+1. 函数是否在 `new` 中调用（`new`绑定）？ 如果是，`this`绑定的是新创建的对象。 `var bar = new foo()`
+2. 函数是否通过 `call` 、 `apply`（显示绑定）或者 `硬绑定` 调用？ 如果是，`this`绑定的是指定的对象。 `var bar = foo.call(obj2)`
+3. 函数是否在某个上下文对象中调用（隐式绑定）？ 如果是，`this`绑定的是那个上下文对象。 `var bar = obj1.foo()`
+4. 如果都不是的话，使用默认绑定。在严格模式下，绑定到 `undefined`，否则绑定到全局对象。 `var bar = foo()`
+
+### 绑定规则例外的情况
+
++ 被忽略的 `this`
+
+  将 `null` 或者 `undefined` 作为 `this`的绑定对象 传入 `call`、`apply`、`bind`，在调用时会被忽略，实际应用的是默认绑定规则。
+
+  + 使用场景：
+    + `apply(...)` “展开” 一个数组，并且当做参数传入一个函数
+    + `bind(...)` 对参数进行柯里化（预先设置一些参数）
+  
+    ``` javascript
+    function foo(a, b) { console.log("a:" + a + ", b:" + b); }
+    // 把数组 “展开” 成参数
+    foo.apply(null, [2, 3]); // a:2, b:3
+    // 使用 bind(...)进行柯里化
+    var bar = foo.bind(null, 2);
+    bar(3); // a:2, b:3
+    ```
+
+  + 副作用
+    + 问题：使用 `null` 来忽略 `this`绑定可能产生一些副作用。如果某个函数确实使用了 `this`（比如第三方库中的一个函数），那默认绑定规则会把 `this` 绑定到全局对象（在浏览器中这个对象是window），这将导致不可预计的后果（比如修改全局对象）。
+    + 解决方法：传入一个特殊的对象（空对象），把this 绑定到这个对象不会对程序产生任何副作用。
+
+      ``` javascript
+      function foo(a, b) { console.log("a:" + a + ", b:" + b); }
+      // 创建一个空对象
+      var ø = Object.create(null);
+      // 把数组 “展开” 成参数
+      foo.apply(ø, [2, 3]); // a:2, b:3
+      // 使用 bind(...)进行柯里化
+      var bar = foo.bind(ø, 2);
+      bar(3); // a:2, b:3
+      ```
+
++ 间接引用：创建了一个函数的“间接引用”，调用这个函数应用了默认绑定规则
+
+  ``` javascript
+  function foo() { console.log( this.a ); }
+  var a = 2;
+  var o = { a: 3, foo: foo };
+  var p = { a: 4 };
+  o.foo(); // 3
+  (p.foo = o.foo)(); // 2
+  // p.foo = o.foo 的返回值是目标函数的引用，因此调用位置是 foo()
+  ```
+
++ 软绑定
+  
+  硬绑定：大大降低函数的灵活性，使用硬绑定之后就无法使用隐式绑定或者显式绑定来修改`this`。
+
+  软绑定实现的效果：给默认绑定指定一个全局对象和undefined以外的值，那就可以实现和硬绑定相同的效果，同时保留隐式绑定或者显示绑定修改 `this` 的能力。
+
+  ``` javascript
+  if (!Function.prototype.softBind) {
+    // 对指定函数进行封装
+    // 首先检查调用时的 this。如果 this 绑定到全局对象或者 undefined，那就把指定的默认对象 obj 绑定到 this，否则不会修改 this
+    Function.prototype.softBind = function(obj) {
+      var fn = this;
+      // 捕获所有 curried 参数
+      var curried = [].slice.call(arguments, 1);
+      var bound = function() {
+        return fn.apply(
+          (!this || this === (window || global)) ? obj : this
+          curried.concat.apply(curried, arguments)
+        );
+      }
+      bound.prototype = Object.create(fn.prototype);
+      return bound;
+    };
+  }
+  function foo() { console.log("name: " + this.name) };
+  var obj  = { name: "obj" },
+      obj2 = { name: "obj2" },
+      obj3 = { name: "obj3" };
+  var fooOBJ = foo.softBind(obj);
+  fooOBJ(); // name: obj
+  obj2.foo = foo.softBind(obj);
+  obj2.foo()l // name: obj2
+  fooOBJ.call(obj3); // name: obj3
+  setTimeout(obj2.foo, 10); // name: obj
+  ```
+
++ 箭头函数：不使用 `this` 的四种标准规则，而是根据外层（函数或者全局）作用域来决定 `this`。**箭头函数会继承外层函数调用的 `this` 绑定**
