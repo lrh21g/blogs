@@ -229,8 +229,12 @@ JavaScript 引擎会在编译阶段进行数项的性能优化。其中有些优
 + 全局代码的上下文环境数据内容
   | 环境数据                                               | 操作                          |
   | :----------------------------------------------------- | :---------------------------- |
-  | 普通变量（包括函数表达式）<br/> 如：`var a = 10;`      | 声明（默认赋值为`undefined`） |
-  | 函数声明（包括函数表达式）<br/> 如：`function fn() {}` | 赋值                          |
+  | 普通变量（包括函数表达式
+  
+   如：`var a = 10;`      | 声明（默认赋值为`undefined`） |
+  | 函数声明（包括函数表达式）
+  
+   如：`function fn() {}` | 赋值                          |
   | this                                                   | 赋值                          |
 + 函数体中的上下文环境数据内容：在全局代码上下文的环境数据的基础下，附加如下数据内容
   | 环境数据             | 操作 |
@@ -490,10 +494,11 @@ ES6 模块机制：
   
   + 显示绑定
     + `call`、`apply`、`bind`
-      + `apply`、`call`、`bind` 三者都是用来改变函数的this对象的指向的；
-      + `apply`、`call`、`bind` 三者第一个参数都是this要指向的对象，也就是想指定的上下文；
+      + `apply`、`call`、`bind` 三者都是用来改变函数的`this`对象的指向的；
+      + `apply`、`call`、`bind` 三者第一个参数都是`this`要指向的对象，也就是想指定的上下文；
       + `apply`、`call`、`bind` 三者都可以利用后续参数传参；
-      + `bind` 是返回对应函数，便于稍后调用；`apply`、`call` 则是立即调用。
+      + `call` 接受的是一个参数列表，`apply` 接受的是一个包含多个参数的数组。
+      + `apply`、`call` 则是立即调用。`bind` 是返回对应函数，便于稍后调用。
     + 硬绑定：显式的强制绑定。（可解决`this`隐式丢失的问题）
   
       ``` javascript
@@ -615,7 +620,7 @@ ES6 模块机制：
   
   硬绑定：大大降低函数的灵活性，使用硬绑定之后就无法使用隐式绑定或者显式绑定来修改`this`。
 
-  软绑定实现的效果：给默认绑定指定一个全局对象和undefined以外的值，那就可以实现和硬绑定相同的效果，同时保留隐式绑定或者显示绑定修改 `this` 的能力。
+  软绑定实现的效果：给默认绑定指定一个全局对象和 `undefined` 以外的值，那就可以实现和硬绑定相同的效果，同时保留隐式绑定或者显示绑定修改 `this` 的能力。
 
   ``` javascript
   if (!Function.prototype.softBind) {
@@ -648,3 +653,75 @@ ES6 模块机制：
   ```
 
 + 箭头函数：不使用 `this` 的四种标准规则，而是根据外层（函数或者全局）作用域来决定 `this`。**箭头函数会继承外层函数调用的 `this` 绑定**
+
+### 手写call、apply及bind函数
+
++ 手写 `call`（接受的是一个参数列表）
+
+  ``` javascript
+  Function.prototype.myCall = function(context) {
+    if (typeof this !== 'function') {
+      throw new TypeError('Error);
+    }
+    context = context || window;
+    context.fn = this;
+    const args = [...argumets].slice(1);
+    const result = context.fn(...args);
+    delete context.fn;
+    return result;
+  }
+  ```
+
+  + `context`为可选参数，如果不传的话默认上下文为 `window`
+  + 给 `context` 创建一个 `fn` 属性，并将值设置为需要调用的函数
+  + `call` 可以传入多个参数作为调用函数的参数，所以需要将参数剥离出来
+  + 然后调用函数并将对像上的函数删除
+
++ 手写 `apply`（接受的是一个包含多个参数的数组）
+
+  ``` javascript
+  Function.prototype.myApply = function(context) {
+    if (typeof this !== 'function') {
+      throw new TypeError('Error');
+    }
+    context = context || window;
+    context.fn = this;
+    let result;
+    // 处理参数和 call 有区别
+    if (arguments[1]) {
+      result = context.fn(...arguments[1]);
+    } else {
+      result = context.fn();
+    }
+    delete context.fn;
+    return result;
+  }
+  ```
+
++ 手写 `bind`（返回对应函数）
+  
+  ``` javascript
+  Function.prototype.myBind = function (context) {
+    if (typeof this !== 'function') {
+      throw new TypeError('Error')
+    }
+    const _this = this
+    const args = [...arguments].slice(1)
+    // 返回一个函数
+    return function F() {
+      // 因为返回了一个函数，我们可以 new F()，所以需要判断
+      if (this instanceof F) {
+        return new _this(...args, ...arguments)
+      }
+      return _this.apply(context, args.concat(...arguments))
+    }
+  }
+  ```
+
+  `bind` 返回了一个函数，对于函数来说有两种方式调用：
+  + 直接调用
+
+    使用 `apply` 的方式实现，但对于参数需要注意一下情况：因为 `bind` 可以实现类似这样的代码 `f.bind(obj, 1)(2)`，所以需要将两边的参数拼接起来，于是就有了这样的实现 `args.concat(...arguments)`
+  + 通过 `new` 的方式
+
+    对于 `new` 的情况来说，不会被任何方式改变 `this`，所以对于这种情况需要忽略传入的 `this`
