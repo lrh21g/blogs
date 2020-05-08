@@ -13,6 +13,7 @@ module.exports = {
       'base', // JavaScript基础
       'prototype', // 原型与继承
       'scope', // 作用域
+      'async', // 异步
       'common', // 通用封装
       'hybrid' // 混合开发
     ]
