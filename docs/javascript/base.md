@@ -37,7 +37,7 @@
 + `栈(stack)`：自动分配的内存空间，它由系统自动释放；
 + `堆(heap)`：动态分配的内存，大小不定也不会自动释放。
 
-## `typeof` 与 `instanceof`
+## typeof 与 instanceof
 
 + `typeof`：能识别所有值类型、函数；判断是否是引用类型（不可再细分）
   
@@ -207,3 +207,19 @@
     !!undefined == false
     !! false === false
     ```
+
+## DOM
+
+property 和 attribute
+
++ property：修改对象属性，不会体现到 html 结构中
++ attribute：修改 html 属性，会改变 html 结构
++ 两者都有可能引起 DOM 重新渲染
+
+## BOM
+
+## 事件绑定
+
+## ajax
+
+## 存储
