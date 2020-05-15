@@ -5,6 +5,7 @@ module.exports = {
       collapsable: false,
       children: [
         'base',
+        'adaptive'
       ]
     }
   ],
