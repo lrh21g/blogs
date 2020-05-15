@@ -1,18 +1,24 @@
-module.exports = [{
-    text: 'CSS',
-    link: '/css/base.html'
-  },
+module.exports = [
   {
-    text: 'JavaScript',
-    link: '/javascript/base.html'
-  },
-  {
-    text: 'TypeScript',
-    link: '/typescript/base.html'
-  },
-  {
-    text: 'Node',
-    link: '/node/base.html'
+    text: '前端',
+    items: [
+      {
+        text: 'HTML',
+        link: '/html/base.html'
+      },
+      {
+        text: 'CSS',
+        link: '/css/base.html'
+      },
+      {
+        text: 'JavaScript',
+        link: '/javascript/base.html'
+      },
+      {
+        text: 'TypeScript',
+        link: '/typescript/base.html'
+      },
+    ]
   },
   {
     text: '框架',
@@ -25,6 +31,15 @@ module.exports = [{
         text: 'React',
         link: '/react/base.html'
       }
+    ]
+  },
+  {
+    text: '后端',
+    items: [
+      {
+        text: 'Node',
+        link: '/node/base.html'
+      },
     ]
   },
   {
