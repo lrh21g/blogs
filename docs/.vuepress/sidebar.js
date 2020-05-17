@@ -1,21 +1,12 @@
 module.exports = {
-  '/html/': [
+  '/htmlcss/': [
     {
-      title: 'HTML',
+      title: 'HTML + CSS',
       collapsable: false,
       children: [
         'base',
-        'adaptive'
-      ]
-    }
-  ],
-  '/css/': [
-    {
-      title: 'CSS',
-      collapsable: false,
-      children: [
-        'base',
-        'common'
+        'adaptive',
+        'css-common'
       ]
     }
   ],

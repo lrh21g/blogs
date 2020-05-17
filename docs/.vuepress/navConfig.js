@@ -3,12 +3,8 @@ module.exports = [
     text: '前端',
     items: [
       {
-        text: 'HTML',
-        link: '/html/base.html'
-      },
-      {
-        text: 'CSS',
-        link: '/css/base.html'
+        text: 'HTML + CSS',
+        link: '/htmlcss/base.html'
       },
       {
         text: 'JavaScript',
