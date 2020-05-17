@@ -6,7 +6,8 @@ module.exports = {
       children: [
         'base',
         'adaptive',
-        'css-common'
+        'css-common',
+        'css-stickyfooter'
       ]
     }
   ],
