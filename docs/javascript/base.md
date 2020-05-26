@@ -246,16 +246,142 @@
 
 `DOM` 提供操作接口，用来获取这三种关系的节点。比如，子节点接口包括`firstChild`（第一个子节点）和`lastChild`（最后一个子节点）等属性，同级节点接口包括`nextSibling`（紧邻在后的那个同级节点）和`previousSibling`（紧邻在前的那个同级节点）属性。
 
-property 和 attribute
+## DOM操作
 
-+ property：修改对象属性，不会体现到 html 结构中
-+ attribute：修改 html 属性，会改变 html 结构
-+ 两者都有可能引起 DOM 重新渲染
+### property 和 attribute 的区别
 
-## BOM
++ `property`：修改对象属性，不会体现到 `html` 结构中
++ `attribute`：修改 `html` 属性，会改变 `html` 结构
++ 两者都有可能引起 `DOM` 重新渲染
+
+### DOM结构操作
+
+### DOM性能
+
++ `DOM` 查询做缓存
+
+``` javascript
+const pList = document.getElementsByTagName('p');
+const length = pList.length;
+for (let i = 0; i < length; i++) {
+  // 缓存 length，只进行一次 DOM 查询
+}
+```
+
++ 将频繁操作改为一次性操作
+
+``` javascript
+const listNode = document.getElementById('list');
+
+// 创建一个文档片段，此时还没有插入到 DOM 树中
+const frag = document.createDocumentFragment();
+// 执行插入
+for (let x = 0; x < 10; x++) {
+  const li = document.createElement('li');
+  li.innerHTML = 'List item' + x;
+  frag.appendChild(li);
+}
+// 完成之后，再插入到 DOM 树中
+listNode.appendChild(frag);
+```
+
+## BOM 操作
+
++ navigator
++ screen
++ location
++ history
 
 ## 事件绑定
 
++ 事件绑定
+
+``` javascript
+// 通用绑定事件函数
+function bindEvent(elem, type, selector, fn) {
+  if (fn === null) {
+    fn = selector;
+    selector = null;
+  }
+  elem.addEventListener(type, event => {
+    const target = event.target;
+    if (selector) {
+      // 代理绑定
+      // matches(): 如果元素被指定的选择器字符串选择，Element.matches() 方法返回true; 否则返回false。
+      if (target.matches(selector)) {
+        fn.call(target, event);
+      }
+    } else {
+      // 普通绑定
+      fn.call(target, event);
+    }
+  })
+}
+```
+
++ 事件冒泡
++ 事件代理
+
 ## ajax
+
+### XMLHttpRequest
+
++ `xhr.readyState`
+  + 0 - 未初始化。还没有调用 `send()` 方法
+  + 1 - 载入。已调用 `send()` 方法，正在发送请求
+  + 2 - 载入完成。`send()` 方法执行完成，已经接收到全部响应内容
+  + 3 - 交互。正在解析响应内容
+  + 4 - 完成。响应内容解析完成，可以在客户端调用
++ `xhr.status`
+  + 2xx - 表示成功处理请求，如 200
+  + 3xx - 需要重定向，浏览器直接跳转，如 301 302 304
+  + 4xx - 客户端请求错误，如 404 403
+  + 5xx - 服务端错误
+
+``` javascript
+// get请求
+const xhr = new XMLHttpRequest();
+xhr.open('GET', '/api', true);
+xhr.onreadystatechange = function () {
+  // 函数异步执行
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      alert(xhr.responseText);
+    }
+  }
+};
+xhr.send(null);
+
+// post 请求
+const xhr = new XMLHttpRequest();
+xhr.open('POST', '/api', true);
+xhr.onreadystatechange = function () {
+  // 函数异步执行
+  if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+      alert(xhr.responseText);
+    }
+  }
+};
+const postData = { name: 'LRH' };
+xhr.send(JSON.stringify(postData));
+```
+
+### 跨域
+
++ 同源策略
+  + ajax 请求时，**浏览器**要求当前网页和 server 必须同源（安全）
+  + 同源：协议、域名、端口，三者必须一致
+  
++ 加载图片、css、JavaScript可无视同源策略
+  + `<img src="跨域的图片地址" />`：可用于统计打点，可使用第三方统计服务
+  + `<link href="跨域的css地址" />`：可使用 `CDN`，`CDN` 一般都是外域
+  + `<script src="跨域的JavaScript地址"></script>`：可使用 `CDN`，可实现 `JSONP`
+  
++ 跨域
+  + 所有跨域，都必须经过 server 端允许和配合
+  + 未经 server 端允许就实现跨域，说明浏览器有漏洞，危险信号
+  
++ JSONP
 
 ## 存储
