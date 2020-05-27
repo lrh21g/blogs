@@ -385,3 +385,38 @@ xhr.send(JSON.stringify(postData));
 + JSONP
 
 ## 存储
+
+## Linux 命令
+
+## 运行环境
+
++ 网页加载过程
+  + 从输入 url 到渲染出页面的整个过程
+  + window.onload 和 DOMContentLoaded 的区别
+
+    ``` javascript
+    window.addEventListener('load', function () {
+      // 页面的全部资源加载完才会执行，包括图片、视频等
+    })
+    document.addEventListener('DOMContentLoaded', function () {
+      // DOM 渲染完即可执行，此时图片、视频可能没有加载完 （推荐）
+    })
+    ```
+  
++ 性能优化
+  + 原则
+    + 多使用内存、缓存或其他方法
+    + 减少 CPU 计算量，减少网络加载耗时
+  + 优化方法
+    + 让加载更快
+      + 减少资源体积：压缩代码
+      + 减少访问次数：合并代码，SSR服务器端渲染，缓存
+      + 使用更快的网络：CDN
+    + 让渲染更快
+      + CSS 放在 head，JavaScript 放在 body 最下面
+      + 尽早开始执行 JavaScript，用 DOMContentLoaded 触发
+      + 懒加载（图片懒加载，上滑加载更多）
+      + 对 DOM 查询进行缓存
+      + 频繁 DOM 操作，合并到一起插入 DOM 结构
+      + 节流 throttle，防抖 debounce
++ 安全
