@@ -420,3 +420,184 @@ xhr.send(JSON.stringify(postData));
       + 频繁 DOM 操作，合并到一起插入 DOM 结构
       + 节流 throttle，防抖 debounce
 + 安全
+  + DDoS
+  + CSRF
+
+## 题目
+
++ var 和 let const的区别
++ typeof返回哪些类型
++ 列举强类型转换和隐式类型转换
++ 变量提升和函数提升
++ 手写深度比较，模拟lodash isEqual
+  
+  ``` javascript
+  // 判断是否是对象或数组
+  function isObject (obj) {
+    return typeof obj === 'object' && obj !== null;
+  }
+  
+  function isEqual (obj1, obj2) {
+    if (!isObject(obj1) || !isObject(obj2)) {
+      // 值类型（注意，参数 equal 的一般不会是函数）
+      return obj1 === obj2;
+    }
+    if (obj1 === obj2) {
+      return true;
+    }
+    // 两个都是对象或数组，而且不相等
+    // 1. 先取出 obj1 和 obj2 的 keys，比较个数
+    const obj1Keys = Object.keys(obj1);
+    const obj2Keys = Object.keys(obj2);
+    if (obj1Keys.length !== obj2Keys.length) {
+      return false
+    }
+    // 2. 以 obj1 为基数，和 obj2 一次递归比较
+    for (let key in obj1) {
+      // 比较当前 key 的 val —— 递归
+      const res = isEqual(obj1[key], obj2[key]);
+      if (!res) {
+        return false;
+      }
+    }
+    // 全相等
+    return true
+  }
+  ```
+
++ split() 和 join() 的区别
++ 数组的 pop、push、unshift、shift分别做什么
+  + 功能
+  + 返回值
+  + 是否会对原数组造成影响
++ 数组 slice 和 splice 的区别
++ `[10, 20, 30].map(parseInt)` 返回结果是什么
+
+  ``` javascript
+  [10, 20, 30].map(parseInt) // [10, NaN, NaN]
+  // 拆解为
+  [10, 20, 30].map((item, index) => {
+    return parseInt(item, index)
+  })
+  ```
+
++ ajax的 get 和 post 的区别
++ 函数 call 和 apply 的区别
++ 时间代理（委托）是什么
++ 闭包是什么，有什么特性？有什么负面影响？
++ 如何阻止事件冒泡和默认行为
++ 查找、添加、删除、移动DOM节点的方法
++ 如何减少DOM操作
++ 解释 jsonp 的原理，为何它不是真正的 ajax
+  + 浏览器的同源策略（服务端没有同源策略）和跨域
+  + 哪些 html 标签能绕过跨域
+  + jsonp原理
++ document load 和 ready 的区别
++ == 和 === 的不同
++ 函数声明和函数表达式的区别
++ new Object() 和 Object.create() 的区别
+  + {} 等同于 new Object(), 原型 Object.prototype
+  + Object.create(null) 没有原型
+  + Object.create({...}) 可指定原型
++ 关于 this 场景值
++ 关于作用域和自由变量的场景题
+
+  ``` javascript
+  let i;
+  for (i = 1; i <= 3; i++) {
+    setTimeout(function () {
+      console.log(i);
+    }, 0)
+  }
+  ```
+
+  ``` javascript
+  let a = 100;
+  function test () {
+    alert(a);
+    a = 10;
+    alert(a);
+  }
+  test();
+  alert(a);
+  ```
+
++ 判断字符串以字母开头，后面字符数字下划线，长度6-30 —— 正则表达式
++ 手写字符串 trim 方法，保证浏览器兼容性
+
+  ``` javascript
+  String.prototype.trim = function () {
+    return this.replace(/^\s+/, '').replace(/\s+$/, '')
+  }
+  ```
+
++ 如何获取多个数字中的最大值
++ 如何用 JavaScript 实现继承
++ 如何捕获 JavaScript 程序中的异常
+
+  ``` javascript
+  try {
+    // todo
+  } catch (err) {
+    console.log(err); // 手动捕获 catch
+  } finally {
+    // todo
+  }
+  ```
+
+  ``` javascript
+  // 自动捕获
+  window.onerror = function (message, source, lineNom, colNom, error) {
+    // 1. 对跨域的 JavaScript， 如 CDN，不会有详细的报错信息
+    // 2. 对于压缩的 JavaScript，还要配合 sourceMap 反查到未压缩代码的行、列
+  }
+  ```
+
++ 什么是 JSON
+  + json 是一种数据格式，本质是一段字符串
+  + json 格式和 js对象结构一致，对js语言更友好
+  + window.JSON 是一个全局对象： JSON.stringify  JSON.parse
++ 获取当前页面 url 参数
+
+  ``` javascript
+  // 传动方式
+  function query (name) {
+    const search = location.search.substr(1);
+    const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i');
+    const res = search.match(reg);
+    if (res === null) {
+      return null;
+    }
+    return res[2];
+  }
+
+  // URLSearchParams
+  function query (name) {
+    const search = location.search;
+    const p = new URLSearchParams(seach);
+    return p.get(name);
+  }
+  ```
+
++ 将url参数解析为js对象
++ 手写数组 flatern, 考虑多层级
+
+  ``` javascript
+  function flat (arr) {
+    // 验证arr中，还有没有深层数组 [1,2,[3,4]]
+    const isDeep = arr.some(item => item instanceof Array)
+    if (!isDeep) {
+      return arr
+    }
+    const res = Array.prototype.concat.apply([], arr)
+    return flat(res) // 递归
+  }
+  ```
+
++ 数组去重
++ 手写深拷贝
++ 介绍一下 RAF requestAnimationFrame
+  + 要想动画流程，更新频率要 60帧/s，即 16.67ms 更新一次视图
+  + setTimeout 要手动控制频率，而 RAF 浏览器会自动控制
+  + 后台标签或隐藏 iframe 中，RAF 会暂停，而 setTimeout 依然执行
++ 前端性能如何优化，一般从哪几个方面考虑
