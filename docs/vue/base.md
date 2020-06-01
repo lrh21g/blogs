@@ -34,6 +34,10 @@
   + 路由模式（hash、H5 history）
   + 路由配置（动态路由、懒加载）
 + Vue原理
+  + 核心API - Object.defineProperty
+    + 缺点
+      + 深度监听，需要递归到底，一次性计算量大
+      + 无法监听新增属性/删除属性（Vue.set  Vue.delete）
 + v-show 和 v-if 的区别
 + 为何 v-for 中要用 key
 + 描述 Vue 组件生命周期(有父子组件的情况)
