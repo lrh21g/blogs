@@ -38,6 +38,125 @@
     + 缺点
       + 深度监听，需要递归到底，一次性计算量大
       + 无法监听新增属性/删除属性（Vue.set  Vue.delete）
+      + 无法原生监听数组，需要特殊处理
+
+    ``` javascript
+    // 触发更新视图
+    function updateView() {
+      console.log('视图更新！')
+    }
+    // 重新定义数组原型
+    const oldArrayProperty = Array.prototype
+    // 创建新对象，原型指向 oldArrayProperty，再扩展新的方法不会影响原型
+    const arrProto = Object.create(oldArrayProperty);
+    ['push', 'pop', 'shift', 'unshift', 'splice'].forEach(methodName => {
+      arrProto[methodName] = function () {
+        updateView() // 触发视图更新
+        oldArrayProperty[methodName].call(this, ...arguments)
+      }
+    })
+    // 重新定义属性，监听起来
+    function defineReactive(target, key , value) {
+      // 深度监听
+      observer(value)
+
+      Object.defineProperty(target, key, {
+        get() {
+          return value
+        }
+        set(newValue) {
+          if (newValue !== value) {
+            // 深度监听
+            observer(value)
+
+            // 设置新值
+            // 注意，value一直在闭包中，此处设置完之后，再 get 时也是会获取最新的值
+            value = newValue
+            // 更新视图
+            updateView()
+          }
+        }
+      })
+    }
+    // 监听对象属性
+    function observer(target) {
+      if (typeof target !== 'object' || target === null) {
+        // 不是数组
+        return target
+      }
+      if (Array.isArray(target)) {
+        target.__proto__ = arrProto
+      }
+      // 重新定义各个属性（for in 也可以遍历数组）
+      for (let key in target) {
+        defineReactive(target, key, target[key])
+      }
+    }
+    // 数据
+    const data = {
+      name: 'zhangsan',
+      age: 20,
+      info: {
+        address: '北京' // 需要深度监听
+      },
+      nums: [1, 2, 3]
+    }
+    // 监听数据
+    observer(data);
+    // 测试
+    data.name = 'list'
+    data.age = 21
+    data.x = '100' // 新增属性，监听不到 - 所以有 Vue.set
+    delete data.name // 删除属性，监听不到 - 所以有 Vue.delete
+    data.info.address = '上海' // 深度监听
+    data.nums.push(4) // 监听数组
+    ```
+
+    + 虚拟DOM（Virtual DOM）和 diff
+      + VDom - 用 JavaScript 模拟 DOM 结构，计算出最小的变更，操作 DOM (可通过 snabbdom 学习 vdom)
+
+        ``` html
+        <div id="div1" class="container">
+          <p>vdom</p>
+          <ul style="font-size: 20px">
+            <li>a</li>
+          </ul>
+        </div>
+        ```
+
+        ``` javascript
+        {
+          tag: 'div',
+          props: {
+            className: 'container',
+            id: 'div1'
+          },
+          children: [
+            {
+              tag: 'p',
+              children: 'vdom'
+            },
+            {
+              tag: 'ul',
+              props: { style: 'font-size: 20px' },
+              children: [
+                {
+                  tag: 'li',
+                  children: 'a'
+                }
+              ]
+            }
+          ]
+        }
+        ```
+
+      + diff 算法
+        + diff 即对比，是一个广泛的概念
+        + 树 diff 的时间复杂度 O(n^3)：第一，遍历 tree1；第二，遍历 tree2；第三，排序。优化 diff 算法，时间复杂度为 O(n)
+          + 只比较统一层级，不跨级比较
+          + tag 不相同，则直接删除重建，不再深度比较
+          + tag 和 key，两者都相同，则认为是相同节点，不再深度比较
+
 + v-show 和 v-if 的区别
 + 为何 v-for 中要用 key
 + 描述 Vue 组件生命周期(有父子组件的情况)
