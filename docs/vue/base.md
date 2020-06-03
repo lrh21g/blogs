@@ -33,7 +33,17 @@
 + Vue-router
   + 路由模式（hash、H5 history）
   + 路由配置（动态路由、懒加载）
+  + 原理
+    + hash
+      + hash变化会触发网页跳转，即浏览器的前进、后退
+      + hash变化不会刷新页面，SPA必需的特点
+      + hash永远不会提交到server端
+    + history
+      + 用 url 规范的路由，但跳转时不刷新页面
+      + history.pushState
+      + window.onpopstate
 + Vue原理
+  + 异步渲染
   + 核心API - Object.defineProperty
     + 缺点
       + 深度监听，需要递归到底，一次性计算量大
