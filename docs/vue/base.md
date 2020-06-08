@@ -168,7 +168,13 @@
           + tag 和 key，两者都相同，则认为是相同节点，不再深度比较
 
 + v-show 和 v-if 的区别
+  + v-show 通过 css display 控制显示和隐藏
+  + v-if 组件真正的渲染和销毁，而不是显示和隐藏
+  + 频繁切换显示状态 v-show，否则用 v-if
 + 为何 v-for 中要用 key
+  + 必须用 key，且不能是 index 和 random
+  + diff 算法中通过 tag 和 key 来判断，是否是 sameNode
+  + 减少渲染次数，提升渲染性能
 + 描述 Vue 组件生命周期(有父子组件的情况)
   + 加载渲染过程
     parent beforeCreated -> parent created -> parent beforeMount -> child beforeCreate -> child created -> child beforeMount -> child mounted -> parent mounted
@@ -178,4 +184,58 @@
     parent beforeDestroy -> child beforeDestroy -> child destroyed -> parent destroyed
 + Vue 组件如何通讯
 + 描述组件渲染和更新的过程
+  ![vue_render](./files/images/vue_render.png)
 + 双向数据绑定 v-model 的实现原理
+  + input 元素的 `value = this.name`
+  + 绑定 input 事件 `this.name = $event.target.value`
+  + data 更新触发 re-render
++ 对 MVVM 的理解
++ computed 有何特点：缓存，data不变不会重新计算，提高性能
++ 为何组件 data 必须是一个函数
++ ajax请求放在哪个生命周期
+  + mounted
+  + js是单线程的， ajax异步获取数据
+  + 放在 mounted 之前没有用，只会让逻辑更加混乱
++ 如何将组件所有 props 传递给子组件
+  + $props
+  + `<User v-bind="$props" />`
++ 如何自己实现 v-model
+  + model 属性，自定义 v-model
+  + `model: { prop: 'xxx', event: 'xxx' }`
++ 何时使用异步组件：加载大组件、路由异步加载
++ 何时需要使用 keep-alive：缓存组件，不需要重复渲染，如多个静态tab页的切换，性能优化
++ 何时需要使用 beforeDestory
+  + 解绑自定义事件 event.$off
+  + 清楚定时器
+  + 解绑自定义的 DOM 事件，如 window scroll 等
++ 作用域插槽
++ Vuex 中 action 和 mutation 有何区别
+  + action 中处理异步，mutation 不可以
+  + mutation 做原子操作，action 可以整合多个 mutation
++ 请用 vnode 描述一个 DOM 结构
++ 监听 data 变化的核心 API 是什么
++ Vue如何监听数组变化
++ 请描述响应式原理
+  + 监听 data 变化
+  + 组件渲染和更新的流程
++ diff 算法的时间复杂度：O(n),在O(n^3)的基础上做的优化
++ 简述diff算法过程
+  + patch(elem, vnode) 和 patch(Vnode, newVnode)
+  + patchVnode 和 addVnodes 和 removeVnodes
+  + updateChildren（key的重要性）
++ Vue为何是异步渲染，$nextTick有何用
+  + 异步渲染（以及合并data修改），以提高渲染性能
+  + $nextTick 在 DOM 更新完之后，触发回调
++ Vue常见性能优化方式
+  + 合理使用 v-show 和 v-if
+  + 合理使用 computed
+  + v-for 时加 key，以及避免和 v-if 同时使用
+  + 自定义事件、DOM事件及时销毁
+  + 合理使用异步组件
+  + 合理使用 keep-alive
+  + data 层级不要太深
+  + 使用 vue-loader 在开发环境做模板编译（预编译）
+  + 合理使用 keep-alive
+  + webpack
+  + 通用的性能优化：图片懒加载等
+  + SSR
