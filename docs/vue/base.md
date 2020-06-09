@@ -239,3 +239,97 @@
   + webpack
   + 通用的性能优化：图片懒加载等
   + SSR
++ Proxy实现响应式
+  + Proxy基本使用
+
+    ``` javascript
+    const data = {
+      name: 'zhangsan',
+      age: 20
+    };
+    const proxyData = new Proxy(data, {
+      get(target, key, receiver) {
+        // 只处理本身（非原型的）属性
+        const ownKeys = Reflect.ownKeys(target)
+        if(ownKeys.includes(key)) {
+          console.log('get', key); // 监听
+        }
+
+        const result = Reflect.get(target, key, receiver);
+        return result; // 返回结果
+      },
+      set(target, key, val, receiver) {
+        // 重复的数据，不处理
+        if(val === target[key]) {
+          return true;
+        }
+
+        const result = Reflect.set(target, key, val, receiver);
+        console.log('set', key, val);
+        return result; // 是否设置成功
+      },
+      deleteProperty(target, key) {
+        const result = Reflect.deleteProperty(target, key);
+        console.log('delete property', key);
+        return result; // 是否删除成功
+      }
+    })
+    ```
+
+  + Reflect
+    + 和 Proxy 能力一一对应
+    + 规范化，标准化，函数式
+    + 替代 Object 上的工具函数
+  + 用 Proxy 实现响应式
+
+    ``` javascript
+    // 创建响应式
+    function reactive(target = {}) {
+      if(typeof target !== 'object' || target == null) {
+        // 不是对象或数组，则返回
+        return target;
+      }
+      // 代理配置
+      const proxyConf = {
+        get(target, key, receiver) {
+          // 只处理本身（非原型的）属性
+          const ownKeys = Reflect.ownKeys(target)
+          if(ownKeys.includes(key)) {
+            console.log('get', key); // 监听
+          }
+
+          const result = Reflect.get(target, key, receiver);
+          // 深度监听
+          return reactive(result); // 返回结果
+        },
+        set(target, key, val, receiver) {
+          // 重复的数据，不处理
+          if(val === target[key]) {
+            return true;
+          }
+
+          const result = Reflect.set(target, key, val, receiver);
+          console.log('set', key, val);
+          return result; // 是否设置成功
+        },
+        deleteProperty(target, key) {
+          const result = Reflect.deleteProperty(target, key);
+          console.log('delete property', key);
+          return result; // 是否删除成功
+        }
+      }
+      // 生成代理对象
+      const observed = new Proxy(target, proxyConf)
+      return observed
+    }
+
+    // 测试数据
+    const data = {
+      name: 'zhangsan',
+      age: 20,
+      info: {
+        city: 'beijing'
+      }
+    }
+    const proxyData = reactive(data);
+    ```
