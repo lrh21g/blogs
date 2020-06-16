@@ -181,8 +181,18 @@
   + 函数组件
     + 纯函数，输入 props，输出 JSX
     + 没有实例，没有生命周期，没有 state
-  + 非受控组件
-  + Portals
+  + 非受控组件：不会随着 state 的改变而改变
+    + ref （React.createRef()）
+    + defaultValue  defaultChecked
+    + 手动操作DOM元素
+    + 使用场景
+      + 必须手动操作 DOM 元素，setState 实现不了
+      + 文件上传 `<input type="file" />`
+      + 某些富文本编辑器，需要传入 DOM  元素
+  + Portals 使用场景
+    + overflow: hidden
+    + 父组件 z-index 值太小
+    + fixed 需要放在 body 第一层级
   + context
   + 异步组件
   + 性能优化
