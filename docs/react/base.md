@@ -142,39 +142,39 @@
       ```
 
   + state 异步更新的话，更新前会被合并
-      + 传入对象，会被合并（类似 Object.assign ）。执行结果只一次 +1
+    + 传入对象，会被合并（类似 Object.assign ）。执行结果只一次 +1
 
-        ``` javascript
-        this.setState({
-          count: this.state.count + 1
-        })
-        this.setState({
-          count: this.state.count + 1
-        })
-        this.setState({
-          count: this.state.count + 1
-        })
-        ```
+      ``` javascript
+      this.setState({
+        count: this.state.count + 1
+      })
+      this.setState({
+        count: this.state.count + 1
+      })
+      this.setState({
+        count: this.state.count + 1
+      })
+      ```
 
-      + 传入函数，不会被合并。执行结果是 +3
+    + 传入函数，不会被合并。执行结果是 +3
 
-        ```javascript
-        this.setState((prevState, props) => {
-          return {
-            count: prevState.count + 1
-          }
-        })
-        this.setState((prevState, props) => {
-          return {
-            count: prevState.count + 1
-          }
-        })
-        this.setState((prevState, props) => {
-          return {
-            count: prevState.count + 1
-          }
-        })
-        ```
+      ```javascript
+      this.setState((prevState, props) => {
+        return {
+          count: prevState.count + 1
+        }
+      })
+      this.setState((prevState, props) => {
+        return {
+          count: prevState.count + 1
+        }
+      })
+      this.setState((prevState, props) => {
+        return {
+          count: prevState.count + 1
+        }
+      })
+      ```
 
 + [React 生命周期](https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 + React 高级特性
@@ -195,8 +195,38 @@
     + fixed 需要放在 body 第一层级
   + context
   + 异步组件
+    + import()
+    + React.lazy
+    + React.Suspense
   + 性能优化
-  + 高阶组件 HOC
+    + shouldComponentUpdate
+      + 默认返回 true，即 React 默认重新渲染所有子组件 （React 默认：父组件有更新，子组件无条件更新）
+      + 必须配合 “不可变值” 一起使用
+      + 有性能问题时再考虑使用
+    + PureComponent 和 React.memo
+      + PureComponent - shouldComponentUpdate中实现了浅比较
+      + memo，函数组件中的 PureComponent
+      + 浅比较已使用大部分情况（尽量不要做深度比较）
+    + 不可变值 immutable.js
+      + 彻底拥抱“不可变值”
+      + 基于共享数据（不是深拷贝），速度好
+      + 需要一定学习成本
+  + 高阶组件 HOC：不是一种功能，而是一种模式
+
+    ``` javascript
+    const HOCFactory = (Component) => {
+      class HOC extends React.Component {
+        // 在此定义多个组件的公用逻辑
+        render() {
+          return <Component {...this.props} /> // 返回拼装的结果
+        }
+      }
+      return HOC
+    }
+    const EnhancedComponent1 = HOCFactory(WrappedComponent1)
+    const EnhancedComponent2 = HOCFactory(WrappedComponent2)
+    ```
+
   + Render Props
 + React 组件如何通讯
 + JSX本质是什么（可对比Vue的模板编译）
