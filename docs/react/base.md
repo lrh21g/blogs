@@ -227,7 +227,65 @@
     const EnhancedComponent2 = HOCFactory(WrappedComponent2)
     ```
 
+    redux connect 是个高阶组件
+
+    ``` javascript
+    import { connect } from 'react-redux'
+    // connect 是高阶组件
+    const VisibleTodoList = connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(TodoList)
+    ```
+
   + Render Props
+
+    ``` javascript
+    // Render Props 的核心思想
+    // 通过一个函数将 class 组件的 state 作为 props 传递给纯函数组件
+    class Factory extends React.Component {
+      constructor() {
+        this.state = {
+          /* state 即多个组件的公共逻辑的数据 */
+        }
+      }
+      /* 修改 state */
+      render(){
+        return <div>{this.props.render(this.state)}</div>
+      }
+    }
+
+    const App = () => (
+      <Factory render={
+        /* render 是一个函数组件 */
+        (props) => <p>{props.a} {props.b} ...</p>
+      } />
+    )
+    ```
+
+  + HOC vs Render Props
+    + HOC: 模式简单，但会增加组件层级
+    + Render Props：代码简洁，学习成本较高
+    + 按需使用
++ Redux 使用
+  + 基本概念
+  + 单项数据流
+  + react-redux
+  + 异步 action
+  + 中间件
++ React 原理
+  + 函数式编程
+    + 一种编程范式，概念比较多
+    + 纯函数
+    + 不可变值
+  + vdom  和 diff
+  + jsx本质
+    + jsx 等同于 vue 模板
+    + vue模板不是html
+    + jsx不是js
+  + 合成事件
+  + setState batchUpdate
+  + 组件渲染过程
 + React 组件如何通讯
 + JSX本质是什么（可对比Vue的模板编译）
 + context是什么，有何用途
