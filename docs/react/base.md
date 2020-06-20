@@ -279,16 +279,94 @@
     + 纯函数
     + 不可变值
   + vdom  和 diff
-  + jsx本质
+    + React.createElement 即 h 函数，返回 vnode
+    + 第一个参数，可能是组件，也可能是 html tag
+    + 组件名，首字母必须大写（React 规定）
+  + jsx本质（jsx可以在[babel](https://www.babeljs.cn)官网查看）
     + jsx 等同于 vue 模板
     + vue模板不是html
     + jsx不是js
   + 合成事件
-  + setState batchUpdate
+    ![react_base_01](./files/images/react_base_01.png)
+    + 所有事件挂载到 document 上
+    + event 不是原生的，是 SyntheticEvent 合成事件对象
+    + 和 Vue 事件不同，和 DOM 事件也不同
+    + 为何要合成事件机制
+      + 更好的兼容性和跨平台
+      + 挂载到 document，减少内存消耗，避免频繁解绑
+      + 方便事件的统一管理（如事务机制）
+  + setState 和 batchUpdate
+    + 有时异步（普通使用），有时同步（setTimeout、DOM事件）
+    + 有时合并（对象形式），有时不合并（函数形式）
+    + 后者比较好理解（像Object.assign）
+  
+    + setState主流程
+      ![react_base_setState](./files/images/react_base_setState.png)
+
+      ![react_base_setState_01](./files/images/react_base_setState_01.png)
+
+      ![react_base_isBatchingUpdates](./files/images/react_base_isBatchingUpdates.png)
+
+    + batchUpdate 机制
+      + 能命中 batchUpdate 机制的情况
+        + 生命周期（和它调用的函数）
+        + React中注册的事件（和它调用的函数）
+        + React可以“管理”的入口
+      + 不能命中 batchUpdate 机制的情况
+        + setTimeout setInterval等（和它调用的函数）
+        + 自定义的 DOM 事件（和它调用的函数）
+        + React “管不到” 的入口
+    + transaction 事务机制
+      ![react_base_transaction](./files/images/react_base_transaction.png)
+
+      ``` javascript
+      class ListDemo extends React.Component {
+        constructor(props) {}
+        render() {}
+        increase = () => {
+          // 开始：处于 batchUpdaste
+          // isBatchUpdates = true
+
+          // 其他任何操作
+
+          // 结束
+          // isBatchingUpdates = false
+        }
+      }
+      ```
+
   + 组件渲染过程
+    + props state
+    + render() 生成 vnode
+    + patch(elem, vnode)
+  + 组件更新过程
+    + setState(newState) --> dirtyComponents(可能有子组件)
+    + render() 生成 newVnode
+    + patch(vnode, newVnode)
+      + reconciliation阶段 - 执行 diff 算法，纯js计算
+      + commit阶段 - 将 diff 结构渲染 DOM
+  + patch 不拆分阶段，可能会有的性能问题
+    + js是单线程，且和 DOM 渲染共用一个线程
+    + 当组件足够复杂，组件更新时计算和渲染都压力大
+    + 同时再有DOM 操作需求（动画，鼠标拖拽等），将卡顿
+  + 解决方案 fiber
+    + 将 reconciliation 阶段进行任务拆分（commit无法拆分）
+    + DOM 需要渲染时暂停，空闲时恢复
+    + window.requestIdleCallback
 + React 组件如何通讯
+  + 父子组件 props
+  + 自定义事件
+  + redux 和 context
 + JSX本质是什么（可对比Vue的模板编译）
+  + createElement
+  + 执行返回 vnode
 + context是什么，有何用途
+  + 父组件，向其下所有子组件传递信息
+  + 如一些简单的公用信息：主题色、语言等
+  + 复杂的公用信息，请用redux
 + shouldComponentUpdate的用途
+  + 性能优化
+  + 配合“不可变值”一起使用，否则会出错
 + 描述redux单项数据流
 + setState是同步还是异步
+  ![react_base_setState02](./files/images/react_base_setState02.png)
