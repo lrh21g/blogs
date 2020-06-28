@@ -1,4 +1,4 @@
-# 设计模式
+# JavaScript设计模式
 
 ## 面向对象
 
@@ -22,9 +22,21 @@
 
 ### UML类图
 
-+ Unified Modeling Language 统一建模语言
-+ 类图，UML 包含很多类图
-+ 泛化(表示继承) 和 关联(表示引用)
+UML类图基本符号的含义：
+
++ 类(class)：一般是用三层矩形框表示，第一层表示类的名称，第二层表示的是字段和属性，第三层则是类的方法第一层中，如果是抽象类，需用斜体显示。类的属性、操作中的可见性使用+、#、－分别表示public、protected、private
++ 包(Package)：是一种常规用途的组合机制。在UML中用一个Tab框表示，Tab里写上包的名称，框里则用来放一些其他子元素，比如类，子包等等。
++ 接口(Interface)：表示的是一系列的操作集合，它指定了一个类所提供的服务。一个接口只指明了实现这一接口的分类器实例应该支持的特性，并没有指定其所刻画的特性是如何实现的。
+
+UML中描述对象和类之间相互的关系：
+
++ 泛化(Generalization)：表示的是类之间的**继承**关系，注意是子类指向父类。
++ 关联(Association)：表示的是类与类之间存在某种特定的对应关系。
++ 聚合(Aggregation)：是关联关系的一种特例，表示的是整体与部分之间的关系，部分不能离开整体单独存在。
++ 组合(Composition)：是聚合的一种特殊形式，表示的是类之间更强的组合关系。
++ 依赖(Dependency)：表示的是类之间的调用关系。
+
+可参考：[UML类图常用符号及关系详解](https://www.edrawsoft.cn/uml-class-symbols/)
 
 ## 设计原则
 
@@ -273,3 +285,331 @@
   console.log('第三辆车离开')
   park.out(car3)
   ```
+
+## 设计模式
+
+### 工厂模式(FactoryMethod)
+
+将 `new` 操作单独封装。遇到 `new` 时，就要考虑是否该使用工厂模式
+
+![design_FactoryMethod](./files/images/design_FactoryMethod.png)
+
+``` javascript
+class Product {
+  constructor(name) {
+    this.name = name
+  }
+  init() { alert('init') }
+  fn1() { alert('fn1') }
+  fn2() { alert('fn2') }
+}
+
+class Creator {
+  create(name) {
+    return new Product(name)
+  }
+}
+
+let creator = new Creator()
+let p = creator.create('p1')
+p.init()
+p.fn1()
+```
+
++ jQuery - `$('div')`
+
+  ``` javascript
+  class jQuery {
+    constructor(selector) {
+      let slice = Array.prototype.slice
+      let dom = slice.call(document.querySelectorAll(selector))
+      let len = dom ? dom.length : 0
+      for (let i = 0; i < len; i++) {
+        this[i] = dom[i]
+      }
+      this.length = len
+      this.selector = selector || ''
+    }
+    append(node) { }
+    addClass(name) { }
+    html(data) { }
+    //... // 此处省略若干 API
+  }
+  window.$ = function (selector) {
+    return new jQuery(selector)
+  }
+  ```
+
++ React.createElement
+
+``` javascript
+var profile = <div>
+  <img src="avator.png" className="profile" />
+  <h3>{[user.firstName, user.lastName].join(' ')}</h3>
+</div>
+
+var profile = React.createElement("div", null,
+  React.createElement("img", { src: "avator.png", className: "profile" }),
+  React.createElement("h3", null, [user.firstName, user.lastName].join(' '))
+)
+
+class Vnode(tag, attrs, children) {
+  // ... 省略内部代码 ...
+}
+React.createElement = function (tag, attrs, children) {
+  return new Vnode(tag, attrs, children)
+}
+```
+
++ Vue 异步组件
+
+``` javascript
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    resolve({ template: '<div>I am async!</div>' })
+  }, 1000)
+})
+```
+
+### 单例模式(Singleton)
+
+系统中被唯一使用，一个类只有一个实例。示例：登录框，购物车
+
++ 单例模式需要用到 java 的特性（private）
++ ES6 中没有 （typescript除外）
++ 只能用 java 代码来演示 UML 图的内容
+
+``` javascript
+class SingleObject {
+  login() {
+    console.log('login...')
+  }
+}
+SingleObject.getInstance = (function () {
+  let instance
+  return function () {
+    if (!instance) {
+      instance = new SingleObject();
+    }
+    return instance
+  }
+})()
+
+let obj1 = SingleObject.getInstance()
+obj1.login()
+let obj2 = SingleObject.getInstance()
+obj2.login()
+console.log(obj1 === obj2)
+```
+
++ jQuery 只有一个 `$`
+
+  ``` javascript
+  // jQuery 只有一个 $
+  if (window.jQuery != null) {
+    return window.jQuery
+  } else {
+    // 初始化...
+  }
+  ```
+
++ 模拟登录框
+
+``` javascript
+class LoginForm {
+  constructor() {
+    this.state = "hide";
+  }
+  show() {
+    if (this.state === "show") {
+      alert("已经显示");
+      return;
+    }
+    this.state = "show";
+    console.log("登录框已显示");
+  }
+  hide() {
+    if (this.state === "hide") {
+      alert("已经隐藏");
+      return;
+    }
+    this.state = "hide";
+    console.log("登录框已隐藏");
+  }
+}
+LoginForm.getInstance = (function () {
+  let instance;
+  return function () {
+    if (!instance) {
+      instance = new LoginForm();
+    }
+    return instance;
+  };
+})();
+
+// 一个页面中调用登录框
+let login1 = LoginForm.getInstance();
+login1.show();
+// 另一个页面中调用登录框
+let login2 = LoginForm.getInstance();
+login2.show();
+// 两者是否相等
+console.log("login1 === login2", login1 === login2);
+```
+
++ 其他
+  + 购物车（和登录框类似）
+  + vuex 和 redux 中的 store
+
+### 适配器模式(Adapter)
+
+将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类能一起工作。
+
+![design_Adapter](./files/images/design_Adapter.png)
+
+``` javascript
+class Adaptee {
+  specificRequest() {
+    return '德国标准插头'
+  }
+}
+class Target {
+  constructor() {
+    this.adaptee = new Adaptee
+  }
+  request() {
+    let info = this.adaptee.specificRequest()
+    return `${info} - 转换器 - 中国标准插头`
+  }
+}
+let target = new Target()
+let res = target.request()
+console.log(res)
+```
+
+场景
+
++ 封装旧接口
+
+``` javascript
+// 自己封装的 ajax，使用方法如下
+ajax({
+  url: '/getData',
+  type: 'Post',
+  dataType: 'json'
+})
+  .done(function () {})
+// 之前的旧接口
+// $.ajax({...})
+```
+
++ vue computed
+
+### 装饰器模式(Decorator)
+
+为对象添加新功能，不改变其原有的结构和功能
+
+![design_Decorator](./files/images/design_Decorator.png)
+
+``` javascript
+class Circle {
+  draw() {
+    console.log('画一个圆形')
+  }
+}
+class Decorator {
+  constructor(circle) {
+    this.circle = circle
+  }
+  draw() {
+    this.circle.draw()
+    this.setRedBorder(circle)
+  }
+  setRedBorder(circle) {
+    console.log('设置红色边框')
+  }
+}
+let circle = new Circle()
+circle.draw()
+let dec = new Decorator(circle)
+dec.draw()
+```
+
+场景
+
++ ES7 装饰器
+
+``` javascript
+function mixins(...list) {
+  return function (target) {
+    Object.assign(target.prototype, ...list)
+  }
+}
+const Foo = {
+  foo() { alert('foo') }
+}
+
+@mixins(Foo)
+class MyClass {}
+
+let obj = new MyClass();
+obj.foo() // 'foo'
+```
+
++ core-decorators
+
+### 代理模式(Proxy)
+
+使用者无权访问目标对象，中间加代理，通过代理做授权和控制
+
+![design_Proxy](./files/images/design_Proxy.png)
+
+``` javascript
+class ReadImg {
+  constructor(fileName) {
+    this.fileName = fileName
+    this.loadFormDisk() // 初始化，即从硬盘中加载 - 模拟
+  }
+  display() {
+    console.log('display...' + this.fileName)
+  }
+  loadFormDisk() {
+    console.log('loading...' + this.fileName)
+  }
+}
+class ProxyImg {
+  constructor(fileName) {
+    this.realImg = new ReadImg(fileName)
+  }
+  display() {
+    this.realImg.display()
+  }
+}
+let proxyImg = new ProxyImg('1.png')
+proxyImg.display()
+```
+
+场景
+
++ 网页事件代理
++ jQuery - `$.proxy`
++ ES6 Proxy
+
+比较
+
++ 代理模式 vs 适配器模式
+  + 适配器模式：提供一个不同的接口
+  + 代理模式：提供一模一样的接口
++ 代理模式 vs 装饰器模式
+  + 装饰器模式：扩展功能，原有功能不变且可直接使用
+  + 代理模式：显示原有功能，但是经过限制或者阉割之后的
+
+### 外观模式
+
+### 观察者模式
+
+### 迭代器模式
+
+### 状态模式
+
+### 其他设计模式
