@@ -26,6 +26,10 @@ module.exports = [
       {
         text: 'React',
         link: '/react/base.html'
+      },
+      {
+        text: 'webpack',
+        link: '/webpack/base.html'
       }
     ]
   },

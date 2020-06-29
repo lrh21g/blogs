@@ -23,6 +23,13 @@ module.exports = {
       ]
     },
     {
+      title: '设计模式',
+      collapsable: false,
+      children: [
+        'design-pattern', // 设计模式
+      ]
+    },
+    {
       title: '实用技巧',
       collapsable: false,
       children: [
