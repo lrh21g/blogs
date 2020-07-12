@@ -4,15 +4,15 @@ module.exports = [
     items: [
       {
         text: 'HTML + CSS',
-        link: '/htmlcss/base.html'
+        link: '/htmlcss/基础知识.html'
       },
       {
         text: 'JavaScript',
-        link: '/javascript/base.html'
+        link: '/javascript/基础知识.html'
       },
       {
         text: 'TypeScript',
-        link: '/typescript/base.html'
+        link: '/typescript/基础知识.html'
       },
     ]
   },
@@ -21,15 +21,15 @@ module.exports = [
     items: [
       {
         text: 'Vue',
-        link: '/vue/base.html'
+        link: '/vue/基础知识.html'
       },
       {
         text: 'React',
-        link: '/react/base.html'
+        link: '/react/基础知识.html'
       },
       {
         text: 'webpack',
-        link: '/webpack/base.html'
+        link: '/webpack/基础知识.html'
       }
     ]
   },
@@ -38,7 +38,7 @@ module.exports = [
     items: [
       {
         text: 'Node',
-        link: '/node/base.html'
+        link: '/node/基础知识.html'
       },
     ]
   },

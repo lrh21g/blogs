@@ -4,10 +4,10 @@ module.exports = {
       title: 'HTML + CSS',
       collapsable: false,
       children: [
-        'base',
-        'adaptive',
-        'css-common',
-        'css-stickyfooter'
+        '基础知识',
+        '移动端适配',
+        'CSS常用封装',
+        'CSS-StickyFooter'
       ]
     }
   ],
@@ -16,31 +16,31 @@ module.exports = {
       title: '基础',
       collapsable: false,
       children: [
-        'base', // JavaScript基础
-        'prototype', // 原型与继承
-        'scope', // 作用域
-        'async', // 异步
+        '基础知识',
+        '原型与继承',
+        '作用域与闭包',
+        '异步',
       ]
     },
     {
       title: '设计模式',
       collapsable: false,
       children: [
-        'design-pattern', // 设计模式
+        'JavaScript设计模式',
       ]
     },
     {
       title: '实用技巧',
       collapsable: false,
       children: [
-        'common', // 通用封装
+        'JavaScript常用封装',
       ]
     },
     {
       title: '混合开发',
       collapsable: false,
       children: [
-        'hybrid' // 混合开发
+        '混合开发'
       ]
     }
   ],
@@ -49,7 +49,7 @@ module.exports = {
       title: '基础',
       collapsable: false,
       children: [
-        'base'
+        '基础知识'
       ]
     }
   ],
@@ -58,7 +58,7 @@ module.exports = {
       title: '基础',
       collapsable: false,
       children: [
-        'base'
+        '基础知识'
       ]
     }
   ],
@@ -67,10 +67,10 @@ module.exports = {
       title: 'Vue',
       collapsable: false,
       children: [
-        'base',
-        'component',
-        'component-communication',
-        'skill'
+        '基础知识',
+        'Vue组件',
+        'Vue组件通信方式',
+        'Vue实用技巧'
       ]
     },
     {
@@ -84,7 +84,7 @@ module.exports = {
       title: 'React',
       collapsable: false,
       children: [
-        'base'
+        '基础知识'
       ]
     }
   ]

@@ -26,10 +26,10 @@ requireComponent.keys().forEach(fileName => {
   const config = requireComponent(fileName)
   const componentName = changeStr(
     // ./componentsA.vue => componentsA
-    fileName.replace(/^\.\//, '').replace(/\.\w+$/, '') 
+    fileName.replace(/^\.\//, '').replace(/\.\w+$/, '')
   )
   // 动态注册该目录下的所有.vue文件
-  Vue.component(componentName, config.default || config) 
+  Vue.component(componentName, config.default || config)
 })
 ```
 
