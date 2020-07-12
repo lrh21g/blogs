@@ -17,6 +17,7 @@ module.exports = {
       collapsable: false,
       children: [
         '基础知识',
+        '数组',
         '原型与继承',
         '作用域与闭包',
         '异步',
