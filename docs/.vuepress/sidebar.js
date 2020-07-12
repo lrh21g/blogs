@@ -20,7 +20,6 @@ module.exports = {
         '原型与继承',
         '作用域与闭包',
         '异步',
-        '手写系列'
       ]
     },
     {
@@ -35,6 +34,7 @@ module.exports = {
       collapsable: false,
       children: [
         'JavaScript常用封装',
+        '手写系列'
       ]
     },
     {
