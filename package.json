@@ -15,5 +15,12 @@
   "license": "ISC",
   "dependencies": {
     "async-validator": "^3.2.4"
+  },
+  "devDependencies": {
+    "@vuepress/plugin-active-header-links": "^1.5.2",
+    "@vuepress/plugin-back-to-top": "^1.5.2",
+    "@vuepress/plugin-medium-zoom": "^1.5.2",
+    "@vuepress/plugin-nprogress": "^1.5.2",
+    "vuepress": "^1.5.2"
   }
 }
