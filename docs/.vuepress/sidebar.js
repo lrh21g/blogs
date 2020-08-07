@@ -70,8 +70,9 @@ module.exports = {
       collapsable: false,
       children: [
         '基础知识',
-        'Vue组件',
+        'Vue生命周期',
         'Vue组件通信方式',
+        'Vue组件',
         'Vue实用技巧'
       ]
     },
