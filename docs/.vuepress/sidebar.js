@@ -64,6 +64,15 @@ module.exports = {
       ]
     }
   ],
+  '/linux/': [
+    {
+      title: '基础',
+      collapsable: false,
+      children: [
+        '基础知识'
+      ]
+    }
+  ],
   '/vue/': [
     {
       title: 'Vue',
