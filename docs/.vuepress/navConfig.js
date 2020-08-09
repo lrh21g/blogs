@@ -40,6 +40,10 @@ module.exports = [
         text: 'Node',
         link: '/node/基础知识.html'
       },
+      {
+        text: 'Linux',
+        link: '/linux/基础知识.html'
+      }
     ]
   },
   {
