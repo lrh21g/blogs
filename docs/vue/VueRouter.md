@@ -22,6 +22,8 @@ const routes = [
     path: string,
     // 路由组件
     component?: Component,
+    // 路由懒加载
+    // component：resolve => (require(['需要加载的路由的地址'])，resolve)
     // 命名路由：通过 <router-link> 的 to 属性 或者 router.push 进行路由导航是，可以传递一个对象 { name: '命令路由的名字', params: {} }
     name?: string,
     // 命名视图组件
