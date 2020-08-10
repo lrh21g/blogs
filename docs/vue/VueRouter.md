@@ -110,6 +110,91 @@ new Vue({
 
   支持所有 JavaScript 运行环境，如 Node.js 服务器端。如果发现没有浏览器的 API，路由会自动强制进入这个模式。
 
+## 编程式导航
+
++ `router.push(location, onComplete?, onAbort?)`
+
+  会向 history 栈添加一个新的记录，当用户点击浏览器后退按钮时，则回到之前的 URL。在 Vue 实例内部，可以通过 `$router` 访问路由实例。因此可以调用 `this.$router.push`。
+
+  |          声明式           |       编程式       |
+  | :-----------------------: | :----------------: |
+  | `<router-link :to="...">` | `router.push(...)` |
+  
+  ``` javascript
+  router.push('home') // 字符串
+  router.push({ path: 'home' }) // 对象
+  // 命名的路由
+  router.push({ name: 'user', params: { userId: '123' }})
+  // 带查询参数，变成 /register?plan=private
+  router.push({ path: 'register', query: { plan: 'private' }})
+  ```
+
+  在 2.2.0+，可选的在 `router.push` 或 `router.replace` 中提供 `onComplete` 和 `onAbort` 回调作为第二个和第三个参数。这些回调将会在导航成功完成 (在所有的异步钩子被解析之后) 或终止 (导航到相同的路由、或在当前导航完成之前导航到另一个不同的路由) 的时候进行相应的调用。
+  
+  在 3.1.0+，可以省略第二个和第三个参数，此时如果支持 Promise，`router.push` 或 `router.replace` 将返回一个 Promise。
+
+  + `query`方式传参，其参数拼接在 URL 后，使用 `this.$route.query` 接受参数
+  + `params`方式传参，其参数不会显示在地址栏，使用 `this.$route.params` 接受参数
+
+  注意：
+  + **如果提供了 `path`，`params` 会被忽略**
+  + 如果目的地和当前路由相同，只有参数发生了改变 (比如从一个用户资料到另一个 /users/1 -> /users/2)，需要使用 `beforeRouteUpdate` 来响应这个变化 (比如抓取用户信息)
+
+  同样的规则也适用于 `router-link` 组件的 `to` 属性。
+
++ `router.replace(location, onComplete?, onAbort?)`
+
+  不会向 history 添加新记录，而是跟它的方法名一样 —— 替换掉当前的 history 记录
+  
+  |              声明式               |        编程式         |
+  | :-------------------------------: | :-------------------: |
+  | `<router-link :to="..." replace>` | `router.replace(...)` |
+
++ `router.go(n)`
+
+  在 history 记录中向前或者后退多少步，类似 `window.history.go(n)`。
+
+  ``` javascript
+  router.go(1) // 在浏览器记录中前进一步，等同于 history.forward()
+  router.go(-1) // 后退一步记录，等同于 history.back()
+  router.go(3) // 前进 3 步记录
+  // 如果 history 记录不够用，则失败
+  router.go(-100)
+  router.go(100)
+  ```
+
+## 路由组件传参
+
+``` javascript
+const User = {
+  props: ['id'],
+  template: '<div>User {{ id }}</div>'
+}
+const router = new VueRouter({
+  routes: [
+    // 布尔值模式：props 被设置为 true，route.params 将会被设置为组件属性
+    { path: '/user/:id', component: User, props: true },
+
+    // 对象模式：props 是一个对象，它会被按原样设置为组件属性。当 props 是静态的时候有用
+    { path: '/user', component: User, props: { age: 18 } }
+
+    // 函数模式：创建一个函数返回 props。尽可能保持 props 函数为无状态的，因为它只会再路由发生变化时起作用
+    {
+      path: '/search',
+      component: SearchUser,
+      props: (route) => ({ query: route.query.q })
+    }
+
+    // 对于包含命名视图的路由，必须分别为每个命名视图添加 `props` 选项：
+    {
+      path: '/user/:id',
+      components: { default: User, sidebar: Sidebar },
+      props: { default: true, sidebar: false }
+    }
+  ]
+})
+```
+
 ## 导航守卫
 
 `vue-router` 提供的导航守卫主要用来通过跳转或取消的方式守卫导航。**参数或查询的改变并不会触发进入/离开的导航守卫。**
@@ -197,3 +282,97 @@ const Foo = {
   }
 }
 ```
+
+## 数据获取
+
+有时候，进入某个路由后，需要从服务器获取数据。可以通过两种方式实现：
+
++ **导航完成之后获取**：先完成导航，然后在接下来的组件生命周期钩子中获取数据。在数据获取期间显示“加载中”之类的指示。
+
+  ``` html
+  <template>
+    <div class="post">
+      <div v-if="loading" class="loading">
+        Loading...
+      </div>
+
+      <div v-if="error" class="error">
+        {{ error }}
+      </div>
+
+      <div v-if="post" class="content">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.body }}</p>
+      </div>
+    </div>
+  </template>
+
+  <script>
+  export default {
+    data () {
+      return {
+        loading: false,
+        post: null,
+        error: null
+      }
+    },
+    created () {
+      // 组件创建完后获取数据，此时 data 已经被 observed 了
+      this.fetchData()
+    },
+    watch: {
+      // 如果路由有变化，会再次执行该方法
+      '$route': 'fetchData'
+    },
+    methods: {
+      fetchData () {
+        this.error = this.post = null
+        this.loading = true
+        getPost(this.$route.params.id, (err, post) => {
+          this.loading = false
+          if (err) {
+            this.error = err.toString()
+          } else {
+            this.post = post
+          }
+        })
+      }
+    }
+  }
+  </script>
+  ```
+
++ **导航完成之前获取**：导航完成前，在路由进入的守卫中获取数据，在数据获取成功后执行导航。
+
+  ``` javascript
+  export default {
+    data () {
+      return {
+        post: null,
+        error: null
+      }
+    },
+    beforeRouteEnter (to, from, next) {
+      getPost(to.params.id, (err, post) => {
+        next(vm => vm.setData(err, post))
+      })
+    },
+    // 路由改变前，组件就已经渲染完了,逻辑稍稍不同
+    beforeRouteUpdate (to, from, next) {
+      this.post = null
+      getPost(to.params.id, (err, post) => {
+        this.setData(err, post)
+        next()
+      })
+    },
+    methods: {
+      setData (err, post) {
+        if (err) {
+          this.error = err.toString()
+        } else {
+          this.post = post
+        }
+      }
+    }
+  }
+  ```
