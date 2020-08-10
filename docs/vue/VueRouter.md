@@ -12,6 +12,8 @@ Vue.use(VueRouter)
 // 1. 定义（路由）组件，可以从其他文件 import 进来
 import routerComponentA from './routerComponentA.vue'
 import routerComponentB from './routerComponentB.vue'
+// 路由懒加载
+const routerComponentC = () => import('./routerComponentC.vue')
 
 // 2. 定义路由
 const routes = [
