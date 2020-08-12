@@ -80,9 +80,10 @@ module.exports = {
       children: [
         '基础知识',
         'Vue生命周期',
+        'Vue组件通信方式',
+        'Vue原理',
         'VueRouter',
         'Vuex',
-        'Vue组件通信方式',
         'Vue组件',
         'Vue实用技巧'
       ]
