@@ -52,7 +52,8 @@ module.exports = {
       collapsable: false,
       children: [
         '基础知识',
-        'tsconfig配置'
+        'tsconfig配置',
+        'ts声明文件'
       ]
     }
   ],
