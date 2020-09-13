@@ -6,6 +6,7 @@ module.exports = {
       children: [
         '基础知识',
         '移动端适配',
+        '移动端常见问题',
         'CSS常用封装',
         'CSS-StickyFooter'
       ]
