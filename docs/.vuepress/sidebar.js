@@ -66,6 +66,15 @@ module.exports = {
       ]
     }
   ],
+  '/MongoDB/': [
+    {
+      title: '基础',
+      collapsable: false,
+      children: [
+        '基础知识'
+      ]
+    }
+  ],
   '/linux/': [
     {
       title: '基础',

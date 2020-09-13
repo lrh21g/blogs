@@ -47,6 +47,15 @@ module.exports = [
     ]
   },
   {
+    text: '数据库',
+    items: [
+      {
+        text: 'MongoDB',
+        link: '/MongoDB/基础知识.html'
+      }
+    ]
+  },
+  {
     text: '其他',
     link: '/'
   },
