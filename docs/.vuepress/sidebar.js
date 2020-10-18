@@ -13,6 +13,44 @@ module.exports = {
     }
   ],
   '/javascript/': [
+    // {
+    //   title: '知识框架',
+    //   path: '/javascript/知识框架/',
+    //   collapsable: false,
+    //   children: [
+    //     {
+    //       title: '运行时',
+    //       path: '/javascript/知识框架/运行时/',
+    //       collapsable: false,
+    //       children: [
+    //         {
+    //           title: '数据结构',
+    //           path: '/javascript/知识框架/运行时/数据结构/',
+    //           collapsable: false,
+    //           children: [
+    //             '/javascript/知识框架/运行时/数据结构/类型',
+    //             '/javascript/知识框架/运行时/数据结构/实例'
+    //           ]
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       title: '文法',
+    //       path: '/javascript/知识框架/文法/',
+    //       collapsable: false,
+    //       children: [
+    //         '/javascript/知识框架/文法/词法',
+    //         '/javascript/知识框架/文法/语法'
+    //       ]
+    //     },
+    //     {
+    //       title: '语义',
+    //       path: '/javascript/知识框架/语义/',
+    //       collapsable: false,
+    //       children: []
+    //     }
+    //   ]
+    // },
     {
       title: '基础',
       collapsable: false,
