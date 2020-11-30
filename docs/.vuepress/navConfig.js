@@ -60,7 +60,7 @@ module.exports = [
     items: [
       {
         text: 'Git',
-        link: '/git/README.html'
+        link: '/git/基础知识.html'
       }
     ]
   },
