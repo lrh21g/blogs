@@ -57,7 +57,12 @@ module.exports = [
   },
   {
     text: '其他',
-    link: '/'
+    items: [
+      {
+        text: 'Git',
+        link: '/git/README.html'
+      }
+    ]
   },
   {
     text: 'Github',
