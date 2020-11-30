@@ -1,4 +1,13 @@
 module.exports = {
+  '/git/': [
+    {
+      title: 'Git',
+      collapsable: false,
+      children: [
+        '基础知识'
+      ]
+    }
+  ],
   '/htmlcss/': [
     {
       title: 'HTML + CSS',
