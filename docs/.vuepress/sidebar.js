@@ -2,7 +2,7 @@ module.exports = {
   '/git/': [
     {
       title: 'Git',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识'
       ]
@@ -11,7 +11,7 @@ module.exports = {
   '/htmlcss/': [
     {
       title: 'HTML + CSS',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识',
         '移动端适配',
@@ -25,17 +25,17 @@ module.exports = {
     // {
     //   title: '知识框架',
     //   path: '/javascript/知识框架/',
-    //   collapsable: false,
+    //   collapsable: true,
     //   children: [
     //     {
     //       title: '运行时',
     //       path: '/javascript/知识框架/运行时/',
-    //       collapsable: false,
+    //       collapsable: true,
     //       children: [
     //         {
     //           title: '数据结构',
     //           path: '/javascript/知识框架/运行时/数据结构/',
-    //           collapsable: false,
+    //           collapsable: true,
     //           children: [
     //             '/javascript/知识框架/运行时/数据结构/类型',
     //             '/javascript/知识框架/运行时/数据结构/实例'
@@ -46,7 +46,7 @@ module.exports = {
     //     {
     //       title: '文法',
     //       path: '/javascript/知识框架/文法/',
-    //       collapsable: false,
+    //       collapsable: true,
     //       children: [
     //         '/javascript/知识框架/文法/词法',
     //         '/javascript/知识框架/文法/语法'
@@ -55,14 +55,14 @@ module.exports = {
     //     {
     //       title: '语义',
     //       path: '/javascript/知识框架/语义/',
-    //       collapsable: false,
+    //       collapsable: true,
     //       children: []
     //     }
     //   ]
     // },
     {
       title: '基础',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识',
         '数组',
@@ -73,14 +73,14 @@ module.exports = {
     },
     {
       title: '设计模式',
-      collapsable: false,
+      collapsable: true,
       children: [
         'JavaScript设计模式',
       ]
     },
     {
       title: '实用技巧',
-      collapsable: false,
+      collapsable: true,
       children: [
         'JavaScript常用封装',
         '手写系列'
@@ -88,7 +88,7 @@ module.exports = {
     },
     {
       title: '混合开发',
-      collapsable: false,
+      collapsable: true,
       children: [
         '混合开发'
       ]
@@ -97,7 +97,7 @@ module.exports = {
   '/typescript/': [
     {
       title: '基础',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识',
         'tsconfig配置',
@@ -108,7 +108,7 @@ module.exports = {
   '/node/': [
     {
       title: '基础',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识'
       ]
@@ -117,7 +117,7 @@ module.exports = {
   '/MongoDB/': [
     {
       title: '基础',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识'
       ]
@@ -126,7 +126,7 @@ module.exports = {
   '/linux/': [
     {
       title: '基础',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识'
       ]
@@ -135,28 +135,28 @@ module.exports = {
   '/vue/': [
     {
       title: 'Vue',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识',
         'Vue生命周期',
         'Vue组件通信方式',
-        'Vue原理',
         'VueRouter',
         'Vuex',
         'Vue组件',
-        'Vue实用技巧'
+        'Vue实用技巧',
+        'Vue原理'
       ]
     },
     {
       title: 'Vue源码',
-      collapsable: false,
+      collapsable: true,
       children: []
     }
   ],
   '/react/': [
     {
       title: 'React',
-      collapsable: false,
+      collapsable: true,
       children: [
         '基础知识'
       ]

@@ -13,7 +13,7 @@ module.exports = {
     lineNumbers: true, // 代码块显示行号
   },
   themeConfig: {
-    sidebarDepth: 2, // e'b将同时提取markdown中h2 和 h3 标题，显示在侧边栏上。
+    sidebarDepth: 2, // 默认的深度是 1，它将提取到 h2 的标题，设置成 0 将会禁用标题（headers）链接，同时，最大的深度为 2，它将同时提取 h2 和 h3 标题。
     lastUpdated: "Last Updated", // 文档更新时间：每个文件git最后提交的时间
     nav: nav, // 导航栏链接
     sidebar: sidebar, // 侧边栏导航
