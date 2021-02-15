@@ -76,10 +76,10 @@ module.exports = {
       path: '/javascript/前端训练营/',
       collapsable: true,
       children: [
-        '01.编程语言通识',
-        '02.JavaScript词法和类型',
-        '03.表达式和类型转换',
-        '04.语句和对象',
+        '/javascript/前端训练营/01.编程语言通识',
+        '/javascript/前端训练营/02.JavaScript词法和类型',
+        '/javascript/前端训练营/03.表达式和类型转换',
+        '/javascript/前端训练营/04.语句和对象',
       ]
     },
     {
