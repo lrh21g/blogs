@@ -72,6 +72,16 @@ module.exports = {
       ]
     },
     {
+      title: '前端训练营',
+      collapsable: true,
+      children: [
+        '01.编程语言通识',
+        '02.JavaScript词法和类型',
+        '03.表达式和类型转换',
+        '04.语句和对象',
+      ]
+    },
+    {
       title: '设计模式',
       collapsable: true,
       children: [
