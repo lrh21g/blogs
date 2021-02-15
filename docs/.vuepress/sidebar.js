@@ -73,6 +73,7 @@ module.exports = {
     },
     {
       title: '前端训练营',
+      path: '/javascript/前端训练营/',
       collapsable: true,
       children: [
         '01.编程语言通识',
