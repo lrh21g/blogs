@@ -23,5 +23,6 @@ module.exports = {
     "@vuepress/back-to-top",
     "@vuepress/nprogress",
     "@vuepress/medium-zoom",
+    "demo-container"
   ],
 };
