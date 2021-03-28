@@ -165,3 +165,10 @@
 + `center`：交叉轴的中点对齐
 + `baseline`: 项目的第一行文字的基线对齐
 + `stretch`：如果项目未设置高度或设为auto，将占满整个容器的高度
+
+## 参考
+
++ [写给自己看的display: flex布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)
++ [flex:0 flex:1 flex:none flex:auto应该在什么场景下使用？](https://www.zhangxinxu.com/wordpress/2020/10/css-flex-0-1-none/)
++ [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
++ [Flex 布局教程：实例篇](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
