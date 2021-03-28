@@ -18,7 +18,7 @@
 + `column`：主轴为垂直方向，起点在上沿
 + `column-reverse`：主轴为垂直方向，起点在下沿
 
-![flex_direction](./files/images/flex_direction.drawio.png)
+![flex_container--flex-direction](./files/images/flex_container--flex-direction.drawio.png)
 
 ### flex-wrap：设置项目在轴线排不下时，如何换行
 
@@ -26,7 +26,7 @@
 + `wrap`：换行，第一行在上方
 + `wrap-reverse`：换行，第一行在下方
 
-![flex_wrap](./files/images/flex_wrap.drawio.png)
+![flex_container--flex_wrap](./files/images/flex_container--flex_wrap.drawio.png)
 
 ### flex-flow: [flex-direction] || [flex-wrap]
 
@@ -49,7 +49,7 @@
 + `space-around`：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍
 + `space-evenly`：每个项目两侧空白间距完全相等。
   
-![justify_content](./files/images/justify_content.drawio.png)
+![flex_container--justify_content](./files/images/flex_container--justify_content.drawio.png)
 
 ### align-items：设置项目在交叉轴上对齐方式
 
@@ -61,7 +61,7 @@
 + `baseline`: 项目的第一行文字的基线对齐
 + `stretch`：默认值。如果项目未设置高度或设为auto，将占满整个容器的高度
 
-![align_items](./files/images/align-items.drawio.png)
+![flex_container--align-items](./files/images/flex_container--align-items.drawio.png)
 
 ### align-content：设置项目在多根轴线的对齐方式
 
@@ -75,7 +75,7 @@
 + `space-evenly`：每一行的项目都完全上下等分
 + `stretch`：默认值。轴线占满整个交叉轴。每一行项目都等比例拉伸
 
-![align_content](./files/images/align_content.drawio.png)
+![flex_container--align-content](./files/images/flex_container--align-content.drawio.png)
 
 ## Flex 项目属性
 
@@ -83,7 +83,7 @@
 
 `order` 属性定义项目的排列顺序。数值越小，排列越靠前，默认为 0 。如果需要将某一个项目放在最前面，可设置比 0 小的整数即可，如： -1 。
 
-![flex_item_order](./files/images/flex_item_order.drawio.png)
+![flex_item--order](./files/images/flex_item--order.drawio.png)
 
 ### flex-grow：设置项目的扩展比例
 
@@ -97,7 +97,7 @@
   + `flex-grow` 值总和 **【小于】** 1，则每个项目的扩展空间为：总剩余空间和当前元素 `flex-grow` 属性值的比例的计算值
   + `flex-grow` 值总和 **【大于】** 1，则所有剩余空间被扩展，分配比例为：`flex-grow` 属性值的比例。例如：如果所有项目都设置为 `flex-grow: 1` ，则表示剩余空间被均分。如果设置 `flex-grow` 比例为 1:2:1 ，则中间项目占一半的剩余空间，剩下项目均分剩余空间
 
-![flex_item_flex_grow](./files/images/flex_item_flex_grow.drawio.png)
+![flex_item--flex-grow](./files/images/flex_item--flex-grow.drawio.png)
 
 ### flex-shrink：设置项目的缩小比例
 
@@ -105,7 +105,7 @@
 
 项目收缩之后的最终宽度计算示例如下：
 
-![flex_item_flex_shrink](./files/images/flex_item_flex_shrink.drawio.png)
+![flex_item--flex-shrink](./files/images/flex_item--flex-shrink.drawio.png)
 
 ### flex-basis：设置项目分配剩余空间，占据的主轴空间
 
@@ -168,7 +168,9 @@
 
 ## 参考
 
-+ [写给自己看的display: flex布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)
-+ [flex:0 flex:1 flex:none flex:auto应该在什么场景下使用？](https://www.zhangxinxu.com/wordpress/2020/10/css-flex-0-1-none/)
 + [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
 + [Flex 布局教程：实例篇](http://www.ruanyifeng.com/blog/2015/07/flex-examples.html)
++ [写给自己看的display: flex布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)
++ [flex:0 flex:1 flex:none flex:auto应该在什么场景下使用？](https://www.zhangxinxu.com/wordpress/2020/10/css-flex-0-1-none/)
++ [FLEX](https://flexbox.malven.co/)
++ [CSS Tricks: A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
