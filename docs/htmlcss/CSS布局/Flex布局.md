@@ -7,6 +7,8 @@
 + `display: flex`：保持元素块状特性，宽度默认 100%，不和内联元素一行显示。
 + `display： inline-flex`：inline-flex 容器为 inline 特性，因此可以和图片文字一行显示。
 
+注意：设为 Flex 布局以后，子元素的 `float` 、 `clear` 和 `vertical-align` 属性将失效。
+
 ![flex_container](./files/images/flex_container.drawio.png)
 
 ## Flex 容器属性
