@@ -165,7 +165,7 @@
 }
 ```
 
-![grid_item--grid-template](./files/images/grid_item--grid-template.drawio.png)
+![grid_container--grid-template](./files/images/grid_container--grid-template.drawio.png)
 
 ### grid-row-gap / grid-column-gap / grid-gap
 
@@ -189,7 +189,9 @@
 + `grid-row-gap` 修改为 `row-gap`
 + `grid-gap` 修改为 `gap`
 
-### justify-items / align-items / place-items
+![grid_container--grid-gap](./files/images/grid_container--grid-gap.drawio.png)
+
+### align-items / justify-items / place-items
 
 + `align-items`：设置单元格内容的垂直位置（上中下）
 + `justify-items`：设置单元格内容的水平位置（左中右）
@@ -211,6 +213,8 @@
 + `end`：对齐单元格的结束边缘
 + `center`：单元格内部居中
 + `stretch`：默认值。拉伸，占满单元格的整个宽度
+
+![grid_container--place-items](./files/images/grid_container--place-items.drawio.png)
 
 ### align-content / justify-content / place-content
 
@@ -238,7 +242,9 @@
 + `space-between`：均匀排列每个网格容器内元素，首个元素放置于起点，末尾元素放置于终点
 + `space-evenly`：均匀排列每个网格容器内元素，每个元素之间的间隔相等
 
-### grid-auto-columns / grid-auto-rows
+![grid_container--place-content](./files/images/grid_container--place-content.drawio.png)
+
+### grid-auto-rows / grid-auto-columns
 
 `grid-auto-columns` / `grid-auto-rows` 指定任何自动生成的网格轨道（也称为隐式网格轨道）的大小。当网格项目多于网格中的单元格或网格项目放置在显式网格之外时，将创建隐式轨道。
 
@@ -248,14 +254,16 @@
 
 ``` css
 .grid-container {
-  grid-auto-columns: <track-size> ...;
   grid-auto-rows: <track-size> ...;
+  grid-auto-columns: <track-size> ...;
 }
 ```
 
 属性值：
 
 + `<track-size>`：可以是长度值，百分比值，以及`fr`单位（网格剩余空间比例单位）。
+
+![grid_container--grid-auto-columns-rows](./files/images/grid_container--grid-auto-columns-rows.drawio.png)
 
 ### grid-auto-flow
 
@@ -271,9 +279,11 @@
 
 属性值：
 
-+ `row`：默认值。指定自动布局算法按照通过逐行填充来排列元素，在必要时增加新行。依次水平排列优先。如果既没有指定 row 也没有 column，则默认为 row。
++ `row`：默认值。指定自动布局算法按照通过逐行填充来排列元素，在必要时增加新行。依次水平排列优先。如果既没有指定 `row` 也没有 `column`，则默认为 `row`。
 + `column`：指定自动布局算法通过逐列填充来排列元素，在必要时增加新列。依次垂直排列优先。
 + `dense`：指定自动布局算法使用一种「稠密」堆积算法，如果后面出现了稍小的元素，则会试图去填充网格中前面留下的空白。这样做会填上稍大元素留下的空白，可能导致原来出现的次序被打乱。如果省略它，使用一种「稀疏」算法，在网格中布局元素时，布局算法只会「向前」移动，永远不会倒回去填补空白。这保证了所有自动布局元素「按照次序」出现，即使可能会留下被后面元素填充的空白。
+
+![grid_container--grid-auto-flow](./files/images/grid_container--grid-auto-flow.drawio.png)
 
 ### grid
 
@@ -314,10 +324,10 @@
 + `span <name>`：表示当前网格会自动扩展，直到命中指定的网格线名称
 + `auto`：全自动，包括定位，跨度等
 
-### grid-column / grid-row
+### grid-row / grid-column
 
-+ `grid-column`：`grid-column-start` 和 `grid-column-end` 的合并简写形式
 + `grid-row`：`grid-row-start` 和 `grid-row-end` 的合并简写形式。
++ `grid-column`：`grid-column-start` 和 `grid-column-end` 的合并简写形式
 
 语法：
 
@@ -347,7 +357,7 @@
 
 ![grid_item--grid-area](./files/images/grid_item--grid-area.drawio.png)
 
-### justify-self / align-self / place-self
+### align-self / justify-self / place-self
 
 + `align-self`：设置单元格内容的垂直位置（上中下），只作用于单个项目
 + `justify-self`：单元格内容的水平位置（左中右），只作用于单个项目
@@ -357,8 +367,8 @@
 
 ``` css
 .grid-item {
-  justify-self: stretch | start | end | center;
   align-self: stretch | start | end | center;
+  justify-self: stretch | start | end | center;
   place-self: <align-self> <justify-self>;
 }
 ```
@@ -370,9 +380,12 @@
 + `center`：将内容与网格区域的中心对齐
 + `stretch`：填充网格区域的整个宽度
 
+![grid_item--place-self](./files/images/grid_item--place-self.drawio.png)
+
 ## 参考
 
 + [CSS Grid 网格布局教程](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)
 + [写给自己看的display: grid布局教程](https://www.zhangxinxu.com/wordpress/2018/11/display-grid-css-css3/)
++ [从零开始学 CSS Grid 布局](http://f2ex.cn/css-grid-layout-guide/?utm_source=tuicool&utm_medium=referral)
 + [GRID](https://grid.malven.co/)
 + [CSS Tricks: A Complete Guide to Grid](https://css-tricks.com/snippets/css/complete-guide-grid/)
