@@ -57,7 +57,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style>
 #fixed-screen-container {
   position: fixed;
   top: 0;
