@@ -14,17 +14,24 @@ module.exports = {
       collapsable: true,
       children: [
         '基础知识',
-        '移动端适配',
-        '移动端常见问题',
-        '1px边框',
+        '页面等比缩放',
         'CSS常用封装',
         'CSS-StickyFooter'
       ]
     },
     {
+      title: '移动端H5',
+      collapsable: true,
+      children: [
+        '/htmlcss/移动端H5/移动端基本概念',
+        '/htmlcss/移动端H5/移动端适配',
+        '/htmlcss/移动端H5/1px边框',
+        '/htmlcss/移动端H5/移动端常见问题',
+      ]
+    },
+    {
       title: 'CSS布局',
-      // path: '/htmlcss/CSS布局/',
-      collapsable: false,
+      collapsable: true,
       children: [
         '/htmlcss/CSS布局/水平垂直居中',
         '/htmlcss/CSS布局/多列布局',
@@ -32,8 +39,6 @@ module.exports = {
         '/htmlcss/CSS布局/全屏布局',
         '/htmlcss/CSS布局/Flex布局',
         '/htmlcss/CSS布局/Grid布局',
-        '/htmlcss/CSS布局/REM布局',
-        '/htmlcss/CSS布局/等比布局',
         '/htmlcss/CSS布局/自适应布局'
       ]
     }

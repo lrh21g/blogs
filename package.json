@@ -18,10 +18,10 @@
     "vuepress-plugin-demo-container": "^0.2.0"
   },
   "devDependencies": {
-    "@vuepress/plugin-active-header-links": "^1.5.3",
-    "@vuepress/plugin-back-to-top": "^1.5.3",
-    "@vuepress/plugin-medium-zoom": "^1.5.3",
-    "@vuepress/plugin-nprogress": "^1.5.3",
-    "vuepress": "^1.5.3"
+    "@vuepress/plugin-active-header-links": "^1.8.2",
+    "@vuepress/plugin-back-to-top": "^1.8.2",
+    "@vuepress/plugin-medium-zoom": "^1.8.2",
+    "@vuepress/plugin-nprogress": "^1.8.2",
+    "vuepress": "^1.8.2"
   }
 }
