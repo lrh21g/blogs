@@ -25,8 +25,9 @@ module.exports = {
       children: [
         '/htmlcss/移动端H5/移动端基本概念',
         '/htmlcss/移动端H5/移动端适配',
-        '/htmlcss/移动端H5/1px边框',
-        '/htmlcss/移动端H5/移动端常见问题',
+        '/htmlcss/移动端H5/1px边框问题',
+        '/htmlcss/移动端H5/图片模糊问题',
+        '/htmlcss/移动端H5/移动端常见问题'
       ]
     },
     {

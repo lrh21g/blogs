@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "async-validator": "^3.4.0",
+    "markdown-it-katex": "^2.0.3",
     "vuepress-plugin-demo-container": "^0.2.0"
   },
   "devDependencies": {
