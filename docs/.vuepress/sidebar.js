@@ -3,21 +3,14 @@ module.exports = {
     {
       title: 'Git',
       collapsable: true,
-      children: [
-        '基础知识'
-      ]
-    }
+      children: ['基础知识'],
+    },
   ],
   '/htmlcss/': [
     {
       title: 'HTML + CSS',
       collapsable: true,
-      children: [
-        '基础知识',
-        '页面等比缩放',
-        'CSS常用封装',
-        'CSS-StickyFooter'
-      ]
+      children: ['基础知识', '页面等比缩放', 'CSS常用封装', 'CSS-StickyFooter'],
     },
     {
       title: '移动端H5',
@@ -27,8 +20,8 @@ module.exports = {
         '/htmlcss/移动端H5/移动端适配',
         '/htmlcss/移动端H5/1px边框问题',
         '/htmlcss/移动端H5/图片模糊问题',
-        '/htmlcss/移动端H5/移动端常见问题'
-      ]
+        '/htmlcss/移动端H5/移动端常见问题',
+      ],
     },
     {
       title: 'CSS布局',
@@ -40,9 +33,9 @@ module.exports = {
         '/htmlcss/CSS布局/全屏布局',
         '/htmlcss/CSS布局/Flex布局',
         '/htmlcss/CSS布局/Grid布局',
-        '/htmlcss/CSS布局/自适应布局'
-      ]
-    }
+        '/htmlcss/CSS布局/自适应布局',
+      ],
+    },
   ],
   '/javascript/': [
     // {
@@ -86,13 +79,7 @@ module.exports = {
     {
       title: '基础',
       collapsable: true,
-      children: [
-        '基础知识',
-        '数组',
-        '原型与继承',
-        '作用域与闭包',
-        '异步',
-      ]
+      children: ['基础知识', '数组', '原型与继承', '作用域与闭包', '异步'],
     },
     {
       title: '前端训练营',
@@ -103,68 +90,51 @@ module.exports = {
         '/javascript/前端训练营/02.JavaScript词法和类型',
         '/javascript/前端训练营/03.表达式和类型转换',
         '/javascript/前端训练营/04.语句和对象',
-      ]
+      ],
     },
     {
       title: '设计模式',
       collapsable: true,
-      children: [
-        'JavaScript设计模式',
-      ]
+      children: ['JavaScript设计模式'],
     },
     {
       title: '实用技巧',
       collapsable: true,
-      children: [
-        'JavaScript常用封装',
-        '手写系列'
-      ]
+      children: ['JavaScript常用封装', '手写系列'],
     },
     {
       title: '混合开发',
       collapsable: true,
-      children: [
-        '混合开发'
-      ]
-    }
+      children: ['混合开发'],
+    },
   ],
   '/typescript/': [
     {
       title: '基础',
       collapsable: true,
-      children: [
-        '基础知识',
-        'tsconfig配置',
-        'ts声明文件'
-      ]
-    }
+      children: ['基础知识', 'tsconfig配置', 'ts声明文件'],
+    },
   ],
   '/node/': [
     {
       title: '基础',
       collapsable: true,
-      children: [
-        '基础知识'
-      ]
-    }
+      children: ['基础知识'],
+    },
   ],
   '/MongoDB/': [
     {
       title: '基础',
       collapsable: true,
-      children: [
-        '基础知识'
-      ]
-    }
+      children: ['基础知识'],
+    },
   ],
   '/linux/': [
     {
       title: '基础',
       collapsable: true,
-      children: [
-        '基础知识'
-      ]
-    }
+      children: ['基础知识'],
+    },
   ],
   '/vue/': [
     {
@@ -178,22 +148,27 @@ module.exports = {
         'Vuex',
         'Vue组件',
         'Vue实用技巧',
-        'Vue原理'
-      ]
+        'Vue原理',
+      ],
     },
     {
       title: 'Vue源码',
       collapsable: true,
-      children: []
-    }
+      children: [],
+    },
   ],
   '/react/': [
     {
       title: 'React',
       collapsable: true,
-      children: [
-        '基础知识'
-      ]
-    }
-  ]
-}
+      children: ['基础知识'],
+    },
+  ],
+  '/tools/': [
+    {
+      title: '编辑器',
+      collapsable: true,
+      children: ['vscode插件'],
+    },
+  ],
+};

@@ -61,6 +61,10 @@ module.exports = [
       {
         text: 'Git',
         link: '/git/基础知识.html'
+      },
+      {
+        text: '工具',
+        link: '/tools/vscode插件.html'
       }
     ]
   },
