@@ -315,3 +315,7 @@
 ```
 
 :::
+
+## 参考
+
++ [CSS实现长宽比的几种方案](https://www.w3cplus.com/css/aspect-ratio.html)
