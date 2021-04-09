@@ -123,6 +123,7 @@
 ``` html
 <template>
   <div class="aspectration-wrapper-padding-cssvar">
+    <!-- 此处CSS编译，calc(100% / (var(--aspect-ratio))) 存在问题 -->
     <div class="aspectration-container-padding-cssvar" style="--aspect-ratio:16/9">
       <div class="aspectration-content-padding-cssvar">16 : 9</div>
     </div>
