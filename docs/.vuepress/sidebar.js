@@ -10,7 +10,13 @@ module.exports = {
     {
       title: 'HTML + CSS',
       collapsable: true,
-      children: ['基础知识', '页面等比缩放', 'CSS常用封装', 'CSS-StickyFooter'],
+      children: [
+        '基础知识',
+        '页面等比缩放',
+        'CSS实现长宽比',
+        'CSS常用封装',
+        'CSS-StickyFooter',
+      ],
     },
     {
       title: '移动端H5',

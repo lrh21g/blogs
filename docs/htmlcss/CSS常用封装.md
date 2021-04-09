@@ -1,6 +1,6 @@
 # CSS 常用封装
 
-## 1. 文本超出 n行 显示省略号
+## 文本超出 n行 显示省略号
 
 ``` less
 // 超过固定宽度显示 ...
@@ -24,7 +24,7 @@
 }
 ```
 
-## 2. 1px边框
+## 1px边框
 
 ``` less
 .hairline-common () {
@@ -116,7 +116,7 @@
 }
 ```
 
-## 3. 去除input默认填充的背景颜色
+## 去除input默认填充的背景颜色
 
 ``` css
 input:-webkit-autofill {
@@ -124,7 +124,7 @@ input:-webkit-autofill {
 }
 ```
 
-## 4. 清除input[type=number]的默认样式
+## 清除input[type=number]的默认样式
 
 ``` css
 input[type=number] {
@@ -138,7 +138,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ```
 
-## 5. 清除移动端 a 标签等点击区域变色
+## 清除移动端 a 标签等点击区域变色
 
 ``` css
 *{
@@ -146,7 +146,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ```
 
-## 6. 避免ios滑动滚动条卡顿
+## 避免ios滑动滚动条卡顿
 
 ``` css
 *{
@@ -154,7 +154,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 ```
 
-## 7. 清楚移动端 `input` 样式
+## 清楚移动端 `input` 样式
 
 ``` css
 input{
@@ -167,7 +167,7 @@ input{
 }
 ```
 
-## 8. 重置样式(reset.css)
+## 重置样式(reset.css)
 
 ``` css
 @charset "utf-8";
