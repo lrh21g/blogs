@@ -10,13 +10,7 @@ module.exports = {
     {
       title: 'HTML + CSS',
       collapsable: true,
-      children: [
-        '基础知识',
-        '页面等比缩放',
-        'CSS实现长宽比',
-        'CSS常用封装',
-        'CSS-StickyFooter',
-      ],
+      children: ['基础知识', '页面等比缩放', 'CSS实现长宽比', 'CSS常用封装'],
     },
     {
       title: '移动端H5',
@@ -40,6 +34,7 @@ module.exports = {
         '/htmlcss/CSS布局/Flex布局',
         '/htmlcss/CSS布局/Grid布局',
         '/htmlcss/CSS布局/自适应布局',
+        '/htmlcss/CSS布局/StickyFooter',
       ],
     },
   ],

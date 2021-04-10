@@ -1,8 +1,9 @@
 # Sticky Footer
 
-概念：如果页面内容不足够长时，页脚固定在浏览器窗口的底部；如果内容足够长时，页脚固定在页面的最底部。但如果网页内容不够长，置底的页脚就会保持在浏览器窗口底部。
++ 如果页面内容不足够长时，页脚固定在浏览器窗口的底部。
++ 如果页面内容足够长时，页脚固定在页面的最底部。但如果页面内容不够长，置底的页脚就会保持在浏览器窗口底部。
 
-![stickyfooter](./files/images/stickyfooter.png)
+![sticky_footer](./files/images/sticky_footer.drawio.png)
 
 ## 将内容部分的底部外边距设为负数
 
@@ -17,6 +18,7 @@
   <footer class="footer"></footer>
 </body>
 
+<style>
 html, body {
   height: 100%;
   margin: 0;
@@ -30,6 +32,7 @@ html, body {
 .footer, .push {
   height: 50px;
 }
+</style>
 ```
 
 这个方法需要**容器里有额外的占位元素（如 .push）**
@@ -48,6 +51,7 @@ html, body {
   <footer class="footer"></footer>
 </body>
 
+<style>
 html, body {
   height: 100%;
   margin: 0;
@@ -66,6 +70,7 @@ html, body {
   height: 50px;
   margin-top: -50px;
 }
+</style>
 ```
 
 ## 使用flexbox弹性盒布局
@@ -78,6 +83,7 @@ html, body {
   <footer class="footer"></footer>
 </body>
 
+<style>
 html {
   height: 100%;
 }
@@ -91,6 +97,7 @@ body {
 .content {
   flex: 1;
 }
+</style>
 ```
 
 ## absolute
@@ -105,6 +112,7 @@ body {
   </div>
 </div>
 
+<style>
 html, body {
   height : 100 %;
 }
@@ -121,6 +129,7 @@ html, body {
   bottom: 0;
   height: 50px;
 }
+</style>
 ```
 
 需指定 `html`、`body` `100%` 的高度，且 `content` 的 `padding-bottom` 需要与 `footer` 的 `height` 一致
@@ -139,6 +148,7 @@ html, body {
   </div>
 </div>
 
+<style>
 .content {
   min-height: calc(100vh - 50px);
 }
@@ -146,7 +156,7 @@ html, body {
 .footer {
   height: 50px;
 }
-
+</style>
 ```
 
 `footer` 的高度值需要与 `content` 其中的计算值一致。
@@ -163,6 +173,7 @@ html, body {
   </div>
 </div>
 
+<style>
 html, body {
   height: 100%;
 }
@@ -177,6 +188,7 @@ html, body {
   display: table-row;
   height: 100%;
 }
+</style>
 ```
 
 注意：使用 `table` 方案存在一个比较常见的样式限制，通常 `margin`、`padding`、`border` 等属性会不符合预期。 不建议使用这个方案。问题解决方式为：别把其他样式写在 table 上。
@@ -191,6 +203,7 @@ html, body {
   <footer class="footer"></footer>
 </body>
 
+<style>
 html {
   height: 100%;
 }
@@ -205,8 +218,9 @@ body {
   grid-row-start: 2;
   grid-row-end: 3;
 }
+</style>
 ```
 
 参考：
 
-[各种CSS实现Sticky Footer](https://mp.weixin.qq.com/s?__biz=MzU0OTE3MjE1Mw%3D%3D&mid=2247483693&idx=1&sn=ea846c8a1b404a8a0aa5a5175059e0f4&chksm=fbb2a7fbccc52eed1b62f21503d93449c8425c464d5b4ac576facadf560f95ab9ea8aca5484b&mpshare=1&scene=23&srcid=1120MlKsKxWYxEsbttZ5V0CO)
++ [各种CSS实现Sticky Footer](https://mp.weixin.qq.com/s?__biz=MzU0OTE3MjE1Mw%3D%3D&mid=2247483693&idx=1&sn=ea846c8a1b404a8a0aa5a5175059e0f4&chksm=fbb2a7fbccc52eed1b62f21503d93449c8425c464d5b4ac576facadf560f95ab9ea8aca5484b&mpshare=1&scene=23&srcid=1120MlKsKxWYxEsbttZ5V0CO)
