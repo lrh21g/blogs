@@ -8,20 +8,14 @@ module.exports = {
   ],
   '/htmlcss/': [
     {
-      title: 'HTML + CSS',
+      title: 'HTML',
       collapsable: true,
-      children: ['基础知识', '页面等比缩放', 'CSS实现长宽比', 'CSS常用封装'],
+      children: ['页面等比适配'],
     },
     {
-      title: '移动端H5',
+      title: 'CSS基础',
       collapsable: true,
-      children: [
-        '/htmlcss/移动端H5/移动端基本概念',
-        '/htmlcss/移动端H5/移动端适配',
-        '/htmlcss/移动端H5/1px边框问题',
-        '/htmlcss/移动端H5/图片模糊问题',
-        '/htmlcss/移动端H5/移动端常见问题',
-      ],
+      children: ['/htmlcss/CSS基础/BFC', '/htmlcss/CSS基础/float'],
     },
     {
       title: 'CSS布局',
@@ -37,46 +31,34 @@ module.exports = {
         '/htmlcss/CSS布局/StickyFooter',
       ],
     },
+    {
+      title: 'CSS相关',
+      collapsable: true,
+      children: [
+        '/htmlcss/CSS相关/CSS常用封装',
+        '/htmlcss/CSS相关/CSS实现长宽比',
+      ],
+    },
+    {
+      title: 'CSS动效',
+      collapsable: true,
+      children: [],
+    },
+  ],
+  '/H5/': [
+    {
+      title: '移动端H5',
+      collapsable: true,
+      children: [
+        '移动端基本概念',
+        '移动端适配',
+        '1px边框问题',
+        '图片模糊问题',
+        '移动端常见问题',
+      ],
+    },
   ],
   '/javascript/': [
-    // {
-    //   title: '知识框架',
-    //   path: '/javascript/知识框架/',
-    //   collapsable: true,
-    //   children: [
-    //     {
-    //       title: '运行时',
-    //       path: '/javascript/知识框架/运行时/',
-    //       collapsable: true,
-    //       children: [
-    //         {
-    //           title: '数据结构',
-    //           path: '/javascript/知识框架/运行时/数据结构/',
-    //           collapsable: true,
-    //           children: [
-    //             '/javascript/知识框架/运行时/数据结构/类型',
-    //             '/javascript/知识框架/运行时/数据结构/实例'
-    //           ]
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       title: '文法',
-    //       path: '/javascript/知识框架/文法/',
-    //       collapsable: true,
-    //       children: [
-    //         '/javascript/知识框架/文法/词法',
-    //         '/javascript/知识框架/文法/语法'
-    //       ]
-    //     },
-    //     {
-    //       title: '语义',
-    //       path: '/javascript/知识框架/语义/',
-    //       collapsable: true,
-    //       children: []
-    //     }
-    //   ]
-    // },
     {
       title: '基础',
       collapsable: true,
