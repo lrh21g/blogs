@@ -15,7 +15,11 @@ module.exports = {
     {
       title: 'CSS基础',
       collapsable: true,
-      children: ['/htmlcss/CSS基础/BFC', '/htmlcss/CSS基础/float'],
+      children: [
+        '/htmlcss/CSS基础/内联元素',
+        '/htmlcss/CSS基础/BFC',
+        '/htmlcss/CSS基础/float',
+      ],
     },
     {
       title: 'CSS布局',
