@@ -26,6 +26,9 @@ module.exports = {
       children: [
         '/htmlcss/CSS基础/内联元素',
         '/htmlcss/CSS基础/BFC',
+        '/htmlcss/CSS基础/x-height',
+        '/htmlcss/CSS基础/line-height',
+        '/htmlcss/CSS基础/vertical-align',
         '/htmlcss/CSS基础/float',
       ],
     },
