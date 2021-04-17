@@ -3,7 +3,15 @@ module.exports = {
     {
       title: 'Git',
       collapsable: true,
-      children: ['基础知识'],
+      children: [
+        'git基础',
+        'git命令',
+        'git_head',
+        'git技巧',
+        'git对象',
+        'git忽略提交',
+        'git相关问题',
+      ],
     },
   ],
   '/htmlcss/': [
