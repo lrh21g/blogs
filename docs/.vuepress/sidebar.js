@@ -162,6 +162,13 @@ module.exports = {
       children: ['基础知识'],
     },
   ],
+  '/specification/': [
+    {
+      title: '项目规范',
+      collapsable: true,
+      children: ['BEM', 'vue项目规范搭建'],
+    },
+  ],
   '/tools/': [
     {
       title: '编辑器',

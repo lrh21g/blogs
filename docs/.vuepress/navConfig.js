@@ -35,6 +35,10 @@ module.exports = [
         text: 'webpack',
         link: '/webpack/基础知识.html',
       },
+      {
+        text: '项目规范',
+        link: '/specification/',
+      },
     ],
   },
   {
