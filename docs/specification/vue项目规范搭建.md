@@ -4,6 +4,8 @@
 
 [EditorConfig](https://editorconfig.org/) 可以在不同的编辑器和 ide 中，为同一个项目工作的多个开发人员维护一致的编码风格。
 
+如果使用 Visual Studio Code 编辑器，需要安装 EditorConfig for VS Code 插件。
+
 ::: details .editorconfig
 
 ``` bash
@@ -40,7 +42,19 @@ trim_trailing_whitespace = false
 
 ## prettier
 
+prettier 可用于格式化代码，支持多种语言。
+
+如果使用 Visual Studio Code 编辑器，需要安装 Prettier - Code formatter 插件。
+
+### 安装
+
+``` bash
+npm i -D prettier
+```
+
 ### 格式化命令
+
+格式化所有文件（. 标识所有文件）命令如下：
 
 ``` json
 {
@@ -318,7 +332,7 @@ module.exports = {
     'comma-style': [2, 'last'],
     // 要求在构造函数中有 super() 的调用
     'constructor-super': 2,
-    // 强制所有控制语句使用一致的括号风 - multi-line：允许在单行中省略大括号，而if、else if、else、for、while 和 do，在其他使用中依然会强制使用大括号
+    // 强制所有控制语句使用一致的括号风格 - multi-line：允许在单行中省略大括号，而if、else if、else、for、while 和 do，在其他使用中依然会强制使用大括号
     curly: [2, 'multi-line'],
     // 强制在点号之前和之后一致的换行 - property：表达式中的点号操作符应该和属性在同一行
     'dot-location': [2, 'property'],
@@ -724,6 +738,351 @@ module.exports = {
 ```
 
 :::
+
+## 集成 husky 和 lint-staged
+
++ [husky](https://typicode.github.io/husky/#/) : Git Hook 工具，可以设置在 git 各个阶段（`pre-commit`、`commit-msg`、`pre-push` 等）触发命令。
++ [lint-staged](https://github.com/okonet/lint-staged) : 在 git 暂存的文件上运行 linters。
+
+### husky
+
+``` bash
+# 安装 husky 依赖包，并初始化项目
+$ npx husky-init && npm install
+```
+
+安装并初始化命令主要进行了如下操作：
+
++ 安装 `husky` 依赖包
++ 在项目根目录下，创建 `.husky` 目录
++ 在 `.husky` 目录下，创建了 `pre-commit` Hook，并且初始化 `pre-commit` 命令为 `npm test`
++ 并修改 `package.json` 中的 `script` 中，增加 `"prepare": "husky install"`
+
+配置 `pre-commit` Hook 文件，使 `pre-commit` 来触发 ESLint 命令。即：当执行 `git commit -m 'xxx'` 的时候，会先对 `src` 目录下的 `.vue`、 `.js`、 `.ts` 文件执行 `eslint --fx` 命令，如果 ESLint 检查通过，则成功 `commit` ，否则终止 `commit`
+
+``` txt
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+eslint --fix ./src --ext .vue,.js,.ts
+```
+
+### lint-staegd
+
+`lint-staged` 一般结合 husky 来使用，可以让 `husky` 的 hook 触发的命令只作用于 `git add` 的文件（即 git 暂存区的文件），而不会影响到其他文件。
+
++ 安装
+
+  ``` bash
+  # 安装 lint-staged 依赖包
+  $ npm i lint-staged -D
+  ```
+
++ 配置: 在 `package.json` 中增加 `lint-staged` 配置项，配置如下，表示只对 git 暂存区的 `src` 目录下的 `.vue`、`.js`、`.ts` 文件执行 `eslint --fix`
+
+  ``` json
+  {
+    "lint-staged": {
+      "src/**/*.{js,vue}": [
+        "eslint --fix",
+        "git add"
+      ]
+    },
+  }
+  ```
+
++ 修改 `.husky/pre-commit` hook 的触发命令为：`npx lint-staged`
+
+  ``` txt
+  #!/bin/sh
+  . "$(dirname "$0")/_/husky.sh"
+
+  npx lint-staged
+  ```
+
+## 提交规范
+
+### Commit message 格式
+
+Commit message 包含三个部分： `Header`、 `Body` 和 `Footer`。其中，`Header` 是必需的，`Body` 和 `Footer` 可以省略。
+
+``` txt
+<type>(<scope>): <subject>
+
+<body>
+
+<footer>
+```
+
+#### Header
+
+`Header` 部分只有一行，包括三个字段：`type`（必需）、`scope`（可选）和 `subject`（必需）。
+
++ `type` : 用于说明 commit 的类别，只允许使用下面7个标识。
+  + `feat`：新功能（feature）
+  + `fix`：修补bug
+  + `docs`：文档（documentation）
+  + `style`： 格式（不影响代码运行的变动）
+  + `refactor`：重构（即不是新增功能，也不是修改bug的代码变动）
+  + `test`：增加测试
+  + `chore`：构建过程或辅助工具的变动
++ `scope` : 用于说明 commit 影响的范围，比如数据层、控制层、视图层等等，视项目不同而不同。
++ `subject` : 用于说明 commit 目的的简短描述，不超过50个字符
+  + 以动词开头，使用第一人称现在时，比如change，而不是changed或changes
+  + 第一个字母小写
+  + 结尾不加句号（.）
+
+#### Body
+
+`Body` 部分是对本次 commit 的详细描述，可以分成多行。
+
+``` txt
+More detailed explanatory text, if necessary.  Wrap it to 
+about 72 characters or so. 
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+- Use a hanging indent
+```
+
+有两个注意点。
+
++ 使用第一人称现在时，比如使用 change 而不是 changed 或 changes。
++ 应该说明代码变动的动机，以及与以前行为的对比。
+
+#### Footer
+
+Footer 部分只用于两种情况。
+
++ 不兼容变动
+
+  如果当前代码与上一个版本不兼容，则 Footer 部分以 BREAKING CHANGE 开头，后面是对变动的描述、以及变动理由和迁移方法。
+
+  ``` txt
+  BREAKING CHANGE: isolate scope bindings definition has changed.
+
+    To migrate the code follow the example below:
+
+    Before:
+
+    scope: {
+      myAttr: 'attribute',
+    }
+
+    After:
+
+    scope: {
+      myAttr: '@',
+    }
+
+    The removed `inject` wasn't generaly useful for directives so there should be no code using it.
+  ```
+
++ 关闭 Issue
+
+  如果当前 commit 针对某个issue，那么可以在 Footer 部分关闭这个 issue 。
+
+#### Revert
+
+如果当前 commit 用于撤销以前的 commit，则必须以 revert: 开头，后面跟着被撤销 Commit 的 Header。
+
+``` txt
+revert: feat(pencil): add 'graphiteWidth' option
+
+This reverts commit 667ecc1654a317a13331b17617d973392f415f02.
+```
+
+Body部分的格式是固定的，必须写成 `This reverts commit <hash>`，其中的 hash 是被撤销 commit 的 SHA 标识符。
+
+如果当前 commit 与被撤销的 commit，在同一个发布（release）里面，那么它们都不会出现在 Change log 里面。如果两者在不同的发布，那么当前 commit，会出现在 Change log 的Reverts小标题下面。
+
+### Commitizen 规范提交代码
+
+[Commitizen](http://commitizen.github.io/cz-cli/) 是一个帮助撰写规范 commit message 的工具。它有一个命令行工具 cz-cli。
+
+#### 安装
+
+``` bash
+# 安装 Commitizen
+$ npm install commitizen --save-dev
+
+# 初始化项目
+$ npx commitizen init cz-conventional-changelog --save-dev --save-exact
+```
+
+安装 cz-conventional-changelog 初始化项目时，会在 package.json 中，添加如下配置
+
+``` json
+{
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
+```
+
+#### 使用
+
+将 `git commit` 命令修改为 `git cz`，则会出现相关选项，用来生成符合格式的 Commit message。
+
+``` bash
+$ git cz
+
+cz-cli@4.2.3, cz-conventional-changelog@3.3.0
+
+? Select the type of change that you're committing: (Use arrow keys)
+> feat:     A new feature
+  fix:      A bug fix
+  docs:     Documentation only changes
+  style:    Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc) 
+  refactor: A code change that neither fixes a bug nor adds a feature
+  perf:     A code change that improves performance
+  test:     Adding missing tests or correcting existing tests
+(Move up and down to reveal more choices)
+```
+
+【注意】运行 `git cz` 时，如果提示 `git: 'cz' is not a git command. See 'git --help'.` ，可以将 commitizen 全局安装： `npm install -g commitizen`
+
+#### 自定义配置提交
+
+可以使用 `cz-customizable` 适配器自定义配置。
+
+##### `cz-customizable` 初始化项目
+
+``` bash
+# 使用 cz-customizable 初始化项目，需要加 --force 覆盖
+$ npx commitizen init cz-customizable --save-dev --save-exact --force
+```
+
+安装 cz-customizable 初始化项目时，会在 package.json 中，添加如下配置
+
+``` json
+{
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-customizable"
+    }
+  }
+}
+```
+
+##### 使用 cz-customizable
+
+在项目根目录创建 `.cz-config.js` 文件，进行配置。[官方示例](https://github.com/leoforfree/cz-customizable/blob/master/cz-config-EXAMPLE.js)
+
+公司内部的代码仓库也不需要管理 issue，可以把询问 body 和 footer 的步骤跳过（在 `.cz-config.js` 中修改成 `skipQuestions: ['body', 'footer']`）。
+
+``` javascript
+module.exports = {
+  // type 类型（定义之后，可通过上下键选择）
+  types: [
+    { value: 'feat', name: 'feat:     新增功能' },
+    { value: 'fix', name: 'fix:      修复 bug' },
+    { value: 'docs', name: 'docs:     文档变更' },
+    { value: 'style', name: 'style:    代码格式（不影响功能，例如空格、分号等格式修正）' },
+    { value: 'refactor', name: 'refactor: 代码重构（不包括 bug 修复、功能新增）' },
+    { value: 'perf', name: 'perf:     性能优化' },
+    { value: 'test', name: 'test:     添加、修改测试用例' },
+    { value: 'build', name: 'build:    构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等）' },
+    { value: 'ci', name: 'ci:       修改 CI 配置、脚本' },
+    { value: 'chore', name: 'chore:    对构建过程或辅助工具和库的更改（不影响源文件、测试用例）' },
+    { value: 'revert', name: 'revert:   回滚 commit' }
+  ],
+
+  // scope 类型（定义之后，可通过上下键选择）
+  scopes: [
+    ['components', '组件相关'],
+    ['hooks', 'hook 相关'],
+    ['utils', 'utils 相关'],
+    ['element-ui', '对 element-ui 的调整'],
+    ['styles', '样式相关'],
+    ['deps', '项目依赖'],
+    ['auth', '对 auth 修改'],
+    ['other', '其他修改'],
+    // 如果选择 custom，后面会让你再输入一个自定义的 scope。也可以不设置此项，把后面的 allowCustomScopes 设置为 true
+    ['custom', '以上都不是？我要自定义']
+  ].map(([value, description]) => {
+    return {
+      value,
+      name: `${value.padEnd(30)} (${description})`
+    }
+  }),
+
+  // 是否允许自定义填写 scope，在 scope 选择的时候，会有 empty 和 custom 可以选择。
+  // allowCustomScopes: true,
+
+  // allowTicketNumber: false,
+  // isTicketNumberRequired: false,
+  // ticketNumberPrefix: 'TICKET-',
+  // ticketNumberRegExp: '\\d{1,5}',
+
+  // 针对每一个 type 去定义对应的 scopes，例如 fix
+  /*
+  scopeOverrides: {
+    fix: [
+      { name: 'merge' },
+      { name: 'style' },
+      { name: 'e2eTest' },
+      { name: 'unitTest' }
+    ]
+  },
+  */
+
+  // 交互提示信息
+  messages: {
+    type: '确保本次提交遵循 Angular 规范！\n选择你要提交的类型：',
+    scope: '\n选择一个 scope（可选）：',
+    // 选择 scope: custom 时会出下面的提示
+    customScope: '请输入自定义的 scope：',
+    subject: '填写简短精炼的变更描述：\n',
+    body: '填写更加详细的变更描述（可选）。使用 "|" 换行：\n',
+    breaking: '列举非兼容性重大的变更（可选）：\n',
+    footer: '列举出所有变更的 ISSUES CLOSED（可选）。 例如: #31, #34：\n',
+    confirmCommit: '确认提交？'
+  },
+
+  // 设置只有 type 选择了 feat 或 fix，才询问 breaking message
+  allowBreakingChanges: ['feat', 'fix'],
+
+  // 跳过要询问的步骤
+  // skipQuestions: ['body', 'footer'],
+
+  // subject 限制长度
+  subjectLimit: 100,
+  breaklineChar: '|', // 支持 body 和 footer
+  // footerPrefix : 'ISSUES CLOSED:'
+  // askForBreakingChangeFirst : true,
+}
+```
+
+### commitlint 校验提交规范
+
+#### 安装
+
+``` bash
+# 安装 commitlint
+$ npm i @commitlint/config-conventional @commitlint/cli -D
+```
+
+#### 配置
+
+在项目根目录下，创建 `commitlint.config.js` 文件。配置如下：
+
+``` javascript
+// commitlint.config.js
+module.exports = {
+  extends: ['@commitlint/config-conventional']
+}
+```
+
+使用 husky 的 `commit-msg` hook 触发验证提交信息的命令。在 `.husky` 目录下，创建 `commit-msg` 文件，并执行添加 commit message 的验证命令。
+
+``` bash
+# 添加执行 commit message 的验证命令
+$ npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+```
 
 ## 相关参考
 
