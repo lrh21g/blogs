@@ -58,8 +58,12 @@ module.exports = [
     text: '数据库',
     items: [
       {
+        text: 'SQL',
+        link: '/SQL/SQL/',
+      },
+      {
         text: 'MongoDB',
-        link: '/MongoDB/基础知识.html',
+        link: '/SQL/MongoDB/基础知识.html',
       },
     ],
   },

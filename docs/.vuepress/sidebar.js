@@ -120,13 +120,25 @@ module.exports = {
       children: ['基础知识'],
     },
   ],
-  '/MongoDB/': [
+  '/SQL/': [
     {
-      title: '基础',
+      title: 'SQL',
       collapsable: true,
-      children: ['基础知识'],
+      children: ['/SQL/SQL/SQL基础'],
+    },
+    {
+      title: 'MongoDB',
+      collapsable: true,
+      children: ['/SQL/MongoDB/基础知识'],
     },
   ],
+  // '/MongoDB/': [
+  //   {
+  //     title: '基础',
+  //     collapsable: true,
+  //     children: ['基础知识'],
+  //   },
+  // ],
   '/linux/': [
     {
       title: '基础',
