@@ -45,3 +45,12 @@ $ git push -u origin master
 # core.autocrlf 设置 false 不转换符号。默认为 true
 $ git config --global core.autocrlf false
 ```
+
+## .git 目录过大的问题
+
+解决方法：
+
++ 找到 `.git` 目录下体积比较大的文件，进行重建索引(将 xxxx.pack 替换你实际需要删除的pack) : `git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch .git/objects/pack/xxxxx.pack' --prune-empty`
++ 删除和重建的索引 : `git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin`
++ 设置reflog过期 : `git reflog expire --expire=now --all`
++ 清理垃圾 : `git gc --aggressive --prune=now`
