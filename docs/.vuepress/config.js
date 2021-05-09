@@ -106,7 +106,7 @@ module.exports = config({
     git: {
       // 当前时区，使用 CI 部署时很有用
       // 详细的时区列表: https://www.zeitverschiebung.net/cn/all-time-zones.html
-      timezone: 'Asia/Changsha',
+      // timezone: 'Asia/Changsha',
     },
 
     // Markdown 功能增强
