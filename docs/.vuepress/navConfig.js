@@ -80,8 +80,4 @@ module.exports = [
       },
     ],
   },
-  {
-    text: 'Github',
-    link: 'https://github.com/lrh21g/blogs',
-  },
 ];
