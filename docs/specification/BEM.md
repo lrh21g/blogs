@@ -291,7 +291,7 @@ h1, nav a {
 
 ## CSS文件组织
 
-``` txt
+``` md
 - project/
     |- dist/ # 用于生产环境
     |- src/ # 所有的开发源代码

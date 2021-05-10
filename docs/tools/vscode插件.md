@@ -207,7 +207,7 @@ EditorConfig 可以在不同编辑器和 IDE 中，维护一致的编码风格�
 
 支持属性：
 
-``` text
+``` md
 # .editorconfig 文件
 # 表示为根文件，不用继续往上查找
 root = true

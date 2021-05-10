@@ -4,7 +4,7 @@
 
 组件目录
 
-``` txt
+``` md
 docs/.vuepress/components/formValidator
   |--- formIndex.vue
   |--- formItem.vue
@@ -22,7 +22,7 @@ docs/.vuepress/components/formValidator
 
 组件目录
 
-``` txt
+``` md
 docs/.vuepress/components/alert
   |--- alertIndex.vue
   |--- alert.js
@@ -46,7 +46,7 @@ docs/.vuepress/components/alert
 
 组件目录
 
-``` txt
+``` md
 docs/.vuepress/components/renderTable
   |--- renderTableIndex.vue
   |--- render.js
@@ -63,7 +63,7 @@ docs/.vuepress/components/renderTable
 
 + 方案一: `slot-scope` 实现，同时兼容 `Render` 函数的旧用法。适用于组件层级简单的表格。
 
-  ``` txt
+  ``` md
   docs/.vuepress/components/slotScopeTable
   |--- slotScopeTableIndex1.vue
   |--- render.js
@@ -74,7 +74,7 @@ docs/.vuepress/components/renderTable
 
 + 方案二: 如果组件已经成型（某 API 基于 Render 函数），但一时间不方便支持 `slot-scope`，而使用者又想用，则可以使用此方案。一种 hack 方式，不推荐使用。
 
-  ``` txt
+  ``` md
   docs/.vuepress/components/slotScopeTable
   |--- slotScopeTableIndex2.vue
   |--- render.js
@@ -85,7 +85,7 @@ docs/.vuepress/components/renderTable
 
 + 方案三: 将 `slot-scope` 集成在 `Table组件` 中，并使用 `provide` / `inject` 进行数据传递，用于组件层级复杂的表格。不会破坏原有的任何内容，但会额外支持 `slot-scope` 用法，关键是改动简单。
 
-  ``` txt
+  ``` md
   docs/.vuepress/components/slotScopeTable
   |--- slotScopeTableIndex3.vue
   |--- render.js
@@ -104,7 +104,7 @@ docs/.vuepress/components/renderTable
 
 这类组件一般都是**数据驱动型**的，父级有一个字段 children，然后递归。
 
-``` txt
+``` md
 docs/.vuepress/components/tree
 |--- treeIndex.vue
 |--- tree.vue

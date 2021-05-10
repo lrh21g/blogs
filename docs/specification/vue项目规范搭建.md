@@ -670,7 +670,7 @@ module.exports = {
 
 ::: details .eslintignore
 
-``` txt
+``` md
 build/*.js
 src/assets
 public
@@ -760,7 +760,7 @@ $ npx husky-init && npm install
 
 配置 `pre-commit` Hook 文件，使 `pre-commit` 来触发 ESLint 命令。即：当执行 `git commit -m 'xxx'` 的时候，会先对 `src` 目录下的 `.vue`、 `.js`、 `.ts` 文件执行 `eslint --fx` 命令，如果 ESLint 检查通过，则成功 `commit` ，否则终止 `commit`
 
-``` txt
+``` md
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
@@ -793,7 +793,7 @@ eslint --fix ./src --ext .vue,.js,.ts
 
 + 修改 `.husky/pre-commit` hook 的触发命令为：`npx lint-staged`
 
-  ``` txt
+  ``` md
   #!/bin/sh
   . "$(dirname "$0")/_/husky.sh"
 
@@ -806,7 +806,7 @@ eslint --fix ./src --ext .vue,.js,.ts
 
 Commit message 包含三个部分： `Header`、 `Body` 和 `Footer`。其中，`Header` 是必需的，`Body` 和 `Footer` 可以省略。
 
-``` txt
+``` md
 <type>(<scope>): <subject>
 
 <body>
@@ -836,7 +836,7 @@ Commit message 包含三个部分： `Header`、 `Body` 和 `Footer`。其中，
 
 `Body` 部分是对本次 commit 的详细描述，可以分成多行。
 
-``` txt
+``` md
 More detailed explanatory text, if necessary.  Wrap it to 
 about 72 characters or so. 
 
@@ -859,7 +859,7 @@ Footer 部分只用于两种情况。
 
   如果当前代码与上一个版本不兼容，则 Footer 部分以 BREAKING CHANGE 开头，后面是对变动的描述、以及变动理由和迁移方法。
 
-  ``` txt
+  ``` md
   BREAKING CHANGE: isolate scope bindings definition has changed.
 
     To migrate the code follow the example below:
@@ -887,7 +887,7 @@ Footer 部分只用于两种情况。
 
 如果当前 commit 用于撤销以前的 commit，则必须以 revert: 开头，后面跟着被撤销 Commit 的 Header。
 
-``` txt
+``` md
 revert: feat(pencil): add 'graphiteWidth' option
 
 This reverts commit 667ecc1654a317a13331b17617d973392f415f02.

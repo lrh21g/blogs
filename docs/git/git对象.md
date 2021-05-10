@@ -4,7 +4,7 @@ Git 是一个内容寻址文件系统。Git 的核心部分是一个简单的键
 
 ## .git目录
 
-``` txt
+``` md
 .git/
   | -- description # 仅供 GitWeb 程序使用
   | -- config # 包含项目特有的配置选项
