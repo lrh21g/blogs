@@ -6,25 +6,25 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import Alert from './alert.js'
+import Vue from 'vue';
+import Alert from './alert.js';
 
-Vue.prototype.$Alert = Alert
+Vue.prototype.$Alert = Alert;
 
 export default {
   methods: {
     handleOpen1() {
       this.$Alert.info({
-        content: "我是提示信息 1"
+        content: '我是提示信息 1',
       });
     },
     handleOpen2() {
       this.$Alert.info({
-        content: "我是提示信息 2",
-        duration: 3
+        content: '我是提示信息 2',
+        duration: 3,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

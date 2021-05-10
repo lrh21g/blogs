@@ -9,10 +9,10 @@
   </div>
 </template>
 <script>
-import TreeNode from "./node.vue";
-import { deepCopy } from "../utils/assist.js";
+import TreeNode from './node.vue';
+import { deepCopy } from '../utils/assist.js';
 export default {
-  name: "Tree",
+  name: 'Tree',
   components: { TreeNode },
   props: {
     //  data 是一个 Object 而非 Array，因为它只负责渲染当前的一个节点，并递归渲染下一个子节点（即 children）
@@ -21,17 +21,17 @@ export default {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     // 是否显示选择框，只进行数据传递
     showCheckbox: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
-      cloneData: []
+      cloneData: [],
     };
   },
   methods: {
@@ -41,7 +41,7 @@ export default {
     },
     emitEvent(eventName, data) {
       this.$emit(eventName, data, this.cloneData);
-    }
+    },
   },
   created() {
     this.rebuildData();
@@ -49,7 +49,7 @@ export default {
   watch: {
     data() {
       this.rebuildData();
-    }
-  }
+    },
+  },
 };
 </script>

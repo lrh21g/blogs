@@ -9,7 +9,12 @@
       <tr v-for="(row, rowIndex) in data">
         <td v-for="col in columns">
           <template v-if="'render' in col">
-            <Render :row="row" :column="col" :index="rowIndex" :render="col.render"></Render>
+            <Render
+              :row="row"
+              :column="col"
+              :index="rowIndex"
+              :render="col.render"
+            ></Render>
           </template>
           <template v-else-if="'slot' in col">
             <slot-scope :row="row" :column="col" :index="rowIndex"></slot-scope>
@@ -21,13 +26,13 @@
   </table>
 </template>
 <script>
-import Render from "./render.js";
-import SlotScope from "./slot.js";
+import Render from './render.js';
+import SlotScope from './slot.js';
 export default {
   components: { Render, SlotScope },
   provide() {
     return {
-      tableRoot: this
+      tableRoot: this,
     };
   },
   props: {
@@ -35,15 +40,15 @@ export default {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     data: {
       type: Array,
       default() {
         return [];
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 <style>

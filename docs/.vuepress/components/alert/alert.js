@@ -15,7 +15,7 @@ function notice({ duration = 1.5, content = '' }) {
 
   instance.add({
     content: content,
-    duration: duration
+    duration: duration,
   });
 }
 
@@ -24,5 +24,5 @@ function notice({ duration = 1.5, content = '' }) {
 export default {
   info(options) {
     return notice(options);
-  }
-}
+  },
+};

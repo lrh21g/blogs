@@ -9,48 +9,54 @@
         v-model="model"
         @change="change"
       />
-      <input v-else type="checkbox" :disabled="disabled" :checked="currentValue" @change="change" />
+      <input
+        v-else
+        type="checkbox"
+        :disabled="disabled"
+        :checked="currentValue"
+        @change="change"
+      />
     </span>
     <slot></slot>
   </label>
 </template>
 <script>
-import { findComponentUpward } from "../utils/assist.js";
-import Emitter from "../mixins/emitter.js";
+import { findComponentUpward } from '../utils/assist.js';
+import Emitter from '../mixins/emitter.js';
 export default {
-  name: "iCheckbox",
+  name: 'iCheckbox',
   mixins: [Emitter],
   props: {
     disabled: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: [String, Number, Boolean],
-      default: false
+      default: false,
     },
     trueValue: {
       type: [String, Number, Boolean],
-      default: true
+      default: true,
     },
     falseValue: {
       type: [String, Number, Boolean],
-      default: false
+      default: false,
     },
     label: {
-      type: [String, Number, Boolean]
-    }
+      type: [String, Number, Boolean],
+    },
   },
   data() {
     return {
       currentValue: this.value,
       model: [],
       group: false,
-      parent: null
+      parent: null,
     };
   },
   mounted() {
-    this.parent = findComponentUpward(this, "iCheckboxGroup");
+    this.parent = findComponentUpward(this, 'iCheckboxGroup');
     if (this.parent) {
       this.group = true;
     }
@@ -68,26 +74,26 @@ export default {
       const checked = event.target.checked;
       this.currentValue = checked;
       const value = checked ? this.trueValue : this.falseValue;
-      this.$emit("input", value);
+      this.$emit('input', value);
       if (this.group) {
         this.parent.change(this.model);
       } else {
-        this.$emit("on-change", value);
-        this.dispatch("iFormItem", "on-form-change", value);
+        this.$emit('on-change', value);
+        this.dispatch('iFormItem', 'on-form-change', value);
       }
     },
     updateModel() {
       this.currentValue = this.value === this.trueValue;
-    }
+    },
   },
   watch: {
     value(val) {
       if (val === this.trueValue || val === this.falseValue) {
         this.updateModel();
       } else {
-        throw "Value should be trueValue or falseValue.";
+        throw 'Value should be trueValue or falseValue.';
       }
-    }
-  }
+    },
+  },
 };
 </script>

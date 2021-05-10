@@ -9,10 +9,20 @@
       <tr v-for="(row, rowIndex) in data">
         <td v-for="col in columns">
           <template v-if="'render' in col">
-            <Render :row="row" :column="col" :index="rowIndex" :render="col.render"></Render>
+            <Render
+              :row="row"
+              :column="col"
+              :index="rowIndex"
+              :render="col.render"
+            ></Render>
           </template>
           <template v-else-if="'slot' in col">
-            <slot :row="row" :column="col" :index="rowIndex" :name="col.slot"></slot>
+            <slot
+              :row="row"
+              :column="col"
+              :index="rowIndex"
+              :name="col.slot"
+            ></slot>
           </template>
           <template v-else>{{ row[col.key] }}</template>
         </td>
@@ -21,7 +31,7 @@
   </table>
 </template>
 <script>
-import Render from "./render.js";
+import Render from './render.js';
 export default {
   components: { Render },
   props: {
@@ -29,15 +39,15 @@ export default {
       type: Array,
       default() {
         return [];
-      }
+      },
     },
     data: {
       type: Array,
       default() {
         return [];
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
 <style>
