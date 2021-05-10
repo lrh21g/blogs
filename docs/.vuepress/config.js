@@ -3,12 +3,14 @@ const nav = require('./navConfig');
 const sidebar = require('./sidebar');
 
 module.exports = config({
+  base: '/blogs/', // 部署站点的基础路径
   title: 'Mr. LRH blogs',
   description: '个人博客，使用 VuePress + vuepress-theme-hope 搭建。',
 
-  dest: './dist',
+  // dest: './dist',
 
   head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
     [
       'script',
       { src: 'https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js' },
