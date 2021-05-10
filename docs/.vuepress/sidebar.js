@@ -79,17 +79,17 @@ module.exports = {
       collapsable: true,
       children: ['基础知识', '数组', '原型与继承', '作用域与闭包', '异步'],
     },
-    {
-      title: '前端训练营',
-      path: '/javascript/前端训练营/',
-      collapsable: true,
-      children: [
-        '/javascript/前端训练营/01.编程语言通识',
-        '/javascript/前端训练营/02.JavaScript词法和类型',
-        '/javascript/前端训练营/03.表达式和类型转换',
-        '/javascript/前端训练营/04.语句和对象',
-      ],
-    },
+    // {
+    //   title: '前端训练营',
+    //   path: '/javascript/前端训练营/',
+    //   collapsable: true,
+    //   children: [
+    //     '/javascript/前端训练营/01.编程语言通识',
+    //     '/javascript/前端训练营/02.JavaScript词法和类型',
+    //     '/javascript/前端训练营/03.表达式和类型转换',
+    //     '/javascript/前端训练营/04.语句和对象',
+    //   ],
+    // },
     {
       title: '设计模式',
       collapsable: true,
@@ -148,23 +148,36 @@ module.exports = {
   ],
   '/vue/': [
     {
-      title: 'Vue',
+      title: 'Vue2',
       collapsable: true,
       children: [
-        '基础知识',
-        'Vue生命周期',
-        'Vue组件通信方式',
-        'VueRouter',
-        'Vuex',
-        'Vue组件',
-        'Vue实用技巧',
-        'Vue原理',
+        '/vue/Vue2/Vue2基础',
+        '/vue/Vue2/Vue生命周期',
+        '/vue/Vue2/Vue组件通信方式',
+        '/vue/Vue2/Vue组件',
+        '/vue/Vue2/Vue实用技巧',
+        '/vue/Vue2/Vue原理',
       ],
     },
     {
-      title: 'Vue源码',
+      title: 'Vue3',
       collapsable: true,
-      children: [],
+      children: ['/vue/Vue3/Vue3基础'],
+    },
+    {
+      title: 'Vuex',
+      collapsable: true,
+      children: ['/vue/Vuex/Vuex基础'],
+    },
+    {
+      title: 'VueRouter',
+      collapsable: true,
+      children: ['/vue/VueRouter/VueRouter基础'],
+    },
+    {
+      title: 'Vue2源码',
+      collapsable: true,
+      children: ['/vue/Vue2源码/Vue2目录结构'],
     },
   ],
   '/react/': [

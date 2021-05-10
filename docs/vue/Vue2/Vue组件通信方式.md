@@ -18,7 +18,7 @@ Event.$on(事件名, data => {});
 
 ## `Vuex`
 
-![vuex](./files/images/vuex.jpg)
+![vuex](../files/images/vuex.jpg)
 
 + `Vuex` 与 `localStorage`
   + 问题: vuex 是 vue 的状态管理器, 刷新之后数据不会保存。

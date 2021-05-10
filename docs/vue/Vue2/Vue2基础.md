@@ -10,7 +10,7 @@ MVC 架构通常是使用控制器更新模型，视图从模型中获取数据�
 
 MVC 的缺陷就是**控制器承担的责任太大了**，随着项目愈加复杂，控制器中的代码会越来越**臃肿**，导致出现**不利于维护**的情况。
 
-![MVC](./files/images/MVC.png)
+![MVC](../files/images/MVC.png)
 
 ### MVVM
 
@@ -20,9 +20,9 @@ MVC 的缺陷就是**控制器承担的责任太大了**，随着项目愈加复
 
 对于 MVVM 来说，其实最重要的并不是通过双向绑定或者其他的方式将 View 与 ViewModel 绑定起来，而是**通过 ViewModel 将视图中的状态和用户的行为分离出一个抽象**。
 
-![MVVM](./files/images/MVVM.png)
+![MVVM](../files/images/MVVM.png)
 
-![MVVM_binder](./files/images/MVVM_binder.png)
+![MVVM_binder](../files/images/MVVM_binder.png)
 
 以 Vue 框架来举例
 
@@ -185,15 +185,15 @@ new Vue({
 
 示例：
 
-![virtual_dom_01](./files/images/virtual_dom_01.jpg)
+![virtual_dom_01](../files/images/virtual_dom_01.jpg)
 
 在B和C之间加一个F，Diff算法默认执行起来如下，即把C更新成F，D更新成C，E更新成D，最后再插入E：
 
-![virtual_dom_02](./files/images/virtual_dom_02.jpg)
+![virtual_dom_02](../files/images/virtual_dom_02.jpg)
 
 使用key来给每个节点做一个唯一标识，Diff算法就可以正确的识别此节点，找到正确的位置区插入新的节点
 
-![virtual_dom_03](./files/images/virtual_dom_03.jpg)
+![virtual_dom_03](../files/images/virtual_dom_03.jpg)
 
 注：Vue 中在使用相同标签名元素的过渡切换时，也会使用到 `key` 属性，其目的也是为了让 Vue 可以区分它们，否则 Vue 只会替换其内部属性而不会触发过渡效果。
 

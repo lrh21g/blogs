@@ -1,4 +1,4 @@
-# Vue3
+# Vue3基础
 
 ## Vue3提升
 
@@ -7,7 +7,7 @@
 + Vue2 中的虚拟DOM是进行全量对比
 + Vue3 中新增静态标记(PathFlag)，只对比带有 PathFlag 的节点，并且可以通过 PathFlag 的信息得知当前节点要对比的具体内容
 
-![vue2vsvue3diff](./vue2vsvue3diff.drawio.png)
+![vue2vsvue3diff](./../files/images/vue2vsvue3diff.drawio.png)
 
 ``` javascript
 <div>

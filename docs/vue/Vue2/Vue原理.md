@@ -2,7 +2,7 @@
 
 ## 全局概览
 
-![vue_render](./files/images/vue_render.png)
+![vue_render](../files/images/vue_render.png)
 
 ## Object.defineProperty
 
@@ -435,7 +435,7 @@ function patchVnode (oldVnode, vnode) {
 
 更新子节点
 
-![vue_updateChildren](./files/images/vue_updateChildren.png)
+![vue_updateChildren](../files/images/vue_updateChildren.png)
 
 ``` javascript
 function updateChildren(parentElm, oldCh, newCh) {

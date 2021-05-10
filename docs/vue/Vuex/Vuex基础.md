@@ -1,8 +1,8 @@
-# Vuex
+# Vuex基础
 
 Vuex 是一个专为 Vue.js 应用程序开发的**状态管理模式**。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
-![vuex](./files/images/vuex.jpg)
+![vuex](../files/images/vuex.jpg)
 
 ## Vuex基本配置
 

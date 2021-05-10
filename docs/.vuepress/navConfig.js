@@ -25,7 +25,7 @@ module.exports = [
     items: [
       {
         text: 'Vue',
-        link: '/vue/基础知识.html',
+        link: '/vue/',
       },
       {
         text: 'React',

@@ -1,4 +1,4 @@
-# Vue Router
+# Vue Router基础
 
 ## 基本使用
 
@@ -83,14 +83,14 @@ new Vue({
   + 每一次改变 # 后的部分，都会在浏览器的访问历史中增加一个记录，使用“后退”按钮，可以回到上一个位置
   + **hash 模式通过锚点值的改变，根据不同的值，渲染指定DOM位置的不同数据。**
 
-  ![vue_router_hash](./files/images/vue_router_hash.png)
+  ![vue_router_hash](../files/images/vue_router_hash.png)
 
   参考：[VueRouter 源码深度解析](https://yuchengkai.cn/blog/2018-07-27.html)
 + HTML5 History 模式
 
   利用 `history.pushState` API 来完成 URL 跳转而无须重新加载页面。
   
-  ![vue_router_history](./files/images/vue_router_history.png)
+  ![vue_router_history](../files/images/vue_router_history.png)
 
   参考：[VueRouter 源码深度解析](https://yuchengkai.cn/blog/2018-07-27.html)
 
