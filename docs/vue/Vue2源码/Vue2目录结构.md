@@ -1,1 +1,37 @@
 # Vue2目录结构
+
+``` md
+├── benchmarks              # 基准，性能测试文件，Vue 跑分Demo。比如：大数据量的 Table 或者渲染大量 SVG
+├── dist                    # 构建后输出的不同版本 Vue 文件（UMD、CommonJS、ES 生产和开发包）
+├── examples                # 示例，使用 Vue 写的 Demo
+├── flow                    # flow：JavaScript 静态类型检查
+├── packages                # NPM包：服务端渲染和模板编译器两种不同的NPM包，提供给不同使用场景使用的
+├── scripts                 # NPM 脚本配置文件：结合 webpack、rollup 进行编译、测试、构建等操作
+│   ├── alias.js            # # 路径别名
+│   ├── config.js           # # rollup 进行编译的配置
+│   ├── build.js            # # 对 config.js 中的编译配置进行构建
+├── src
+│   ├── compiler            # 编译相关：包括将模板解析成 AST 语法树、AST 语法树优化、代码生成等功能
+│   │   ├── codegen         # # 将 AST 转换成 Render 函数
+│   │   ├── directives      # # 生成 Render 函数之前，处理指令
+│   │   ├── parser          # # 将 模板 解析成 AST
+│   ├── core                # 核心代码：包括内置组件、全局 API 封装、Vue 实例化、观察者、虚拟 DOM、工具函数等
+│   │   ├── components      # # 组件相关属性：主要为 Keep-Alive
+│   │   ├── global-api      # # 全局 API：Vue.use、Vue.extend、Vue.mixin等
+│   │   ├── instance        # # 实例化相关内容：生命周期、事件等
+│   │   ├── observer        # # 响应式核心目录，双向数据绑定相关文件
+│   │   ├── util            # # 工具方法
+│   │   ├── vdom            # # 虚拟 DOM
+│   ├── platforms           # 跨平台支持
+│   │   ├── web             # # web 端
+│   │   │   ├── compiler    # # # web端编译器相关代码：将 模板 编译为 Render 函数
+│   │   │   ├── runtime     # # # web端运行时相关代码：创建 Vue 实例等
+│   │   │   ├── server      # # # 服务端渲染
+│   │   │   ├── util        # # # 相关工具集合
+│   │   ├── weex            # # weex 端
+│   ├── server              # 服务端渲染：代码运行在服务端的 Node.js 上，与浏览器中的 Vue.js 不一致。主要将组件渲染为服务端的 HTML 字符串
+│   ├── sfc                 # .vue 文件解析：将 .vue 文件内容解析为一个 JavaScript 对象
+│   ├── shared              # 共享工具方法：浏览器端与服务端的 Vue.js 共享的工具方法
+├── test                    # 测试用例
+├── type                    # Vue 新版本支持 TypeScript，主要是 TypeScript 类型声明文件
+```
