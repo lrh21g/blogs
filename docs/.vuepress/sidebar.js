@@ -177,7 +177,7 @@ module.exports = {
     {
       title: 'Vue2源码',
       collapsable: true,
-      children: ['/vue/Vue2源码/Vue2目录结构'],
+      children: ['/vue/Vue2源码/目录结构', '/vue/Vue2源码/源码构建'],
     },
   ],
   '/react/': [
