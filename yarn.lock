@@ -2424,6 +2424,11 @@ async-limiter@~1.0.0:
   resolved "https://registry.npm.taobao.org/async-limiter/download/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha1-3TeelPDbgxCwgpH51kwyCXZmF/0=
 
+async-validator@^3.4.0:
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-3.5.2.tgz#68e866a96824e8b2694ff7a831c1a25c44d5e500"
+  integrity sha512-8eLCg00W9pIRZSB781UUX/H6Oskmm8xloZfr09lz5bikRpBVDlJ3hRVuxxP1SxcwsEYfJ4IU8Q19Y8/893r3rQ==
+
 async@^2.6.2:
   version "2.6.3"
   resolved "https://registry.npm.taobao.org/async/download/async-2.6.3.tgz?cache=0&sync_timestamp=1582513244496&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fasync%2Fdownload%2Fasync-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
@@ -4153,9 +4158,9 @@ dns-equal@^1.0.0:
   integrity sha1-s55/HabrCnW6nBcySzR1PEfgZU0=
 
 dns-packet@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.npm.taobao.org/dns-packet/download/dns-packet-1.3.1.tgz#12aa426981075be500b910eedcd0b47dd7deda5a"
-  integrity sha1-EqpCaYEHW+UAuRDu3NC0fdfe2lo=
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/dns-packet/-/dns-packet-1.3.4.tgz#e3455065824a2507ba886c55a89963bb107dec6f"
+  integrity sha512-BQ6F4vycLXBvdrJZ6S3gZewt6rcrks9KBgM9vrhW+knGRqc8uEdT7fuCwloc7nny5xNoMJ17HGH0R/6fpo8ECA==
   dependencies:
     ip "^1.1.0"
     safe-buffer "^5.0.1"
@@ -9821,10 +9826,10 @@ vuepress-plugin-sitemap@^2.3.1:
   dependencies:
     sitemap "^3.0.0"
 
-vuepress-plugin-smooth-scroll@^0.0.10:
+vuepress-plugin-smooth-scroll@0.0.10, vuepress-plugin-smooth-scroll@^0.0.10:
   version "0.0.10"
-  resolved "https://registry.npm.taobao.org/vuepress-plugin-smooth-scroll/download/vuepress-plugin-smooth-scroll-0.0.10.tgz#6cb6926032bd5abd7b928df6e7b73b8dd31b5f9d"
-  integrity sha1-bLaSYDK9Wr17ko3257c7jdMbX50=
+  resolved "https://registry.yarnpkg.com/vuepress-plugin-smooth-scroll/-/vuepress-plugin-smooth-scroll-0.0.10.tgz#6cb6926032bd5abd7b928df6e7b73b8dd31b5f9d"
+  integrity sha512-1B7cc0OxROX9aPdktTF6lGqASGh3h0mtiUCmbAVZfGDtTOGUYDDA1BhLV96zkz/v1Zh/UvKP2gF6ADrcV83BMg==
   dependencies:
     smoothscroll-polyfill "^0.4.4"
 
