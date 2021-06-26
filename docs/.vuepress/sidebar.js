@@ -59,6 +59,16 @@ module.exports = {
       collapsable: true,
       children: [],
     },
+    {
+      title: 'Canvas',
+      collapsable: true,
+      children: ['/htmlcss/canvas/canvas基础'],
+    },
+    {
+      title: 'Canvas',
+      collapsable: true,
+      children: ['/htmlcss/svg/svg基础'],
+    },
   ],
   '/H5/': [
     {
