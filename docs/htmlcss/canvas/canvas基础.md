@@ -1,3 +1,8 @@
+---
+category: Canvas
+tag: Canvas
+---
+
 # Canvas 基础
 
 Canvas API 提供了一个通过 JavaScript 和 HTML 的 `<canvas>` 元素来绘制图形的方式。它可以用于动画、游戏画面、数据可视化、图片编辑以及实时视频处理等方面。
@@ -130,47 +135,3 @@ if (canvas.getContext) {
 
 + [MDN - Canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API)
 + [Canvas API中文文档首页地图](https://www.canvasapi.cn/)
-
-### 绘制形状
-
-#### 绘制矩形
-
-+ `fillRect(x, y, width, height)` : 绘制一个填充的矩形。
-  + `x` : 矩形起始点的 x 轴坐标
-  + `y` : 矩形起始点的 y 轴坐标
-  + `width` : 矩形的宽度。正值在右侧，负值在左侧。
-  + `height` : 矩形的高度。正值在下，负值在上。
-+ `strokeRect(x, y, width, height)` : 绘制一个矩形的边框。
-  + `x` : 矩形起始点的 x 轴坐标
-  + `y` : 矩形起始点的 y 轴坐标
-  + `width` : 矩形的宽度。正值在右侧，负值在左侧。
-  + `height` : 矩形的高度。正值在下，负值在上。
-+ `clearRect(x, y, width, height)` : 清除指定矩形区域，让清除部分完全透明。
-  + `x` : 矩形起始点的 x 轴坐标
-  + `y` : 矩形起始点的 y 轴坐标
-  + `width` : 矩形的宽度
-  + `height` : 矩形的高度
-
-::: demo
-
-  ```html
-  <canvas id="drawRectangleCanvas">
-  ```
-
-  ```js
-  function draw() {
-    var canvas = document.getElementById('drawRectangleCanvas');
-    if (canvas.getContext) {
-      var ctx = canvas.getContext('2d');
-      // 在坐标 (25, 25) 处，绘制一个宽 100px 高 100px 的正方形（矩形）
-      ctx.fillRect(25, 25, 100, 100);
-      // 在坐标 (45, 45) 处，清除一个宽 60px 高 60px 的正方形（矩形）
-      ctx.clearRect(45, 45, 60, 60);
-      // 在坐标 (50, 50) 处，绘制一个宽 50px 高 50px 的正方形（矩形）边框
-      ctx.strokeRect(50, 50, 50, 50);
-    }
-  }
-  draw()
-  ```
-
-:::

@@ -62,10 +62,13 @@ module.exports = {
     {
       title: 'Canvas',
       collapsable: true,
-      children: ['/htmlcss/canvas/canvas基础'],
+      children: [
+        '/htmlcss/canvas/canvas基础',
+        '/htmlcss/canvas/canvas绘制形状',
+      ],
     },
     {
-      title: 'Canvas',
+      title: 'svg',
       collapsable: true,
       children: ['/htmlcss/svg/svg基础'],
     },
