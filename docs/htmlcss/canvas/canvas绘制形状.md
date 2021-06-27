@@ -25,25 +25,25 @@ tag: Canvas
 
 ::: demo
 
-  ```html
-  <canvas id="drawRectangleCanvas">
-  ```
+```html
+<canvas id="drawRectangleCanvas">
+```
 
-  ```js
-  function draw() {
-    var canvas = document.getElementById('drawRectangleCanvas');
-    if (canvas.getContext) {
-      var ctx = canvas.getContext('2d');
-      // 在坐标 (25, 25) 处，绘制一个宽 100px 高 100px 的正方形（矩形）
-      ctx.fillRect(25, 25, 100, 100);
-      // 在坐标 (45, 45) 处，清除一个宽 60px 高 60px 的正方形（矩形）
-      ctx.clearRect(45, 45, 60, 60);
-      // 在坐标 (50, 50) 处，绘制一个宽 50px 高 50px 的正方形（矩形）边框
-      ctx.strokeRect(50, 50, 50, 50);
-    }
+```js
+function draw() {
+  var canvas = document.getElementById('drawRectangleCanvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    // 在坐标 (25, 25) 处，绘制一个宽 100px 高 100px 的正方形（矩形）
+    ctx.fillRect(25, 25, 100, 100);
+    // 在坐标 (45, 45) 处，清除一个宽 60px 高 60px 的正方形（矩形）
+    ctx.clearRect(45, 45, 60, 60);
+    // 在坐标 (50, 50) 处，绘制一个宽 50px 高 50px 的正方形（矩形）边框
+    ctx.strokeRect(50, 50, 50, 50);
   }
-  draw()
-  ```
+}
+draw()
+```
 
 :::
 
@@ -65,13 +65,17 @@ tag: Canvas
 
 + 生成路径 `beginPath()` 。本质上，路径由多个子路径构成，这些子路径都在一个列表中，所有的子路径（线、弧形等）构成图形。 `beginPath()` 调用之后，子路径列表将会清空重置，重新绘制新的图形。
   
-  > 注：当前路径为空时，即调用 `beginPath()` 之后，或者 Canvas 刚创建的时候，第一条路径构造命令通常被视为 `moveTo()`
+  ::: tip
+  当前路径为空时，即调用 `beginPath()` 之后，或者 Canvas 刚创建的时候，第一条路径构造命令通常被视为 `moveTo()`
+  :::
 
 + 调用函数指定绘制路径。
 + 闭合路径 `closePath()` ，并不是必需的。`closePath()` 会通过绘制一条从当前点到开始点的直线来闭合图形。如果图像已闭合，则当前点为开始点。
-  
-  > 注：调用 `fill()` 进行路径填充，没有闭合的形状将会自动闭合，不需要调用 `closePath()` 闭合路径。但是调用 `stroke()` 进行路径描边时，不会自动闭合路径。
 
+  ::: tip
+  调用 `fill()` 进行路径填充，没有闭合的形状将会自动闭合，不需要调用 `closePath()` 闭合路径。但是调用 `stroke()` 进行路径描边时，不会自动闭合路径。
+  :::
+  
 ### moveTo() 移动笔触
 
 `moveTo(x, y)` : 将笔触移动到指定的坐标 (x, y) 上，不创建线条。

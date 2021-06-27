@@ -65,6 +65,7 @@ module.exports = {
       children: [
         '/htmlcss/canvas/canvas基础',
         '/htmlcss/canvas/canvas绘制形状',
+        '/htmlcss/canvas/canvas添加样式',
       ],
     },
     {
