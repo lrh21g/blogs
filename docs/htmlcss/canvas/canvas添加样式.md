@@ -274,6 +274,164 @@ draw();
 
 ## 渐变 Gradients
 
+### createLinearGradient() 创建一个沿参数坐标指定的直线的渐变
+
+`createLinearGradient(x1, y1, x2, y2)` : 创建一个沿参数坐标（起始点 (x1, y1) 、终点 (x2, y2)）指定的直线的渐变,。该方法返回一个线性 `CanvasGradient` 对象。如果需要应用渐变，则需要将返回值赋值给 `fillStyle` 或者 `strokeStyle` 。
+
+::: demo
+
+```html
+<canvas id="drawCreateLinearGradientCanvas"></canvas>
+```
+
+```js
+function draw() {
+  var ctx = document.getElementById('drawCreateLinearGradientCanvas').getContext('2d');
+
+  // Create gradients
+  var lingrad = ctx.createLinearGradient(0, 0, 0, 150);
+  lingrad.addColorStop(0, '#00ABEB');
+  lingrad.addColorStop(0.5, '#fff');
+  lingrad.addColorStop(0.5, '#26C000');
+  lingrad.addColorStop(1, '#fff');
+
+  var lingrad2 = ctx.createLinearGradient(0, 50, 0, 95);
+  lingrad2.addColorStop(0.5, '#000');
+  lingrad2.addColorStop(1, 'rgba(0,0,0,0)');
+
+  // assign gradients to fill and stroke styles
+  ctx.fillStyle = lingrad;
+  ctx.strokeStyle = lingrad2;
+
+  // draw shapes
+  ctx.fillRect(10, 10, 130, 130);
+  ctx.strokeRect(50, 50, 50, 50);
+}
+
+draw();
+```
+
+:::
+
+### createRadialGradient() 绘制放射性渐变
+
+`createRadialGradient(x1, y1, r1, x2, y2, r2)` : 根据参数确定两个圆的坐标（一个以 (x1, y1) 为圆心，半径为 r1 的圆；一个以 (x2, y2) 为圆心，半径为 r2 的圆），绘制放射性渐变的方法。该方法返回一个 `CanvasGradient` 对象。
+
+使用 `createRadialGradient` 方法创建一个指定了开始和结束圆的 `CanvasGradient` 对象之后，可以使用 `CanvasGradient.addColorStop(offset, color)` 方法根据指定的偏移和颜色进行颜色的绘制。
+
+`gradient.addColorStop(offset, color)` : 添加一个由偏移值和颜色值指定的断点到渐变。
+
++ `offset` : `0 - 1` 之间的值，超出范围将抛出 `INDEX_SIZE_ERR` 错误
++ `color` : CSS颜色值。如果颜色值不能被解析为有效的CSS颜色值，将抛出 `SYNTAX_ERR` 错误。
+
+::: demo
+
+```html
+<canvas id="drawCreateRadialGradientCanvas"></canvas>
+```
+
+```js
+function draw() {
+  var context = document.getElementById('drawCreateRadialGradientCanvas').getContext('2d');
+
+  // 创建一个起始圆半径为0的径向渐变对象
+  var gradient = context.createRadialGradient(75, 75, 0, 75, 75, 75);
+  // 设置起止颜色
+  gradient.addColorStop(0, 'red');
+  gradient.addColorStop(0.2, 'red');
+  gradient.addColorStop(0.2, 'orange');
+  gradient.addColorStop(0.4, 'orange');
+  gradient.addColorStop(0.4, 'yellow');
+  gradient.addColorStop(0.6, 'yellow');
+  gradient.addColorStop(0.6, 'green');
+  gradient.addColorStop(0.8, 'green');
+  gradient.addColorStop(0.8, 'purple');
+  gradient.addColorStop(1, 'purple');
+  gradient.addColorStop(1, 'transparent');
+  // 矩形填充
+  context.fillStyle = gradient;
+  context.fillRect(0, 0, 150, 150);
+}
+
+draw();
+```
+
+:::
+
 ## 图案样式 Patterns
 
+### createPattern() 创建图案对象
+
+`createPattern(image, repetition)` : 指定图像 (`CanvasImageSource`) 创建模式。通过 `repetition` 参数在指定的方向上重复元图像。此方法返回一个 `CanvasPattern` 对象。
+
++ `image` ： 作为重复图像源的 `CanvasImageSource` 对象。
+  + `HTMLImageElement` : `<img>` 元素
+  + `HTMLVideoElement` : `<video>` 元素，例如捕获摄像头视频产生的图像信息。
+  + `HTMLCanvasElement`
+  + `CanvasRenderingContext2D`
+  + `ImageBitmap`
+  + `ImageData`
+  + `Blob`
++ `repetition` : 指定如何重复图像。
+  + `repeat` 水平和垂直平铺。当 `repetition` 属性值为 `空字符串''` 或者 `null` ，也会按照 `repeat` 进行渲染。
+  + `repeat-x` 仅水平平铺。
+  + `repeat-y` 仅垂直平铺。
+  + `no-repeat` 不平铺。
+
+::: demo
+
+```html
+<canvas id="drawCreatePatternCanvas"></canvas>
+```
+
+```js
+function draw() {
+  var ctx = document.getElementById('drawCreatePatternCanvas').getContext('2d');
+
+  // 创建新 image 对象，用作图案
+  var img = new Image();
+  img.src = 'https://mdn.mozillademos.org/files/222/Canvas_createpattern.png';
+  img.onload = function () {
+    // 创建图案
+    var ptrn = ctx.createPattern(img, 'repeat');
+    ctx.fillStyle = ptrn;
+    ctx.fillRect(0, 0, 150, 150);
+  };
+}
+
+draw();
+```
+
+:::
+
 ## 阴影 Shadows
+
++ `shadowOffsetX = float` : 设定阴影在 X 轴的延伸距离。不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，默认为 0。
++ `shadowOffsetY = float` : 设定阴影在 Y 轴的延伸距离。不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，默认为 0。
++ `shadowBlur = float` : 设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。
++ `shadowColor = color` : 标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。
+
+::: demo
+
+```html
+<canvas id="drawShadowsCanvas" height="80"></canvas>
+```
+
+```js
+function draw() {
+  var ctx = document.getElementById('drawShadowsCanvas').getContext('2d');
+
+  ctx.shadowOffsetX = 2;
+  ctx.shadowOffsetY = 2;
+  ctx.shadowBlur = 2;
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+
+  ctx.font = '20px Times New Roman';
+  ctx.fillStyle = 'Black';
+  ctx.fillText('Sample String', 5, 30);
+}
+
+draw();
+```
+
+:::
