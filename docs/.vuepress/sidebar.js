@@ -68,6 +68,7 @@ module.exports = {
         '/htmlcss/canvas/canvas添加样式',
         '/htmlcss/canvas/canvas绘制文本',
         '/htmlcss/canvas/canvas使用图像',
+        '/htmlcss/canvas/canvas变形',
       ],
     },
     {
