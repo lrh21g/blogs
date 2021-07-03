@@ -3,7 +3,7 @@ category: Canvas
 tag: Canvas
 ---
 
-# Canvas 组合
+# Canvas 合成与裁剪
 
 ## globalCompositeOperation 设置图像混合模式
 
