@@ -84,7 +84,7 @@ window.onload = function() {
     g: 0.33,
     b: 0.33,
   };
-  // resize canvas
+  // 调整画布大小
   canvas1.width = width;
   canvas1.height = height;
   canvas2.width = width;
@@ -171,11 +171,16 @@ function runComposite() {
 
 var lightMix = function() {
   var ctx = canvas2.getContext('2d');
+  // save() : 保存 canvas 全部状态
   ctx.save();
+  // 设置图像混合模式为 lighter : 是两个重叠图形的颜色是通过颜色值相加来确定的。
   ctx.globalCompositeOperation = 'lighter';
+  // beginPath() : 新建路径。通过清空子路径列表开始一个新路径
   ctx.beginPath();
   ctx.fillStyle = 'rgba(255,0,0,1)';
+  // arc() : 绘制圆弧
   ctx.arc(100, 200, 100, Math.PI * 2, 0, false);
+  // fill() : 路径条南充
   ctx.fill();
   ctx.beginPath();
   ctx.fillStyle = 'rgba(0,0,255,1)';
@@ -188,6 +193,7 @@ var lightMix = function() {
   ctx.restore();
   ctx.beginPath();
   ctx.fillStyle = '#f00';
+  // fillRect() : 绘制填充矩形
   ctx.fillRect(0, 0, 30, 30);
   ctx.fill();
 };
@@ -196,11 +202,12 @@ var colorSphere = function(element) {
   var ctx = canvas1.getContext('2d');
   var width = 360;
   var halfWidth = width / 2;
-  var rotate = (1 / 360) * Math.PI * 2; // per degree
-  var offset = 0; // scrollbar offset
+  var rotate = (1 / 360) * Math.PI * 2;
+  var offset = 0;
   var oleft = -20;
   var otop = -20;
   for (var n = 0; n <= 359; n++) {
+    // createLinearGradient() : 创建一个沿参数坐标指定的直线的渐变
     var gradient = ctx.createLinearGradient(
       oleft + halfWidth,
       otop,
@@ -208,6 +215,7 @@ var colorSphere = function(element) {
       otop + halfWidth
     );
     var color = Color.HSV_RGB({ H: (n + 300) % 360, S: 100, V: 100 });
+    // addColorStop() : 给渐变添加新的渐变点
     gradient.addColorStop(0, 'rgba(0,0,0,0)');
     gradient.addColorStop(
       0.7,
@@ -220,7 +228,9 @@ var colorSphere = function(element) {
     ctx.lineTo(oleft + halfWidth + 6, otop);
     ctx.fillStyle = gradient;
     ctx.fill();
+    // translate() : 通过移动 canvas 和它的原点到一个不同的位置。常用于改变其他变换方法的变换中心点。
     ctx.translate(oleft + halfWidth, otop + halfWidth);
+    // rotate() : 以原点为中心旋转 canvas。
     ctx.rotate(rotate);
     ctx.translate(-(oleft + halfWidth), -(otop + halfWidth));
   }
@@ -303,6 +313,7 @@ var createInterlace = function(size, color1, color2) {
   proto.fillRect(0, size, size, size);
   proto.fillStyle = color1; // bottom-right
   proto.fillRect(size, size, size, size);
+  // createPattern() : 指定图像创建模式。repeat - 水平和垂直平铺
   var pattern = proto.createPattern(proto.canvas, 'repeat');
   pattern.data = proto.canvas.toDataURL();
   return pattern;
