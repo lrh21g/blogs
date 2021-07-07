@@ -209,4 +209,6 @@ module.exports = config({
       },
     },
   },
+
+  // plugins: [],
 });

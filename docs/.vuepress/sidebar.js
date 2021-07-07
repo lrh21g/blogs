@@ -70,6 +70,7 @@ module.exports = {
         '/htmlcss/canvas/canvas使用图像',
         '/htmlcss/canvas/canvas变形',
         '/htmlcss/canvas/canvas合成与裁剪',
+        '/htmlcss/canvas/canvas基本动画',
       ],
     },
     {
