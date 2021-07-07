@@ -72,6 +72,7 @@ module.exports = {
         '/htmlcss/canvas/canvas合成与裁剪',
         '/htmlcss/canvas/canvas基本动画',
         '/htmlcss/canvas/canvas像素操作',
+        '/htmlcss/canvas/canvas优化',
       ],
     },
     {
