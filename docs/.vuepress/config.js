@@ -27,6 +27,10 @@ module.exports = config({
       'script',
       { src: 'https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js' },
     ],
+    // [
+    //   'script',
+    //   { src: 'https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js' },
+    // ],
   ],
 
   // vuepress 提供多语言支持的语言配置。

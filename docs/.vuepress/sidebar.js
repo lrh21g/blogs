@@ -78,7 +78,7 @@ module.exports = {
     {
       title: 'SVG',
       collapsable: true,
-      children: ['/htmlcss/svg/svg基础'],
+      children: ['/htmlcss/svg/svg基础', '/htmlcss/svg/svg动画'],
     },
   ],
   '/H5/': [
