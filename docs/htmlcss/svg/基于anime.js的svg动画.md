@@ -1,3 +1,8 @@
+---
+category: SVG
+tag: SVG
+---
+
 # 基于 Anime.js 的 SVG 动画
 
 动画库: [animejs](https://www.animejs.cn/)
