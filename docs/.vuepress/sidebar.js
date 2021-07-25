@@ -82,6 +82,7 @@ module.exports = {
         '/htmlcss/svg/svg基础',
         '/htmlcss/svg/svg动画',
         '/htmlcss/svg/svgSMIL动画',
+        '/htmlcss/svg/基于anime.js的svg动画',
       ],
     },
   ],
