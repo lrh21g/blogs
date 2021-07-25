@@ -13,6 +13,9 @@
     "async-validator": "^3.4.0"
   },
   "devDependencies": {
+    "node-sass": "^4.14.1",
+    "sass": "^1.36.0",
+    "sass-loader": "^7.3.1",
     "vuepress": "^1.8.2",
     "vuepress-plugin-smooth-scroll": "0.0.10",
     "vuepress-theme-hope": "^1.16.0"

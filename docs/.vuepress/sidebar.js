@@ -90,7 +90,7 @@ module.exports = {
     {
       title: '动效',
       collapsable: true,
-      children: [],
+      children: ['/animation/H5直播点赞动画.md'],
     },
   ],
   '/H5/': [
