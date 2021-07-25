@@ -1,3 +1,9 @@
+---
+category: CSS布局
+tags:
+  - CSS
+---
+
 # Sticky Footer
 
 + 如果页面内容不足够长时，页脚固定在浏览器窗口的底部。

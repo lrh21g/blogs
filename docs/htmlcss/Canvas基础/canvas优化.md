@@ -1,8 +1,8 @@
 ---
 category: Canvas
-tag: Canvas
+tag: 
+  - Canvas
 ---
-
 # Canvas 优化
 
 ## 在离屏 canvas 上预渲染相似的图形或重复的对象

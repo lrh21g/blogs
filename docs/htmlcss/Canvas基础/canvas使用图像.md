@@ -1,6 +1,7 @@
 ---
 category: Canvas
-tag: Canvas
+tag: 
+  - Canvas
 ---
 
 # Canvas 使用图像

@@ -1,6 +1,8 @@
 ---
 category: SVG
-tag: SVG
+tags:
+  - SVG
+  - 动画
 ---
 
 # SVG 基础

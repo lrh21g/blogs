@@ -8,7 +8,7 @@
 
 ::: demo [vue]
 
-``` html
+```vue
 <template>
   <div class="aspectration-wrapper-padding">
     <div class="aspectration-container-padding" data-ratio="16:9">
@@ -68,7 +68,7 @@
 
 ::: demo [vue]
 
-``` html
+```vue
 <template>
   <div class="aspectration-wrapper-padding-calc">
     <div class="aspectration-container-padding-calc" data-ratio="16:9">
@@ -128,7 +128,7 @@
 
 ::: demo [vue]
 
-``` html
+```vue
 <template>
   <div class="aspectration-wrapper-padding-cssvar">
     <!-- 此处CSS编译，calc(100% / (var(--aspect-ratio))) 存在问题 -->
@@ -185,7 +185,7 @@
 
 ::: demo [vue]
 
-``` html
+```vue
 <template>
   <div class="aspectration-wrapper-padding-after">
     <div class="aspectration-container-padding-after" data-ratio="16:9">
@@ -275,7 +275,7 @@
 
 ::: demo [vue]
 
-``` html
+```vue
 <template>
   <div class="aspectration-wrapper-aspect-ratio aspectration-container-aspect-ratio">
     <p>width: auto;</p>

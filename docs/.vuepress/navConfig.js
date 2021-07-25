@@ -7,6 +7,10 @@ module.exports = [
         link: '/htmlcss/',
       },
       {
+        text: '动效',
+        link: '/animation/',
+      },
+      {
         text: '移动端H5',
         link: '/H5/',
       },

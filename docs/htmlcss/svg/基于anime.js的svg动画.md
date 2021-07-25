@@ -1,6 +1,7 @@
 ---
 category: SVG
-tag: SVG
+tags:
+  - SVG
 ---
 
 # 基于 Anime.js 的 SVG 动画

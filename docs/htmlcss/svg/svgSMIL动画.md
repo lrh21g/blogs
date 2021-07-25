@@ -1,6 +1,8 @@
 ---
 category: SVG
-tag: SVG
+tags:
+  - SVG
+  - SMIL
 ---
 
 # SMIL 动画

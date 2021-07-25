@@ -1,3 +1,9 @@
+---
+category: CSS基础
+tags:
+  - CSS
+---
+
 # x-height
 
 [x 字高](https://zh.wikipedia.org/wiki/X%E5%AD%97%E9%AB%98)： 指字母 x 的高度。即：基线（baseline）和主线（median line）之间的距离。

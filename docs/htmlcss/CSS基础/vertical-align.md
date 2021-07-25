@@ -1,3 +1,9 @@
+---
+category: CSS基础
+tags:
+  - CSS
+---
+
 # vertical-align
 
 `vertical-align` 起作用的前提条件是：只能应用于 **内联元素** 以及设置 **`display: inline / inline-block / inine-table / table-cell` 的元素上**。

@@ -1,6 +1,8 @@
 ---
 category: Canvas
-tag: Canvas
+tag: 
+  - Canvas
+  - 动画
 ---
 
 # Canvas 基本动画

@@ -1,6 +1,7 @@
 ---
 category: Canvas
-tag: Canvas
+tag: 
+  - Canvas
 ---
 
 # Canvas 绘制文本
