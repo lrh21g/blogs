@@ -138,6 +138,11 @@ module.exports = {
       collapsable: true,
       children: ['混合开发'],
     },
+    {
+      title: '其他',
+      collapsable: true,
+      children: ['/javascript/其他/JavaScript实现网页截屏'],
+    },
   ],
   '/typescript/': [
     {
