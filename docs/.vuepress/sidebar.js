@@ -1,73 +1,55 @@
 module.exports = {
-  '/git/': [
-    {
-      title: 'Git',
-      collapsable: true,
-      children: [
-        'git基础',
-        'git命令',
-        'git_head',
-        'git技巧',
-        'git对象',
-        'git忽略提交',
-        'git相关问题',
-      ],
-    },
-  ],
-  '/htmlcss/': [
-    {
-      title: 'HTML',
-      collapsable: true,
-      children: ['页面等比适配'],
-    },
+  // ========== 前端 ==========
+  '/前端/HTML+CSS/': [
     {
       title: 'CSS基础',
       collapsable: true,
       children: [
-        '/htmlcss/CSS基础/内联元素',
-        '/htmlcss/CSS基础/BFC',
-        '/htmlcss/CSS基础/x-height',
-        '/htmlcss/CSS基础/line-height',
-        '/htmlcss/CSS基础/vertical-align',
-        '/htmlcss/CSS基础/float',
+        '/前端/HTML+CSS/CSS基础/内联元素',
+        '/前端/HTML+CSS/CSS基础/BFC',
+        '/前端/HTML+CSS/CSS基础/x-height',
+        '/前端/HTML+CSS/CSS基础/line-height',
+        '/前端/HTML+CSS/CSS基础/vertical-align',
+        '/前端/HTML+CSS/CSS基础/float',
       ],
     },
     {
       title: 'CSS布局',
       collapsable: true,
       children: [
-        '/htmlcss/CSS布局/水平垂直居中',
-        '/htmlcss/CSS布局/多列布局',
-        '/htmlcss/CSS布局/栅格布局',
-        '/htmlcss/CSS布局/全屏布局',
-        '/htmlcss/CSS布局/Flex布局',
-        '/htmlcss/CSS布局/Grid布局',
-        '/htmlcss/CSS布局/自适应布局',
-        '/htmlcss/CSS布局/StickyFooter',
+        '/前端/HTML+CSS/CSS布局/页面等比适配',
+        '/前端/HTML+CSS/CSS布局/水平垂直居中',
+        '/前端/HTML+CSS/CSS布局/多列布局',
+        '/前端/HTML+CSS/CSS布局/栅格布局',
+        '/前端/HTML+CSS/CSS布局/全屏布局',
+        '/前端/HTML+CSS/CSS布局/Flex布局',
+        '/前端/HTML+CSS/CSS布局/Grid布局',
+        '/前端/HTML+CSS/CSS布局/自适应布局',
+        '/前端/HTML+CSS/CSS布局/StickyFooter',
       ],
     },
     {
       title: 'CSS相关',
       collapsable: true,
       children: [
-        '/htmlcss/CSS相关/CSS常用封装',
-        '/htmlcss/CSS相关/CSS实现长宽比',
+        '/前端/HTML+CSS/CSS相关/CSS常用封装',
+        '/前端/HTML+CSS/CSS相关/CSS实现长宽比',
       ],
     },
     {
       title: 'Canvas基础',
       collapsable: true,
       children: [
-        '/htmlcss/Canvas基础/canvas基础',
-        '/htmlcss/Canvas基础/canvas绘制形状',
-        '/htmlcss/Canvas基础/canvas添加样式',
-        '/htmlcss/Canvas基础/canvas绘制文本',
-        '/htmlcss/Canvas基础/canvas使用图像',
-        '/htmlcss/Canvas基础/canvas变形',
-        '/htmlcss/Canvas基础/canvas合成与裁剪',
-        '/htmlcss/Canvas基础/canvas基本动画',
-        '/htmlcss/Canvas基础/canvas像素操作',
-        '/htmlcss/Canvas基础/canvas优化',
+        '/前端/HTML+CSS/Canvas基础/canvas基础',
+        '/前端/HTML+CSS/Canvas基础/canvas绘制形状',
+        '/前端/HTML+CSS/Canvas基础/canvas添加样式',
+        '/前端/HTML+CSS/Canvas基础/canvas绘制文本',
+        '/前端/HTML+CSS/Canvas基础/canvas使用图像',
+        '/前端/HTML+CSS/Canvas基础/canvas变形',
+        '/前端/HTML+CSS/Canvas基础/canvas合成与裁剪',
+        '/前端/HTML+CSS/Canvas基础/canvas基本动画',
+        '/前端/HTML+CSS/Canvas基础/canvas像素操作',
+        '/前端/HTML+CSS/Canvas基础/canvas优化',
       ],
     },
     {
@@ -79,164 +61,193 @@ module.exports = {
       title: 'SVG',
       collapsable: true,
       children: [
-        '/htmlcss/svg/svg基础',
-        '/htmlcss/svg/svg动画',
-        '/htmlcss/svg/svgSMIL动画',
-        '/htmlcss/svg/基于anime.js的svg动画',
+        '/前端/HTML+CSS/svg/svg基础',
+        '/前端/HTML+CSS/svg/svg动画',
+        '/前端/HTML+CSS/svg/svgSMIL动画',
+        '/前端/HTML+CSS/svg/基于anime.js的svg动画',
       ],
     },
   ],
-  '/animation/': [
-    {
-      title: '动效',
-      collapsable: true,
-      children: ['/animation/H5直播点赞动画.md'],
-    },
-  ],
-  '/H5/': [
+  '/前端/H5/': [
     {
       title: '移动端H5',
       collapsable: true,
       children: [
-        '移动端基本概念',
-        '移动端适配',
-        '1px边框问题',
-        '图片模糊问题',
-        '移动端常见问题',
+        '/前端/H5/移动端基本概念',
+        '/前端/H5/移动端适配',
+        '/前端/H5/1px边框问题',
+        '/前端/H5/图片模糊问题',
+        '/前端/H5/移动端常见问题',
       ],
     },
   ],
-  '/javascript/': [
+  '/前端/动效/': [
     {
-      title: '基础',
+      title: '动效',
       collapsable: true,
-      children: ['基础知识', '数组', '原型与继承', '作用域与闭包', '异步'],
+      children: ['/前端/动效/H5直播点赞动画'],
     },
-    // {
-    //   title: '前端训练营',
-    //   path: '/javascript/前端训练营/',
-    //   collapsable: true,
-    //   children: [
-    //     '/javascript/前端训练营/01.编程语言通识',
-    //     '/javascript/前端训练营/02.JavaScript词法和类型',
-    //     '/javascript/前端训练营/03.表达式和类型转换',
-    //     '/javascript/前端训练营/04.语句和对象',
-    //   ],
-    // },
+  ],
+  '/前端/JavaScript/': [
+    {
+      title: 'JavaScript基础',
+      collapsable: true,
+      children: [
+        '/前端/JavaScript/基础知识',
+        '/前端/JavaScript/数组',
+        '/前端/JavaScript/原型与继承',
+        '/前端/JavaScript/作用域与闭包',
+        '/前端/JavaScript/异步',
+      ],
+    },
     {
       title: '设计模式',
       collapsable: true,
-      children: ['JavaScript设计模式'],
+      children: ['/前端/设计模式/JavaScript设计模式'],
     },
     {
       title: '实用技巧',
       collapsable: true,
-      children: ['JavaScript常用封装', '手写系列'],
+      children: [
+        '/前端/JavaScript/JavaScript常用封装',
+        '/前端/JavaScript/手写系列',
+      ],
     },
     {
       title: '混合开发',
       collapsable: true,
-      children: ['混合开发'],
+      children: ['/前端/JavaScript/混合开发'],
     },
     {
       title: '其他',
       collapsable: true,
-      children: ['/javascript/其他/JavaScript实现网页截屏'],
+      children: ['/前端/JavaScript/其他/JavaScript实现网页截屏'],
     },
   ],
-  '/typescript/': [
+  '/前端/TypeScript/': [
     {
       title: '基础',
       collapsable: true,
-      children: ['基础知识', 'tsconfig配置', 'ts声明文件'],
+      children: [
+        '/前端/TypeScript/基础知识',
+        '/前端/TypeScript/tsconfig配置',
+        '/前端/TypeScript/ts声明文件',
+      ],
     },
   ],
-  '/node/': [
+  '/前端/Node/': [
     {
       title: '基础',
       collapsable: true,
-      children: ['基础知识'],
+      children: ['/前端/Node/基础知识'],
     },
   ],
-  '/SQL/': [
+  '/前端框架/项目搭建/': [
     {
-      title: 'SQL',
+      title: '项目规范',
       collapsable: true,
-      children: ['/SQL/SQL/SQL基础'],
-    },
-    {
-      title: 'MongoDB',
-      collapsable: true,
-      children: ['/SQL/MongoDB/基础知识'],
+      children: ['/前端框架/项目搭建/vue项目规范搭建'],
     },
   ],
-  // '/MongoDB/': [
-  //   {
-  //     title: '基础',
-  //     collapsable: true,
-  //     children: ['基础知识'],
-  //   },
-  // ],
-  '/linux/': [
-    {
-      title: '基础',
-      collapsable: true,
-      children: ['基础知识'],
-    },
-  ],
-  '/vue/': [
+  '/前端框架/Vue/': [
     {
       title: 'Vue2',
       collapsable: true,
       children: [
-        '/vue/Vue2/Vue2基础',
-        '/vue/Vue2/Vue生命周期',
-        '/vue/Vue2/Vue组件通信方式',
-        '/vue/Vue2/Vue组件',
-        '/vue/Vue2/Vue实用技巧',
-        '/vue/Vue2/Vue原理',
+        '/前端框架/Vue/Vue2/Vue2基础',
+        '/前端框架/Vue/Vue2/Vue生命周期',
+        '/前端框架/Vue/Vue2/Vue组件通信方式',
+        '/前端框架/Vue/Vue2/Vue组件',
+        '/前端框架/Vue/Vue2/Vue实用技巧',
+        '/前端框架/Vue/Vue2/Vue原理',
       ],
     },
     {
       title: 'Vue3',
       collapsable: true,
-      children: ['/vue/Vue3/Vue3基础'],
+      children: ['/前端框架/Vue/Vue3/Vue3基础'],
     },
     {
       title: 'Vuex',
       collapsable: true,
-      children: ['/vue/Vuex/Vuex基础'],
+      children: ['/前端框架/Vue/Vuex/Vuex基础'],
     },
     {
       title: 'VueRouter',
       collapsable: true,
-      children: ['/vue/VueRouter/VueRouter基础'],
+      children: ['/前端框架/Vue/VueRouter/VueRouter基础'],
     },
     {
       title: 'Vue2源码',
       collapsable: true,
-      children: ['/vue/Vue2源码/目录结构', '/vue/Vue2源码/源码构建'],
+      children: [
+        '/前端框架/Vue/Vue2源码/目录结构',
+        '/前端框架/Vue/Vue2源码/源码构建',
+      ],
     },
   ],
-  '/react/': [
+  '/前端框架/React/': [
     {
       title: 'React',
       collapsable: true,
-      children: ['基础知识'],
+      children: ['/前端框架/React/基础知识'],
     },
   ],
-  '/specification/': [
+  '/前端框架/Webpack/': [
     {
-      title: '项目规范',
+      title: 'React',
       collapsable: true,
-      children: ['BEM', 'vue项目规范搭建'],
+      children: ['/前端框架/Webpack/基础知识'],
     },
   ],
-  '/tools/': [
+  '/服务端/Linux/': [
     {
-      title: '编辑器',
+      title: 'Linux基础',
       collapsable: true,
-      children: ['vscode插件'],
+      children: ['/服务端/Linux/基础知识'],
+    },
+  ],
+  '/数据库/SQL语言/': [
+    {
+      title: '基础',
+      collapsable: true,
+      children: ['/数据库/SQL语言/SQL基础'],
+    },
+  ],
+  '/数据库/MongoDB/': [
+    {
+      title: '基础',
+      collapsable: true,
+      children: ['/数据库/MongoDB/基础知识'],
+    },
+  ],
+  '/其他/Git/': [
+    {
+      title: 'Git',
+      collapsable: true,
+      children: [
+        '/其他/Git/git基础',
+        '/其他/Git/git命令',
+        '/其他/Git/git_head',
+        '/其他/Git/git技巧',
+        '/其他/Git/git对象',
+        '/其他/Git/git忽略提交',
+        '/其他/Git/git相关问题',
+      ],
+    },
+  ],
+  '/其他/工具/': [
+    {
+      title: '工具相关',
+      collapsable: true,
+      children: ['/其他/工具/VSCode插件', '/其他/工具/whistle'],
+    },
+  ],
+  '/代码规范/': [
+    {
+      title: 'React',
+      collapsable: true,
+      children: ['/代码规范/BEM'],
     },
   ],
 };
