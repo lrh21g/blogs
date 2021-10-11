@@ -191,9 +191,6 @@ $ git checkout <branch-name/tag-name>
 # 切换到上一个分支
 $ git checkout -
 
-# 创建新的分支，并切换到该分支
-$ git checkout -b <branch-name>
-
 # 查看所有的本地分支
 $ git branch
 
