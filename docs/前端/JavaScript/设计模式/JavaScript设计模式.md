@@ -116,7 +116,7 @@ UML中描述对象和类之间相互的关系：
   + 行程结束时，显示打车金额（假定行程就5公里）
   + 画出UML类图，用ES6语法写出该示例？
 
-  ![design_01.png](./files/images/design_01.png)
+  ![design_01.png](../files/images/design_01.png)
 
   ``` javascript
   // 车
@@ -165,7 +165,7 @@ UML中描述对象和类之间相互的关系：
   + 车辆进入时，摄像头可识别车牌号和时间
   + 车辆出来时，出口显示器显示车牌号和停车时长
   
-  ![design_02](./files/images/design_02.png)
+  ![design_02](../files/images/design_02.png)
 
   ``` javascript
   // 车辆
@@ -294,7 +294,7 @@ UML中描述对象和类之间相互的关系：
 
 构造函数和创造者分离。符合开放封闭原则。
 
-![design_FactoryMethod](./files/images/design_FactoryMethod.png)
+![design_FactoryMethod](../files/images/design_FactoryMethod.png)
 
 ``` javascript
 class Product {
@@ -471,7 +471,7 @@ console.log("login1 === login2", login1 === login2);
 
 将旧接口和使用者进行分离。符合开放封闭原则
 
-![design_Adapter](./files/images/design_Adapter.png)
+![design_Adapter](../files/images/design_Adapter.png)
 
 ``` javascript
 class Adaptee {
@@ -517,7 +517,7 @@ ajax({
 
 将现有对象和装饰器分离，两者独立存在。符合开放封闭原则
 
-![design_Decorator](./files/images/design_Decorator.png)
+![design_Decorator](../files/images/design_Decorator.png)
 
 ``` javascript
 class Circle {
@@ -572,7 +572,7 @@ obj.foo() // 'foo'
 
 代理类和目标类分离，隔离开目标类和使用者，符合开放封闭原则
 
-![design_Proxy](./files/images/design_Proxy.png)
+![design_Proxy](../files/images/design_Proxy.png)
 
 ``` javascript
 class ReadImg {
@@ -626,7 +626,7 @@ proxyImg.display()
 
 主题和观察者分离，不是主动触发而是被动监听，两者解耦。符合开发封闭原则。
 
-![design_Observer](./files/images/design_Observer.png)
+![design_Observer](../files/images/design_Observer.png)
 
 ``` javascript
 // 主题，接收状态变化，触发每个观察者
@@ -705,7 +705,7 @@ emitter1.emit('some')
 
 迭代器对象和目标对象分离；迭代器将使用者与目标对象隔离开；符合开放封闭原则。
 
-![design_Iterator](./files/images/design_Iterator.png)
+![design_Iterator](../files/images/design_Iterator.png)
 
 ``` javascript
 class Iterator {
@@ -750,7 +750,7 @@ while(iterator.hasNext()) {
 
 一个对象有状态变化，每次状态变化都会触发一个逻辑，不能总是用 `if...else` 来控制
 
-![design_State](./files/images/design_State.png)
+![design_State](../files/images/design_State.png)
 
 ``` javascript
 class State {
@@ -954,7 +954,7 @@ console.log(context.getState())
 
 + 中介者模式
 
-  ![design_Mediator](./files/images/design_Mediator.png)
+  ![design_Mediator](../files/images/design_Mediator.png)
 
   各关联对象通过中介者隔离，符合开放封闭原则
 
