@@ -2,52 +2,101 @@
 
 ## 全局概览
 
-![vue_render](../files/images/vue_render.png)
-
-## Object.defineProperty
+![vue_render](../files/images/vue2_render.drawio.png)
 
 Vue.js 基于 [`Object.defineProperty`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 实现**响应式系统**。
 
-``` javascript
-/*
-  obj: 目标对象
-  prop: 需要操作的目标对象的属性名
-  descriptor: 描述符
-    {
-      enumerable: 属性是否可枚举，默认 false
-      configurable: 属性是否可以被修改或者删除，默认 false
-      get: 获取属性的方法
-      set: 设置属性的方法
-    }
-  return value 传入对象
-*/
-Object.defineProperty(obj, prop, descriptor)
-```
+## Object.defineProperty
 
-`Object.defineProperty` 的缺点：
+### API简介
+
+`Object.defineProperty()` 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+
+`Object.defineProperty(obj, prop, descriptor)`
+
++ 参数
+  + `obj` : 要定义属性的对象。
+  + `prop` : 需要操作的目标对象的属性名。
+  + `descriptor` : 要定义或修改的属性描述符。
+    + enumerable: 属性是否可枚举，默认 false 。
+    + configurable: 属性是否可以被修改或者删除，默认 false 。
+    + writable: 当且仅当该属性为 true 时，属性的值，才能被赋值运算符改变。属性值假如是数组时，将不受 push, splice 等方法的影响。默认为 false。
+    + value: 该属性对应的值。
+    + get: 属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数，默认为 undefined。
+    + set: 属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数，默认为 undefined。
++ 返回值：被传递给函数的对象。
+
+### 缺点
 
 + 深度监听，需要递归到底，一次性计算量大
 + 对于对象，无法检测到属性的添加或移除。
-  + 原因：Vue 会在初始化实例时对属性执行 `getter/setter` 转化，所以属性必须在 `data` 对象上存在才能让 Vue 将它转换为响应式
-  + 解决方法：
-    + 单个属性：`Vue.set()`(或者`vm.$set`) / `Vue.delete()`
-    + 多个属性：使用原对象与要混合进去的对象的属性一起创建一个新的对象。
 + 对于数组，无法检测到利用索引直接设置一个数组项和修改数组的长度。
-  
-  ``` javascript
-  var vm = new Vue({
-    data: {
-      items: ['a', 'b', 'c']
-    }
-  })
-  // Vue.set / vm.$set
-  Vue.set(vm.items, indexOfItem, newValue)
-  vm.$set(vm.items, indexOfItem, newValue)
-  // Array.prototype.splice
-  vm.items.splice(indexOfItem, 1, newValue)
-  ```
 
-示例：
+## Vue.set
+
+### API简介
+
+`Vue.set( target, propertyName/index, value )` : 向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新 property，因为 Vue 无法探测普通的新增 property (比如 `this.myObject.newProperty = 'hi'`)
+
++ Vue 在初始化实例时，对属性执行 `getter/setter` 转化，属性必须在 `data` 对象上存在才能让 Vue 将它转换为响应式。
++ 解决方法：
+  + 单个属性：`Vue.set()`(或者`vm.$set`) / `Vue.delete()`
+  + 多个属性：使用原对象与要混合进去的对象的属性一起创建一个新的对象。
+
+``` javascript
+var vm = new Vue({
+  data: {
+    items: ['a', 'b', 'c']
+  }
+})
+// Vue.set / vm.$set
+Vue.set(vm.items, indexOfItem, newValue)
+vm.$set(vm.items, indexOfItem, newValue)
+// Array.prototype.splice
+vm.items.splice(indexOfItem, 1, newValue)
+```
+
+### 实现原理
+
+``` typescript
+export function set(target: Array<any> | Object, key: any, val: any): any {
+  if (process.env.NODE_ENV !== 'production' && (isUndef(target) || isPrimitive(target))) {
+    warn(`Cannot set reactive property on undefined, null, or primitive value: ${(target: any)}`);
+  }
+  // 判断目标值是否为数组，并且key值是否为有效的数组索引
+  if (Array.isArray(target) && isValidArrayIndex(key)) {
+    // 对比数组的key值和数组长度，取较大值设置为数组的长度
+    target.length = Math.max(target.length, key); // 替换目标值
+    target.splice(key, 1, val);
+    return val;
+  } // 如果目标值是对象，并且key值是目标值存在的有效key值，并且不是原型上的key值
+  if (key in target && !(key in Object.prototype)) {
+    // 直接更改目标值
+    target[key] = val;
+    return val;
+  }
+  const ob = (target: any).__ob__; // 判断目标值是否为响应式的
+  if (target._isVue || (ob && ob.vmCount)) {
+    // 如果是vue根实例，就警告
+    process.env.NODE_ENV !== 'production' &&
+      warn(
+        'Avoid adding reactive properties to a Vue instance or its root $data ' +
+          'at runtime - declare it upfront in the data option.'
+      );
+    return val;
+  }
+  if (!ob) {
+    // 如果目标值不是响应式的，那么值需要给对应的key赋值
+    target[key] = val;
+    return val;
+  } // 其他情况，目标值是响应式的，就通过Object.defineProperty进行数据监听
+  defineReactive(ob.value, key, val); // 通知更新dom操作
+  ob.dep.notify();
+  return val;
+}
+```
+
+## 响应式简单实现
 
 ``` javascript
 /* 订阅者 Dep：用来存放 Watcher 观察者对象 */
@@ -68,10 +117,11 @@ class Dep {
 
 class Watcher {
   constructor() {
-    /* 在new一个Watcher对象时将该对象赋值给Dep.target，在get中会用到 */
+    /* 在 new 一个 Watcher 对象时，将该对象赋值给 Dep.target，在 get 中会用到 */
     Dep.target = this;
   }
-  update() { console.log("视图更新啦～"); } /* 更新视图的方法 */
+  /* 更新视图的方法 */
+  update() { console.log("视图更新啦～"); }
 }
 
 /**
@@ -258,13 +308,13 @@ const nodeOps = {
 diff 算法特点：
 
 + 只会做同级比较，不跨级比较
-+ tag不相同，则直接删除重建，不再深度比较
++ tag 不相同，则直接删除重建，不再深度比较
 + tag 和 key，两者都相同，则认为是相同节点，不再深度比较
 
 `patch`过程中需要使用到的 API：
 
 + `insert`: 在 `parent` 这个父节点下插入一个子节点，如果指定了 `ref` 则插入到 `ref` 这个子节点前面
-  
+
   ``` javascript
   function insert (parent, elm, ref) {
     if (parent) {

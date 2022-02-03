@@ -31,10 +31,7 @@ module.exports = {
     {
       title: 'CSS相关',
       collapsable: true,
-      children: [
-        '/前端/HTML+CSS/CSS相关/CSS常用封装',
-        '/前端/HTML+CSS/CSS相关/CSS实现长宽比',
-      ],
+      children: ['/前端/HTML+CSS/CSS相关/CSS常用封装', '/前端/HTML+CSS/CSS相关/CSS实现长宽比'],
     },
     {
       title: 'Canvas基础',
@@ -108,10 +105,7 @@ module.exports = {
     {
       title: '实用技巧',
       collapsable: true,
-      children: [
-        '/前端/JavaScript/JavaScript常用封装',
-        '/前端/JavaScript/手写系列',
-      ],
+      children: ['/前端/JavaScript/JavaScript常用封装', '/前端/JavaScript/手写系列'],
     },
     {
       title: '混合开发',
@@ -178,12 +172,9 @@ module.exports = {
       children: ['/前端框架/Vue/VueRouter/VueRouter基础'],
     },
     {
-      title: 'Vue2源码',
+      title: 'Vue2解析',
       collapsable: true,
-      children: [
-        '/前端框架/Vue/Vue2源码/目录结构',
-        '/前端框架/Vue/Vue2源码/源码构建',
-      ],
+      children: ['/前端框架/Vue/Vue2解析/目录结构', '/前端框架/Vue/Vue2解析/源码构建'],
     },
   ],
   '/前端框架/React/': [

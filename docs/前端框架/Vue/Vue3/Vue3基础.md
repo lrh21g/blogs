@@ -529,7 +529,7 @@ export default {
 
 ### toRef / toRefs
 
-+ `toRef`: 可以用来为源响应式对象上的 `property` 性创建一个 `ref`。然后可以将 `ref` 传递出去，从而保持对其源 `property` 的响应式连接。
++ `toRef`: 可以用来为源响应式对象上的 `property` 新创建一个 `ref`。然后可以将 `ref` 传递出去，从而保持对其源 `property` 的响应式连接。
 + `toRefs`: 将响应式对象转换为普通对象，其中结果对象的每个 `property` 都是指向原始对象相应 `property` 的 `ref`。
 
 `toRef` 使用场景：将响应式数据与源数据进行关联，更新响应式数据不会更新界面。
