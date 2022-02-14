@@ -120,13 +120,24 @@ module.exports = {
   ],
   '/前端/TypeScript/': [
     {
-      title: '基础',
+      title: 'TypeScript 类型系统',
       collapsable: true,
       children: [
-        '/前端/TypeScript/基础知识',
-        '/前端/TypeScript/tsconfig配置',
-        '/前端/TypeScript/ts声明文件',
+        '/前端/TypeScript/TypeScript基础类型',
+        '/前端/TypeScript/TypeScript其他类型',
+        '/前端/TypeScript/TypeScript装饰器',
+        '/前端/TypeScript/TypeScript控制反转和依赖注入',
       ],
+    },
+    {
+      title: 'TypeScript 项目配置',
+      collapsable: true,
+      children: ['/前端/TypeScript/TypeScript声明文件', '/前端/TypeScript/tsconfig配置'],
+    },
+    {
+      title: 'TypeScript 实战',
+      collapsable: true,
+      children: ['/前端/TypeScript/TypeScript实现Promise', '/前端/TypeScript/TypeScript实现Vuex'],
     },
   ],
   '/前端/Node/': [
