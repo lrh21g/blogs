@@ -151,7 +151,7 @@ module.exports = {
     {
       title: '项目规范',
       collapsable: true,
-      children: ['/前端框架/项目搭建/vue项目规范搭建'],
+      children: ['/前端框架/项目搭建/编程规范'],
     },
   ],
   '/前端框架/Vue/': [
@@ -200,6 +200,23 @@ module.exports = {
       title: 'React',
       collapsable: true,
       children: ['/前端框架/Webpack/基础知识'],
+    },
+  ],
+  '/架构/微前端/': [
+    {
+      title: '中心基座模式',
+      collapsable: true,
+      children: ['/架构/微前端/'],
+    },
+    {
+      title: '自组织模式',
+      collapsable: true,
+      children: ['/架构/微前端/'],
+    },
+    {
+      title: '去中心模式',
+      collapsable: true,
+      children: ['/架构/微前端/'],
     },
   ],
   '/服务端/Linux/': [
