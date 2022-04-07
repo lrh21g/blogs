@@ -287,7 +287,7 @@ module.exports = {
 + `AddAssetHtmlPlugin` ：将打包的 `DLL` 库引入到 HTML 模块中。
 
 ```javascript
-// webpack.dll.config.js
+// config/webpack.dll.js
 const path = require('path');
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -332,7 +332,7 @@ module.exports = {
 ```
 
 ```javascript
-// webpack.prod.conf.js
+// config/webpack.prod.js
 const webpack = require('webpack');
 const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 
@@ -351,11 +351,11 @@ module.exports = {
 ```json
 {
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config config/webpack.dev.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js",
-    "build:dll": "webpack --config build/webpack.dll.conf.js"
+    "build": "node config/build.js",
+    "build:dll": "webpack --config config/webpack.dll.js"
   }
 }
 ```
