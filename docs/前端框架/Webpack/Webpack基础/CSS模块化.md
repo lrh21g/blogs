@@ -8,7 +8,7 @@
 
 缺点：维护非常困难(复杂)。当你修改某一个具体的元素的样式的时候，大部分情况下，除了修改CSS本身(因为多数的CSS类是通用的)，你还不得不添加更多的标记类(markup)。
 
-![css_module_oocss](./files/images/css_module_oocss.jpg)
+![css_module_oocss](../files/images/css_module_oocss.jpg)
 
 ## SMACSS（可扩展和模块化结构的 CSS）
 
@@ -17,7 +17,7 @@
 + `Module`（模块）：模块规则，模块(类似于卡片布局)可以在一个页面中使用多次。对于模块CSS类，不建议使用ID和tag选择器(为了方便重用以及上下文独立)。
 + `State`（状态）：状态规则，页面中的某些元素会需要响应不同的状态，比如，可用、不可用、已用、过期、警告等等。这是唯一允许使用 `!important` 的地方。
 
-![css_module_smacss](./files/images/css_module_smacss.jpg)
+![css_module_smacss](../files/images/css_module_smacss.jpg)
 
 ## Atomic CSS（原子CSS）
 
@@ -27,7 +27,7 @@
 
 缺点：CSS 类名是属性名称的描述，而不是元素的自然语义。直接在HTML中进行显示设置 Atomic CSS 在各种框架中被用于校正元素样式以及某些层(layers)的其他方法
 
-![css_module_atomic_css](./files/images/css_module_atomic_css.jpg)
+![css_module_atomic_css](../files/images/css_module_atomic_css.jpg)
 
 ## MCSS（多层CSS）
 
@@ -45,13 +45,13 @@
 + `项目层`(Project layer)中的元素可以影响基层和项目层
 + `装饰层`(Cosmetic layer)是以描述性 OOCSS类("atomic"类) 的形式进行设计，不会影响其他CSS代码，而是在标记中有选择的使用
 
-![css_module_mcss](./files/images/css_module_mcss.jpg)
+![css_module_mcss](../files/images/css_module_mcss.jpg)
 
 ## AMCSS（属性模块CSS）
 
 针对熟悉的CSS设计，比如：`am-size="large"`，`am-disabled`。
 
-![css_module_amcss](./files/images/css_module_amcss.jpg)
+![css_module_amcss](../files/images/css_module_amcss.jpg)
 
 ## BEM
 
@@ -59,10 +59,10 @@
 
 + `Block` 是页面中独立存在的区块，可以在不同场合下被重用。每个页面都可以看做是多个 `Block` 组成。
 
-  ![css_module_bem_block](./files/images/css_module_bem_block.png)
+  ![css_module_bem_block](../files/images/css_module_bem_block.png)
 + `Element` 是构成 `Block` 的元素，只有在对应 `Block` 内部才具有意义，是依赖于 `Block` 的存在。
 
-  ![css_module_bem_element](./files/images/css_module_bem_element.png)
+  ![css_module_bem_element](../files/images/css_module_bem_element.png)
 + `Modifier` 是描述 `Block` 或 `Element` 的属性或状态。同一 `Block` 或 `Element` 可以有多个 `Modifier` 。
 
 优点：能够使得我们仅通过类名就知道哪些代码是属于一个模块内，以及在模块中所起的作用。
