@@ -90,7 +90,7 @@ MVC 的缺陷就是**控制器承担的责任太大了**，随着项目愈加复
     ``` javascript
     chainWebpack: config => {
       config.module
-        .rule("vue")]
+        .rule("vue")
         .use("vue-loader")
         .loader("vue-loader")
         .tap(options => {
