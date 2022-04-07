@@ -197,26 +197,48 @@ module.exports = {
   ],
   '/前端框架/Webpack/': [
     {
-      title: 'React',
+      title: 'Webpack',
       collapsable: true,
-      children: ['/前端框架/Webpack/基础知识'],
+      children: [
+        '/前端框架/Webpack/Webpack基础/JS模块化',
+        '/前端框架/Webpack/Webpack基础/CSS模块化',
+        '/前端框架/Webpack/Webpack基础/核心概念',
+        '/前端框架/Webpack/Webpack基础/babel',
+        '/前端框架/Webpack/Webpack基础/loaders',
+        '/前端框架/Webpack/Webpack基础/plugins',
+        '/前端框架/Webpack/Webpack基础/多页面配置',
+        '/前端框架/Webpack/Webpack基础/devServer',
+      ],
+    },
+    {
+      title: 'Webpack优化',
+      collapsable: true,
+      children: ['/前端框架/Webpack/Webpack优化/Webpack优化'],
+    },
+    {
+      title: 'Webpack原理',
+      collapsable: true,
+      children: ['/前端框架/Webpack/Webpack原理/'],
     },
   ],
   '/架构/微前端/': [
     {
-      title: '中心基座模式',
-      collapsable: true,
-      children: ['/架构/微前端/'],
+      title: '微前端简介',
+      path: '/架构/微前端/',
     },
     {
-      title: '自组织模式',
+      title: '实现方式',
       collapsable: true,
-      children: ['/架构/微前端/'],
+      children: [
+        '/架构/微前端/实现方式/qiankun',
+        '/架构/微前端/实现方式/single-spa',
+        '/架构/微前端/实现方式/Garfish',
+        '/架构/微前端/实现方式/EMP',
+      ],
     },
     {
-      title: '去中心模式',
-      collapsable: true,
-      children: ['/架构/微前端/'],
+      title: '基础模块实现',
+      path: '/架构/微前端/基础模块实现.md',
     },
   ],
   '/服务端/Linux/': [
