@@ -216,9 +216,17 @@ module.exports = {
       children: ['/前端框架/Webpack/Webpack优化/Webpack优化'],
     },
     {
+      title: 'Webpack实战',
+      collapsable: true,
+      children: [
+        '/前端框架/Webpack/Webpack实战/编写loader',
+        '/前端框架/Webpack/Webpack实战/编写plugin',
+      ],
+    },
+    {
       title: 'Webpack原理',
       collapsable: true,
-      children: ['/前端框架/Webpack/Webpack原理/'],
+      children: ['/前端框架/Webpack/Webpack原理/Webpack原理'],
     },
   ],
   '/架构/微前端/': [
