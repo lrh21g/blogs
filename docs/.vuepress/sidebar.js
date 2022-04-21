@@ -170,7 +170,7 @@ module.exports = {
     {
       title: 'Vue3',
       collapsable: true,
-      children: ['/前端框架/Vue/Vue3/Vue3基础'],
+      children: ['/前端框架/Vue/Vue3/Vue3CompositionAPI'],
     },
     {
       title: 'Vuex',
