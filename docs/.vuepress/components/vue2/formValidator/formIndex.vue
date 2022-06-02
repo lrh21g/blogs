@@ -1,12 +1,7 @@
 <template>
   <div>
     <!-- <h3>具有数据校验功能的表单组件 - From</h3> -->
-    <i-form
-      class="i-form-container"
-      ref="form"
-      :model="formValidate"
-      :rules="ruleValidate"
-    >
+    <i-form class="i-form-container" ref="form" :model="formValidate" :rules="ruleValidate">
       <i-form-item label="用户名" prop="name">
         <i-input v-model="formValidate.name"></i-input>
       </i-form-item>
@@ -20,9 +15,9 @@
 </template>
 
 <script>
-import iForm from './from';
-import iFormItem from './fromItem';
-import iInput from './input';
+import iForm from './form.vue';
+import iFormItem from './formItem.vue';
+import iInput from './input.vue';
 
 export default {
   components: { iForm, iFormItem, iInput },
@@ -58,7 +53,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .i-form-container {
   padding-top: 24px;
 }

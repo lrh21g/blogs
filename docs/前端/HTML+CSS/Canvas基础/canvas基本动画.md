@@ -29,7 +29,7 @@ tag:
 
 ### 太阳系动画
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawSunAnimation" width="300" height="300"></canvas>
@@ -100,7 +100,7 @@ init();
 
 ### 时钟动画
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawClockAnimation" width="300"></canvas>
@@ -214,7 +214,7 @@ window.requestAnimationFrame(clock);
 
 ### 循环全景照片
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawPanoramicPhotoAnimation" width="400" height="200"></canvas>
@@ -305,7 +305,7 @@ function draw() {
 
 ### 鼠标追踪动画
 
-::: demo
+::: normal-demo
 
 ```html
 <div>暂时去除鼠标移动事件，移除鼠标跟随动画，如果需要可在代码中放开</div>

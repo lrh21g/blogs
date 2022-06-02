@@ -6,7 +6,7 @@
 
 【注意】 需要把容器的 `height: 0` ，容器内容中所有的元素需要采用 `position: absolute` ，不然子元素内容会被 `padding` 挤出容器，造成内容溢出。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -66,7 +66,7 @@
 
 原理：利用 `padding-top` 或者 `padding-bottom` 的百分比值。在 CSS 中，`padding-top` 或者 `padding-bottom` 的百分比是根据容器的 `width` 来计算的，可以使用 `calc()` 计算 `padding` 的百分比值。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -126,7 +126,7 @@
 
 原理：利用 `padding-top` 或者 `padding-bottom` 的百分比值。在 CSS 中，`padding-top` 或者 `padding-bottom` 的百分比是根据容器的 `width` 来计算的。可通过 CSS变量 和 `calc()`函数 计算 `padding` 的值。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -183,7 +183,7 @@
 
 原理：利用 `padding-top` 或者 `padding-bottom` 的百分比值。在 CSS 中，`padding-top` 或者 `padding-bottom` 的百分比是根据容器的 `width` 来计算的。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -273,7 +273,7 @@
 + 设置容器属性 `width: 500px` 时，元素首先会设置 `width: 500px;` ，根据 `aspect-ratio: 2/1;` 比例 `height: 250px` ，此时违反了 `max-height` 约束，容器大小将被设置为 `height: 200px; width: 400px`
 + 设置容器属性 `max-width: 450px;`，长宽比将会完全忽略，因为无法满足
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>

@@ -17,7 +17,7 @@ tags:
 
     假设 `float` 元素的父元素宽度为 200px，`float` 元素的子元素为 `width: 100px` 的图片，则此时 `float` 元素宽度表现为 “包裹”，宽度为 100px 。
 
-    ::: demo [vue]
+    ::: vue-demo
 
     ```vue
     <template>
@@ -68,7 +68,7 @@ tags:
     + 西方文字最小宽度由特定的连续的英文字符单元决定
     + 类似图片等的替换元素的最小宽度就是该元素内容本身的宽度
 
-    ::: demo [vue]
+    ::: vue-demo
 
     ```vue
     <template>
@@ -131,7 +131,7 @@ tags:
 
 【注】 块状盒子中的 “行框盒子” 会被 `float` 元素限制，没有任何重叠。“行框盒子” 区域被限制，只要不改变当前布局方式，则无法通过其他 CSS 属性改变该区域大小。同时，也是 `float` 元素后面的元素  `margin` 负无穷无效的原因。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -215,7 +215,7 @@ tags:
 
 **【解析】** 内联状态下图片元素底部是有间隙的，`float` 元素实际高度并不为 100px，实际会大于 100px，`float` 元素下方的文字会发生 “环绕效果” 为原有导致。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -273,7 +273,7 @@ tags:
 
 【原因】 每一行内联元素都有一个 “行框盒子” ，示例中标题文字较多，分两行显示，因此有上下两个 “行框盒子”，而 “更多” 所在的 `<a>` 元素是在标题文字后面，位于第二行，因此，设置 `float:right` 的 `<a>` 元素是相对于第二行的 “行框盒子” 对齐的。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -319,7 +319,7 @@ tags:
 
 ## float 布局示例
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -366,7 +366,7 @@ tags:
 
 :::
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>

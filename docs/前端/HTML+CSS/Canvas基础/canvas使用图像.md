@@ -99,7 +99,7 @@ function getMyVideo() {
 + `dx` : image 的左上角在目标 canvas 上 X 轴坐标。
 + `dy` : image 的左上角在目标 canvas 上 Y 轴坐标。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawImageCanvas" width="150" height="150"></canvas>
@@ -137,7 +137,7 @@ draw()
 
 注意：图像可能会因为大幅度的缩放而变得起杂点或者模糊。图像里面有文字，最好不要进行缩放，因为处理之后很可能图像里的文字就会变得无法辨认。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawImageScalingCanvas" width="150" height="150"></canvas>
@@ -175,7 +175,7 @@ draw()
 + `dWidth` : 可选。image 在目标 canvas 上绘制的宽度。允许对绘制的 image 进行缩放。如果不说明，在绘制时 image 宽度不会缩放。
 + `dHeight` : 可选。image 在目标 canvas 上绘制的高度。允许对绘制的 image 进行缩放。如果不说明， 在绘制时 image 高度不会缩放。
 
-::: demo
+::: normal-demo
 
 ```html
 <body onload="draw();">
@@ -223,7 +223,7 @@ draw()
 + 如果加载图像并在其构造函数中指定可选的大小参数，则必须使用所创建实例的 `naturalWidth` 和 `naturalHeight` 属性来正确计算裁剪和缩放区域等内容，而不是 `element.width` 和`element.height`。
 + 如果元素是 `<video>` 元素，则 `videoWidth` 和 `videoHeight` 也是如此，依此类推。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawImageSourceSizeCanvas"></canvas>

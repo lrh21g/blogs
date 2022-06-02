@@ -25,7 +25,7 @@ Canvas API 提供了一个通过 JavaScript 和 HTML 的 `<canvas>` 元素来绘
 
 + HTML 设置 `width` 、 `height` 。 当 canvas 未设置宽高的时候， canvas 会初始化宽高 `width = 300px` 、 `height = 150px` 。
 
-  ::: demo
+  ::: normal-demo
 
   ```html
   <canvas id="setCanvasWHByHTML">
@@ -41,7 +41,7 @@ Canvas API 提供了一个通过 JavaScript 和 HTML 的 `<canvas>` 元素来绘
 
 + CSS 设置 `width` 、 `height` 。 使用 CSS 设置 canvas 宽高， canvas 画布在绘制图像时，会伸缩以适应它的框架尺寸：如果 CSS 的尺寸与初始画布的比例不一致，会出现扭曲。
   
-  ::: demo
+  ::: normal-demo
 
   ```html
   <canvas id="setCanvasWHByCSS">
@@ -59,7 +59,7 @@ Canvas API 提供了一个通过 JavaScript 和 HTML 的 `<canvas>` 元素来绘
 
 + JavaScript 设置 `width` 、 `height`
 
-  ::: demo
+  ::: normal-demo
 
   ```html
   <canvas id="setCanvasWHByJS">

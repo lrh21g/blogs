@@ -48,7 +48,7 @@ BFC 最重要的用途不是去 `margin` 重叠或者是清除 `float` 影响，
 + 左侧 `float` 元素为 `float: left` ，则可设置 `float` 元素的 `margin-right`、 `padding-right`、 透明的`border-right`。
 + 右侧 BFC 元素，则可设置 `padding-left` 、透明的`border-left`。如果需要设置 `margin-left`，其值必须是 `float` 元素的宽度和间隙大小的总和，变得不可空，无法大规模复用。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>

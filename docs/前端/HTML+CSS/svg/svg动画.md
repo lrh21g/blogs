@@ -55,7 +55,7 @@ SVG 描边动画通过 `stroke-dashoffset` 和 `stroke-dasharray` 来实现。
 
 ### 实例
 
-::: demo
+::: normal-demo
 
 ```html
 <button class="stroke-edge-btn">开始动画</button>
@@ -168,7 +168,7 @@ window.onload = function () {
 
 ## 裁剪动画
 
-::: demo
+::: normal-demo
 
 ```html
 <div class="svg-crop-wrapper">
@@ -231,7 +231,7 @@ window.onload = function() {
 
 ## 手写文字动画效果
 
-::: demo
+::: normal-demo
 
 ```html
 <svg
@@ -561,7 +561,7 @@ c-0.961,0.624-1.609,1.296-1.945,2.016l-0.936,3.888l0.936,1.944C403.168,56.037,40
 
 ## 渐变显示文字动画效果
 
-::: demo
+::: normal-demo
 
 ```html
 <button class="gradient-text-btn">开始动画</button>

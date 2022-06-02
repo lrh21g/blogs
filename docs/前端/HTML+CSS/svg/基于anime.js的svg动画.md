@@ -10,7 +10,7 @@ tags:
 
 ## 描边动画
 
-::: demo
+::: normal-demo
 
 ```html
 <div class="line-draw">
@@ -205,7 +205,7 @@ window.onload = function() {
 
 ## Morphing 动画
 
-::: demo
+::: normal-demo
 
 ```html
 <svg

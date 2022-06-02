@@ -1,9 +1,6 @@
 <template>
   <div class="i-form-item-container">
-    <label
-      v-if="label"
-      class="i-form-item-label"
-      :class="{ 'i-form-item-label-required': isRequired }"
+    <label v-if="label" class="i-form-item-label" :class="{ 'i-form-item-label-required': isRequired }"
       >{{ label }}：</label
     >
     <div class="i-form-item-wrapper">
@@ -17,6 +14,7 @@
 <script>
 import AsyncValidator from 'async-validator';
 import Emitter from '../mixins/emitter.js';
+
 export default {
   name: 'iFormItem',
   mixins: [Emitter],
@@ -78,16 +76,14 @@ export default {
     // 只支持 blur 和 change，所以过滤出符合要求的 rule 规则
     getFilteredRule(trigger) {
       const rules = this.getRules();
-      return rules.filter(
-        (rule) => !rule.trigger || rule.trigger.indexOf(trigger) !== -1
-      );
+      return rules.filter((rule) => !rule.trigger || rule.trigger.indexOf(trigger) !== -1);
     },
     /**
      * 校验数据
      * @param trigger 校验类型
      * @param callback 回调函数
      */
-    validate(trigger, callback = function() {}) {
+    validate(trigger, callback = function () {}) {
       let rules = this.getFilteredRule(trigger);
       if (!rules || rules.length === 0) {
         return true;

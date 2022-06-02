@@ -40,7 +40,7 @@ tags:
 
 左框和右框的基线（baseline）对齐，因此会展示如下效果。当设置右框 `line-height: 0` 时，字符占据高度为 0 ，此时，高度的起始位置为字符内容的垂直中线位置，则字符的一半高度会到边框外面。由于字符上移，右框元素的基线（baseline）也会上移，则左右两框的高度落差会越大。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -90,7 +90,7 @@ tags:
 + 图标字符标签里面永远有字符。可借助 `:before` 或者 `:after` 伪元素生成一个空格字符
 + 图标 CSS 不使用 `overflow: hidden` 保证基线为里面字符的基线，但需要里面字符不可见。
 
-::: demo [vue]
+::: vue-demo
 
 ``` html
 <template>
@@ -273,7 +273,7 @@ tags:
 
 如下所示，`margin-top: -200px` 的图片应该展示在容器的外面，但是，图片依然有部分在 div 元素中。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -317,7 +317,7 @@ tags:
 
 为实现图片如下示例排列，可使用 `text-align: jusitfy` （规定元素中的文本的水平对齐方式，`jusitfy` 属性为实现两端对齐文本效果），为了让任意个数的列表最后一行也是左对齐排列，在列表最后辅助和列表宽度一样的空标签元素来占位，类似 `<i>` 标签 （示例中已使用 `outline: 1px solid #db5860;` 标出）
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>

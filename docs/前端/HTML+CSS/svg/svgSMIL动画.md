@@ -35,7 +35,7 @@ SMIL 动画指在 SVG 集成了 Synchronized Multimedia Integration Language (SM
 
 ## 实例
 
-::: demo
+::: normal-demo
 
 ```html
 <svg

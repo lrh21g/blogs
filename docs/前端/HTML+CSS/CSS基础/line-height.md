@@ -48,7 +48,7 @@ tags:
 
 行框盒子的高度是由高度最高的 “内联盒子” 决定的，故父元素高度为最大的 `line-height`
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -97,7 +97,7 @@ tags:
 
 ## 内联元素的高度由 line-height 决定
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -149,7 +149,7 @@ tags:
 
 注：`em` 相对于 `font-size` 大小的 CSS 单位。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -239,7 +239,7 @@ tags:
 
 示例：图片的高度为 `height: 100px` ，包裹图片元素的 div 设置 `line-height: 120px` 的高度为 120px，主要原因是因为每一个 “行框盒子” 前面都有一个宽度为 0 的 “幽灵空白节点”，其内联特性表现和普通字符一样，所以，容器高度等于 `line-height` 设置的属性值 256px 。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>
@@ -282,7 +282,7 @@ tags:
 + 多行文本使用 `div` 标签包裹，并设置为 `display: inline-block` 。可重置外部 `line-height` 为正常大小，并保持内联元素的特性，从而可设置 `vertical-align` 属性，产生 “行框盒子” 。在 “行框盒子” 前面都有一个宽度为 0 的 “幽灵空白节点” ，此时外部设置的 `line-height: 120px` 产生作用。
 + 内联元素默认为基线对齐，则可通过 `vertical-align: center` 调整多行文本垂直位置，实现**近似**垂直居中。
 
-::: demo [vue]
+::: vue-demo
 
 ```vue
 <template>

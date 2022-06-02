@@ -17,7 +17,7 @@ tag:
 + `y` : 文本起点的 y 轴坐标。
 + `maxWidth` : 绘制的最大宽度。如果指定了值，并且经过计算字符串的值比最大宽度还要宽，字体为了适应会水平缩放（如果通过水平缩放当前字体，可以进行有效的或者合理可读的处理）或者使用小号的字体。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawFillTextCanvas" height="80"></canvas>
@@ -45,7 +45,7 @@ draw();
 + `y` : 文本起点的 y 轴坐标。
 + `maxWidth` : 绘制的最大宽度。如果指定了值，并且经过计算字符串的值比最大宽度还要宽，字体为了适应会水平缩放（如果通过水平缩放当前字体，可以进行有效的或者合理可读的处理）或者使用小号的字体。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawStrokeTextCanvas" height="80"></canvas>
@@ -96,7 +96,7 @@ draw();
 + `ideographic` : 文字基线是表意字基线；如果字符本身超出了 `alphabetic` 基线，那么 ideog`rahpic 基线位置在字符本身的底部。
 + `bottom` : 文本基线在文本块的底部。 与 `ideographic` 基线的区别在于 `ideographic` 基线不需要考虑下行字母。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawTextBaselineCanvas" width="600" height="390"></canvas>

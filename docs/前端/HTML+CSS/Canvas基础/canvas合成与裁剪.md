@@ -10,7 +10,7 @@ tag:
 
 `globalCompositeOperation = type` : 设置 Canvas 图形的混合模式。
 
-::: demo
+::: normal-demo
 
 ```html
 <div id="globalCompositeOperationContainer"></div>
@@ -333,7 +333,7 @@ var op_8x8 = createInterlace(8, '#FFF', '#eee');
   + `nonzero`: 非零环绕原则，默认的原则。
   + `evenodd`: 奇偶环绕原则。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawClipCanvas">

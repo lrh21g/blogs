@@ -184,7 +184,7 @@ for (const input of inputs) {
 + `true` : 表示图片平滑（默认值）。
 + `false` : 表示图片不平滑。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="canvas" width="300" height="227"></canvas>

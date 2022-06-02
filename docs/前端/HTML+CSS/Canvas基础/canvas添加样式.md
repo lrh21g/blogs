@@ -27,7 +27,7 @@ ctx.strokeStyle = "rgba(255,165,0,1)";
 如果设置了 `fillStyle` 或 `strokeStyle` 的值，则该值会成为新绘制图形的默认值。需要给每个图形添加不同的颜色，则需要重新设置 `fillStyle` 或 `strokeStyle` 的值。
 :::
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawSetColorsCanvas"></canvas>
@@ -106,7 +106,7 @@ ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 + `round` : 线段末端以圆形结束。端点处加上了半径为一半线宽的半圆。
 + `square` : 线段末端以方形结束。端点处加上了等宽且高度为一半线宽的方块。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawSetLineCapCanvas"></canvas>
@@ -150,7 +150,7 @@ drawLineCap();
 + `bevel` : 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
 + `miter` : 默认值。通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawSetLineJoinCanvas"></canvas>
@@ -194,7 +194,7 @@ drawLineJoin();
 
 + `segments` : `Array` 数组。一组描述交替绘制线段和间距（坐标空间单位）长度的数字。如果数组元素的数量是奇数， 数组的元素会被复制并重复。例如， [5, 15, 25] 会变成 [5, 15, 25, 5, 15, 25]。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawSetLineDashCanvas"></canvas>
@@ -236,7 +236,7 @@ draw();
 
 `lineDashOffset = value` : 设置虚线样式的起始偏移量。偏移量是 `float` 精度的数字，初始值为 0.0 。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawSetLineDashOffsetCanvas"></canvas>
@@ -279,7 +279,7 @@ draw();
 
 `createLinearGradient(x1, y1, x2, y2)` : 创建一个沿参数坐标（起始点 (x1, y1) 、终点 (x2, y2)）指定的直线的渐变,。该方法返回一个线性 `CanvasGradient` 对象。如果需要应用渐变，则需要将返回值赋值给 `fillStyle` 或者 `strokeStyle` 。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawCreateLinearGradientCanvas"></canvas>
@@ -325,7 +325,7 @@ draw();
 + `offset` : `0 - 1` 之间的值，超出范围将抛出 `INDEX_SIZE_ERR` 错误
 + `color` : CSS颜色值。如果颜色值不能被解析为有效的CSS颜色值，将抛出 `SYNTAX_ERR` 错误。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawCreateRadialGradientCanvas"></canvas>
@@ -379,7 +379,7 @@ draw();
   + `repeat-y` 仅垂直平铺。
   + `no-repeat` 不平铺。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawCreatePatternCanvas"></canvas>
@@ -412,7 +412,7 @@ draw();
 + `shadowBlur = float` : 设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。
 + `shadowColor = color` : 标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawShadowsCanvas" height="80"></canvas>

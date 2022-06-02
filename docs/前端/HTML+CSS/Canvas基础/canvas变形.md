@@ -16,7 +16,7 @@ tag:
 
 + `restore()` : 恢复画布(canvas)状态。在绘图状态栈中弹出顶端的状态，将 canvas 恢复到最近的保存状态的方法。如果没有保存状态，此方法不做任何改变。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawSaveRestoreCanvas"></canvas>
@@ -59,7 +59,7 @@ draw()
 
 ![canvas_translating](./files/images/canvas_translating.drawio.png)
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawTranslatingCanvas"></canvas>
@@ -92,7 +92,7 @@ draw()
 
 ![canvas_rotating](./files/images/canvas_rotating.drawio.png)
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawRotatingCanvas"></canvas>
@@ -131,7 +131,7 @@ draw()
 
 画布初始情况下， 是以左上角坐标为原点的第一象限。如果参数为负实数，相当于以 x 或 y 轴作为对称轴镜像反转。（例如，使用 `translate(0, canvas.height); scale(1, -1);` 以y轴作为对称轴镜像反转，就可得到著名的笛卡尔坐标系，左下角为原点）。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawScalingCanvas"></canvas>
@@ -179,7 +179,7 @@ draw()
 
 + `resetTransform()` : 重置当前变形为单位矩阵，它和调用以下语句是一样的：`ctx.setTransform(1, 0, 0, 1, 0, 0)`
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawTransformsCanvas" width="300" height="280"></canvas>

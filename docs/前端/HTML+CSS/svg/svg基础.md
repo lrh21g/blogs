@@ -46,7 +46,7 @@ tags:
 
 `<g>` 元素用来**组合对象**的容器。添加到 `<g>` 元素上的变换、属性会应用到其所有的子元素上。也可以用来定义复杂的对象，之后可以通过 `<use>` 元素来引用它们。
 
-::: demo
+::: normal-demo
 
 ```html
 <svg width="100%" height="80px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -74,7 +74,7 @@ tags:
 
 SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再次使用的引用元素定义在 `<defs>` 元素里面。在 `<defs>` 元素中定义的图形元素不会直接呈现。可以在视口的任意地方利用 `<use>` 元素呈现这些元素。
 
-::: demo
+::: normal-demo
 
 ```html
 <svg width="80px" height="30px" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">
@@ -96,7 +96,7 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 
 `<symbol>` 元素用来定义一个**图形模板**对象，它可以用一个 `<use>` 元素实例化。`<symbol>` 元素对图形的作用是在同一文档中多次使用，添加结构和语义。一个 `<symbol>` 元素本身是不呈现的。只有 `<symbol>` 元素的实例（亦即，一个引用了symbol的 `<use>` 元素）才能呈现。
 
-::: demo
+::: normal-demo
 
 ```html
 <svg>
@@ -119,7 +119,7 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 
 `<a>` 元素定义一个超链接。当使用 CSS 或 `querySelector` 选择 "a" 时，可能应用到错误的元素上。可以尝试使用 `@namespace规则` 来区分两者。
 
-::: demo
+::: normal-demo
 
 ```html
 <svg width="140" height="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -159,7 +159,7 @@ svg|a {}
 | **多边形** | `<polygon points="points-list" />`                                   | 由一系列坐标组成 `points-list: x1,y1 x2,y2 x3,y3 ...`                         |
 | **折线**   | `<polyline points="points-list" />`                                  | 由一系列坐标组成 `points-list: x1,y1 x2,y2 x3,y3 ...`                         |
 
-::: demo
+::: normal-demo
 
 ```html
 <svg
@@ -219,7 +219,7 @@ svg|a {}
 
 ![svg_arc](./files/images/svg_arc.drawio.png)
 
-::: demo
+::: normal-demo
 
 ```html
 <svg
@@ -278,7 +278,7 @@ svg|a {}
 
 ## 示例
 
-::: demo
+::: normal-demo
 
 ```html
 <svg
@@ -314,7 +314,7 @@ svg|a {}
 
 :::
 
-::: demo
+::: normal-demo
 
 ```html
 <svg

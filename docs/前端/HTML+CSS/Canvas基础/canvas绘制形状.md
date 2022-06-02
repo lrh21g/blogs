@@ -24,7 +24,7 @@ tag:
   + `width` : 矩形的宽度
   + `height` : 矩形的高度
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawRectangleCanvas">
@@ -106,7 +106,7 @@ draw()
   + `endAngle` : 圆弧的终点，单位以弧度表示。
   + `anticlockwise` : 可选 `Boolean` 值。如果为 true，逆时针绘制圆弧，反之，顺时针绘制。
 
-  ::: demo
+  ::: normal-demo
 
   ```html
   <canvas id="drawArcCanvasByArc">
@@ -147,7 +147,7 @@ draw()
   + `y2` : 第一个控制点的 y 轴坐标。
   + `radius` : 圆弧的半径。
 
-  ::: demo
+  ::: normal-demo
 
   ```html
   <canvas id="drawArcCanvasByArcTo">
@@ -195,7 +195,7 @@ draw()
 + `x` : 终点的 x 轴坐标。
 + `y` : 终点的 y 轴坐标。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawBezierCurveCanvasByQuadraticCurveTo" width="300" height="300">
@@ -249,7 +249,7 @@ ctx.stroke();
 + `x` : 结束点的 x 轴坐标。
 + `y` : 结束点的 y 轴坐标。
 
-::: demo
+::: normal-demo
 
 ```html
 <canvas id="drawBezierCurveCanvasByBezierCurveTo" width="300" height="300">

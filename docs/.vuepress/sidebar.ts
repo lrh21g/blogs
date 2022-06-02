@@ -1,8 +1,9 @@
-module.exports = {
-  // ========== 前端 ==========
+import { sidebar } from 'vuepress-theme-hope';
+
+export default sidebar({
   '/前端/HTML+CSS/': [
     {
-      title: 'CSS基础',
+      text: 'CSS基础',
       collapsable: true,
       children: [
         '/前端/HTML+CSS/CSS基础/内联元素',
@@ -14,7 +15,7 @@ module.exports = {
       ],
     },
     {
-      title: 'CSS布局',
+      text: 'CSS布局',
       collapsable: true,
       children: [
         '/前端/HTML+CSS/CSS布局/页面等比适配',
@@ -29,12 +30,12 @@ module.exports = {
       ],
     },
     {
-      title: 'CSS相关',
+      text: 'CSS相关',
       collapsable: true,
       children: ['/前端/HTML+CSS/CSS相关/CSS常用封装', '/前端/HTML+CSS/CSS相关/CSS实现长宽比'],
     },
     {
-      title: 'Canvas基础',
+      text: 'Canvas基础',
       collapsable: true,
       children: [
         '/前端/HTML+CSS/Canvas基础/canvas基础',
@@ -50,12 +51,12 @@ module.exports = {
       ],
     },
     {
-      title: 'Canvas实战',
+      text: 'Canvas实战',
       collapsable: true,
       children: [],
     },
     {
-      title: 'SVG',
+      text: 'SVG',
       collapsable: true,
       children: [
         '/前端/HTML+CSS/svg/svg基础',
@@ -67,7 +68,7 @@ module.exports = {
   ],
   '/前端/H5/': [
     {
-      title: '移动端H5',
+      text: '移动端H5',
       collapsable: true,
       children: [
         '/前端/H5/移动端基本概念',
@@ -80,14 +81,14 @@ module.exports = {
   ],
   '/前端/动效/': [
     {
-      title: '动效',
+      text: '动效',
       collapsable: true,
       children: ['/前端/动效/H5直播点赞动画'],
     },
   ],
   '/前端/JavaScript/': [
     {
-      title: 'JavaScript基础',
+      text: 'JavaScript基础',
       collapsable: true,
       children: [
         '/前端/JavaScript/基础知识',
@@ -98,29 +99,29 @@ module.exports = {
       ],
     },
     {
-      title: '设计模式',
+      text: '设计模式',
       collapsable: true,
       children: ['/前端/设计模式/JavaScript设计模式'],
     },
     {
-      title: '实用技巧',
+      text: '实用技巧',
       collapsable: true,
       children: ['/前端/JavaScript/JavaScript常用封装', '/前端/JavaScript/手写系列'],
     },
     {
-      title: '混合开发',
+      text: '混合开发',
       collapsable: true,
       children: ['/前端/JavaScript/混合开发'],
     },
     {
-      title: '其他',
+      text: '其他',
       collapsable: true,
       children: ['/前端/JavaScript/其他/JavaScript实现网页截屏'],
     },
   ],
   '/前端/TypeScript/': [
     {
-      title: 'TypeScript 类型系统',
+      text: 'TypeScript 类型系统',
       collapsable: true,
       children: [
         '/前端/TypeScript/TypeScript基础类型',
@@ -130,33 +131,33 @@ module.exports = {
       ],
     },
     {
-      title: 'TypeScript 项目配置',
+      text: 'TypeScript 项目配置',
       collapsable: true,
       children: ['/前端/TypeScript/TypeScript声明文件', '/前端/TypeScript/tsconfig配置'],
     },
     {
-      title: 'TypeScript 实战',
+      text: 'TypeScript 实战',
       collapsable: true,
       children: ['/前端/TypeScript/TypeScript实现Promise', '/前端/TypeScript/TypeScript实现Vuex'],
     },
   ],
   '/前端/Node/': [
     {
-      title: '基础',
+      text: '基础',
       collapsable: true,
       children: ['/前端/Node/基础知识'],
     },
   ],
   '/前端框架/项目搭建/': [
     {
-      title: '项目规范',
+      text: '项目规范',
       collapsable: true,
       children: ['/前端框架/项目搭建/编程规范'],
     },
   ],
   '/前端框架/Vue/': [
     {
-      title: 'Vue2',
+      text: 'Vue2',
       collapsable: true,
       children: [
         '/前端框架/Vue/Vue2/Vue2基础',
@@ -168,36 +169,36 @@ module.exports = {
       ],
     },
     {
-      title: 'Vue3',
+      text: 'Vue3',
       collapsable: true,
       children: ['/前端框架/Vue/Vue3/Vue3CompositionAPI'],
     },
     {
-      title: 'Vuex',
+      text: 'Vuex',
       collapsable: true,
       children: ['/前端框架/Vue/Vuex/Vuex基础'],
     },
     {
-      title: 'VueRouter',
+      text: 'VueRouter',
       collapsable: true,
       children: ['/前端框架/Vue/VueRouter/VueRouter基础'],
     },
     {
-      title: 'Vue2解析',
+      text: 'Vue2解析',
       collapsable: true,
-      children: ['/前端框架/Vue/Vue2解析/目录结构', '/前端框架/Vue/Vue2解析/源码构建'],
+      children: ['/前端框架/Vue/Vue2解析/目录结构', '/前端框架/Vue/Vue2解析/项目构建'],
     },
   ],
   '/前端框架/React/': [
     {
-      title: 'React',
+      text: 'React',
       collapsable: true,
       children: ['/前端框架/React/基础知识'],
     },
   ],
   '/前端框架/Webpack/': [
     {
-      title: 'Webpack',
+      text: 'Webpack',
       collapsable: true,
       children: [
         '/前端框架/Webpack/Webpack基础/JS模块化',
@@ -211,31 +212,28 @@ module.exports = {
       ],
     },
     {
-      title: 'Webpack优化',
+      text: 'Webpack优化',
       collapsable: true,
       children: ['/前端框架/Webpack/Webpack优化/Webpack优化'],
     },
     {
-      title: 'Webpack实战',
+      text: 'Webpack实战',
       collapsable: true,
-      children: [
-        '/前端框架/Webpack/Webpack实战/编写loader',
-        '/前端框架/Webpack/Webpack实战/编写plugin',
-      ],
+      children: ['/前端框架/Webpack/Webpack实战/编写loader', '/前端框架/Webpack/Webpack实战/编写plugin'],
     },
     {
-      title: 'Webpack原理',
+      text: 'Webpack原理',
       collapsable: true,
       children: ['/前端框架/Webpack/Webpack原理/Webpack原理'],
     },
   ],
   '/架构/微前端/': [
     {
-      title: '微前端简介',
-      path: '/架构/微前端/',
+      text: '微前端简介',
+      link: '/架构/微前端/',
     },
     {
-      title: '实现方式',
+      text: '实现方式',
       collapsable: true,
       children: [
         '/架构/微前端/实现方式/qiankun',
@@ -245,34 +243,34 @@ module.exports = {
       ],
     },
     {
-      title: '基础模块实现',
-      path: '/架构/微前端/基础模块实现.md',
+      text: '基础模块实现',
+      link: '/架构/微前端/基础模块实现.md',
     },
   ],
   '/服务端/Linux/': [
     {
-      title: 'Linux基础',
+      text: 'Linux基础',
       collapsable: true,
       children: ['/服务端/Linux/基础知识'],
     },
   ],
   '/数据库/SQL语言/': [
     {
-      title: '基础',
+      text: '基础',
       collapsable: true,
       children: ['/数据库/SQL语言/SQL基础'],
     },
   ],
   '/数据库/MongoDB/': [
     {
-      title: '基础',
+      text: '基础',
       collapsable: true,
       children: ['/数据库/MongoDB/基础知识'],
     },
   ],
   '/其他/Git/': [
     {
-      title: 'Git',
+      text: 'Git',
       collapsable: true,
       children: [
         '/其他/Git/git基础',
@@ -287,16 +285,16 @@ module.exports = {
   ],
   '/其他/工具/': [
     {
-      title: '工具相关',
+      text: '工具相关',
       collapsable: true,
       children: ['/其他/工具/VSCode插件', '/其他/工具/whistle'],
     },
   ],
   '/代码规范/': [
     {
-      title: 'React',
+      text: 'React',
       collapsable: true,
       children: ['/代码规范/BEM'],
     },
   ],
-};
+});

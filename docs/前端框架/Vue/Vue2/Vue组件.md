@@ -1,38 +1,82 @@
-# Vue 组件
+# Vue 组件 (Vue 2.x)
 
 ## 具有数据校验功能的表单组件
-
-组件目录
-
-``` md
-docs/.vuepress/components/formValidator
-  |--- formIndex.vue
-  |--- formItem.vue
-  |--- form.vue
-  |--- input.vue
-```
 
 `Form组件` 的核心功能是数据校验，一个 `Form` 中包含了多个 `FormItem`，当点击提交按钮时，**逐一对每个 `FormItem` 内的表单组件校验，而校验是由使用者发起，并通过 `Form` 来调用每一个 `FormItem` 的验证方法，再将校验结果汇总后，通过 `Form` 返回出去**。
 
 要在 `Form` 中逐一调用 `FormItem` 的验证方法，而 `Form` 和 `FormItem` 是独立的，**需要预先将 `FormItem` 的每个实例缓存在 `Form` 中**。当每个 `FormItem` 渲染时，将其自身（this）作为参数通过 dispatch 组件通信方法派发到 `Form` 组件中，然后通过一个数组缓存起来；同理当 `FormItem` 销毁时，将其从 `Form` 缓存的数组中移除。
 
-<formValidator-formIndex />
+``` md
+/docs/.vuepress/components/vue2/formValidator
+  |--- form.vue
+  |--- formIndex.vue
+  |--- formItem.vue
+  |--- input.vue
+```
+
+<!-- <vue2-formValidator-formIndex /> -->
+
+::: details formValidator/form.vue
+
+@[code vue](@docs/.vuepress/components/vue2/formValidator/form.vue)
+
+:::
+
+::: details formValidator/formIndex.vue
+
+@[code vue](@docs/.vuepress/components/vue2/formValidator/formIndex.vue)
+
+:::
+
+::: details formValidator/formItem.vue
+
+@[code vue](@docs/.vuepress/components/vue2/formValidator/formItem.vue)
+
+:::
+
+::: details formValidator/input.vue
+
+@[code vue](@docs/.vuepress/components/vue2/formValidator/input.vue)
+
+:::
 
 ## 全局提示组件
 
-组件目录
+显示一个信息提示组件的流程：`入口 alert.js` --> `info()` --- `add()` ---> `创建实例 notification.js` --- `add()` ---> `增加数据` --> `渲染alert.vue`
 
 ``` md
-docs/.vuepress/components/alert
-  |--- alertIndex.vue
+/docs/.vuepress/components/vue2/alert
   |--- alert.js
   |--- alert.vue
+  |--- alertIndex.vue
   |--- notification.js
 ```
 
-显示一个信息提示组件的流程：`入口 alert.js` --> `info()` --- `add()` ---> `创建实例 notification.js` --- `add()` ---> `增加数据` --> `渲染alert.vue`
+<!-- <vue2-alert-alertIndex /> -->
 
-<alert-alertIndex />
+::: details alert/alert.js
+
+@[code js](@docs/.vuepress/components/vue2/alert/alert.js)
+
+:::
+
+::: details alert/alert.vue
+
+@[code vue](@docs/.vuepress/components/vue2/alert/alert.vue)
+
+:::
+
+::: details alert/alertIndex.vue
+
+@[code vue](@docs/.vuepress/components/vue2/alert/alertIndex.vue)
+
+:::
+
+::: details alert/notification.js
+
+@[code js](@docs/.vuepress/components/vue2/alert/notification.js)
+
+:::
 
 注意：
 
@@ -44,16 +88,32 @@ docs/.vuepress/components/alert
 
 ## 可用 Render 自定义列的表格组件
 
-组件目录
-
 ``` md
-docs/.vuepress/components/renderTable
-  |--- renderTableIndex.vue
+/docs/.vuepress/components/vue2/renderTable
   |--- render.js
-  |--- table.vue
+  |--- renderTableIndex.vue
+  |--- tableRender.vue
 ```
 
-<renderTable-renderTableIndex />
+<!-- <vue2-renderTable-renderTableIndex /> -->
+
+::: details renderTable/render.js
+
+@[code js](@docs/.vuepress/components/vue2/renderTable/render.js)
+
+:::
+
+::: details renderTable/renderTableIndex.vue
+
+@[code vue](@docs/.vuepress/components/vue2/renderTable/renderTableIndex.vue)
+
+:::
+
+::: details renderTable/tableRender.vue
+
+@[code vue](@docs/.vuepress/components/vue2/renderTable/tableRender.vue)
+
+:::
 
 ## 可用 slot-scope 自定义列的表格组件
 
@@ -64,36 +124,96 @@ docs/.vuepress/components/renderTable
 + 方案一: `slot-scope` 实现，同时兼容 `Render` 函数的旧用法。适用于组件层级简单的表格。
 
   ``` md
-  docs/.vuepress/components/slotScopeTable
-  |--- slotScopeTableIndex1.vue
-  |--- render.js
-  |--- tableRender1.vue -- Table组件
+  docs/.vuepress/components/vue2/slotScopeTable
+    |--- render.js
+    |--- slotScopeTableIndex1.vue
+    |--- tableRender1.vue -- Table组件
   ```
 
-  <slotScopeTable-slotScopeTableIndex1 />
+  <!-- <vue2-slotScopeTable-slotScopeTableIndex1 /> -->
+
+  ::: details slotScopeTable/render.js
+
+  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/render.js)
+
+  :::
+
+  ::: details slotScopeTable/slotScopeTableIndex1.vue
+
+  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/slotScopeTableIndex1.vue)
+
+  :::
+
+  ::: details slotScopeTable/tableRender1.vue
+
+  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/tableRender1.vue)
+
+  :::
 
 + 方案二: 如果组件已经成型（某 API 基于 Render 函数），但一时间不方便支持 `slot-scope`，而使用者又想用，则可以使用此方案。一种 hack 方式，不推荐使用。
 
   ``` md
   docs/.vuepress/components/slotScopeTable
-  |--- slotScopeTableIndex2.vue
-  |--- render.js
-  |--- tableRender2.vue -- Table组件
+    |--- render.js
+    |--- slotScopeTableIndex2.vue
+    |--- tableRender2.vue -- Table组件
   ```
 
-  <slotScopeTable-slotScopeTableIndex2 />
+  <!-- <vue2-slotScopeTable-slotScopeTableIndex2 /> -->
+
+  ::: details slotScopeTable/render.js
+
+  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/render.js)
+
+  :::
+
+  ::: details slotScopeTable/slotScopeTableIndex2.vue
+
+  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/slotScopeTableIndex2.vue)
+
+  :::
+
+  ::: details slotScopeTable/tableRender2.vue
+
+  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/tableRender2.vue)
+
+  :::
 
 + 方案三: 将 `slot-scope` 集成在 `Table组件` 中，并使用 `provide` / `inject` 进行数据传递，用于组件层级复杂的表格。不会破坏原有的任何内容，但会额外支持 `slot-scope` 用法，关键是改动简单。
 
   ``` md
-  docs/.vuepress/components/slotScopeTable
-  |--- slotScopeTableIndex3.vue
-  |--- render.js
-  |--- slot.js
-  |--- tableRender3.vue -- Table组件
+  docs/.vuepress/components/vue2/slotScopeTable
+    |--- render.js
+    |--- slot.js
+    |--- slotScopeTableIndex3.vue
+    |--- tableRender3.vue -- Table组件
   ```
 
-  <slotScopeTable-slotScopeTableIndex3 />
+  <!-- <vue2-slotScopeTable-slotScopeTableIndex3 /> -->
+
+  ::: details slotScopeTable/render.js
+
+  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/render.js)
+
+  :::
+
+  ::: details slotScopeTable/slot.js
+
+  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/slot.js)
+
+  :::
+
+  ::: details slotScopeTable/slotScopeTableIndex2.vue
+
+  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/slotScopeTableIndex3.vue)
+
+  :::
+
+  ::: details slotScopeTable/tableRender3.vue
+
+  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/tableRender3.vue)
+
+  :::
 
 ## 树形控件（递归组件） — Tree
 
@@ -105,13 +225,37 @@ docs/.vuepress/components/renderTable
 这类组件一般都是**数据驱动型**的，父级有一个字段 children，然后递归。
 
 ``` md
-docs/.vuepress/components/tree
-|--- treeIndex.vue
-|--- tree.vue
-|--- node.vue
+/docs/.vuepress/components/vue2/tree
+  |--- node.vue
+  |--- tree.vue
+  |--- treeIndex.vue
 
-docs/.vuepress/components/utils
-|--- assist.js
+/docs/.vuepress/components/vue2/utils
+  |--- assist.js
 ```
 
-<tree-treeIndex />
+<!-- <vue2-tree-treeIndex /> -->
+
+::: details tree/node.vue
+
+@[code vue](@docs/.vuepress/components/vue2/tree/node.vue)
+
+:::
+
+::: details tree/tree.vue
+
+@[code vue](@docs/.vuepress/components/vue2/tree/tree.vue)
+
+:::
+
+::: details tree/treeIndex.vue
+
+@[code vue](@docs/.vuepress/components/vue2/tree/treeIndex.vue)
+
+:::
+
+::: details utils/assist.js
+
+@[code js](@docs/.vuepress/components/vue2/utils/assist.js)
+
+:::
