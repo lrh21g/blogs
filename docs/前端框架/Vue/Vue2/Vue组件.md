@@ -18,25 +18,25 @@
 
 ::: details formValidator/form.vue
 
-@[code vue](@docs/.vuepress/components/vue2/formValidator/form.vue)
+@[code vue](../files/Vue2Components/formValidator/form.vue)
 
 :::
 
 ::: details formValidator/formIndex.vue
 
-@[code vue](@docs/.vuepress/components/vue2/formValidator/formIndex.vue)
+@[code vue](../files/Vue2Components/formValidator/formIndex.vue)
 
 :::
 
 ::: details formValidator/formItem.vue
 
-@[code vue](@docs/.vuepress/components/vue2/formValidator/formItem.vue)
+@[code vue](../files/Vue2Components/formValidator/formItem.vue)
 
 :::
 
 ::: details formValidator/input.vue
 
-@[code vue](@docs/.vuepress/components/vue2/formValidator/input.vue)
+@[code vue](../files/Vue2Components/formValidator/input.vue)
 
 :::
 
@@ -56,25 +56,25 @@
 
 ::: details alert/alert.js
 
-@[code js](@docs/.vuepress/components/vue2/alert/alert.js)
+@[code js](../files/Vue2Components/alert/alert.js)
 
 :::
 
 ::: details alert/alert.vue
 
-@[code vue](@docs/.vuepress/components/vue2/alert/alert.vue)
+@[code vue](../files/Vue2Components/alert/alert.vue)
 
 :::
 
 ::: details alert/alertIndex.vue
 
-@[code vue](@docs/.vuepress/components/vue2/alert/alertIndex.vue)
+@[code vue](../files/Vue2Components/alert/alertIndex.vue)
 
 :::
 
 ::: details alert/notification.js
 
-@[code js](@docs/.vuepress/components/vue2/alert/notification.js)
+@[code js](../files/Vue2Components/alert/notification.js)
 
 :::
 
@@ -99,19 +99,19 @@
 
 ::: details renderTable/render.js
 
-@[code js](@docs/.vuepress/components/vue2/renderTable/render.js)
+@[code js](../files/Vue2Components/renderTable/render.js)
 
 :::
 
 ::: details renderTable/renderTableIndex.vue
 
-@[code vue](@docs/.vuepress/components/vue2/renderTable/renderTableIndex.vue)
+@[code vue](../files/Vue2Components/renderTable/renderTableIndex.vue)
 
 :::
 
 ::: details renderTable/tableRender.vue
 
-@[code vue](@docs/.vuepress/components/vue2/renderTable/tableRender.vue)
+@[code vue](../files/Vue2Components/renderTable/tableRender.vue)
 
 :::
 
@@ -134,19 +134,19 @@
 
   ::: details slotScopeTable/render.js
 
-  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/render.js)
+  @[code js](../files/Vue2Components/slotScopeTable/render.js)
 
   :::
 
   ::: details slotScopeTable/slotScopeTableIndex1.vue
 
-  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/slotScopeTableIndex1.vue)
+  @[code vue](../files/Vue2Components/slotScopeTable/slotScopeTableIndex1.vue)
 
   :::
 
   ::: details slotScopeTable/tableRender1.vue
 
-  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/tableRender1.vue)
+  @[code vue](../files/Vue2Components/slotScopeTable/tableRender1.vue)
 
   :::
 
@@ -163,19 +163,19 @@
 
   ::: details slotScopeTable/render.js
 
-  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/render.js)
+  @[code js](../files/Vue2Components/slotScopeTable/render.js)
 
   :::
 
   ::: details slotScopeTable/slotScopeTableIndex2.vue
 
-  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/slotScopeTableIndex2.vue)
+  @[code vue](../files/Vue2Components/slotScopeTable/slotScopeTableIndex2.vue)
 
   :::
 
   ::: details slotScopeTable/tableRender2.vue
 
-  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/tableRender2.vue)
+  @[code vue](../files/Vue2Components/slotScopeTable/tableRender2.vue)
 
   :::
 
@@ -193,25 +193,25 @@
 
   ::: details slotScopeTable/render.js
 
-  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/render.js)
+  @[code js](../files/Vue2Components/slotScopeTable/render.js)
 
   :::
 
   ::: details slotScopeTable/slot.js
 
-  @[code js](@docs/.vuepress/components/vue2/slotScopeTable/slot.js)
+  @[code js](../files/Vue2Components/slotScopeTable/slot.js)
 
   :::
 
   ::: details slotScopeTable/slotScopeTableIndex2.vue
 
-  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/slotScopeTableIndex3.vue)
+  @[code vue](../files/Vue2Components/slotScopeTable/slotScopeTableIndex3.vue)
 
   :::
 
   ::: details slotScopeTable/tableRender3.vue
 
-  @[code vue](@docs/.vuepress/components/vue2/slotScopeTable/tableRender3.vue)
+  @[code vue](../files/Vue2Components/slotScopeTable/tableRender3.vue)
 
   :::
 
@@ -238,24 +238,24 @@
 
 ::: details tree/node.vue
 
-@[code vue](@docs/.vuepress/components/vue2/tree/node.vue)
+@[code vue](../files/Vue2Components/tree/node.vue)
 
 :::
 
 ::: details tree/tree.vue
 
-@[code vue](@docs/.vuepress/components/vue2/tree/tree.vue)
+@[code vue](../files/Vue2Components/tree/tree.vue)
 
 :::
 
 ::: details tree/treeIndex.vue
 
-@[code vue](@docs/.vuepress/components/vue2/tree/treeIndex.vue)
+@[code vue](../files/Vue2Components/tree/treeIndex.vue)
 
 :::
 
 ::: details utils/assist.js
 
-@[code js](@docs/.vuepress/components/vue2/utils/assist.js)
+@[code js](../files/Vue2Components/utils/assist.js)
 
 :::
