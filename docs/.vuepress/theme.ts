@@ -73,6 +73,10 @@ export default hopeTheme({
 
     mdEnhance: {
       enableAll: true,
+      demo: {
+        codepen: false,
+        jsfiddle: false,
+      },
       presentation: {
         plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
       },
