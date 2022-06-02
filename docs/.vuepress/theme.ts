@@ -10,14 +10,14 @@ export default hopeTheme({
     url: 'https://lrh21g.github.io/blogs/',
   },
 
-  iconPrefix: 'iconfont icon-',
+  iconAssets: '//at.alicdn.com/t/font_2410206_a0xb9hku9iu.css',
 
   logo: '/hero.png',
 
   // 默认为 GitHub. 同时也可以是一个完整的 URL
   repo: 'https://github.com/lrh21g/blogs',
-  // 自定义仓库链接文字。默认从 `repo` 中自动推断为
-  // "GitHub" / "GitLab" / "Gitee" / "Bitbucket" 其中之一，或是 "Source"。
+  // 自定义仓库链接文字。
+  // 默认从 `repo` 中自动推断为 "GitHub" / "GitLab" / "Gitee" / "Bitbucket" 其中之一，或是 "Source"。
   repoLabel: 'GitHub',
   // 是否在导航栏内显示仓库链接，默认为 `true`
   repoDisplay: true,
@@ -27,7 +27,7 @@ export default hopeTheme({
   // 默认为 "Edit this page"
   editLinkText: '帮助我们改善此页面！',
 
-  docsDir: 'docs',
+  docsDir: 'demo/src',
 
   // navbar
   navbar: navbar,
@@ -71,16 +71,9 @@ export default hopeTheme({
       autoExcerpt: true, // 是否为每个页面生成摘录
     },
 
-    // 提供 Markdown 增强功能
     mdEnhance: {
       enableAll: true,
-      // include: true,
-      demo: {
-        codepen: false,
-        jsfiddle: false,
-      },
       presentation: {
-        // 启用的 Reveal.js 插件
         plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
       },
     },
@@ -96,8 +89,6 @@ export default hopeTheme({
       disableCopy: false, // 是否禁止复制
       disableSelection: false, // 是否禁止选中文字
     },
-
-    git: {},
 
     // 如果你不需要评论，可以直接删除 comment 配置，
     // 以下配置仅供体验，如果你需要评论，请自行配置并使用自己的环境，详见文档。
@@ -124,69 +115,5 @@ export default hopeTheme({
     //   // type: "waline",
     //   // serverURL: "https://vuepress-theme-hope-comment.vercel.app",
     // },
-
-    // 渐进式网络应用程序支持
-    pwa: {
-      favicon: '/favicon.ico', // 填入 favicon 地址，(绝对路径)
-      cachePic: true, // 是否缓存图片
-      // 针对苹果的特殊设置
-      apple: {
-        icon: '/assets/icon/apple-icon-152.png', // 苹果使用的图标地址，推荐 152×152 大小
-        statusBarColor: 'black', // 苹果的状态栏颜色
-      },
-      // 针对微软磁贴的特殊设置
-      msTile: {
-        image: '/assets/icon/ms-icon-144.png', // 磁贴图标
-        color: '#ffffff', // 磁贴颜色，缺省会自动回退到主题色
-      },
-      // 填充一个将被解析为 manifest.webmanifest 的对象。
-      manifest: {
-        icons: [
-          {
-            src: '/assets/icon/chrome-mask-512.png',
-            sizes: '512x512',
-            purpose: 'maskable',
-            type: 'image/png',
-          },
-          {
-            src: '/assets/icon/chrome-mask-192.png',
-            sizes: '192x192',
-            purpose: 'maskable',
-            type: 'image/png',
-          },
-          {
-            src: '/assets/icon/chrome-512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: '/assets/icon/chrome-192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-        ],
-        shortcuts: [
-          {
-            name: 'Guide',
-            short_name: 'Guide',
-            url: '/guide/',
-            icons: [
-              {
-                src: '/assets/icon/guide-maskable.png',
-                sizes: '192x192',
-                purpose: 'maskable',
-                type: 'image/png',
-              },
-              {
-                src: '/assets/icon/guide-monochrome.png',
-                sizes: '192x192',
-                purpose: 'monochrome',
-                type: 'image/png',
-              },
-            ],
-          },
-        ],
-      },
-    },
   },
 });

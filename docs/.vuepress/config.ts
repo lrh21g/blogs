@@ -9,20 +9,11 @@ export default defineUserConfig({
   title: 'Mr.LRH 博客',
   description: '学习笔记，使用 VuePress + vuepress-theme-hope 搭建。',
 
-  base: '/',
+  base: '/blogs/',
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        href: '//at.alicdn.com/t/font_2410206_mfj6e1vbwo.css',
-      },
-    ],
   ],
-
-  theme,
 
   markdown: {
     importCode: {
@@ -36,4 +27,6 @@ export default defineUserConfig({
       componentsDir: path.resolve(__dirname, './components'),
     }),
   ],
+
+  theme,
 });
