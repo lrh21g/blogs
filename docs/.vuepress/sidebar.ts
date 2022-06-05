@@ -292,7 +292,7 @@ export default sidebar({
   ],
   '/代码规范/': [
     {
-      text: 'React',
+      text: '代码规范',
       collapsable: true,
       children: ['/代码规范/BEM'],
     },
