@@ -12,7 +12,7 @@ export default defineUserConfig({
   base: '/blogs/',
 
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
+    ['link', { rel: 'icon', href: '/blogs/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
   ],
 
   markdown: {
