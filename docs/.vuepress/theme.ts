@@ -1,6 +1,8 @@
-import { hopeTheme } from 'vuepress-theme-hope';
-import navbar from './navbar';
-import sidebar from './sidebar';
+import { hopeTheme } from 'vuepress-theme-hope'
+import navbar from './navbar'
+import sidebar from './sidebar'
+
+const { path } = require('@vuepress/utils')
 
 export default hopeTheme({
   hostname: 'https://vuepress-theme-hope-v2-demo.mrhope.site',
@@ -10,7 +12,8 @@ export default hopeTheme({
     url: 'https://lrh21g.github.io/blogs/',
   },
 
-  iconAssets: '//at.alicdn.com/t/font_2410206_a0xb9hku9iu.css',
+  // iconAssets: '//at.alicdn.com/t/font_2410206_a0xb9hku9iu.css',
+  iconAssets: 'iconfont',
 
   logo: '/hero.png',
 
@@ -27,7 +30,7 @@ export default hopeTheme({
   // 默认为 "Edit this page"
   // editLinkText: '帮助我们改善此页面！',
 
-  docsDir: 'demo/src',
+  docsDir: 'blogs/docs', // 文档在仓库中的目录
 
   // navbar
   navbar: navbar,
@@ -58,7 +61,15 @@ export default hopeTheme({
     medias: {}, // 博主的媒体链接配置
     roundAvatar: true, // 是否剪裁头像为圆形形状
     sidebarDisplay: 'mobile', // 是否在侧边栏展示博主信息： mobile - 在移动视图中显示在侧边栏中, always - 总是展示在侧边栏中, none - 永远不在侧边栏展示
-    articleInfo: ['Author', 'Original', 'Date', 'PageView', 'Category', 'Tag', 'ReadingTime'],
+    articleInfo: [
+      'Author',
+      'Original',
+      'Date',
+      'PageView',
+      'Category',
+      'Tag',
+      'ReadingTime',
+    ],
   },
 
   // 加密配置
@@ -72,14 +83,53 @@ export default hopeTheme({
     },
 
     mdEnhance: {
-      enableAll: true,
+      // enableAll: true, // 启用 md-enhance 插件的所有功能，启用不需要的功能将增加开发和构建时间
+      tabs: true, // Markdown 文件 - 添加选项卡支持
+      tex: true, // Markdown 文件 - 支持 TeX 语法
+      sub: true, // Markdown 文件 - 启用下角标功能
+      sup: true, // Markdown 文件 - 启用上角标
+      // playground: true, // Markdown 文件 - 支持代码交互 2.0.0-beta.92 已移除
+      // playground: {
+      //   mode: 'external', // 使用外置模式
+      //   external: {
+      //     base: 'https://sfc.vuejs.org/', // 使用 vue sfc playground.
+      //     defaultImportsMap: 'import-map.json',
+      //   },
+      //   internal: {
+      //     defaultImportsMap: 'import-map.json',
+      //     showCode: false, // 不显示代码
+      //     showCompileOutput: false, // 不显示 js, css, ssr 面板
+      //     showImportMap: true, // 显示 import map
+      //     clearConsole: false, // 不清空控制台
+      //   },
+      // },
+      codetabs: true, // Markdown 文件 - 支持代码块分组
       demo: {
         codepen: false,
         jsfiddle: false,
       },
-      presentation: {
-        plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
-      },
+      tasklist: true, // Markdown 文件 - 支持任务列表
+      imageMark: true, // Markdown 文件 - 启用图片标记
+      imageSize: true, // Markdown 文件 - 启用图片大小
+      // Markdown 文件 - 支持导入其他文件
+      // include: {
+      //   getPath: file => {
+      //     if (file.startsWith('@docs'))
+      //       return file.replace('@docs', path.resolve(__dirname, '../'))
+      //     return file
+      //   },
+      // },
+      attrs: true, // Markdown 元素添加属性
+      mark: true, // Markdown 文件 - 支持标记
+      stylize: [], // Markdown 文件 - 创建行内 snippet，对内联标记进行样式化，包括更改标签、添加属性和修改内容
+      flowchart: true, //  Markdown 文件 - 支持流程图
+      footnote: true, //  Markdown 文件 - 支持脚注
+      container: true, // Markdown 文件 - 添加提示、注释、信息、注意、警告和详情自定义容器的支持
+      align: true, // Markdown 文件 - 对段落对齐进行自定义,
+      // Markdown 文件 - 支持幻灯片
+      // presentation: {
+      //   plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
+      // },
     },
 
     // 处理你的 VuePress 站点中的复制操作
@@ -120,4 +170,4 @@ export default hopeTheme({
     //   // serverURL: "https://vuepress-theme-hope-comment.vercel.app",
     // },
   },
-});
+})

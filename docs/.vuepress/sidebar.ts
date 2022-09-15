@@ -1,4 +1,4 @@
-import { sidebar } from 'vuepress-theme-hope';
+import { sidebar } from 'vuepress-theme-hope'
 
 export default sidebar({
   '/前端/HTML+CSS/': [
@@ -32,7 +32,10 @@ export default sidebar({
     {
       text: 'CSS相关',
       collapsable: true,
-      children: ['/前端/HTML+CSS/CSS相关/CSS常用封装', '/前端/HTML+CSS/CSS相关/CSS实现长宽比'],
+      children: [
+        '/前端/HTML+CSS/CSS相关/CSS常用封装',
+        '/前端/HTML+CSS/CSS相关/CSS实现长宽比',
+      ],
     },
     {
       text: 'Canvas基础',
@@ -106,7 +109,10 @@ export default sidebar({
     {
       text: '实用技巧',
       collapsable: true,
-      children: ['/前端/JavaScript/JavaScript常用封装', '/前端/JavaScript/手写系列'],
+      children: [
+        '/前端/JavaScript/JavaScript常用封装',
+        '/前端/JavaScript/手写系列',
+      ],
     },
     {
       text: '混合开发',
@@ -133,12 +139,18 @@ export default sidebar({
     {
       text: 'TypeScript 项目配置',
       collapsable: true,
-      children: ['/前端/TypeScript/TypeScript声明文件', '/前端/TypeScript/tsconfig配置'],
+      children: [
+        '/前端/TypeScript/TypeScript声明文件',
+        '/前端/TypeScript/tsconfig配置',
+      ],
     },
     {
       text: 'TypeScript 实战',
       collapsable: true,
-      children: ['/前端/TypeScript/TypeScript实现Promise', '/前端/TypeScript/TypeScript实现Vuex'],
+      children: [
+        '/前端/TypeScript/TypeScript实现Promise',
+        '/前端/TypeScript/TypeScript实现Vuex',
+      ],
     },
   ],
   '/前端/Node/': [
@@ -161,7 +173,6 @@ export default sidebar({
       collapsable: true,
       children: [
         '/前端框架/Vue/Vue2/Vue2基础',
-        '/前端框架/Vue/Vue2/Vue生命周期',
         '/前端框架/Vue/Vue2/Vue组件通信方式',
         '/前端框架/Vue/Vue2/Vue组件',
         '/前端框架/Vue/Vue2/Vue实用技巧',
@@ -186,7 +197,10 @@ export default sidebar({
     {
       text: 'Vue2解析',
       collapsable: true,
-      children: ['/前端框架/Vue/Vue2解析/目录结构', '/前端框架/Vue/Vue2解析/项目构建'],
+      children: [
+        '/前端框架/Vue/Vue2解析/目录结构',
+        '/前端框架/Vue/Vue2解析/项目构建',
+      ],
     },
   ],
   '/前端框架/React/': [
@@ -219,7 +233,10 @@ export default sidebar({
     {
       text: 'Webpack实战',
       collapsable: true,
-      children: ['/前端框架/Webpack/Webpack实战/编写loader', '/前端框架/Webpack/Webpack实战/编写plugin'],
+      children: [
+        '/前端框架/Webpack/Webpack实战/编写loader',
+        '/前端框架/Webpack/Webpack实战/编写plugin',
+      ],
     },
     {
       text: 'Webpack原理',
@@ -297,4 +314,4 @@ export default sidebar({
       children: ['/代码规范/BEM'],
     },
   ],
-});
+})

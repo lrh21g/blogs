@@ -1,8 +1,10 @@
-import { defineUserConfig } from 'vuepress';
-import theme from './theme';
+import { defineUserConfig } from 'vuepress'
+import theme from './theme'
 
-const { path } = require('@vuepress/utils');
-const { registerComponentsPlugin } = require('@vuepress/plugin-register-components');
+const { path } = require('@vuepress/utils')
+const {
+  registerComponentsPlugin,
+} = require('@vuepress/plugin-register-components')
 
 export default defineUserConfig({
   lang: 'zh-CN',
@@ -17,7 +19,8 @@ export default defineUserConfig({
 
   markdown: {
     importCode: {
-      handleImportPath: (str) => str.replace(/^@docs/, path.resolve(__dirname, '..')),
+      handleImportPath: str =>
+        str.replace(/^@docs/, path.resolve(__dirname, '..')),
     },
   },
 
@@ -29,4 +32,4 @@ export default defineUserConfig({
   ],
 
   theme,
-});
+})
