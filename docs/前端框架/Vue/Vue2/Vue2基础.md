@@ -2,7 +2,7 @@
 
 ## MVC 与 MVVM
 
-![MVVM](../files/images/MVVM%26MVC.drawio.png)
+![MVVM](../files/images/MVVM&MVC.drawio.png)
 
 ### MVC 的组成
 
