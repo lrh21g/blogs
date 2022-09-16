@@ -1,102 +1,34 @@
-# Vue 原理
+# Vue 2.x 实现原理
 
 ## 全局概览
 
 ![vue_render](../files/images/vue2_render.drawio.png)
 
-Vue.js 基于 [`Object.defineProperty`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 实现**响应式系统**。
+Vue 2.x 基于 [`Object.defineProperty`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty) 实现**响应式系统**。
 
 ## Object.defineProperty
 
-### API简介
+`Object.defineProperty(obj, prop, descriptor)` 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
 
-`Object.defineProperty()` 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
-
-`Object.defineProperty(obj, prop, descriptor)`
-
-+ 参数
++ **参数**
   + `obj` : 要定义属性的对象。
   + `prop` : 需要操作的目标对象的属性名。
   + `descriptor` : 要定义或修改的属性描述符。
-    + enumerable: 属性是否可枚举，默认 false 。
-    + configurable: 属性是否可以被修改或者删除，默认 false 。
-    + writable: 当且仅当该属性为 true 时，属性的值，才能被赋值运算符改变。属性值假如是数组时，将不受 push, splice 等方法的影响。默认为 false。
-    + value: 该属性对应的值。
-    + get: 属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数，默认为 undefined。
-    + set: 属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数，默认为 undefined。
-+ 返回值：被传递给函数的对象。
-
-### 缺点
-
-+ 深度监听，需要递归到底，一次性计算量大
-+ 对于对象，无法检测到属性的添加或移除。
-+ 对于数组，无法检测到利用索引直接设置一个数组项和修改数组的长度。
-
-## Vue.set
-
-### API简介
-
-`Vue.set( target, propertyName/index, value )` : 向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新 property，因为 Vue 无法探测普通的新增 property (比如 `this.myObject.newProperty = 'hi'`)
-
-+ Vue 在初始化实例时，对属性执行 `getter/setter` 转化，属性必须在 `data` 对象上存在才能让 Vue 将它转换为响应式。
-+ 解决方法：
-  + 单个属性：`Vue.set()`(或者`vm.$set`) / `Vue.delete()`
-  + 多个属性：使用原对象与要混合进去的对象的属性一起创建一个新的对象。
-
-``` javascript
-var vm = new Vue({
-  data: {
-    items: ['a', 'b', 'c']
-  }
-})
-// Vue.set / vm.$set
-Vue.set(vm.items, indexOfItem, newValue)
-vm.$set(vm.items, indexOfItem, newValue)
-// Array.prototype.splice
-vm.items.splice(indexOfItem, 1, newValue)
-```
-
-### 实现原理
-
-``` typescript
-export function set(target: Array<any> | Object, key: any, val: any): any {
-  if (process.env.NODE_ENV !== 'production' && (isUndef(target) || isPrimitive(target))) {
-    warn(`Cannot set reactive property on undefined, null, or primitive value: ${(target: any)}`);
-  }
-  // 判断目标值是否为数组，并且key值是否为有效的数组索引
-  if (Array.isArray(target) && isValidArrayIndex(key)) {
-    // 对比数组的key值和数组长度，取较大值设置为数组的长度
-    target.length = Math.max(target.length, key); // 替换目标值
-    target.splice(key, 1, val);
-    return val;
-  } // 如果目标值是对象，并且key值是目标值存在的有效key值，并且不是原型上的key值
-  if (key in target && !(key in Object.prototype)) {
-    // 直接更改目标值
-    target[key] = val;
-    return val;
-  }
-  const ob = (target: any).__ob__; // 判断目标值是否为响应式的
-  if (target._isVue || (ob && ob.vmCount)) {
-    // 如果是vue根实例，就警告
-    process.env.NODE_ENV !== 'production' &&
-      warn(
-        'Avoid adding reactive properties to a Vue instance or its root $data ' +
-          'at runtime - declare it upfront in the data option.'
-      );
-    return val;
-  }
-  if (!ob) {
-    // 如果目标值不是响应式的，那么值需要给对应的key赋值
-    target[key] = val;
-    return val;
-  } // 其他情况，目标值是响应式的，就通过Object.defineProperty进行数据监听
-  defineReactive(ob.value, key, val); // 通知更新dom操作
-  ob.dep.notify();
-  return val;
-}
-```
+    + `enumerable` : 属性是否可枚举，默认 false 。
+    + `configurable` : 属性是否可以被修改或者删除，默认 false 。
+    + `writable` : 当且仅当该属性为 true 时，属性的值，才能被赋值运算符改变。属性值假如是数组时，将不受 push, splice 等方法的影响。默认为 false。
+    + `value` : 该属性对应的值。
+    + `get` : 属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数，默认为 undefined。
+    + `set` : 属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数，默认为 undefined。
++ **返回值** ：被传递给函数的对象。
++ **API 存在的缺陷**
+  + 深度监听，需要递归到底，一次性计算量大
+  + 对于对象，无法检测到属性的添加或移除。
+  + 对于数组，无法检测到利用索引直接设置一个数组项和修改数组的长度。
 
 ## 响应式简单实现
+
+::: details 基于 Object.defineProperty 响应式简单实现
 
 ``` javascript
 /* 订阅者 Dep：用来存放 Watcher 观察者对象 */
@@ -188,11 +120,17 @@ o._data.test = "hello,test.";
 Dep.target = null;
 ```
 
+:::
+
 ## Virtual DOM
 
-Virtual DOM 其实是一棵以 JavaScript 对象（VNode 节点）作为基础的树，用对象属性来描述节点，实际上它只是一层对真实 DOM 的抽象。最终可以通过一系列操作使这棵树映射到真实环境上。由于 Virtual DOM 是以 JavaScript 对象为基础而不依赖真实平台环境，所以使它具有了跨平台的能力，比如说浏览器平台、Weex、Node 等。
+Virtual DOM 其实是一棵以 JavaScript 对象（VNode 节点）作为基础的树，用对象属性来描述节点，实际上它只是一层对真实 DOM 的抽象。最终可以通过一系列操作使这棵树映射到真实环境上。
 
-``` html
+由于 Virtual DOM 是以 JavaScript 对象为基础而不依赖真实平台环境，所以使它具有了跨平台的能力，比如说浏览器平台、Weex、Node 等。
+
+::: details Virtual DOM
+
+``` vue
 <template>
   <span class="demo" v-show="isShow">
     This is a span.
@@ -239,39 +177,37 @@ function render () {
 }
 
 // 转化文 VNode
-{
-  tag: 'span',
-  data: {
-    /* 指令集合数组 */
-    directives: [
-      {
-        /* v-show指令 */
-        rawName: 'v-show',
-        expression: 'isShow',
-        name: 'show',
-        value: true
-      }
-    ],
-    /* 静态class */
-    staticClass: 'demo'
-  },
-  text: undefined,
-  children: [
-    /* 子节点是一个文本VNode节点 */
-    {
-      tag: undefined,
-      data: undefined,
-      text: 'This is a span.',
-      children: undefined
-    }
-  ]
-}
+// {
+//   tag: 'span',
+//   data: {
+//     /* 指令集合数组 */
+//     directives: [
+//       {
+//         /* v-show指令 */
+//         rawName: 'v-show',
+//         expression: 'isShow',
+//         name: 'show',
+//         value: true
+//       }
+//     ],
+//     /* 静态class */
+//     staticClass: 'demo'
+//   },
+//   text: undefined,
+//   children: [
+//     /* 子节点是一个文本VNode节点 */
+//     {
+//       tag: undefined,
+//       data: undefined,
+//       text: 'This is a span.',
+//       children: undefined
+//     }
+//   ]
+// }
 </script>
 ```
 
-## 数据状态更新
-
-### 跨平台
+:::
 
 因为使用 Virtual DOM 的原因，Vue.js 具有了跨平台的能力，Virtual DOM 终归是 JavaScript 对象。调用不同平台的 API,需要依赖适配层，将不同的 API 封装在内，以同样的接口对外提供。
 
@@ -300,6 +236,22 @@ const nodeOps = {
   }
 }
 ```
+
+## Compile 编译 template 模板
+
+`compile` 编译可以分成 `parse`、`optimize` 与 `generate` 三个阶段，最终需要得到 `render` function。
+
++ `parse` : 用正则表达式解析 template 模板中的指令、class、style 等数据形成 AST
++ `optimize` : 标记 static 静态节点。当 update 更新界面时，会有一个 patch 的过程，diff 算法会直接跳过静态节点，从而减少比较过程，优化 patch 的性能
++ `generate` : AST 转换为 render function 字符串的过程，得到结构是 render 的字符串以及 staticRenderFns 字符串
+
+::: details Compile 编译 template 模板 Demo
+
+@[code js](../files/Vue2/Compile编译template模板.js)
+
+:::
+
+## diff 算法
 
 ### diff 算法以及patch 机制
 
@@ -363,7 +315,7 @@ diff 算法特点：
   ```
 
 + `removeVnodes`: 会批量调用 `removeNode` 移除节点。
-  
+
   ``` javascript
   function removeVnodes (parentElm, vnodes, startIdx, endIdx) {
     for (; startIdx <= endIdx; ++startIdx) {
@@ -376,7 +328,7 @@ diff 算法特点：
   ```
 
 + `sameVnode`: 判断两个 VNode 是否属于相同的节点。只需要判断 `key`、 `tag`、 `isComment`（是否为注释节点）、 `data`同时定义（或不定义），同时满足当标签类型为 `input` 的时候 `type` 相同（某些浏览器不支持动态修改`<input>`类型，所以他们被视为不同类型）即可
-  
+
   ``` javascript
   function sameVnode () {
     return (
@@ -435,6 +387,8 @@ function patch (oldVnode, vnode, parentElm) {
 
 `patchVnode` 函数只有在符合 `sameVnode` 的条件下触发进行比对。用于比较新旧 VNode 节点，根据不同的状态对 DOM 做合理的更新操作（添加、移动、删除）。
 
+::: details patchVnode 函数实现
+
 ``` javascript
 function patchVnode (oldVnode, vnode) {
   // 新老 VNode 节点相同，不做任何改变，直接 return
@@ -481,15 +435,18 @@ function patchVnode (oldVnode, vnode) {
 }
 ```
 
+:::
+
 ### updateChildren 函数
 
 更新子节点
 
 ![vue_updateChildren](../files/images/vue_updateChildren.png)
 
+::: details updateChildren 函数实现
+
 ``` javascript
 function updateChildren(parentElm, oldCh, newCh) {
-  
   let oldStartIdx = 0; // 老VNode的开始索引
   let newStartIdx = 0; // 新VNode的开始索引
   let oldEndIdx = oldCh.length - 1; // 老VNode的结尾索引
@@ -502,7 +459,7 @@ function updateChildren(parentElm, oldCh, newCh) {
 
   // while 循环中，oldStartIdx、newStartIdx、oldEndIdx 以及 newEndIdx 会逐渐向中间靠拢
   while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-  
+
     // 当 oldStartVnode 或者 oldEndVnode 不存在的时候
     // oldStartIdx 与 oldEndIdx 继续向中间靠拢，并更新对应的 oldStartVnode 与 oldEndVnode 的指向
     if (!oldStartVnode) {
@@ -510,9 +467,9 @@ function updateChildren(parentElm, oldCh, newCh) {
     } else if (!oldEndVnode) {
       oldEndVnode = oldCh[--oldEndIdx];
     }
-  
+
     // 将 oldStartIdx、newStartIdx、oldEndIdx 以及 newEndIdx 两两比对的过程
-  
+
     // 当新老 VNode 节点的头部符合 sameVnode
     // 直接进行 patchVnode（比较新老 VNode 节点）操作
     else if (sameVnode(oldStartVnode, newStartVnode)) {
@@ -520,7 +477,7 @@ function updateChildren(parentElm, oldCh, newCh) {
       oldStartVnode = oldCh[++oldStartIdx];
       newStartVnode = newCh[++newStartIdx];
     }
-  
+
     // 当新老 VNode 节点的结尾符合 sameVnode
     // 直接进行 patchVnode（比较新老 VNode 节点）操作
     // 并将 oldEndVnode 与 newEndVnode 向前移动一位
@@ -529,7 +486,7 @@ function updateChildren(parentElm, oldCh, newCh) {
       oldEndVnode = oldCh[--oldEndIdx];
       newEndVnode = newCh[--newEndIdx];
     }
-  
+
     // 当老 VNode 节点的头部与新 VNode 节点的尾部符合 sameVnode
     // 将 oldStartVnode.elm 直接移动到 oldEndVnode.elm 后面
     // 然后将 oldStartIdx 向后移动一位，newEndIdx 向前移动一位
@@ -543,7 +500,7 @@ function updateChildren(parentElm, oldCh, newCh) {
       oldStartVnode = oldCh[++oldStartIdx];
       newEndVnode = newCh[--newEndIdx];
     }
-  
+
     // 当老 VNode 节点的尾部与新 VNode 节点的头部符合 sameVnode
     // 将 oldEndVnode.elm 插入到 oldStartVnode.elm 前面。
     // 然后将 oldEndIdx 向前移动一位，newStartIdx 向后移动一位。
@@ -553,7 +510,7 @@ function updateChildren(parentElm, oldCh, newCh) {
       oldEndVnode = oldCh[--oldEndIdx];
       newStartVnode = newCh[++newStartIdx];
     }
-  
+
     // 不符合以上情况的处理方式
     else {
       let elmToMove = oldCh[idxInOld];
@@ -564,18 +521,18 @@ function updateChildren(parentElm, oldCh, newCh) {
         oldKeyToIdx = createKeyToOldIdx(oldCh, oldStartIdx, oldEndIdx);
       // 根据某一个 key 值，快速地从 oldKeyToIdx 中获取相同 key 的节点的索引 idxInOld,然后找到相同的节点
       idxInOld = newStartVnode.key ? oldKeyToIdx[newStartVnode.key] : null;
-  
+
       // 如果没有找到相同的节点
       // 则通过 createElm 创建一个新节点，并将 newStartIdx 向后移动一位
       if (!idxInOld) {
         createElm(newStartVnode, parentElm);
         newStartVnode = newCh[++newStartIdx];
       }
-  
+
       // 找到了相同的节点
       else {
         elmToMove = oldCh[idxInOld];
-  
+
         // 如果符合 sameVnode
         // 将这两个节点进行 patchVnode（比较新老 VNode 节点）操作
         // 将该位置的老节点赋值 undefined（之后如果还有新节点与该节点key相同可以检测出来提示已有重复的 key）
@@ -587,7 +544,7 @@ function updateChildren(parentElm, oldCh, newCh) {
           nodeOps.insertBefore(parentElm, newStartVnode.elm, oldStartVnode.elm);
           newStartVnode = newCh[++newStartIdx];
         }
-  
+
         // 如果不符合 sameVnode
         // 创建一个新节点插入到 parentElm 的子节点中
         // newStartIdx 往后移动一位
@@ -606,7 +563,7 @@ function updateChildren(parentElm, oldCh, newCh) {
     refElm = newCh[newEndIdx + 1] ? newCh[newEndIdx + 1].elm : null;
     addVnodes(parentElm, refElm, newCh, newStartIdx, newEndIdx);
   }
-  
+
   // newStartIdx > newEndIdx
   // 说明新节点比对完了，老节点还有多，将这些无用的老节点通过 removeVnodes 批量删除即可
   else if (newStartIdx > newEndIdx) {
@@ -625,6 +582,8 @@ function createKeyToOldIdx (children, beginIdx, endIdx) {
 }
 ```
 
+:::
+
 ## 批量异步更新策略
 
 Vue 在更新 DOM 时是**异步**执行的。
@@ -632,3 +591,97 @@ Vue 在更新 DOM 时是**异步**执行的。
 只要侦听到数据变化，Vue 将开启一个队列，并缓冲在同一事件循环中发生的所有数据变更。如果同一个 watcher 被多次触发，只会被推入到队列中一次。可以避免不必要的计算和 DOM 操作。然后，在下一个的事件循环【**tick**】中，Vue 刷新队列并执行实际 (已去重的) 工作。Vue 在内部对异步队列尝试使用原生的 `Promise.then`、`MutationObserver` 和 `setImmediate`，如果执行环境不支持，则会采用 `setTimeout(fn, 0)` 代替。
 
 为了在数据变化之后等待 Vue 完成更新 DOM，可以在数据变化之后立即使用 `Vue.nextTick(callback)`。这样回调函数将在 DOM 更新完成后被调用。
+
+## Vue.set
+
+### API简介
+
+`Vue.set( target, propertyName/index, value )` : 向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新 property，因为 Vue 无法探测普通的新增 property (比如 `this.myObject.newProperty = 'hi'`)
+
++ Vue 在初始化实例时，对属性执行 `getter/setter` 转化，属性必须在 `data` 对象上存在才能让 Vue 将它转换为响应式。
++ 解决方法：
+  + 单个属性：`Vue.set()`(或者`vm.$set`) / `Vue.delete()`
+  + 多个属性：使用原对象与要混合进去的对象的属性一起创建一个新的对象。
+
+``` javascript
+var vm = new Vue({
+  data: {
+    items: ['a', 'b', 'c']
+  }
+})
+// Vue.set / vm.$set
+Vue.set(vm.items, indexOfItem, newValue)
+vm.$set(vm.items, indexOfItem, newValue)
+// Array.prototype.splice
+vm.items.splice(indexOfItem, 1, newValue)
+```
+
+### 实现源码
+
+::: details Vue.set 实现源码
+
+``` typescript
+export function set<T>(array: T[], key: number, value: T): T
+export function set<T>(object: object, key: string | number, value: T): T
+export function set(
+  target: any[] | Record<string, any>,
+  key: any,
+  val: any
+): any {
+  if (__DEV__ && (isUndef(target) || isPrimitive(target))) {
+    warn(
+      `Cannot set reactive property on undefined, null, or primitive value: ${target}`
+    )
+  }
+  if (isReadonly(target)) {
+    __DEV__ && warn(`Set operation on key "${key}" failed: target is readonly.`)
+    return
+  }
+  const ob = (target as any).__ob__
+  // 判断目标值是否为【数组】，并且 key值 是否为有效的数组索引
+  if (isArray(target) && isValidArrayIndex(key)) {
+    // 对比数组的 key 值和数组长度，取较大值设置为数组的长度
+    target.length = Math.max(target.length, key)
+    target.splice(key, 1, val)
+    // when mocking for SSR, array methods are not hijacked
+    if (ob && !ob.shallow && ob.mock) {
+      observe(val, false, true)
+    }
+    return val
+  }
+  // 判断目标值是否为【对象】， key值 是目标值存在的有效key值，并且不是原型上的key值
+  if (key in target && !(key in Object.prototype)) {
+    target[key] = val
+    return val
+  }
+  if ((target as any)._isVue || (ob && ob.vmCount)) {
+    __DEV__ &&
+      warn(
+        'Avoid adding reactive properties to a Vue instance or its root $data ' +
+          'at runtime - declare it upfront in the data option.'
+      )
+    return val
+  }
+  // 如果目标值不是响应式的，那么直接给对应的 key 赋值
+  if (!ob) {
+    target[key] = val
+    return val
+  }
+  // 其他情况，目标值是响应式的，则通过 Object.defineProperty 进行数据监听
+  defineReactive(ob.value, key, val, undefined, ob.shallow, ob.mock)
+  if (__DEV__) {
+    ob.dep.notify({
+      type: TriggerOpTypes.ADD,
+      target: target,
+      key,
+      newValue: val,
+      oldValue: undefined
+    })
+  } else {
+    ob.dep.notify() // 通知更新
+  }
+  return val
+}
+```
+
+:::
