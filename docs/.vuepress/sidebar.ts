@@ -173,10 +173,10 @@ export default sidebar({
       collapsable: true,
       children: [
         '/前端框架/Vue/Vue2/Vue2基础',
-        '/前端框架/Vue/Vue2/Vue组件通信方式',
-        '/前端框架/Vue/Vue2/Vue组件',
-        '/前端框架/Vue/Vue2/Vue实用技巧',
-        '/前端框架/Vue/Vue2/Vue原理',
+        '/前端框架/Vue/Vue2/Vue2组件通信方式',
+        '/前端框架/Vue/Vue2/Vue2相关组件实现',
+        '/前端框架/Vue/Vue2/Vue2实用技巧',
+        '/前端框架/Vue/Vue2/Vue2实现原理',
       ],
     },
     {
@@ -193,14 +193,6 @@ export default sidebar({
       text: 'VueRouter',
       collapsable: true,
       children: ['/前端框架/Vue/VueRouter/VueRouter基础'],
-    },
-    {
-      text: 'Vue2解析',
-      collapsable: true,
-      children: [
-        '/前端框架/Vue/Vue2解析/目录结构',
-        '/前端框架/Vue/Vue2解析/项目构建',
-      ],
     },
   ],
   '/前端框架/React/': [
