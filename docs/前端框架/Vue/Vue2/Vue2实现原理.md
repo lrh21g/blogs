@@ -839,3 +839,83 @@ export function set(
 ```
 
 :::
+
+## 监听数组的变化
+
+Vue.js 内部通过重写 `push` 、 `pop` 、 `shift` 、 `unshift` 、 `splice` 、 `sort` 、 `reverse` 函数的方式进行派发更新。
+
+::: details 监听数组变化
+
+``` javascript
+/*
+ * not type checking this file because flow doesn't play well with
+ * dynamically accessing methods on Array prototype
+ */
+
+import { TriggerOpTypes } from '../../v3'
+
+import { def } from '../util/index'
+// export function def(obj: Object, key: string, val: any, enumerable?: boolean) {
+//   Object.defineProperty(obj, key, {
+//     value: val,
+//     enumerable: !!enumerable,
+//     writable: true,
+//     configurable: true
+//   })
+// }
+
+const arrayProto = Array.prototype // 获取数组原型
+export const arrayMethods = Object.create(arrayProto)
+
+// 重写以下函数
+const methodsToPatch = [
+  'push',
+  'pop',
+  'shift',
+  'unshift',
+  'splice',
+  'sort',
+  'reverse'
+]
+
+/**
+ * Intercept mutating methods and emit events
+ */
+methodsToPatch.forEach(function (method) {
+  // cache original method - 缓存原生函数
+  const original = arrayProto[method]
+  // 重写函数
+  def(arrayMethods, method, function mutator(...args) {
+    // 调用原生函数获取结果
+    const result = original.apply(this, args)
+    const ob = this.__ob__
+    let inserted
+    // 调用以下函数时，监听新数据
+    switch (method) {
+      case 'push':
+      case 'unshift':
+        inserted = args
+        break
+      case 'splice':
+        inserted = args.slice(2)
+        break
+    }
+    if (inserted) ob.observeArray(inserted)
+    // notify change
+    if (__DEV__) {
+      ob.dep.notify({
+        type: TriggerOpTypes.ARRAY_MUTATION,
+        target: this,
+        key: method
+      })
+    } else {
+      // 手动派生更新
+      ob.dep.notify()
+    }
+    return result
+  })
+})
+
+```
+
+:::
