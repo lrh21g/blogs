@@ -180,6 +180,11 @@ export default sidebar({
       ],
     },
     {
+      text: 'Vue2源码解析',
+      collapsable: true,
+      children: ['/前端框架/Vue/Vue2源码解析/数据驱动'],
+    },
+    {
       text: 'Vue3',
       collapsable: true,
       children: ['/前端框架/Vue/Vue3/Vue3CompositionAPI'],
