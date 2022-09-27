@@ -182,7 +182,10 @@ export default sidebar({
     {
       text: 'Vue2源码解析',
       collapsable: true,
-      children: ['/前端框架/Vue/Vue2源码解析/数据驱动'],
+      children: [
+        '/前端框架/Vue/Vue2源码解析/数据驱动',
+        '/前端框架/Vue/Vue2源码解析/组件化',
+      ],
     },
     {
       text: 'Vue3',
