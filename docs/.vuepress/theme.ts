@@ -123,25 +123,31 @@ export default hopeTheme({
 
     // Disable features you don't want here
     mdEnhance: {
+      // gfm: true, // 是否支持完整的 GFM 语法
       align: true, // 是否启用自定义对齐格式支持
-      attrs: true, // 添加属性
-      chart: true,
-      codetabs: true, // 是否启用代码
+      attrs: true, // 是否启用为 Markdown 元素添加属性
       container: true, // 是否启用自定义容器支持
-      demo: true, // 是否启用代码案例支持
-      echarts: true,
-      flowchart: true, // 是否启用流程图支持
-      gfm: true, // 是否支持完整的 GFM 语法
       imageSize: true, // 是否启用图片大小
-      include: true, // 支持导入其他文件
-      katex: true, // 是否通过 KaTeX\KaTeXKATEX 启用 TeX\TeXTEX 语法支持
       lazyLoad: true, // 是否使用原生方式懒加载页面图片
       mark: true, // 是否启用图片标注支持
-      mermaid: true, // 是否启用 Mermaid 支持
-      // 交互演示
+      tasklist: true, // 是否启用任务列表格式支持,
+      include: true, // 支持导入其他文件
+      tabs: true, // 添加选项卡支持
+      codetabs: true, // 是否启用代码块分组
+      demo: true, // 是否启用代码案例支持
       playground: {
         presets: ['ts', 'vue'],
-      },
+      }, // 交互演示
+      vpre: true, // 启用 v-pre 容器
+      vuePlayground: true, // 是否启用 Vue 交互演示支持
+      sub: true, // 是否启用下角标功能
+      sup: true, // 是否启用上角标
+      footnote: true, // 是否支持脚注
+      // katex: true, // 是否通过 KaTeX\KaTeXKATEX 启用 TeX\TeXTEX 语法支持
+      // chart: true, // 支持图表
+      // echarts: true, // 是否使用 ECharts 提供相应功能图表
+      // flowchart: true, // 是否启用流程图支持
+      // mermaid: true, // 是否启用 Mermaid 支持
       // 是否启用幻灯片支持
       // presentation: {
       //   plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
@@ -160,13 +166,6 @@ export default hopeTheme({
           },
         },
       ],
-      sub: true, // 是否启用下角标功能
-      sup: true, // 是否启用上角标
-      tabs: true, // 添加选项卡支持
-      footnote: true, //  是否支持脚注
-      vpre: true, // 启用 v-pre 容器
-      vuePlayground: true, // 是否启用 Vue 交互演示支持
-      tasklist: true, // 是否启用任务列表格式支持,
     },
 
     // If you don't need comment feature, you can remove following option
