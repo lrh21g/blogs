@@ -185,6 +185,7 @@ export default sidebar({
       children: [
         '/前端框架/Vue/Vue2源码解析/数据驱动',
         '/前端框架/Vue/Vue2源码解析/组件化',
+        '/前端框架/Vue/Vue2源码解析/响应式',
       ],
     },
     {
