@@ -186,6 +186,18 @@ export default sidebar({
         '/前端框架/Vue/Vue2源码解析/数据驱动',
         '/前端框架/Vue/Vue2源码解析/组件化',
         '/前端框架/Vue/Vue2源码解析/响应式',
+        '/前端框架/Vue/Vue2源码解析/编译',
+        {
+          text: '相关扩展',
+          collapsable: true,
+          children: [
+            '/前端框架/Vue/Vue2源码解析/相关扩展/event',
+            '/前端框架/Vue/Vue2源码解析/相关扩展/v-model',
+            '/前端框架/Vue/Vue2源码解析/相关扩展/slot',
+            '/前端框架/Vue/Vue2源码解析/相关扩展/keep-alive',
+            '/前端框架/Vue/Vue2源码解析/相关扩展/transition',
+          ],
+        },
       ],
     },
     {
