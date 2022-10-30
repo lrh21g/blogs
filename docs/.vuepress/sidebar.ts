@@ -198,6 +198,8 @@ export default sidebar({
             '/前端框架/Vue/Vue2源码解析/相关扩展/transition',
           ],
         },
+        '/前端框架/Vue/Vue2源码解析/vue-router',
+        '/前端框架/Vue/Vue2源码解析/vue-vuex',
       ],
     },
     {
