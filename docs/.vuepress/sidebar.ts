@@ -169,7 +169,7 @@ export default sidebar({
   ],
   '/前端框架/Vue/': [
     {
-      text: 'Vue2',
+      text: 'Vue2.x',
       collapsable: true,
       children: [
         '/前端框架/Vue/Vue2/Vue2基础',
@@ -177,10 +177,12 @@ export default sidebar({
         '/前端框架/Vue/Vue2/Vue2相关组件实现',
         '/前端框架/Vue/Vue2/Vue2实用技巧',
         '/前端框架/Vue/Vue2/Vue2实现原理',
+        '/前端框架/Vue/Vue2/VueRouter',
+        '/前端框架/Vue/Vue2/Vuex',
       ],
     },
     {
-      text: 'Vue2源码解析',
+      text: 'Vue2.x 源码解析',
       collapsable: true,
       children: [
         '/前端框架/Vue/Vue2源码解析/数据驱动',
@@ -188,7 +190,7 @@ export default sidebar({
         '/前端框架/Vue/Vue2源码解析/响应式',
         '/前端框架/Vue/Vue2源码解析/编译',
         {
-          text: '相关扩展',
+          text: 'Vue 相关扩展',
           collapsable: true,
           children: [
             '/前端框架/Vue/Vue2源码解析/相关扩展/event',
@@ -203,26 +205,16 @@ export default sidebar({
       ],
     },
     {
-      text: 'Vue3',
+      text: 'Vue3.x',
       collapsable: true,
       children: ['/前端框架/Vue/Vue3/Vue3CompositionAPI'],
-    },
-    {
-      text: 'Vuex',
-      collapsable: true,
-      children: ['/前端框架/Vue/Vuex/Vuex基础'],
-    },
-    {
-      text: 'VueRouter',
-      collapsable: true,
-      children: ['/前端框架/Vue/VueRouter/VueRouter基础'],
     },
   ],
   '/前端框架/React/': [
     {
       text: 'React',
       collapsable: true,
-      children: ['/前端框架/React/基础知识'],
+      children: ['/前端框架/React/React/基础知识'],
     },
   ],
   '/前端框架/Webpack/': [
@@ -257,6 +249,11 @@ export default sidebar({
       text: 'Webpack原理',
       collapsable: true,
       children: ['/前端框架/Webpack/Webpack原理/Webpack原理'],
+    },
+    {
+      text: 'Webpack Q&A',
+      collapsable: true,
+      children: ['/前端框架/Webpack/Q&A'],
     },
   ],
   '/架构/微前端/': [
