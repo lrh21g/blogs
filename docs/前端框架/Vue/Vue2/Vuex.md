@@ -1,12 +1,12 @@
-# Vuex基础
+# Vuex（3.x）
 
 Vuex 是一个专为 Vue.js 应用程序开发的**状态管理模式**。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。
 
 ![vuex](../files/images/vuex.jpg)
 
-## Vuex基本配置
+## Vuex 基本配置
 
-``` javascript
+```javascript
 // store
 //   | --- modules
 //   |        | --- user.js
@@ -85,14 +85,14 @@ new Vue({
 
 注：
 
-+ 通过 `store` 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中（需调用 `Vue.use(Vuex)`）
-+ 该 `store` 实例会注入到根组件下的所有子组件中，且子组件能通过 `this.$store` 访问到。
+- 通过 `store` 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中（需调用 `Vue.use(Vuex)`）
+- 该 `store` 实例会注入到根组件下的所有子组件中，且子组件能通过 `this.$store` 访问到。
 
 ## 组件分发 Vuex
 
 ### State
 
-``` javascript
+```javascript
 // mapState 辅助函数
 import { mapState } from 'vuex'
 export default {
@@ -129,18 +129,18 @@ export default {
 
 `getter` 可以认为是 `store` 的计算属性，其返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。
 
-``` javascript
+```javascript
 // 通过方法访问：通过让 getter 返回一个函数，来实现给 getter 传参。
 // 注意：getter 在通过方法访问时，每次都会进行调用，而不会缓存结果
 const store = new Vuex.Store({
   state: {
-    todo: []
+    todo: [],
   },
   getters: {
-    getTodoById: (state) => (id) => {
+    getTodoById: state => id => {
       return state.todos.find(todo => todo.id === id)
-    }
-  }
+    },
+  },
 })
 
 import { mapGetters } from 'vuex'
@@ -150,9 +150,9 @@ export default {
     ...mapGetters(['doneTodosCount']),
     ...mapGetters({
       // 把 `this.doneCount` 映射为 `this.$store.getters.doneTodosCount`
-      doneCount: 'doneTodosCount'
-    })
-  }
+      doneCount: 'doneTodosCount',
+    }),
+  },
 }
 ```
 
@@ -164,13 +164,13 @@ export default {
 
 **`mutation` 必须是同步函数**。因为当 `mutation` 触发的时候，回调函数还没有被调用，devtools 不知道什么时候回调函数实际上被调用 —— 实质上任何在回调函数中进行的状态的改变都是不可追踪的。
 
-``` javascript
+```javascript
 const store = new Vuex.Store({
   mutations: {
-    increment (state, payload) {
+    increment(state, payload) {
       state.count += payload.amount
-    }
-  }
+    },
+  },
 })
 
 // store.commit 传入额外的参数，即 mutation 的 载荷（payload）。大多数情况下，载荷是一个对象
@@ -178,7 +178,7 @@ store.commit('increment', 10)
 // 对象风格的提交方式：整个对象都作为载荷传给 mutation 函数，因此回调函数保持不变。
 store.commit({
   type: 'increment',
-  amount: 10
+  amount: 10,
 })
 
 import { mapMutations } from 'vuex'
@@ -189,13 +189,13 @@ export default {
       'increment',
       // `mapMutations` 也支持载荷
       // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
-      'incrementBy'
+      'incrementBy',
     ]),
     ...mapMutations({
       // 将 `this.add()` 映射为 `this.$store.commit('increment')`
-      add: 'increment'
-    })
-  }
+      add: 'increment',
+    }),
+  },
 }
 ```
 
@@ -205,10 +205,10 @@ export default {
 
 `Action` 函数接受一个与 `store` 实例具有相同方法和属性的 `context` 对象。因此可以：
 
-+ 调用 `context.commit` 提交一个 `mutation`
-+ 通过 `context.state` 和 `context.getters` 来获取 `state` 和 `getters`
+- 调用 `context.commit` 提交一个 `mutation`
+- 通过 `context.state` 和 `context.getters` 来获取 `state` 和 `getters`
 
-``` javascript
+```javascript
 const store = new Vuex.Store({
   actions: {
     incrementAsync ({ commit }) {
@@ -251,7 +251,7 @@ export default {
 
 `store.dispatch` 可以处理被触发的 `action` 的处理函数返回的 `Promise`，并且 `store.dispatch` 仍旧返回 `Promise`
 
-``` javascript
+```javascript
 const store = new Vuex.Store({
   actionA ({ commit }) {
     return new Promise((resolve, reject) => {
@@ -288,7 +288,7 @@ Vuex 允许将 `store` 分割成**模块（module）**。每个模块拥有自�
 
 ### 基本使用
 
-``` javascript
+```javascript
 const moduleA = {
   state: () => ({
     count: 0
@@ -346,7 +346,7 @@ store.state.b // -> moduleB 的状态
 
 默认情况下，模块内部的 `action`、`mutation` 和 `getter` 是注册在全局命名空间的 —— 这样使得多个模块能够对同一 `mutation` 或 `action` 作出响应。通过添加 `namespaced: true` 的方式使其成为带命名空间的模块。
 
-``` javascript
+```javascript
 const store = new Vuex.Store({
   modules: {
     foo: {
@@ -390,7 +390,7 @@ const store = new Vuex.Store({
 
 ### 分发 Module Vuex
 
-``` javascript
+```javascript
 const moduleA = {
   state: () => ({ ... }),
   mutations: { ... },
@@ -462,12 +462,12 @@ export default {
 
 ### 模块动态注册
 
-+ 注册模块：在 `store` 创建之后，你可以使用 `store.registerModule` 方法注册模块
-+ 卸载模块：使用 `store.unregisterModule(moduleName)` 来动态卸载模块。注意，**不能使用此方法卸载静态模块（即创建 store 时声明的模块）**。
+- 注册模块：在 `store` 创建之后，你可以使用 `store.registerModule` 方法注册模块
+- 卸载模块：使用 `store.unregisterModule(moduleName)` 来动态卸载模块。注意，**不能使用此方法卸载静态模块（即创建 store 时声明的模块）**。
 
 注：可以通过 `store.hasModule(moduleName)` 方法检查该模块是否已经被注册到 `store`。
 
-``` javascript
+```javascript
 import Vuex from 'vuex'
 const store = new Vuex.Store({ /* 选项 */ })
 // 注册模块 `myModule`
