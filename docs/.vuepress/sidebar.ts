@@ -212,9 +212,15 @@ export default sidebar({
   ],
   '/前端框架/React/': [
     {
-      text: 'React',
+      text: 'React 基础',
       collapsable: true,
-      children: ['/前端框架/React/React/基础知识'],
+      children: [
+        '/前端框架/React/React基础/JSX',
+        '/前端框架/React/React基础/React组件',
+        '/前端框架/React/React基础/State',
+        '/前端框架/React/React基础/Props',
+        '/前端框架/React/React基础/LifeCycle',
+      ],
     },
   ],
   '/前端框架/Webpack/': [
