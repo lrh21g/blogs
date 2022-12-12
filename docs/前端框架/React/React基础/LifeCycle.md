@@ -529,7 +529,7 @@ UNSAFE_componentWillUpdate(nextProps, nextState)
 useEffect(() => {
   // ... effect function
   return destoryCallback // destory function
-}, dependArray)
+}, deps)
 ```
 
 - 第一个参数为 **callback 回调函数** 。可在回调函数中返回 destoryCallback 清除函数
@@ -562,7 +562,7 @@ useEffect(() => {
 useLayoutEffect(() => {
   // ... effect function
   return destoryCallback // destory function
-}, dependArray)
+}, deps)
 ```
 
 - `useLayoutEffect` 在 DOM 更新之后，浏览器执行绘制之前，其 callback 回调函数的更新计划会被同步执行。
@@ -650,7 +650,7 @@ function ExampleComponent() {
 ```js
 useEffect(() => {
   /* 可进行请求数据、事件监听、操纵 DOM、增加定时器，延时器 */
-}, []) /* 注意：依赖项数组 dependArray = [] */
+}, []) /* 注意：依赖项数组 deps = [] */
 ```
 
 #### componentWillUnmount 替代方案
@@ -663,7 +663,7 @@ useEffect(() => {
   return function componentWillUnmount() {
     /* 解除事件监听器、清除定时器或延时器 */
   }
-}, []) /* 注意：依赖项数组 dependArray = [] */
+}, []) /* 注意：依赖项数组 deps = [] */
 ```
 
 #### componentWillReceiveProps 替代方案
@@ -697,7 +697,7 @@ useEffect(() => {
 // 组件更新完成，执行当前 effect
 useEffect(() => {
   // ... effect function
-}) /* 注意：没有依赖项数组 dependArray */
+}) /* 注意：没有依赖项数组 deps */
 ```
 
 ### Hooks 模拟生命周期示例
@@ -714,7 +714,7 @@ function FunctionLifecycle(props) {
       /* 解除事件监听器 ，清除定时器，延时器 */
       console.log('组件销毁，模拟 【componentWillUnmount】')
     }
-  }, []) /* 注意：依赖项数组 dependArray = [] */
+  }, []) /* 注意：依赖项数组 deps = [] */
 
   useEffect(() => {
     console.log('props 变化，模拟 【componentWillReceiveProps】')
