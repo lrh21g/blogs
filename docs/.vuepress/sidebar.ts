@@ -220,6 +220,8 @@ export default sidebar({
         '/前端框架/React/React基础/State',
         '/前端框架/React/React基础/Props',
         '/前端框架/React/React基础/LifeCycle',
+        '/前端框架/React/React基础/Ref',
+        '/前端框架/React/React基础/Context',
       ],
     },
   ],
