@@ -226,6 +226,15 @@ export default sidebar({
         '/前端框架/React/React基础/高阶组件',
       ],
     },
+    {
+      text: 'React 优化',
+      collapsable: true,
+      children: [
+        '/前端框架/React/React优化/渲染控制',
+        '/前端框架/React/React优化/渲染调优',
+        '/前端框架/React/React优化/处理海量数据',
+      ],
+    },
   ],
   '/前端框架/Webpack/': [
     {
