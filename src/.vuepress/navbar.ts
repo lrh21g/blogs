@@ -3,10 +3,12 @@ import { navbar } from 'vuepress-theme-hope'
 export default navbar([
   {
     text: '前端',
+    // icon: 'info',
+    // prefix: '/zh/basic/', // 为分组的每一个子链接添加一个前缀
     children: [
       {
         text: 'HTML + CSS',
-        link: '/前端/HTML+CSS/',
+        link: '/前端/HTML_CSS/',
       },
       {
         text: 'H5',

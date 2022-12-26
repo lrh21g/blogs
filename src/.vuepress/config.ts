@@ -1,8 +1,10 @@
 import { defineUserConfig } from 'vuepress'
-import { path } from '@vuepress/utils'
+import { getDirname, path } from '@vuepress/utils'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 
-import theme from './theme'
+import theme from './theme.js'
+
+// const __dirname = getDirname(import.meta.url)
 
 export default defineUserConfig({
   // ========== 站点配置 ==========
@@ -13,10 +15,19 @@ export default defineUserConfig({
   head: [
     ['link', { rel: 'icon', href: '/blogs/favicon.ico' }], // 增加一个自定义的 favicon(网页标签的图标)
   ], // 在最终渲染出的 HTML 的 <head> 标签内加入的额外标签
-  // locales: {}, // 多语言支持的各个语言 locales
-
-  // ========== 主题配置 ==========
-  theme,
+  // 多语言支持的各个语言 locales
+  // locales: {
+  //   '/': {
+  //     lang: 'en-US',
+  //     title: 'Blog Demo',
+  //     description: 'A blog demo for vuepress-theme-hope',
+  //   },
+  //   '/zh/': {
+  //     lang: 'zh-CN',
+  //     title: '博客演示',
+  //     description: 'vuepress-theme-hope 的博客演示',
+  //   },
+  // },
 
   // ========== Markdown 配置 ==========
   markdown: {
@@ -28,6 +39,9 @@ export default defineUserConfig({
     },
   },
 
+  // ========== 主题配置 ==========
+  theme,
+
   // ========== 插件 配置 ==========
   plugins: [
     registerComponentsPlugin({
@@ -35,4 +49,6 @@ export default defineUserConfig({
       componentsDir: path.resolve(__dirname, './components'),
     }),
   ],
+
+  shouldPrefetch: false,
 })

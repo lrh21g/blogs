@@ -10,7 +10,35 @@ export default hopeTheme({
     name: 'Mr.LRH',
     url: 'https://lrh21g.github.io/blogs/',
   }, // 文章显示的默认作者
-  // locales: {}, // 主题的多语言配置
+  // 主题的多语言配置
+  // locales: {
+  //   '/': {
+  //     navbar: enNavbar,
+  //     sidebar: enSidebar,
+  //     footer: 'Default footer',
+  //     displayFooter: true,
+  //     blog: {
+  //       description: 'A FrontEnd programmer',
+  //       intro: '/intro.html',
+  //     },
+  //     metaLocales: {
+  //       editLink: 'Edit this page on GitHub',
+  //     },
+  //   },
+  //   '/zh/': {
+  //     navbar: zhNavbar,
+  //     sidebar: zhSidebar,
+  //     footer: '默认页脚',
+  //     displayFooter: true,
+  //     blog: {
+  //       description: '一个前端开发者',
+  //       intro: '/zh/intro.html',
+  //     },
+  //     metaLocales: {
+  //       editLink: '在 GitHub 上编辑此页',
+  //     },
+  //   },
+  // },
 
   // ========== 主题外观选项 ==========
   iconAssets: 'iconfont', // 字体图标资源链接，支持 'iconfont' 和 'fontawesome' 关键字。
@@ -117,9 +145,10 @@ export default hopeTheme({
   // },
 
   plugins: {
-    blog: {
-      autoExcerpt: true, // 是否为每个页面生成摘录
-    },
+    blog: true,
+    // blog: {
+    //   autoExcerpt: true, // 是否为每个页面生成摘录
+    // },
 
     // Disable features you don't want here
     mdEnhance: {
@@ -128,7 +157,7 @@ export default hopeTheme({
       attrs: true, // 是否启用为 Markdown 元素添加属性
       container: true, // 是否启用自定义容器支持
       imageSize: true, // 是否启用图片大小
-      lazyLoad: true, // 是否使用原生方式懒加载页面图片
+      // lazyLoad: true, // 是否使用原生方式懒加载页面图片
       mark: true, // 是否启用图片标注支持
       tasklist: true, // 是否启用任务列表格式支持,
       include: true, // 支持导入其他文件
@@ -138,7 +167,7 @@ export default hopeTheme({
       playground: {
         presets: ['ts', 'vue'],
       }, // 交互演示
-      vpre: true, // 启用 v-pre 容器
+      // vpre: true, // 启用 v-pre 容器
       vuePlayground: true, // 是否启用 Vue 交互演示支持
       sub: true, // 是否启用下角标功能
       sup: true, // 是否启用上角标
