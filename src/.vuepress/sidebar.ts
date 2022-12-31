@@ -236,6 +236,11 @@ export default sidebar({
         '/前端框架/React/React优化/其他优化',
       ],
     },
+    {
+      text: 'React 原理',
+      collapsible: true,
+      children: ['/前端框架/React/React原理/事件系统'],
+    },
   ],
   '/前端框架/Webpack/': [
     {
