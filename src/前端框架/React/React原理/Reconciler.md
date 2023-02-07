@@ -9,8 +9,8 @@
 
 Reconciler `render` 阶段开始于 `performSyncWorkOnRoot` 或 `performConcurrentWorkOnRoot` 函数的调用。
 
-- `performSyncWorkOnRoot` ：执行同步渲染任务。
-- `performConcurrentWorkOnRoot` ：执行并发渲染任务。在函数中，会调用 `shouldYield` 函数判断是否需要中断遍历，使浏览器有时间渲染。如果当前浏览器帧没有剩余时间，则会终止循环，直到浏览器有空闲时间后再继续遍历。
+- `performSyncWorkOnRoot` （`Legacy Sync` 模式）：执行同步渲染任务。
+- `performConcurrentWorkOnRoot` （`Concurrent` 模式）：执行并发渲染任务。在函数中，会调用 `shouldYield` 函数判断是否需要中断遍历，使浏览器有时间渲染。如果当前浏览器帧没有剩余时间，则会终止循环，直到浏览器有空闲时间后再继续遍历。
 
 ::: details performSyncWorkOnRoot 与 performConcurrentWorkOnRoot 函数
 
@@ -73,6 +73,21 @@ function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
 // 执行同步渲染任务
 function performSyncWorkOnRoot(root) {
   let exitStatus = renderRootSync(root, lanes)
+
+  // ... 省略部分代码
+
+  commitRoot(
+    root,
+    workInProgressRootRecoverableErrors,
+    workInProgressTransitions
+  )
+
+  // Before exiting, make sure there's a callback scheduled for the next
+  // pending level.
+  // 退出前再次检测, 是否还有其他更新, 是否需要发起新调度
+  ensureRootIsScheduled(root, now())
+
+  return null
 }
 
 // 执行并发渲染任务
@@ -335,18 +350,22 @@ function completeUnitOfWork(unitOfWork: Fiber): void {
 
 ![fiber_reconciler_render_beginWork](../files/images/fiber_reconciler_render_beginWork.drawio.png)
 
-`beginWork(current, workInProgress, renderLanes)` 函数的作用是传入当前 `Fiber 节点`，创建 `子 Fiber 节点` 。
-
 ::: details beginWork 函数
 
 ```js
+let didReceiveUpdate: boolean = false
+
 function beginWork(
   current: Fiber | null,
   workInProgress: Fiber,
   renderLanes: Lanes
 ): Fiber | null {
   if (current !== null) {
+    /* 更新流程 */
+
+    // current 树上上一次渲染后的 props
     const oldProps = current.memoizedProps
+    // workInProgress 树上这一次更新的 props
     const newProps = workInProgress.pendingProps
 
     if (
@@ -361,6 +380,8 @@ function beginWork(
     } else {
       // Neither props nor legacy context changes. Check if there's a pending
       // update or context change.
+
+      // props 和 context 没有发生变化，检查是否更新来自自身或者 context 改变
       const hasScheduledUpdateOrContext = checkScheduledUpdateOrContext(
         current,
         renderLanes
@@ -373,6 +394,9 @@ function beginWork(
       ) {
         // No pending updates or context. Bail out now.
         didReceiveUpdate = false
+
+        // attemptEarlyBailoutIfNoScheduledUpdate 函数会处理部分 Context 逻辑
+        // 在函数内部，调用了 bailoutOnAlreadyFinishedWork
         return attemptEarlyBailoutIfNoScheduledUpdate(
           current,
           workInProgress,
@@ -437,16 +461,20 @@ function beginWork(
 
 :::
 
-- `update` 时
+`beginWork(current, workInProgress, renderLanes)` 函数的作用是传入当前 `Fiber 节点`，创建 `子 Fiber 节点` 。在该函数中：
+
+- `update`（即： `current !== null`） 时
 
   如果 `current` 存在（即 `current !== null`），在满足一定条件时可以复用 `current` 节点，就能克隆 `current.child` 作为 `workInProgress.child`，而不需要新建 `workInProgress.child` 。
 
-  满足如下情况时 `didReceiveUpdate === false`，即可以直接复用前一次更新的 `子 Fiber`，不需要新建 `子 Fiber`
+  满足如下情况时，`didReceiveUpdate === false`，即可以直接复用前一次更新的 `子 Fiber`，不需要新建 `子 Fiber`
 
   - `oldProps === newProps && workInProgress.type === current.type` ，即 `props` 与 `fiber.type` 不变
   - `!includesSomeLane(renderLanes, updateLanes)`，即当前 `Fiber 节点` 优先级不够
 
-- `mount` 时
+  注：`didReceiveUpdate` 标识当前更新是否来源于父级的更新，自身并没有更新。比如：更新父组件，其子组件也会跟着更新，这个情况下 `didReceiveUpdate = true`。
+
+- `mount`（即： `current == null`） 时
 
   组件 `mount` 时，除 `fiberRoot` 以外，满足如下情况，会根据 `fiber.tag` 不同，创建不同类型的子 `Fiber 节点` 。
 
@@ -751,6 +779,25 @@ Reconciler commit 阶段（即 `Renderer` 的工作流程）主要分为三部�
 
 在 `before mutation` 阶段之前和 `layout` 阶段之后还有一些额外工作，比如 `useEffect` 的触发、优先级相关的重置、`ref` 的绑定/解绑。
 
+在 `render` 阶段，会遍历 `Fiber` 树，收集需要更新的地方，打不同的标志，标志会在 `commit` 阶段执行。
+
+- 更新相关
+  - Update ：组件更新标志
+  - Ref ：处理绑定元素和组件实例
+- 元素相关
+  - Placement ：插入元素
+  - Update ：更新元素
+  - ChildDeletion ：删除元素
+  - Snapshot ：元素快照
+  - Visibility-offscreen ：新特性
+  - ContentReset ：文本内容更新
+- 更新回调，执行 effect：
+  - Callback-root 回调函数
+  - 类组件回调
+  - Passive-useEffect 的钩子函数
+  - Layout-useLayoutEffect 的钩子函数
+  - Insertion-useInsertionEffect 的钩子函数
+
 ### before mutation
 
 `before mutation` 阶段，遍历 `EffectList` 并调用 `commitBeforeMutationEffects` 函数处理。
@@ -760,7 +807,7 @@ Reconciler commit 阶段（即 `Renderer` 的工作流程）主要分为三部�
 - 处理 DOM 节点渲染/删除后的 `autoFocus`、`blur` 逻辑。
 - 调用 `getSnapshotBeforeUpdate` 生命周期钩子。
 
-  `commitBeforeMutationEffectsOnFiber` 函数中，对于 `ClassComponent` 会调用实例的 `getSnapShotBeforeUpdate` 函数。
+  `commitBeforeMutationEffectsOnFiber` 函数，主要用与处理 `Snapshot`，获取 DOM 更新前的快照信息，对于 `ClassComponent` 会调用实例的 `getSnapShotBeforeUpdate` 函数。
 
   从 React v16 开始，`componentWillXXX` 钩子函数前增加了 `UNSAFE_` 前缀，是因为 Stack Reconciler 重构为 Fiber Reconciler 后，`render` 阶段的任务可能中断/重新开始，对应的组件在 `render` 阶段的生命周期钩子（即 `componentWillXXX`）可能触发多次。为此，React 提供了替代的生命周期钩子 `getSnapshotBeforeUpdate`。
 
@@ -1007,6 +1054,7 @@ function commitMutationEffectsOnFiber(
 
       if (flags & Ref) {
         if (current !== null) {
+          // 清空 ref
           safelyDetachRef(current, current.return)
         }
       }
@@ -1180,9 +1228,9 @@ function commitMutationEffectsOnFiber(
   }
   ```
 
-:::
+  :::
 
-::: details
+::: details commitLayoutEffectOnFiber 函数
 
 ```js
 function commitLayoutEffectOnFiber(
