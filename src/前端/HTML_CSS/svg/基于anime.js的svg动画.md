@@ -1,6 +1,6 @@
 ---
 category: SVG
-tags:
+tag:
   - SVG
 ---
 
@@ -79,23 +79,26 @@ tags:
 ```
 
 ```js
-window.onload = function() {
-  var script = document.createElement('script');
-  script.setAttribute('type', 'text/javascript');
-  script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js');
-  var heads = document.getElementsByTagName('head');
+window.onload = function () {
+  var script = document.createElement('script')
+  script.setAttribute('type', 'text/javascript')
+  script.setAttribute(
+    'src',
+    'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js'
+  )
+  var heads = document.getElementsByTagName('head')
   if (heads.length) {
-    heads[0].appendChild(script);
+    heads[0].appendChild(script)
   } else {
-    document.documentElement.appendChild(script);
+    document.documentElement.appendChild(script)
   }
-  script.onload = function() {
+  script.onload = function () {
     initLineDrawing()
   }
 }
 
 function initLineDrawing() {
-  var letterTime = 2000;
+  var letterTime = 2000
 
   var lineDrawing = anime({
     targets: 'path', // 动画目标对象
@@ -108,15 +111,15 @@ function initLineDrawing() {
     duration: letterTime,
     // 延迟： 定义动画的延迟（以毫秒为单位）
     delay: function (el, i) {
-      return letterTime * i;
+      return letterTime * i
     },
     // begin 事件：当动画开始播放时，begin()回调被触发一次。动画完成后，会触发一次 complete() 回调。
     begin: function (anim) {
       var letters = document.querySelectorAll('path'),
-        i;
+        i
       for (i = 0; i < letters.length; ++i) {
-        letters[i].setAttribute('stroke', 'white');
-        letters[i].setAttribute('fill', 'none');
+        letters[i].setAttribute('stroke', 'white')
+        letters[i].setAttribute('fill', 'none')
       }
     },
     // update 事件：动画开始播放后，每帧都会触发此回调。
@@ -135,9 +138,9 @@ function initLineDrawing() {
     //   }
     // },
     autoplay: false,
-  });
+  })
   // anime - restart（重新开始）： 从动画的初始值重新开始动画。
-  document.querySelector('.play-line-draw-btn').onclick = lineDrawing.restart;
+  document.querySelector('.play-line-draw-btn').onclick = lineDrawing.restart
 }
 ```
 
@@ -177,18 +180,21 @@ function initLineDrawing() {
 ```
 
 ```js
-window.onload = function() {
-  var script = document.createElement('script');
-  script.setAttribute('type', 'text/javascript');
-  script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js');
-  var heads = document.getElementsByTagName('head');
+window.onload = function () {
+  var script = document.createElement('script')
+  script.setAttribute('type', 'text/javascript')
+  script.setAttribute(
+    'src',
+    'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js'
+  )
+  var heads = document.getElementsByTagName('head')
   if (heads.length) {
-    heads[0].appendChild(script);
+    heads[0].appendChild(script)
   } else {
-    document.documentElement.appendChild(script);
+    document.documentElement.appendChild(script)
   }
-  script.onload = function() {
-    var path = anime.path('path');
+  script.onload = function () {
+    var path = anime.path('path')
 
     anime({
       targets: '.motion-path-square',
@@ -198,7 +204,7 @@ window.onload = function() {
       duration: 3000,
       loop: true,
       easing: 'linear',
-    });
+    })
   }
 }
 ```
@@ -232,22 +238,25 @@ window.onload = function() {
 ```
 
 ```js
-window.onload = function() {
-  var script = document.createElement('script');
-  script.setAttribute('type', 'text/javascript');
-  script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js');
-  var heads = document.getElementsByTagName('head');
+window.onload = function () {
+  var script = document.createElement('script')
+  script.setAttribute('type', 'text/javascript')
+  script.setAttribute(
+    'src',
+    'https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js'
+  )
+  var heads = document.getElementsByTagName('head')
   if (heads.length) {
-    heads[0].appendChild(script);
+    heads[0].appendChild(script)
   } else {
-    document.documentElement.appendChild(script);
+    document.documentElement.appendChild(script)
   }
-  script.onload = function() {
+  script.onload = function () {
     var socialTimeline = anime.timeline({
-        autoplay: true,
-        direction: 'alternate',
-        loop: true,
-    });
+      autoplay: true,
+      direction: 'alternate',
+      loop: true,
+    })
 
     socialTimeline
       .add({
@@ -283,7 +292,7 @@ window.onload = function() {
         targets: '.social',
         opacity: 1,
         duration: 500,
-      });
+      })
   }
 }
 ```

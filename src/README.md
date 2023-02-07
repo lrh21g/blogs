@@ -48,6 +48,6 @@ features:
     details: VuePress 相关资源资源：示例、画廊、主题、插件、项目等
     link: https://vuepress-theme-hope.github.io/v2/zh/
 
-copyrightText: false
+copyright: false
 footer: MIT Licensed | Copyright © 2020-present Mr. LRH
 ---

@@ -156,7 +156,7 @@ export default hopeTheme({
       align: true, // 是否启用自定义对齐格式支持
       attrs: true, // 是否启用为 Markdown 元素添加属性
       container: true, // 是否启用自定义容器支持
-      imageSize: true, // 是否启用图片大小
+      imgSize: true, // 是否启用图片大小
       // lazyLoad: true, // 是否使用原生方式懒加载页面图片
       mark: true, // 是否启用图片标注支持
       tasklist: true, // 是否启用任务列表格式支持,

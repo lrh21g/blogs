@@ -1,6 +1,6 @@
 ---
 category: CSS基础
-tags:
+tag:
   - CSS
 ---
 
@@ -18,9 +18,9 @@ tags:
 
 `ex` 的作用：可用于**不受字体和字号影响的内联元素的垂直居中对齐效果**
 
-`ex` 使用示例：文本 + icon图标展示，icon图标需要与文字垂直居中。使用 `ex` 单位，利用默认的基线（baseline）对齐即可。
+`ex` 使用示例：文本 + icon 图标展示，icon 图标需要与文字垂直居中。使用 `ex` 单位，利用默认的基线（baseline）对齐即可。
 
-``` css
+```css
 .icon-arrow {
   display: inline-block;
   width: 20px;

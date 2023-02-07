@@ -1,6 +1,6 @@
 ---
 category: SVG
-tags:
+tag:
   - SVG
   - 动画
 ---
@@ -11,30 +11,37 @@ tags:
 
 ### 描边动画原理
 
-SVG 描边动画主要与以下3个属性相关。
+SVG 描边动画主要与以下 3 个属性相关。
 
-+ `stroke="<paint>"` : 定义图形元素的外轮廓的颜色。它的默认值是 `none` 。
-+ `stroke-dasharray="<dasharray>"` : 控制用来描边的点划线的图案范式。
-  + `<dasharray>` : 它是一个 `<length>` 和 `<percentage>` 数列，数与数之间用逗号或者空白隔开，指定**短划线**和**缺口**的长度。如果提供了奇数个值，则这个值的数列重复一次，从而变成偶数个值。因此，`5,3,2` 等同于 `5,3,2,5,3,2` 。
-+ `stroke-dashoffset="<percentage> | <length> | inherit"` : 指定了 dash 模式到路径开始的距离。如果使用了一个百分比值，那么这个值就代表了当前 viewport(视口) 的一个百分比。
+- `stroke="<paint>"` : 定义图形元素的外轮廓的颜色。它的默认值是 `none` 。
+- `stroke-dasharray="<dasharray>"` : 控制用来描边的点划线的图案范式。
+  - `<dasharray>` : 它是一个 `<length>` 和 `<percentage>` 数列，数与数之间用逗号或者空白隔开，指定**短划线**和**缺口**的长度。如果提供了奇数个值，则这个值的数列重复一次，从而变成偶数个值。因此，`5,3,2` 等同于 `5,3,2,5,3,2` 。
+- `stroke-dashoffset="<percentage> | <length> | inherit"` : 指定了 dash 模式到路径开始的距离。如果使用了一个百分比值，那么这个值就代表了当前 viewport(视口) 的一个百分比。
 
 SVG 描边动画通过 `stroke-dashoffset` 和 `stroke-dasharray` 来实现。
 
-+ 通过 `stroke-dasharray` 将实线部分增加至全长。
-+ 通过 `stroke-dashoffset` 来移动新增的实线部分，造成线段移动的效果。
+- 通过 `stroke-dasharray` 将实线部分增加至全长。
+- 通过 `stroke-dashoffset` 来移动新增的实线部分，造成线段移动的效果。
 
 示例如下：
 
 `stroke-dasharray` 和 `stroke-dashoffset` 的值都为 `300` ， dash 模式开始的距离(`stroke-dashoffset`)为 300 ，正好对应描边的点划线(`stroke-dasharray`)的缺口，则该线段为不可见的状态。当将 `stroke-dashoffset` 设置为 `0` 的时候，该线段则可以显示出来。
 
 ```html
-<svg x="0px" y="0px" width="300px" height="100px" viewBox="0 0 300 100" class="svg">
-  <line x1="20" y1="50" x2="200" y2="50" stroke="#000" stroke-width="1" ></line>
+<svg
+  x="0px"
+  y="0px"
+  width="300px"
+  height="100px"
+  viewBox="0 0 300 100"
+  class="svg"
+>
+  <line x1="20" y1="50" x2="200" y2="50" stroke="#000" stroke-width="1"></line>
 </svg>
 
 <style type="text/css">
   .svg line {
-    stroke-dasharray: 300,300;
+    stroke-dasharray: 300, 300;
     stroke-dashoffset: 300;
     transition: all 2s linear;
   }
@@ -47,9 +54,9 @@ SVG 描边动画通过 `stroke-dashoffset` 和 `stroke-dasharray` 来实现。
 
 <script type="text/javascript">
   window.onload = function () {
-    var svgDOM = document.getElementsByClassName('svg')[0];
-    svgDOM.classList.add('active');
-  };
+    var svgDOM = document.getElementsByClassName('svg')[0]
+    svgDOM.classList.add('active')
+  }
 </script>
 ```
 
@@ -106,8 +113,8 @@ SVG 描边动画通过 `stroke-dashoffset` 和 `stroke-dasharray` 来实现。
   /* >>> forwards : 当动画完成后，保持最后一帧的状态 */
   /* >>> backwards : 在 animation-delay 所指定的一段时间内，在动画显示之前，应用开始属性值（在第一个关键帧中定义） */
   /* >>> both : 向前和向后填充模式都被应用 */
-  animation: fill 0.4s ease-in-out 0.4s forwards,
-    scale 0.3s ease-in-out 0.9s both;
+  animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s
+      both;
 }
 
 .checkmark__circle {
@@ -149,19 +156,19 @@ SVG 描边动画通过 `stroke-dashoffset` 和 `stroke-dasharray` 来实现。
 
 ```js
 window.onload = function () {
-  var strokeEdgeBtnDOM = document.querySelector('.stroke-edge-btn');
-  console.log('strokeEdgeBtnDOM: ', strokeEdgeBtnDOM);
-  var checkmarkDOM = document.querySelector('.checkmark');
+  var strokeEdgeBtnDOM = document.querySelector('.stroke-edge-btn')
+  console.log('strokeEdgeBtnDOM: ', strokeEdgeBtnDOM)
+  var checkmarkDOM = document.querySelector('.checkmark')
   strokeEdgeBtnDOM.addEventListener('click', function () {
-    var checkmarkDOMDisplay = checkmarkDOM.style.display;
-    console.log('checkmarkDOMDisplay: ', checkmarkDOMDisplay);
+    var checkmarkDOMDisplay = checkmarkDOM.style.display
+    console.log('checkmarkDOMDisplay: ', checkmarkDOMDisplay)
     if (checkmarkDOMDisplay === 'block') {
-      checkmarkDOM.style.display = 'none';
+      checkmarkDOM.style.display = 'none'
     } else {
-      checkmarkDOM.style.display = 'block';
+      checkmarkDOM.style.display = 'block'
     }
-  });
-};
+  })
+}
 ```
 
 :::
@@ -209,20 +216,23 @@ window.onload = function () {
 ```
 
 ```js
-window.onload = function() {
-  var script = document.createElement('script');
-  script.setAttribute('type', 'text/javascript');
-  script.setAttribute('src', 'https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js');
-  var heads = document.getElementsByTagName('head');
+window.onload = function () {
+  var script = document.createElement('script')
+  script.setAttribute('type', 'text/javascript')
+  script.setAttribute(
+    'src',
+    'https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js'
+  )
+  var heads = document.getElementsByTagName('head')
   if (heads.length) {
-    heads[0].appendChild(script);
+    heads[0].appendChild(script)
   } else {
-    document.documentElement.appendChild(script);
+    document.documentElement.appendChild(script)
   }
-  script.onload = function() {
+  script.onload = function () {
     $('.svg-crop-wrapper').click(function () {
-      $(this).toggleClass('svg-crop-visible');
-    });
+      $(this).toggleClass('svg-crop-visible')
+    })
   }
 }
 ```
@@ -636,22 +646,25 @@ c-0.961,0.624-1.609,1.296-1.945,2.016l-0.936,3.888l0.936,1.944C403.168,56.037,40
 ```
 
 ```js
-window.onload = function() {
-  var script = document.createElement('script');
-  script.setAttribute('type', 'text/javascript');
-  script.setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js');
-  var heads = document.getElementsByTagName('head');
+window.onload = function () {
+  var script = document.createElement('script')
+  script.setAttribute('type', 'text/javascript')
+  script.setAttribute(
+    'src',
+    'https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js'
+  )
+  var heads = document.getElementsByTagName('head')
   if (heads.length) {
-    heads[0].appendChild(script);
+    heads[0].appendChild(script)
   } else {
-    document.documentElement.appendChild(script);
+    document.documentElement.appendChild(script)
   }
-  script.onload = function() {
+  script.onload = function () {
     document
       .querySelector('.gradient-text-btn')
       .addEventListener('click', function () {
-        gradientTextAnimation();
-      });
+        gradientTextAnimation()
+      })
   }
 }
 
@@ -659,11 +672,11 @@ function gradientTextAnimation() {
   // 循环播放动画
   var tl = new TimelineMax({
     repeat: -1,
-  });
+  })
 
   // 获取svg中渐变的transform属性
   var gradient = document.getElementById('gradient'),
-    gradient_attr = gradient.getAttribute('gradientTransform');
+    gradient_attr = gradient.getAttribute('gradientTransform')
 
   // 改变渐变transform的rotate属性
   for (var i = 0, l = 360; i <= l; i++) {
@@ -672,10 +685,9 @@ function gradientTextAnimation() {
         gradientTransform: 'rotate(' + -i + ')',
       },
       ease: Linear.easeInOut,
-    });
+    })
   }
 }
-
 ```
 
 :::

@@ -1,46 +1,46 @@
 ---
 category: SVG
-tags:
+tag:
   - SVG
   - 动画
 ---
 
 # SVG 基础
 
-可缩放矢量图形（Scalable Vector Graphics，SVG），是一种用于描述二维的矢量图形，基于 XML 的标记语言。作为一个基于文本的开放网络标准，SVG能够优雅而简洁地渲染不同大小的图形，并和CSS，DOM，JavaScript和SMIL等其他网络标准无缝衔接。本质上，SVG 相对于图像，就好比 HTML 相对于文本。
+可缩放矢量图形（Scalable Vector Graphics，SVG），是一种用于描述二维的矢量图形，基于 XML 的标记语言。作为一个基于文本的开放网络标准，SVG 能够优雅而简洁地渲染不同大小的图形，并和 CSS，DOM，JavaScript 和 SMIL 等其他网络标准无缝衔接。本质上，SVG 相对于图像，就好比 HTML 相对于文本。
 
 ## 容器
 
 ### `<svg>` 元素
 
-`svg` 元素可以用于在当前文档（比如说，一个HTML文档）内嵌套一个独立的 `svg` 片段。 这个独立片段拥有独立的视口和坐标系统。
+`svg` 元素可以用于在当前文档（比如说，一个 HTML 文档）内嵌套一个独立的 `svg` 片段。 这个独立片段拥有独立的视口和坐标系统。
 
-+ `version` : 用于指明 `SVG` 文档遵循规范。它只允许在根元素 `<svg>` 上使用。目前只有 `1.0` 和 `1.1` 两个有效选择。
-+ `width` : 在用户坐标系统中标识了一个水平长度。大多数时候，它体现引用元素的矩形区域的宽度。`<svg>` 的宽度默认是 `100%`
-+ `height` : 在用户坐标系统中标识了一个垂直长度。大多数时候，它体现引用元素的矩形区域的高度。`<svg>` 的宽度默认是 `100%`
-+ `x` : 在用户坐标系统中标识了一个 `x轴` 坐标。
-+ `y` : 在用户坐标系统中标识了一个 `y轴` 坐标。
-+ `viewBox` ： 指定一个给定的一组图形伸展以适应特定的容器元素。
-  + `viewBox="x, y, width, height"` : `x` -左上角横坐标， `y` -左上角纵坐标， `width` -宽度， `height` -高度。不允许宽度和高度为负值, `0` 则禁用元素的呈现。
-  + 该属性会受到 `preserveAspectRatio` 的影响
-+ `preserveAspectRatio` : 表示是否强制进行统一缩放。 `preserveAspectRatio="<align> [<meetOrSlice>]"`
-  + `<align>` : 表示 SVG 的 `viewbox` 与 视图宽高(`viewport`) 如何对齐。
-    + `xMin` : 视图宽高(`viewport`) 和 `viewBox` 左边对齐
-    + `xMid` : 视图宽高(`viewport`) 和 `viewBox` x轴中心对齐
-    + `xMax` : 视图宽高(`viewport`) 和 `viewBox` 右边对齐
-    + `YMin` : 视图宽高(`viewport`) 和 `viewBox` 上边缘对齐。注意 Y 是大写。
-    + `YMid` : 视图宽高(`viewport`) 和 `viewBox` y轴中心点对齐。注意 Y 是大写。
-    + `YMax` : 视图宽高(`viewport`) 和 `viewBox` 下边缘对齐。注意 Y 是大写。
-    + `x` 和 `y` 可以组合，如： `xMinYMin` 、`xMinYMid` 、 `xMinYMax` 等
-  + `<meetOrSlice>` : 可选，表示如何维持高宽比。
-    + `meet` : 保持纵横比缩放 `viewBox` 适应 视图宽高(`viewport`)
-    + `slice` : 保持纵横比同时比例小的方向放大填满 视图宽高(`viewport`)
-    + `none` : 扭曲纵横比以充分适应 视图宽高(`viewport`)
-+ `baseProfile` : 描述了作者认为正确渲染内容所需要的最小的 `SVG` 语言概述。可以被编辑工具用来在用户的修改超出所指定的基准概述范围时发出警告。
-  + `none` : 代表了最小的 `SVG` 语言配置，没有描述作者关于正确渲染内容的观点。
-  + `full` : 代表一个正常的概述，适用于 PC。
-  + `basic` : 代表一个轻量级的概述，适用于 PDA。
-  + `tiny` : 代表更轻量的概述，适用于手机。
+- `version` : 用于指明 `SVG` 文档遵循规范。它只允许在根元素 `<svg>` 上使用。目前只有 `1.0` 和 `1.1` 两个有效选择。
+- `width` : 在用户坐标系统中标识了一个水平长度。大多数时候，它体现引用元素的矩形区域的宽度。`<svg>` 的宽度默认是 `100%`
+- `height` : 在用户坐标系统中标识了一个垂直长度。大多数时候，它体现引用元素的矩形区域的高度。`<svg>` 的宽度默认是 `100%`
+- `x` : 在用户坐标系统中标识了一个 `x轴` 坐标。
+- `y` : 在用户坐标系统中标识了一个 `y轴` 坐标。
+- `viewBox` ： 指定一个给定的一组图形伸展以适应特定的容器元素。
+  - `viewBox="x, y, width, height"` : `x` -左上角横坐标， `y` -左上角纵坐标， `width` -宽度， `height` -高度。不允许宽度和高度为负值, `0` 则禁用元素的呈现。
+  - 该属性会受到 `preserveAspectRatio` 的影响
+- `preserveAspectRatio` : 表示是否强制进行统一缩放。 `preserveAspectRatio="<align> [<meetOrSlice>]"`
+  - `<align>` : 表示 SVG 的 `viewbox` 与 视图宽高(`viewport`) 如何对齐。
+    - `xMin` : 视图宽高(`viewport`) 和 `viewBox` 左边对齐
+    - `xMid` : 视图宽高(`viewport`) 和 `viewBox` x 轴中心对齐
+    - `xMax` : 视图宽高(`viewport`) 和 `viewBox` 右边对齐
+    - `YMin` : 视图宽高(`viewport`) 和 `viewBox` 上边缘对齐。注意 Y 是大写。
+    - `YMid` : 视图宽高(`viewport`) 和 `viewBox` y 轴中心点对齐。注意 Y 是大写。
+    - `YMax` : 视图宽高(`viewport`) 和 `viewBox` 下边缘对齐。注意 Y 是大写。
+    - `x` 和 `y` 可以组合，如： `xMinYMin` 、`xMinYMid` 、 `xMinYMax` 等
+  - `<meetOrSlice>` : 可选，表示如何维持高宽比。
+    - `meet` : 保持纵横比缩放 `viewBox` 适应 视图宽高(`viewport`)
+    - `slice` : 保持纵横比同时比例小的方向放大填满 视图宽高(`viewport`)
+    - `none` : 扭曲纵横比以充分适应 视图宽高(`viewport`)
+- `baseProfile` : 描述了作者认为正确渲染内容所需要的最小的 `SVG` 语言概述。可以被编辑工具用来在用户的修改超出所指定的基准概述范围时发出警告。
+  - `none` : 代表了最小的 `SVG` 语言配置，没有描述作者关于正确渲染内容的观点。
+  - `full` : 代表一个正常的概述，适用于 PC。
+  - `basic` : 代表一个轻量级的概述，适用于 PDA。
+  - `tiny` : 代表更轻量的概述，适用于手机。
 
 ### `<g>` 元素
 
@@ -49,22 +49,29 @@ tags:
 ::: normal-demo
 
 ```html
-<svg width="100%" height="80px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg
+  width="100%"
+  height="80px"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
   <style>
-    .classA { fill:red }
+    .classA {
+      fill: red;
+    }
   </style>
   <defs>
     <g id="Port">
-      <circle style="fill:inherit" r="10"/>
+      <circle style="fill:inherit" r="10" />
     </g>
   </defs>
 
   <text y="15">black</text>
   <use x="50" y="10" xlink:href="#Port" />
   <text y="35">red</text>
-  <use x="50" y="30" xlink:href="#Port" class="classA"/>
+  <use x="50" y="30" xlink:href="#Port" class="classA" />
   <text y="55">blue</text>
-  <use x="50" y="50" xlink:href="#Port" style="fill:blue"/>
+  <use x="50" y="50" xlink:href="#Port" style="fill:blue" />
 </svg>
 ```
 
@@ -77,8 +84,12 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 ::: normal-demo
 
 ```html
-<svg width="80px" height="30px" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">
-
+<svg
+  width="80px"
+  height="30px"
+  viewBox="0 0 80 30"
+  xmlns="http://www.w3.org/2000/svg"
+>
   <defs>
     <linearGradient id="Gradient01">
       <stop offset="20%" stop-color="#39F" />
@@ -86,7 +97,7 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
     </linearGradient>
   </defs>
 
-  <rect x="10" y="10" width="60" height="10" fill="url(#Gradient01)"  />
+  <rect x="10" y="10" width="60" height="10" fill="url(#Gradient01)" />
 </svg>
 ```
 
@@ -94,7 +105,7 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 
 ### `<symbol>` 元素
 
-`<symbol>` 元素用来定义一个**图形模板**对象，它可以用一个 `<use>` 元素实例化。`<symbol>` 元素对图形的作用是在同一文档中多次使用，添加结构和语义。一个 `<symbol>` 元素本身是不呈现的。只有 `<symbol>` 元素的实例（亦即，一个引用了symbol的 `<use>` 元素）才能呈现。
+`<symbol>` 元素用来定义一个**图形模板**对象，它可以用一个 `<use>` 元素实例化。`<symbol>` 元素对图形的作用是在同一文档中多次使用，添加结构和语义。一个 `<symbol>` 元素本身是不呈现的。只有 `<symbol>` 元素的实例（亦即，一个引用了 symbol 的 `<use>` 元素）才能呈现。
 
 ::: normal-demo
 
@@ -102,14 +113,21 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 <svg>
   <!-- symbol definition  NEVER draw -->
   <symbol id="sym01" viewBox="0 0 150 110">
-    <circle cx="50" cy="50" r="40" stroke-width="8" stroke="red" fill="red"/>
-    <circle cx="90" cy="60" r="40" stroke-width="8" stroke="green" fill="white"/>
+    <circle cx="50" cy="50" r="40" stroke-width="8" stroke="red" fill="red" />
+    <circle
+      cx="90"
+      cy="60"
+      r="40"
+      stroke-width="8"
+      stroke="green"
+      fill="white"
+    />
   </symbol>
 
   <!-- actual drawing by "use" element -->
-  <use xlink:href="#sym01" x="0" y="0" width="100" height="50"/>
-  <use xlink:href="#sym01" x="0" y="50" width="75" height="38"/>
-  <use xlink:href="#sym01" x="0" y="100" width="50" height="25"/>
+  <use xlink:href="#sym01" x="0" y="0" width="100" height="50" />
+  <use xlink:href="#sym01" x="0" y="50" width="75" height="38" />
+  <use xlink:href="#sym01" x="0" y="100" width="50" height="25" />
 </svg>
 ```
 
@@ -122,13 +140,16 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 ::: normal-demo
 
 ```html
-<svg width="140" height="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-
+<svg
+  width="140"
+  height="30"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+>
   <a xlink:href="https://lrh21g.github.io/blogs/" target="_blank">
-    <rect height="30" width="120" y="0" x="0" rx="15"/>
+    <rect height="30" width="120" y="0" x="0" rx="15" />
     <text fill="white" text-anchor="middle" y="21" x="60">MR.LRH BLOGS</text>
   </a>
-
 </svg>
 ```
 
@@ -138,26 +159,26 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 @namespace url(http://www.w3.org/1999/xhtml);
 @namespace svg url(http://www.w3.org/2000/svg);
 
-/* 匹配所有的XHTML <a> 元素, 因为 XHTML 是默认无前缀命名空间 */
+/_ 匹配所有的 XHTML <a> 元素, 因为 XHTML 是默认无前缀命名空间 _/
 a {}
 
-/* 匹配所有的 SVG <a> 元素 */
+/_ 匹配所有的 SVG <a> 元素 _/
 svg|a {}
 
-/* 匹配 XHTML 和 SVG <a> 元素 */
-*|a {}
+/_ 匹配 XHTML 和 SVG <a> 元素 _/
+\*|a {}
 ```
 
 ## 基本形状
 
-| 形状       | 代码                                                                 | 描述                                                                          |
-| :--------- | :------------------------------------------------------------------- | :---------------------------------------------------------------------------- |
-| **直线**   | `<line x1="start-x" y1="start-y" x2="end-x" y2="end-y" />`           | 以 `(start-x, start-y)` 为起点，`(end-x, end-y)` 为终点                       |
-| **矩形**   | `<rect x="left-x" y="top-y" width="width" height="height" />`        | 指定左上角 `(left-x, top-y)` 坐标，宽 `width` ，高 `height`                   |
-| **圆**     | `<circle cx="center-x" cy="center-y" r="radius" />`                  | 以 `(center-x, center-y)` 为圆心，半径为 `radius`                             |
-| **椭圆**   | `<ellipse cx="center-x" cy="center-y" rx="x-radius" ry="y-radius"/>` | 以 `(center-x, center-y)` 为圆心，x轴半径为 `x-radius` ，y轴半径为 `y-radius` |
-| **多边形** | `<polygon points="points-list" />`                                   | 由一系列坐标组成 `points-list: x1,y1 x2,y2 x3,y3 ...`                         |
-| **折线**   | `<polyline points="points-list" />`                                  | 由一系列坐标组成 `points-list: x1,y1 x2,y2 x3,y3 ...`                         |
+| 形状       | 代码                                                                 | 描述                                                                            |
+| :--------- | :------------------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| **直线**   | `<line x1="start-x" y1="start-y" x2="end-x" y2="end-y" />`           | 以 `(start-x, start-y)` 为起点，`(end-x, end-y)` 为终点                         |
+| **矩形**   | `<rect x="left-x" y="top-y" width="width" height="height" />`        | 指定左上角 `(left-x, top-y)` 坐标，宽 `width` ，高 `height`                     |
+| **圆**     | `<circle cx="center-x" cy="center-y" r="radius" />`                  | 以 `(center-x, center-y)` 为圆心，半径为 `radius`                               |
+| **椭圆**   | `<ellipse cx="center-x" cy="center-y" rx="x-radius" ry="y-radius"/>` | 以 `(center-x, center-y)` 为圆心，x 轴半径为 `x-radius` ，y 轴半径为 `y-radius` |
+| **多边形** | `<polygon points="points-list" />`                                   | 由一系列坐标组成 `points-list: x1,y1 x2,y2 x3,y3 ...`                           |
+| **折线**   | `<polyline points="points-list" />`                                  | 由一系列坐标组成 `points-list: x1,y1 x2,y2 x3,y3 ...`                           |
 
 ::: normal-demo
 
@@ -201,17 +222,17 @@ svg|a {}
 
 ## 路径
 
-| 路径                                             | 描述                                                                                                                                                                                                                                                                               |
-| :----------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `M(m) x y`                                       | 移动画笔到 `(x, y)`                                                                                                                                                                                                                                                                |
-| `L(l) x y`                                       | 绘制一条直线到 `(x, y)`                                                                                                                                                                                                                                                            |
-| `H(h) x`                                         | 水平绘制一条直线到 `x`                                                                                                                                                                                                                                                             |
-| `V(v) y`                                         | 垂直绘制一条直线到 `y`                                                                                                                                                                                                                                                             |
-| `A(a) rx ry x-axis-rotation large-arc sweep x y` | 绘制一段到 `(x, y)` 的椭圆弧。椭圆弧 x轴 的半径为 `rx` ，椭圆弧 y轴 的半径为 `ry` ，椭圆相对于 x轴 旋转 `x-axis-rotation` 度。 <br/> `large-arc` 设置为 `0` 表示弧线小于 180 度， `1` 表示弧线大于 180 度。 <br/> `sweep` 设置为 `0` 表示弧线逆时针旋转， `1` 表示弧线顺时针旋转。 |
-| `Q(q) cx cy x y`                                 | 从当前点绘制一条到 `(x, y)` 的二次贝塞尔曲线, 曲线的控制点为 `(cx, cy)`                                                                                                                                                                                                            |
-| `T(t) x y`                                       | 该命令只能在 `Q(q) cx cy x y` 之后使用。假设 `Q` 命令生成曲线 s , `T` 命令的作用是从 s 的终点再绘制一条到 `(x y)` 的二次贝塞尔曲线, 曲线的控制点为 s 控制点关于 s 终点的对称点. `T` 命令生成的曲线会非常平滑。                                                                     |
-| `C(c) cx1 cy1 cx2 cy2 x y`                       | 从当前点绘制一条到 `(x, y)` 的三次贝塞尔曲线, 曲线的开始控制点和终点控制点分别为 `(cx1, cy1)`, `(cx2, cy2)` 。                                                                                                                                                                     |
-| `S(s) cx2 cy2 x y`                               | 该命令只能在 `C(c) cx1 cy1 cx2 cy2 x y` 命令后使用, 假设 `C` 命令生成曲线 s , `S` 命令的作用是再绘制一条到 `(x, y)` 的三次贝塞尔曲线, 曲线的终点控制点是 `(cx2, cy2)`, 曲线的开始控制点是 s 的终点控制点关于 s 终点的对称点.                                                       |
+| 路径                                             | 描述                                                                                                                                                                                                                                                                                  |
+| :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `M(m) x y`                                       | 移动画笔到 `(x, y)`                                                                                                                                                                                                                                                                   |
+| `L(l) x y`                                       | 绘制一条直线到 `(x, y)`                                                                                                                                                                                                                                                               |
+| `H(h) x`                                         | 水平绘制一条直线到 `x`                                                                                                                                                                                                                                                                |
+| `V(v) y`                                         | 垂直绘制一条直线到 `y`                                                                                                                                                                                                                                                                |
+| `A(a) rx ry x-axis-rotation large-arc sweep x y` | 绘制一段到 `(x, y)` 的椭圆弧。椭圆弧 x 轴 的半径为 `rx` ，椭圆弧 y 轴 的半径为 `ry` ，椭圆相对于 x 轴 旋转 `x-axis-rotation` 度。 <br/> `large-arc` 设置为 `0` 表示弧线小于 180 度， `1` 表示弧线大于 180 度。 <br/> `sweep` 设置为 `0` 表示弧线逆时针旋转， `1` 表示弧线顺时针旋转。 |
+| `Q(q) cx cy x y`                                 | 从当前点绘制一条到 `(x, y)` 的二次贝塞尔曲线, 曲线的控制点为 `(cx, cy)`                                                                                                                                                                                                               |
+| `T(t) x y`                                       | 该命令只能在 `Q(q) cx cy x y` 之后使用。假设 `Q` 命令生成曲线 s , `T` 命令的作用是从 s 的终点再绘制一条到 `(x y)` 的二次贝塞尔曲线, 曲线的控制点为 s 控制点关于 s 终点的对称点. `T` 命令生成的曲线会非常平滑。                                                                        |
+| `C(c) cx1 cy1 cx2 cy2 x y`                       | 从当前点绘制一条到 `(x, y)` 的三次贝塞尔曲线, 曲线的开始控制点和终点控制点分别为 `(cx1, cy1)`, `(cx2, cy2)` 。                                                                                                                                                                        |
+| `S(s) cx2 cy2 x y`                               | 该命令只能在 `C(c) cx1 cy1 cx2 cy2 x y` 命令后使用, 假设 `C` 命令生成曲线 s , `S` 命令的作用是再绘制一条到 `(x, y)` 的三次贝塞尔曲线, 曲线的终点控制点是 `(cx2, cy2)`, 曲线的开始控制点是 s 的终点控制点关于 s 终点的对称点.                                                          |
 
 > 注意：路径小写表示相对于上个坐标。
 
@@ -233,23 +254,14 @@ svg|a {}
   <!-- 灰色阴影 -->
   <ellipse cx="154" cy="154" rx="150" ry="120" style="fill: #999"></ellipse>
   <!-- 浅蓝色椭圆 -->
-  <ellipse
-    cx="152"
-    cy="152"
-    rx="150"
-    ry="120"
-    style="fill: #cceeff"
-  ></ellipse>
+  <ellipse cx="152" cy="152" rx="150" ry="120" style="fill: #cceeff"></ellipse>
   <!-- 浅红色大半圆填充符合的上半部分，其下方“侵入”符号左下方的浅红色小半圆 -->
   <path
     d="M 302 152 A 150 120, 0, 1, 0, 2, 152 A 75 60, 0, 1, 0, 152, 152"
     style="fill: #ffcccc"
   ></path>
   <!-- 浅蓝色小半圆，填充符号右上方 -->
-  <path
-    d="M 152 152 A 75 60, 0, 1, 1, 302, 152"
-    style="fill: #cceeff"
-  ></path>
+  <path d="M 152 152 A 75 60, 0, 1, 1, 302, 152" style="fill: #cceeff"></path>
 </svg>
 ```
 
@@ -268,7 +280,7 @@ svg|a {}
 | 变换         | 代码                              | 描述                                                                  |
 | :----------- | :-------------------------------- | :-------------------------------------------------------------------- |
 | **平移**     | `translate(x, y)`                 | 将用户坐标系统的坐标原点移动到 `(x, y)`                               |
-| **缩放**     | `scale(xFactor, yFactor)`         | 将用户坐标系统的 x轴、y轴 单位长度分别乘 `(xFactor, yFactor)` 倍      |
+| **缩放**     | `scale(xFactor, yFactor)`         | 将用户坐标系统的 x 轴、y 轴 单位长度分别乘 `(xFactor, yFactor)` 倍    |
 | **缩放**     | `scale(factor)`                   | 同 `scale(factor, factor)`                                            |
 | **旋转**     | `rotate(angle, centerX, centerY)` | 将用户坐标系统以 `(centerX, centerY)` 为旋转中心顺时针旋转 `angle` 度 |
 | **旋转**     | `rotate(angle)`                   | 同 `rotate(angle, 0, 0)`                                              |
@@ -385,12 +397,12 @@ svg|a {}
 
 ## SVG 文件优化
 
-+ 减少路径的控制点
-+ 使用合适的画布尺寸
-+ 使用第三方工具进行优化
-  + [SVGO-GUI](https://github.com/svg/svgo-gui)
-  + [SVGOMG](https://jakearchibald.github.io/svgomg/)
+- 减少路径的控制点
+- 使用合适的画布尺寸
+- 使用第三方工具进行优化
+  - [SVGO-GUI](https://github.com/svg/svgo-gui)
+  - [SVGOMG](https://jakearchibald.github.io/svgomg/)
 
 ## 参考
 
-+ [MDN - SVG教程](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial)
+- [MDN - SVG 教程](https://developer.mozilla.org/zh-CN/docs/Web/SVG/Tutorial)
