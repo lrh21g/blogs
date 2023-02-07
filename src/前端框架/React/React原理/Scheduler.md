@@ -333,7 +333,7 @@ function unstable_scheduleCallback(priorityLevel, callback, options) {
 
 :::
 
-### 消费任务
+### 任务管理
 
 创建任务之后，通过 `requestHostCallback(callback)` 函数请求调度。`flushWork` 函数作为参数被传入调度中心等待回调。
 
@@ -705,6 +705,331 @@ function workLoop(hasTimeRemaining, initialTime) {
       requestHostTimeout(handleTimeout, firstTimer.startTime - currentTime)
     }
     return false
+  }
+}
+```
+
+:::
+
+### 时间切片原理
+
+消费任务队列的过程中, 可以消费 `1~n` 个 `task`, 甚至清空整个调度任务队列 `taskQueue` 。在每一次具体执行 `task.callback` 之前，都会进行超时检测。如果超时，会立即退出循环并等待下一次调用。
+
+```js
+function workLoop(hasTimeRemaining, initialTime) {
+  while (
+    currentTask !== null &&
+    !(enableSchedulerDebugging && isSchedulerPaused)
+  ) {
+    if (
+      currentTask.expirationTime > currentTime &&
+      (!hasTimeRemaining || shouldYieldToHost())
+    ) {
+      break
+    }
+
+    const callback = currentTask.callback
+
+    if (typeof callback === 'function') {
+      // 执行当前任务 callback 回调
+      const continuationCallback = callback(didUserCallbackTimeout)
+    }
+
+    // 省略部分代码
+  }
+  // 省略部分代码
+}
+```
+
+### 可中断渲染原理
+
+在时间切片的基础之上，如果单个 `task.callback` 执行时间就很长(假设 200ms)，则需要 `task.callback` 自己能够检测是否超时。
+
+在 `Fiber` 树构造过程中，每构造完成一个单元，都会检测一次超时。如遇超时，就退出 `Fiber` 树构造循环，并返回一个新的回调函数（即：执行当前任务 `callback` 回调的返回值 `continuationCallback`）并等待下一次回调继续未完成的 `Fiber` 树构造。
+
+## React 节流防抖
+
+`ensureRootIsScheduled` 函数会与 `scheduler` 包通信, 最后注册一个 `task` 并等待回调。
+
+- 在 `task` 注册完成之后, 会设置 `fiberRoot` 对象上的属性，代表现在已经处于调度进行中。
+- 再次进入 `ensureRootIsScheduled` 时（比如：连续 2 次 `setState`, 第 2 次 `setState` 同样会触发 `reconciler` 运作流程中的调度阶段）。如果发现处于调度中, 则需要一些节流和防抖措施, 进而保证调度性能。
+  - 节流（判断条件: `existingCallbackPriority === newCallbackPriority`, 新旧更新的优先级相同, 如连续多次执行 `setState`）, 则无需注册新 `task` （继续沿用上一个优先级相同的 `task`）, 直接退出调用。
+  - 防抖（判断条件: `existingCallbackPriority !== newCallbackPriority`, 新旧更新的优先级不同）, 则取消旧 `task`, 重新注册新 `task`。
+
+::: details ensureRootIsScheduled
+
+```js
+// ensureRootIsScheduled 用于 rootFiber 的任务调度。一个 root 只有一个任务在执行，每次更新和任务退出前都会调用此函数。
+// 1. 计算新任务的过期时间、优先级
+// 2. 无新任务，退出调度
+// 3. 有历史任务：
+//    3.1 新旧任务的优先级相同，继续执行旧任务，（新任务会在旧任务执行完成之后的同步刷新钩子中执行）
+//    3.2 新旧任务的优先级不相同，取消旧任务
+// 4. 根据不同的 Priority （优先级） 执行不同的调度(scheduleSyncCallback(同步) 或 scheduleCallback（异步）), 最后将返回值设置到 fiberRoot.callbackNode
+function ensureRootIsScheduled(root: FiberRoot, currentTime: number) {
+  const existingCallbackNode = root.callbackNode
+
+  // Check if any lanes are being starved by other work. If so, mark them as
+  // expired so we know to work on those next.
+  markStarvedLanesAsExpired(root, currentTime)
+
+  // Determine the next lanes to work on, and their priority.
+  const nextLanes = getNextLanes(
+    root,
+    root === workInProgressRoot ? workInProgressRootRenderLanes : NoLanes
+  )
+
+  // 节流防抖
+  if (nextLanes === NoLanes) {
+    // Special case: There's nothing to work on.
+    if (existingCallbackNode !== null) {
+      cancelCallback(existingCallbackNode)
+    }
+    root.callbackNode = null
+    root.callbackPriority = NoLane
+    return
+  }
+
+  // We use the highest priority lane to represent the priority of the callback.
+  const newCallbackPriority = getHighestPriorityLane(nextLanes)
+
+  // Check if there's an existing task. We may be able to reuse it.
+  const existingCallbackPriority = root.callbackPriority
+  if (
+    existingCallbackPriority === newCallbackPriority &&
+    // Special case related to `act`. If the currently scheduled task is a
+    // Scheduler task, rather than an `act` task, cancel it and re-scheduled
+    // on the `act` queue.
+    !(
+      __DEV__ &&
+      ReactCurrentActQueue.current !== null &&
+      existingCallbackNode !== fakeActCallbackNode
+    )
+  ) {
+    // The priority hasn't changed. We can reuse the existing task. Exit.
+    return
+  }
+
+  if (existingCallbackNode != null) {
+    // Cancel the existing callback. We'll schedule a new one below.
+    cancelCallback(existingCallbackNode)
+  }
+
+  // Schedule a new callback.
+  let newCallbackNode
+  if (newCallbackPriority === SyncLane) {
+    // Special case: Sync React callbacks are scheduled on a special
+    // internal queue
+    if (root.tag === LegacyRoot) {
+      scheduleLegacySyncCallback(performSyncWorkOnRoot.bind(null, root))
+    } else {
+      scheduleSyncCallback(performSyncWorkOnRoot.bind(null, root))
+    }
+    if (supportsMicrotasks) {
+      scheduleMicrotask(() => {
+        // In Safari, appending an iframe forces microtasks to run.
+        // https://github.com/facebook/react/issues/22459
+        // We don't support running callbacks in the middle of render
+        // or commit so we need to check against that.
+        if (
+          (executionContext & (RenderContext | CommitContext)) ===
+          NoContext
+        ) {
+          // Note that this would still prematurely flush the callbacks
+          // if this happens outside render or commit phase (e.g. in an event).
+          flushSyncCallbacks()
+        }
+      })
+    } else {
+      // Flush the queue in an Immediate task.
+      scheduleCallback(ImmediateSchedulerPriority, flushSyncCallbacks)
+    }
+    newCallbackNode = null
+  } else {
+    let schedulerPriorityLevel
+    // lanesToEventPriority ： 将 lane 优先级转换为 event 优先级
+    // 以区间的形式，根据传入的 lane 返回对应的 event 优先级。比如，传入的优先级不大于 Discrete 优先级，就返回 Discrete 优先级，以此类推
+    switch (lanesToEventPriority(nextLanes)) {
+      case DiscreteEventPriority:
+        // DiscreteEventPriority 离散事件优先级。click、keydown、focusin等，事件的触发不是连续，可以做到快速响应
+        schedulerPriorityLevel = ImmediateSchedulerPriority
+        break
+      case ContinuousEventPriority:
+        // ContinuousEventPriority 连续事件优先级。drag、scroll、mouseover等，事件的是连续触发的，快速响应可能会阻塞渲染，优先级较离散事件低
+        schedulerPriorityLevel = UserBlockingSchedulerPriority
+        break
+      case DefaultEventPriority:
+        // DefaultEventPriority 默认的事件优先级
+        schedulerPriorityLevel = NormalSchedulerPriority
+        break
+      case IdleEventPriority:
+        // IdleEventPriority 空闲的优先级
+        schedulerPriorityLevel = IdleSchedulerPriority
+        break
+      default:
+        schedulerPriorityLevel = NormalSchedulerPriority
+        break
+    }
+    newCallbackNode = scheduleCallback(
+      schedulerPriorityLevel,
+      performConcurrentWorkOnRoot.bind(null, root)
+    )
+  }
+  root.callbackPriority = newCallbackPriority
+  root.callbackNode = newCallbackNode
+}
+```
+
+:::
+
+## React Lane 模型
+
+`Lane` 模型使用 31 位二进制来表示优先级车道共 31 条, 位数越小（1 的位置越靠右）表示优先级越高。
+
+::: details Lane 模型优先级
+
+```js
+export type Lanes = number
+export type Lane = number
+export type LaneMap<T> = Array<T>
+
+// Lane 使用 31 位二进制来表示优先级车道共 31 条, 位数越小（1的位置越靠右）表示优先级越高
+export const TotalLanes = 31
+
+// 没有优先级
+export const NoLanes: Lanes = /*                        */ 0b0000000000000000000000000000000
+export const NoLane: Lane = /*                          */ 0b0000000000000000000000000000000
+
+// 同步优先级，表示同步的任务一次只能执行一个，例如：用户的交互事件产生的更新任务
+export const SyncLane: Lane = /*                        */ 0b0000000000000000000000000000001
+
+// 连续触发优先级，例如：滚动事件，拖动事件等
+export const InputContinuousHydrationLane: Lane = /*    */ 0b0000000000000000000000000000010
+export const InputContinuousLane: Lane = /*             */ 0b0000000000000000000000000000100
+
+// 默认优先级，例如使用 setTimeout，请求数据返回等造成的更新
+export const DefaultHydrationLane: Lane = /*            */ 0b0000000000000000000000000001000
+export const DefaultLane: Lane = /*                     */ 0b0000000000000000000000000010000
+
+// 过度优先级，例如: Suspense、useTransition、useDeferredValue等拥有的优先级
+const TransitionHydrationLane: Lane = /*                */ 0b0000000000000000000000000100000
+const TransitionLanes: Lanes = /*                       */ 0b0000000001111111111111111000000
+const TransitionLane1: Lane = /*                        */ 0b0000000000000000000000001000000
+const TransitionLane2: Lane = /*                        */ 0b0000000000000000000000010000000
+const TransitionLane3: Lane = /*                        */ 0b0000000000000000000000100000000
+const TransitionLane4: Lane = /*                        */ 0b0000000000000000000001000000000
+const TransitionLane5: Lane = /*                        */ 0b0000000000000000000010000000000
+const TransitionLane6: Lane = /*                        */ 0b0000000000000000000100000000000
+const TransitionLane7: Lane = /*                        */ 0b0000000000000000001000000000000
+const TransitionLane8: Lane = /*                        */ 0b0000000000000000010000000000000
+const TransitionLane9: Lane = /*                        */ 0b0000000000000000100000000000000
+const TransitionLane10: Lane = /*                       */ 0b0000000000000001000000000000000
+const TransitionLane11: Lane = /*                       */ 0b0000000000000010000000000000000
+const TransitionLane12: Lane = /*                       */ 0b0000000000000100000000000000000
+const TransitionLane13: Lane = /*                       */ 0b0000000000001000000000000000000
+const TransitionLane14: Lane = /*                       */ 0b0000000000010000000000000000000
+const TransitionLane15: Lane = /*                       */ 0b0000000000100000000000000000000
+const TransitionLane16: Lane = /*                       */ 0b0000000001000000000000000000000
+
+const RetryLanes: Lanes = /*                            */ 0b0000111110000000000000000000000
+const RetryLane1: Lane = /*                             */ 0b0000000010000000000000000000000
+const RetryLane2: Lane = /*                             */ 0b0000000100000000000000000000000
+const RetryLane3: Lane = /*                             */ 0b0000001000000000000000000000000
+const RetryLane4: Lane = /*                             */ 0b0000010000000000000000000000000
+const RetryLane5: Lane = /*                             */ 0b0000100000000000000000000000000
+
+export const SomeRetryLane: Lane = RetryLane1
+
+export const SelectiveHydrationLane: Lane = /*          */ 0b0001000000000000000000000000000
+
+const NonIdleLanes: Lanes = /*                          */ 0b0001111111111111111111111111111
+
+export const IdleHydrationLane: Lane = /*               */ 0b0010000000000000000000000000000
+export const IdleLane: Lane = /*                        */ 0b0100000000000000000000000000000
+
+export const OffscreenLane: Lane = /*                   */ 0b1000000000000000000000000000000
+```
+
+:::
+
+在 React 中，`render` 阶段可能被中断，在这个期间会产生一个更高优先级的任务，会再次更新 `Lane` 属性，多个更新就会合并，则需要 `Lane` 表现出多个更新优先级。通过位运算，可以让多个优先级的任务合并，也可以通过位运算分离出高优先级和低优先级的任务。
+
+React 调用 `getHighestPriorityLanes(lanes)` 函数，通过 `getHighestPriorityLane(lanes)` 执行 `lanes & -lanes` 分离出高优先级任务。
+
+::: note 示例
+例如：`SyncLane` 和 `InputContinuousLane` 优先级合并后，通过 `lane & -lane` 分离的结果是 `SyncLane`
+
+```js
+SyncLane = /*                */0b0000000000000000000000000000001
+InputContinuousLane = /*     */0b0000000000000000000000000000100
+lane = SyncLane ｜ InputContinuousLane // SyncLane 和 InputContinuousLane 优先级合并
+lane = /*                    */0b0000000000000000000000000000101
+-lane = /*                   */0b1111111111111111111111111111011
+lanes & -lanes /*            */0b0000000000000000000000000000001
+```
+
+:::
+
+::: details getHighestPriorityLanes 函数
+
+```js
+export function getHighestPriorityLane(lanes: Lanes): Lane {
+  return lanes & -lanes
+}
+
+function getHighestPriorityLanes(lanes: Lanes | Lane): Lanes {
+  switch (getHighestPriorityLane(lanes)) {
+    case SyncLane:
+      return SyncLane
+    case InputContinuousHydrationLane:
+      return InputContinuousHydrationLane
+    case InputContinuousLane:
+      return InputContinuousLane
+    case DefaultHydrationLane:
+      return DefaultHydrationLane
+    case DefaultLane:
+      return DefaultLane
+    case TransitionHydrationLane:
+      return TransitionHydrationLane
+    case TransitionLane1:
+    case TransitionLane2:
+    case TransitionLane3:
+    case TransitionLane4:
+    case TransitionLane5:
+    case TransitionLane6:
+    case TransitionLane7:
+    case TransitionLane8:
+    case TransitionLane9:
+    case TransitionLane10:
+    case TransitionLane11:
+    case TransitionLane12:
+    case TransitionLane13:
+    case TransitionLane14:
+    case TransitionLane15:
+    case TransitionLane16:
+      return lanes & TransitionLanes
+    case RetryLane1:
+    case RetryLane2:
+    case RetryLane3:
+    case RetryLane4:
+    case RetryLane5:
+      return lanes & RetryLanes
+    case SelectiveHydrationLane:
+      return SelectiveHydrationLane
+    case IdleHydrationLane:
+      return IdleHydrationLane
+    case IdleLane:
+      return IdleLane
+    case OffscreenLane:
+      return OffscreenLane
+    default:
+      if (__DEV__) {
+        console.error(
+          'Should have found matching lanes. This is a bug in React.'
+        )
+      }
+      // This shouldn't be reachable, but as a fallback, return the entire bitmask.
+      return lanes
   }
 }
 ```
