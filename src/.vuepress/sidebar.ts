@@ -245,6 +245,7 @@ export default sidebar({
         '/前端框架/React/React原理/Reconciler',
         '/前端框架/React/React原理/事件系统',
         '/前端框架/React/React原理/React位运算',
+        '/前端框架/React/React原理/Hooks',
       ],
     },
   ],
