@@ -251,7 +251,10 @@ export default sidebar({
     {
       text: 'React 生态',
       collapsible: true,
-      children: ['/前端框架/React/React生态/react-router'],
+      children: [
+        '/前端框架/React/React生态/react-router',
+        '/前端框架/React/React生态/react-redux',
+      ],
     },
   ],
   '/前端框架/Webpack/': [
