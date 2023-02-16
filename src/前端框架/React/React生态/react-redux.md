@@ -19,13 +19,11 @@ Redux Toolkit 是 Redux 官方强烈推荐，开箱即用的一个高效的 Redu
 
 import { Provider } from 'react-redux'
 
-import reduxTookitStore from './store/reduxToolkit.js';
-import ViewReduxToolkit from './views/ViewReduxToolkit.js';
+import reduxTookitStore from './store/reduxToolkit.js'
+import ViewReduxToolkit from './views/ViewReduxToolkit.js'
 
 export default function App() {
   return (
-    {/* <Provider store> 使组件层级中的 connect() 方法都能够获得 Redux store。 */}
-    {/* 正常情况下，根组件应该嵌套在 <Provider> 中才能使用 connect() 方法。 */}
     <Provider store={reduxTookitStore}>
       <ViewReduxToolkit />
     </Provider>
