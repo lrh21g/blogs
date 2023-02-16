@@ -1,9 +1,37 @@
 # React-Router v6.x
 
-## 基础使用
+React Router 是完整的 React 路由解决方案。
+
+- [React Router](https://reactrouter.com/en/main)
+- [React Router 6.4 [中文]](https://runebook.dev/zh/docs/react_router/-index-)
+
+## 基本使用
+
+::: details src/App.js
 
 ```js
-// router/index.js
+// src/App.js
+
+import React, { Suspense } from 'react'
+import { RouterProvider } from 'react-router-dom'
+
+import router from './router'
+
+export default function App() {
+  return (
+    <Suspense fallback={null}>
+      <RouterProvider router={router} />
+    </Suspense>
+  )
+}
+```
+
+:::
+
+::: details src/router/index.js
+
+```js
+// src/router/index.js
 
 import React from 'react'
 import { createBrowserRouter, Navigate, useNavigate } from 'react-router-dom'
@@ -47,25 +75,12 @@ const router = createBrowserRouter(localRoutes)
 export default router
 ```
 
-```js
-// App.js
+:::
 
-import React, { Suspense } from 'react'
-import { RouterProvider } from 'react-router-dom'
-
-import router from './router'
-
-export default function App() {
-  return (
-    <Suspense fallback={null}>
-      <RouterProvider router={router} />
-    </Suspense>
-  )
-}
-```
+::: details src/views/List.js
 
 ```js
-// List.js
+// src/views/List.js
 
 import React, { useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
@@ -94,8 +109,12 @@ const List = props => {
 export default List
 ```
 
+:::
+
+::: details src/views/Detail.js
+
 ```js
-// Detail.js
+// src/views/Detail.js
 
 import React, { useState, useEffect, useCallback } from 'react'
 import {
@@ -200,6 +219,8 @@ const Detail = () => {
 
 export default Detail
 ```
+
+:::
 
 ## 实现原理
 
