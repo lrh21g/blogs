@@ -2,8 +2,40 @@
 
 Redux 是 JavaScript 应用的状态容器，提供可预测的状态管理。
 
+Redux 可以作为发布订阅模式的一个具体实现。Redux 都会创建一个 `store` ，里面保存了状态信息，改变 `store` 的方法 `dispatch` ，以及订阅 `store` 变化的方法 `subscribe` 。
+
 - [Redux](https://redux.js.org/)
 - [Redux 中文官网](https://cn.redux.js.org/)
+
+## Redux 三大原则
+
+- 单一数据源：应用程序的全局状态作为对象存储在单个 `store` 中。
+
+  一个单一数据源 `state` 简化了应用的调试和和监控，在开发中能将应用数据持久化到本地，从而加速开发周期。
+
+- State 是只读的：更改状态的唯一方法是 `dispatch` 一个 `action`，通过 `action` 执行每个 `reducer` 。
+
+  确保了视图行为和网络请求回调都不能直接修改 `state`，相反它们只能表达出想要修改 `state` 的意图。`action` 是一个用于描述已发生事件的普通对象。
+
+- 使用 `Reducer` 纯函数来执行修改：为了描述 `action` 如何改变 `state tree`，需要编写纯的 `reducers`。
+
+  `Reducer` 是纯函数，它接收旧的 `state` 和 `action`，并返回新的 `state`。记住，一定要返回一个新的对象，而不是修改之前的 `state`。
+
+## Redux 单向数据流
+
+- 初始启动
+  - 使用最顶层的 `root reducer` 函数创建 `Redux store`
+  - `store` 调用一次 `root reducer`，并将返回值保存为它的初始 `state`
+  - 当 UI 首次渲染时，UI 组件访问 `Redux store` 的当前 `state`，并使用该数据来决定要呈现的内容。同时监听 `store` 的更新，以便可以知道 `state` 是否已更改。
+- 更新环节
+  - 应用程序中发生了某些事情，例如：用户单击按钮
+  - `dispatch` 一个 `action` 到 `Redux store`，例如 `dispatch({type: 'counter/increment'})`
+  - `store` 用之前的 `state` 和当前的 `action` 再次运行 `reducer` 函数，并将返回值保存为新的 `state`
+  - `store` 通知所有订阅过的 UI，通知 `store` 发生更新
+  - 每个订阅过 `store` 数据的 UI 组件都会检查它们需要的 `state` 部分是否被更新
+  - 发现数据被更新的每个组件都强制使用新数据重新渲染，紧接着更新网页
+
+![redux_data_flow_diagram](../files/images/redux_data_flow_diagram.gif)
 
 ## Redux Toolkit
 
