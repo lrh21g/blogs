@@ -226,6 +226,7 @@ export default sidebar({
         '/前端框架/React/React基础/高阶组件',
         '/前端框架/React/React基础/自定义Hooks',
         '/前端框架/React/React基础/Transition',
+        '/前端框架/React/React基础/useSyncExternalStore',
       ],
     },
     {
