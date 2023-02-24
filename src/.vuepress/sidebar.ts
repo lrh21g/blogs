@@ -224,6 +224,8 @@ export default sidebar({
         '/前端框架/React/React基础/Context',
         '/前端框架/React/React基础/模块化CSS',
         '/前端框架/React/React基础/高阶组件',
+        '/前端框架/React/React基础/自定义Hooks',
+        '/前端框架/React/React基础/Transition',
       ],
     },
     {
@@ -246,6 +248,7 @@ export default sidebar({
         '/前端框架/React/React原理/事件系统',
         '/前端框架/React/React原理/React位运算',
         '/前端框架/React/React原理/Hooks',
+        '/前端框架/React/React原理/Context',
       ],
     },
     {
