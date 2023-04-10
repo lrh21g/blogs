@@ -91,6 +91,14 @@ export default sidebar({
   ],
   '/前端/JavaScript/': [
     {
+      text: '数据类型',
+      collapsible: true,
+      children: [
+        '/前端/JavaScript/数据类型/概述',
+        '/前端/JavaScript/数据类型/基础类型',
+      ],
+    },
+    {
       text: 'JavaScript基础',
       collapsible: true,
       children: [
