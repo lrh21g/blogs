@@ -41,7 +41,7 @@ export default hopeTheme({
   // },
 
   // ========== 主题外观选项 ==========
-  iconAssets: 'iconfont', // 字体图标资源链接，支持 'iconfont' 和 'fontawesome' 关键字。
+  iconAssets: 'iconify', // 全局设置图标资源，内置关键字 "iconfont"、"iconify"、"fontawesome" 和 "fontawesome-with-brand 支持。
   // iconPrefix: '', // 通常情况下，它可以识别 iconAssets 并自动设置，如果识别失败，你可以手动设置图标的 FontClass 前缀。
   darkmode: 'switch', // 深色模式选项。switch - 在深色模式，浅色模式和自动之间切换
   themeColor: {
