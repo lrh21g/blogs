@@ -108,6 +108,12 @@ export default sidebar({
           children: ['对象', '原型与继承'],
         },
         {
+          text: 'Class',
+          icon: 'material-symbols:arrow-circle-right',
+          collapsible: true,
+          children: ['Class类'],
+        },
+        {
           text: '数组',
           icon: 'material-symbols:data-array-rounded',
           collapsible: true,
