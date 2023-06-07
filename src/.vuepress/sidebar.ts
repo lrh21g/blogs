@@ -105,7 +105,7 @@ export default sidebar({
           text: 'Object',
           icon: 'material-symbols:data-object-rounded',
           collapsible: true,
-          children: ['对象', '原型与继承'],
+          children: ['对象', '原型与继承', 'Reflect'],
         },
         {
           text: 'Class',
@@ -123,7 +123,7 @@ export default sidebar({
           text: '函数',
           icon: 'material-symbols:function',
           collapsible: true,
-          children: ['作用域与闭包'],
+          children: ['函数', '作用域与闭包'],
         },
         {
           text: '异步',
