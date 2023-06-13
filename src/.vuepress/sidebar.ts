@@ -129,7 +129,7 @@ export default sidebar({
           text: '异步',
           icon: 'material-symbols:update-rounded',
           collapsible: true,
-          children: ['异步'],
+          children: ['异步', 'EventLoop', 'Promise', 'Generator', 'async'],
         },
       ],
     },
