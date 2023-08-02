@@ -44,12 +44,7 @@ export default hopeTheme({
   iconAssets: 'iconify', // 全局设置图标资源，内置关键字 "iconfont"、"iconify"、"fontawesome" 和 "fontawesome-with-brand 支持。
   // iconPrefix: '', // 通常情况下，它可以识别 iconAssets 并自动设置，如果识别失败，你可以手动设置图标的 FontClass 前缀。
   darkmode: 'switch', // 深色模式选项。switch - 在深色模式，浅色模式和自动之间切换
-  themeColor: {
-    blue: '#2196f3',
-    red: '#f26d6d',
-    green: '#3eaf7c',
-    orange: '#fb9b5f',
-  }, // 主题色选项配置
+  themeColor: true, // 主题色选项配置
   fullscreen: false, // 是否显示全屏按钮
   backToTop: true, // 是否显示返回顶部按钮。如果设置为数字，则该数字为触发临界值 (默认临界值为 300px)
   pure: false, // 是否开启纯净模式

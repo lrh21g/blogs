@@ -1,6 +1,9 @@
 import { defineUserConfig } from 'vuepress'
 import { getDirname, path } from '@vuepress/utils'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
+// import { docsearchPlugin } from '@vuepress/plugin-docsearch'
+import { cut } from "nodejs-jieba"
+import { searchProPlugin } from 'vuepress-plugin-search-pro'
 
 import theme from './theme.js'
 
@@ -34,7 +37,7 @@ export default defineUserConfig({
     // importCode : VuePress 内置的 markdown-it 导入代码插件的配置项。设置为 false 可以禁用该插件
     importCode: {
       // handleImportPath ： 用于处理导入代码语法中的文件导入路径
-      handleImportPath: str =>
+      handleImportPath: (str) =>
         str.replace(/^@docs/, path.resolve(__dirname, '..')),
     },
   },
@@ -47,6 +50,16 @@ export default defineUserConfig({
     registerComponentsPlugin({
       // 组件目录的绝对路径
       componentsDir: path.resolve(__dirname, './components'),
+    }),
+    searchProPlugin({
+      // 索引全部内容
+      indexContent: true,
+      autoSuggestions: true,
+      // hotReload: true,
+      indexOptions: {
+        tokenize: (text, fieldName) =>
+          fieldName === "id" ? [text] : cut(text, true),
+      },
     }),
   ],
 
