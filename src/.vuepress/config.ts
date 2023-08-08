@@ -40,6 +40,9 @@ export default defineUserConfig({
       handleImportPath: (str) =>
         str.replace(/^@docs/, path.resolve(__dirname, '..')),
     },
+    headers: {
+      level: [2, 3]
+    }
   },
 
   // ========== 主题配置 ==========

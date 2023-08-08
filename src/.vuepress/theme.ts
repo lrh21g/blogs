@@ -158,7 +158,9 @@ export default hopeTheme({
       include: true, // 支持导入其他文件
       tabs: true, // 添加选项卡支持
       codetabs: true, // 是否启用代码块分组
-      demo: true, // 是否启用代码案例支持
+      demo: {
+        jsfiddle: false // 是否显示 JSFiddle 按钮
+      }, // 是否启用代码案例支持
       playground: {
         presets: ['ts', 'vue'],
       }, // 交互演示
