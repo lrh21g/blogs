@@ -113,12 +113,7 @@ export default sidebar({
           collapsible: true,
           children: ['Class类'],
         },
-        {
-          text: '数组',
-          icon: 'material-symbols:data-array-rounded',
-          collapsible: true,
-          children: ['数组'],
-        },
+        'Set和Map',
         {
           text: '函数',
           icon: 'material-symbols:function',
