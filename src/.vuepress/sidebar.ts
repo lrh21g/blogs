@@ -99,8 +99,16 @@ export default sidebar({
       prefix: '基础知识/',
       collapsible: true,
       children: [
-        '类型概述',
-        '基础类型',
+        {
+          text: "类型概述",
+          link: "类型概述",
+          icon: "material-symbols:arrow-circle-right",
+        },
+        {
+          text: "基础类型",
+          link: "基础类型",
+          icon: "material-symbols:arrow-circle-right",
+        },
         {
           text: 'Object',
           icon: 'material-symbols:data-object-rounded',
@@ -108,12 +116,21 @@ export default sidebar({
           children: ['对象', '原型与继承', 'Reflect'],
         },
         {
-          text: 'Class',
-          icon: 'material-symbols:arrow-circle-right',
-          collapsible: true,
-          children: ['Class类'],
+          text: "Class",
+          link: "Class",
+          icon: "material-symbols:arrow-circle-right",
         },
-        'Set和Map',
+        {
+          text: 'Array',
+          icon: 'material-symbols:data-array-rounded',
+          collapsible: true,
+          children: ['数组', 'ArrayBuffer'],
+        },
+        {
+          text: "Set和Map",
+          link: "Set和Map",
+          icon: "material-symbols:arrow-circle-right",
+        },
         {
           text: '函数',
           icon: 'material-symbols:function',
@@ -121,11 +138,17 @@ export default sidebar({
           children: ['函数', '作用域与闭包'],
         },
         {
-          text: '异步',
+          text: '异步编程',
           icon: 'material-symbols:update-rounded',
           collapsible: true,
           children: ['异步', 'EventLoop', 'Promise', 'Generator', 'async'],
         },
+        {
+          text: '正则表达式',
+          icon: 'material-symbols:regular-expression-rounded',
+          collapsible: true,
+          children: [],
+        }
       ],
     },
     {

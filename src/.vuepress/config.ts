@@ -41,7 +41,7 @@ export default defineUserConfig({
         str.replace(/^@docs/, path.resolve(__dirname, '..')),
     },
     headers: {
-      level: [2, 3]
+      level: [2, 3, 4]
     }
   },
 
