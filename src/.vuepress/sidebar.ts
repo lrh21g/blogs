@@ -144,11 +144,10 @@ export default sidebar({
           children: ['异步', 'EventLoop', 'Promise', 'Generator', 'async'],
         },
         {
-          text: '正则表达式',
-          icon: 'material-symbols:regular-expression-rounded',
-          collapsible: true,
-          children: [],
-        }
+          text: "正则表达式",
+          link: "RegExp",
+          icon: "material-symbols:regular-expression-rounded",
+        },
       ],
     },
     {
