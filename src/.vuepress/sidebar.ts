@@ -148,6 +148,11 @@ export default sidebar({
           link: "RegExp",
           icon: "material-symbols:regular-expression-rounded",
         },
+        {
+          text: "Math和Date",
+          link: "Math和Date",
+          icon: "material-symbols:calculate-outline-rounded",
+        },
       ],
     },
     {
