@@ -25,7 +25,7 @@
 
 处理宏任务和微任务队列之间的区别：单次循环迭代中，最多处理一个宏任务（其余的在队列中等待），而队列中的所有微任务都会被处理。
 
-![event_loop](../files/images/event_loop.drawio.png)
+![event_loop](./files/images/event_loop.drawio.png)
 
 - 两类任务队列都是独立于事件循环的，这意味着**任务队列的添加行为也发生在事件循环之外**。
 - JavaScript 基于单线程执行模型，所以这两类任务都是逐个执行的。**当一个任务开始执行后，在完成前，中间不会被任何其他任务中断**。除非浏览器决定中止执行该任务，例如，某个任务执行时间过长或内存占用过大。
@@ -67,7 +67,7 @@
 </script>
 ```
 
-![event_loop_macro_task_example](../files/images/event_loop_macro_task_example.drawio.png)
+![event_loop_macro_task_example](./files/images/event_loop_macro_task_example.drawio.png)
 
 ### 含宏任务和微任务
 
@@ -99,7 +99,7 @@
 </script>
 ```
 
-![event_loop_macro_micro_task_example](../files/images/event_loop_macro_micro_task_example.drawio.png)
+![event_loop_macro_micro_task_example](./files/images/event_loop_macro_micro_task_example.drawio.png)
 
 ### 事件循环中执行计时器
 
@@ -134,7 +134,7 @@
 </script>
 ```
 
-![event_loop_timer](../files/images/event_loop_timer.drawio.png)
+![event_loop_timer](./files/images/event_loop_timer.drawio.png)
 
 ### 其他
 
@@ -159,7 +159,7 @@
   // timer1 --> promise1 -> timer2 -> promise2
   ```
 
-  ![async_02](../files/images/async_02.gif)
+  ![async_02](./files/images/async_02.gif)
 
 - 示例二
 

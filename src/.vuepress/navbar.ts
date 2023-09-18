@@ -7,20 +7,20 @@ export default navbar([
     // prefix: '/zh/basic/', // 为分组的每一个子链接添加一个前缀
     children: [
       {
-        text: 'HTML + CSS',
-        link: '/前端/HTML_CSS/',
+        text: 'CSS',
+        link: '/前端/CSS/',
+      },
+      {
+        text: 'JavaScript',
+        link: '/前端/JavaScript/',
       },
       {
         text: 'H5',
         link: '/前端/H5/',
       },
       {
-        text: '动效',
-        link: '/前端/动效/',
-      },
-      {
-        text: 'JavaScript',
-        link: '/前端/JavaScript/',
+        text: '动画效果',
+        link: '/前端/动画效果/',
       },
       {
         text: 'TypeScript',
@@ -67,6 +67,10 @@ export default navbar([
       {
         text: 'Flutter',
         link: '/移动端/Flutter/',
+      },
+      {
+        text: '混合开发',
+        link: '/移动端/混合开发',
       },
     ],
   },

@@ -1,7 +1,7 @@
 import { sidebar } from 'vuepress-theme-hope'
 
 export default sidebar({
-  '/前端/HTML_CSS/': [
+  '/前端/CSS/': [
     {
       text: 'CSS基础', // 必要的，分组的标题文字
       // icon: 'brackets-curly', // 可选的, 分组标题对应的图标
@@ -40,74 +40,23 @@ export default sidebar({
       collapsible: true,
       children: ['CSS常用封装', 'CSS实现长宽比'],
     },
-    {
-      text: 'Canvas基础',
-      prefix: 'Canvas基础/',
-      collapsible: true,
-      children: [
-        'canvas基础',
-        'canvas绘制形状',
-        'canvas添加样式',
-        'canvas绘制文本',
-        'canvas使用图像',
-        'canvas变形',
-        'canvas合成与裁剪',
-        'canvas基本动画',
-        'canvas像素操作',
-        'canvas优化',
-      ],
-    },
-    {
-      text: 'Canvas实战',
-      prefix: 'Canvas实战/',
-      collapsible: true,
-      children: [],
-    },
-    {
-      text: 'SVG',
-      prefix: 'svg/',
-      collapsible: true,
-      children: ['svg基础', 'svg动画', 'svgSMIL动画', '基于anime.js的svg动画'],
-    },
-  ],
-  '/前端/H5/': [
-    {
-      text: '移动端H5',
-      prefix: '',
-      collapsible: true,
-      children: [
-        '移动端基本概念',
-        '移动端适配',
-        '1px边框问题',
-        '图片模糊问题',
-        '移动端常见问题',
-      ],
-    },
-  ],
-  '/前端/动效/': [
-    {
-      text: '动效',
-      prefix: '',
-      collapsible: true,
-      children: ['H5直播点赞动画'],
-    },
   ],
   '/前端/JavaScript/': [
     {
       text: 'Javascript',
-      icon: 'ri:javascript-fill',
+      icon: 'material-symbols:javascript-rounded',
       prefix: '基础知识/',
       collapsible: true,
       children: [
         {
           text: "类型概述",
           link: "类型概述",
-          icon: "material-symbols:arrow-circle-right",
+          icon: "material-symbols:arrow-circle-right-outline-rounded",
         },
         {
           text: "基础类型",
           link: "基础类型",
-          icon: "material-symbols:arrow-circle-right",
+          icon: "material-symbols:arrow-circle-right-outline-rounded",
         },
         {
           text: 'Object',
@@ -118,7 +67,7 @@ export default sidebar({
         {
           text: "Class",
           link: "Class",
-          icon: "material-symbols:arrow-circle-right",
+          icon: "material-symbols:arrow-circle-right-outline-rounded",
         },
         {
           text: 'Array',
@@ -129,7 +78,7 @@ export default sidebar({
         {
           text: "Set和Map",
           link: "Set和Map",
-          icon: "material-symbols:arrow-circle-right",
+          icon: "material-symbols:arrow-circle-right-outline-rounded",
         },
         {
           text: '函数',
@@ -157,9 +106,10 @@ export default sidebar({
     },
     {
       text: '设计模式',
+      icon: 'material-symbols:design-services',
       prefix: '设计模式/',
       collapsible: true,
-      children: ['JavaScript设计模式'],
+      children: ['README'],
     },
     {
       text: '实用技巧',
@@ -168,16 +118,61 @@ export default sidebar({
       children: ['JavaScript常用封装', '手写系列'],
     },
     {
-      text: '混合开发',
-      prefix: '',
-      collapsible: true,
-      children: ['混合开发'],
-    },
-    {
-      text: '其他',
-      prefix: '其他/',
+      text: '相关应用',
+      prefix: '相关应用/',
       collapsible: true,
       children: ['JavaScript实现网页截屏'],
+    },
+    {
+      text: 'Canvas基础',
+      prefix: 'Canvas基础/',
+      collapsible: true,
+      children: [
+        'canvas基础',
+        'canvas绘制形状',
+        'canvas添加样式',
+        'canvas绘制文本',
+        'canvas使用图像',
+        'canvas变形',
+        'canvas合成与裁剪',
+        'canvas基本动画',
+        'canvas像素操作',
+        'canvas优化',
+      ],
+    },
+    {
+      text: 'Canvas实战',
+      prefix: 'Canvas实战/',
+      collapsible: true,
+      children: [],
+    },
+    {
+      text: 'SVG',
+      prefix: 'SVG/',
+      collapsible: true,
+      children: ['svg基础', 'svg动画', 'svgSMIL动画', '基于anime.js的svg动画'],
+    },
+  ],
+  '/前端/H5/': [
+    {
+      text: '移动端H5',
+      prefix: '',
+      collapsible: true,
+      children: [
+        '移动端基本概念',
+        '移动端适配',
+        '1px边框问题',
+        '图片模糊问题',
+        '移动端常见问题',
+      ],
+    },
+  ],
+  '/前端/动画效果/': [
+    {
+      text: '动画效果',
+      prefix: '',
+      collapsible: true,
+      children: ['H5直播点赞动画'],
     },
   ],
   '/前端/TypeScript/': [

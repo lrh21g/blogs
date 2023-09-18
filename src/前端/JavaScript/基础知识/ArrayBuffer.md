@@ -19,7 +19,7 @@ JavaScript 类型化数组将实现拆分为缓冲和视图两部分。缓冲（
   - `BigUint64Array` ：64 位无符号整型，长度 8 字节。
 - `DataView` 视图：从 `ArrayBuffer` 对象中**读写复杂类型**的二进制数据。比如第一个字节是 `Uint8Array`，第二、三个字节是 `Int16Array`、第四个字节开始是 `Float32Array`（32 位浮点数）等，此外还可以自定义字节序。
 
-![arraybuffer_layout](../files/images/arraybuffer_layout.drawio.png)
+![arraybuffer_layout](./files/images/arraybuffer_layout.drawio.png)
 
 ## ArrayBuffer 对象
 
