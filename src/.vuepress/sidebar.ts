@@ -105,6 +105,13 @@ export default sidebar({
       ],
     },
     {
+      text: 'BOM',
+      icon: 'material-symbols:select-window',
+      prefix: 'BOM/',
+      collapsible: true,
+      children: ['window对象', 'URL', 'navigator对象', 'screen对象', 'history对象'],
+    },
+    {
       text: '设计模式',
       icon: 'material-symbols:design-services',
       prefix: '设计模式/',
