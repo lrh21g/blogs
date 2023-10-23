@@ -1,4 +1,4 @@
-# location 对象与 URL
+# location 对象、history 对象与 URL
 
 ## location 对象
 
@@ -69,6 +69,72 @@ document.location.password // 'password'
 - `Location.replace(url)` ：用给定的 URL 替换掉当前的资源。与 `assign()` 方法不同的是用 `replace()` 替换的新页面不会被保存在会话的历史 `History` 中，意味着用户将不能用后退按钮转到该页面。
 
 - `Location.toString()` ：返回整个 URL 字符串，是 `Location.href` 的只读版本。
+
+## history 对象
+
+`history` 对象允许操作浏览器的曾经在标签页或者框架里访问的会话历史记录。
+
+### history 对象属性
+
+- `history.length` ： 只读属性。返回一个整数（Integer），表示会话历史中元素的数目，包括当前加载的页。
+
+- `history.scrollRestoration` ： 允许 Web 应用程序在历史导航上显式地设置默认滚动恢复行为。属性值如下：
+  - `auto` ： 将恢复用户已滚动到的页面上的位置。
+  - `manual` ： 未还原页上的位置。用户必须手动滚动到该位置。
+
+- `history.state` ： 只读属性。返回一个表示历史堆栈顶部的状态的任意（any）值。不必等待 `popstate` 事件而查看状态的方式。
+
+### history 对象方法
+
+- `history.back()` ：在会话历史记录中向后移动一页。如果没有上一页，则此方法调用不执行任何操作。
+
+- `history.forward()` ： 在会话历史中向前移动一页。它与使用 `delta` 参数为 `1` 时，调用 `history.go(delta)` 的效果相同。
+
+- `history.go(delta)` ： 从会话历史记录中加载特定页面。相对于当前页面在历史记录中前后移动，具体取决于 `delta` 参数的值，负值表示向后移动，正值表示向前移动。如果未向该函数传参或 `delta` 相等于 `0`，则该函数与调用 `location.reload()` 具有相同的效果。
+
+- `history.pushState(state, unused, url)` ： 向浏览器的会话历史栈增加了一个条目。不会触发页面刷新，只是导致 `history` 对象发生变化，地址栏会有反应。
+
+  - `state` ： 一个 JavaScript 对象，其与通过 `pushState()` 创建的新历史条目相关联。每当用户导航到新的 `state`，都会触发 `popstate` 事件，并且该事件的 `state` 属性包含历史条目 `state` 对象的副本。可以用 `history.state` 属性读取该对象。
+  - `unused` ： 该参数存在且不能忽略。传递一个空字符串是安全的，以防将来对该方法进行更改。
+  - `url` ： 新历史条目的 URL。浏览器不会在调用 `pushState()` 之后尝试加载该 URL，但是它可能会在以后尝试加载该 URL，例如，在用户重启浏览器之后。
+
+  ```javascript
+  // 使用 history.state 属性读出状态对象
+  var stateObj = { foo: 'bar' }
+  history.pushState(stateObj, '', '123.html')
+  history.state // {foo: "bar"}
+
+  // 设置了一个跨域网址，会报错
+  // 当前网址为 http://example.com
+  history.pushState(null, '', 'https://twitter.com/hello')
+  ```
+
+  如果 `pushState` 的 URL 参数设置了一个新的锚点值（即 `hash`），并不会触发 `hashchange` 事件。反过来，如果 URL 的锚点值变了，则会在 `history` 对象创建一条浏览记录。
+
+- `history.replaceState(stateObj, title[, url])` ： 修改当前历史记录实体。参数与 `history.pushState(state, unused, url)` 一致。
+
+### popstate 事件
+
+每当激活同一文档中不同的历史记录条目（即 `history` 对象）时，就会触发 `popstate` 事件。
+
+注意：
+
+- 仅仅调用 `pushState()` 方法或 `replaceState()` 方法 ，并不会触发该事件。只有用户点击浏览器倒退按钮和前进按钮，或者使用 JavaScript 调用 `history.back()`、`history.forward()`、`history.go()` 方法时才会触发。
+- `popstate` 事件只针对同一个文档，如果浏览历史的切换，导致加载不同的文档，该事件也不会触发。
+- 页面第一次加载的时候，浏览器不会触发 `popstate` 事件。
+
+```javascript
+window.onpopstate = function (event) {
+  console.log('location: ' + document.location)
+  console.log('state: ' + JSON.stringify(event.state))
+}
+
+// 或者
+window.addEventListener('popstate', function (event) {
+  console.log('location: ' + document.location)
+  console.log('state: ' + JSON.stringify(event.state))
+})
+```
 
 ## URL
 
