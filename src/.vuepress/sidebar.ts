@@ -112,6 +112,13 @@ export default sidebar({
       children: ['window对象', 'URL', 'navigator对象', 'storage', 'file'],
     },
     {
+      text: 'DOM',
+      icon: 'material-symbols:network-node',
+      prefix: 'DOM/',
+      collapsible: true,
+      children: ['node', 'document', 'element', 'other'],
+    },
+    {
       text: '设计模式',
       icon: 'material-symbols:design-services',
       prefix: '设计模式/',
