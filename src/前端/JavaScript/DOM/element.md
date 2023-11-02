@@ -1,10 +1,10 @@
 # Element 类型
 
-在 XML 和 HTML 中，Element 用来描述页面的结构，可以是数据项、文本、按钮、复选框、图像等。
+在 XML 和 HTML 中，`Element` 用来描述页面的结构，可以是数据项、文本、按钮、复选框、图像等。
 
-Element 所有属性集成自祖先接口 Node ，并扩展了 Node 的父接口 EventTarget。
+`Element` 继承链路： `EventTarget <-- Node <-- Element` 。。
 
-Element 包括开始标签、结束标签、属性以及其他内容。
+`Element` 包括开始标签、结束标签、属性以及其他内容。
 
 ![element](./files/images/element.drawio.png)
 
