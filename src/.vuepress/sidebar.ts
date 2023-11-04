@@ -116,7 +116,7 @@ export default sidebar({
       icon: 'material-symbols:network-node',
       prefix: 'DOM/',
       collapsible: true,
-      children: ['node', 'document', 'element', 'other'],
+      children: ['node', 'document', 'element', 'other', 'css'],
     },
     {
       text: '设计模式',
