@@ -242,6 +242,12 @@
   - `CaretPosition.offsetNode` ：返回一个 `Node` 对象，表示光标所在的节点。
   - `CaretPosition.offset` ：返回一个整数，表示光标在 `offsetNode` 节点内的偏移量。
 
+- `document.createRange()`
+
+  **语法** ： `document.createRange()`
+
+  **描述** ： 创建一个 `Range` 对象，表示文档中的连续范围。
+
 ### 查找元素节点方法
 
 - `document.getElementById()`
@@ -335,7 +341,7 @@
 
   - 有焦点的文档必定被激活（active），反之不成立，激活的文档未必有焦点。比如，用户点击按钮，从当前窗口跳出一个新窗口，该新窗口就是激活的，但是不拥有焦点。
 
-### 文档其他方法
+### 遍历元素节点方法
 
 - `document.createNodeIterator()`
 
@@ -364,6 +370,8 @@
   **描述** ： 创建一个 `TreeWalker` 对象，用于遍历指定节点 `root` 的子节点和位置。
 
   **参数** ： 与 `document.createNodeIterator()` 方法一致。
+
+### 文档其他方法
 
 - `document.elementFromPoint()`
 
