@@ -44,19 +44,19 @@ export default sidebar({
   '/前端/JavaScript/': [
     {
       text: 'Javascript',
-      icon: 'material-symbols:javascript-rounded',
+      icon: 'fluent:javascript-24-regular',
       prefix: '基础知识/',
       collapsible: true,
       children: [
         {
           text: "类型概述",
           link: "类型概述",
-          icon: "material-symbols:arrow-circle-right-outline-rounded",
+          icon: "material-symbols:file-copy-outline-rounded",
         },
         {
           text: "基础类型",
           link: "基础类型",
-          icon: "material-symbols:arrow-circle-right-outline-rounded",
+          icon: "material-symbols:file-copy-outline-rounded",
         },
         {
           text: 'Object',
@@ -67,7 +67,7 @@ export default sidebar({
         {
           text: "Class",
           link: "Class",
-          icon: "material-symbols:arrow-circle-right-outline-rounded",
+          icon: "material-symbols:file-copy-outline-rounded",
         },
         {
           text: 'Array',
@@ -78,7 +78,7 @@ export default sidebar({
         {
           text: "Set和Map",
           link: "Set和Map",
-          icon: "material-symbols:arrow-circle-right-outline-rounded",
+          icon: "material-symbols:file-copy-outline-rounded",
         },
         {
           text: '函数',
@@ -109,7 +109,7 @@ export default sidebar({
       icon: 'material-symbols:select-window',
       prefix: 'BOM/',
       collapsible: true,
-      children: ['window对象', 'URL', 'navigator对象', 'storage', 'file'],
+      children: ['window', 'URL', 'navigator', 'storage', 'file'],
     },
     {
       text: 'DOM',
@@ -119,6 +119,13 @@ export default sidebar({
       children: ['node', 'document', 'element', 'other', 'css', 'MutationObserver', 'event'],
     },
     {
+      text: '实用技巧',
+      prefix: '实用技巧/',
+      icon: 'material-symbols:settings-applications-outline-rounded',
+      collapsible: true,
+      children: ['工具函数', '手写代码', '网页截屏'],
+    },
+    {
       text: '设计模式',
       icon: 'material-symbols:design-services',
       prefix: '设计模式/',
@@ -126,20 +133,9 @@ export default sidebar({
       children: ['README'],
     },
     {
-      text: '实用技巧',
-      prefix: '',
-      collapsible: true,
-      children: ['JavaScript常用封装', '手写系列'],
-    },
-    {
-      text: '相关应用',
-      prefix: '相关应用/',
-      collapsible: true,
-      children: ['JavaScript实现网页截屏'],
-    },
-    {
-      text: 'Canvas基础',
-      prefix: 'Canvas基础/',
+      text: 'Canvas',
+      prefix: 'Canvas/',
+      icon: 'material-symbols:drive-file-move-outline-rounded',      
       collapsible: true,
       children: [
         'canvas基础',
@@ -155,14 +151,9 @@ export default sidebar({
       ],
     },
     {
-      text: 'Canvas实战',
-      prefix: 'Canvas实战/',
-      collapsible: true,
-      children: [],
-    },
-    {
       text: 'SVG',
       prefix: 'SVG/',
+      icon: 'material-symbols:drive-file-move-outline-rounded',
       collapsible: true,
       children: ['svg基础', 'svg动画', 'svgSMIL动画', '基于anime.js的svg动画'],
     },
