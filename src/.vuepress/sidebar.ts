@@ -102,6 +102,11 @@ export default sidebar({
           link: "Math和Date",
           icon: "material-symbols:calculate-outline-rounded",
         },
+        {
+          text: "JavaScript API",
+          link: "API",
+          icon: "material-symbols:api-rounded",
+        },
       ],
     },
     {
