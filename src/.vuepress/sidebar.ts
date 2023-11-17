@@ -121,7 +121,7 @@ export default sidebar({
       icon: 'material-symbols:network-node',
       prefix: 'DOM/',
       collapsible: true,
-      children: ['node', 'document', 'element', 'other', 'css', 'MutationObserver', 'event'],
+      children: ['node', 'document', 'element', 'other', 'css', 'MutationObserver', 'event', 'WebComponents'],
     },
     {
       text: '实用技巧',
