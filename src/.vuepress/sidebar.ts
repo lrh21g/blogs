@@ -107,6 +107,11 @@ export default sidebar({
           link: "API",
           icon: "material-symbols:api-rounded",
         },
+        {
+          text: "JSON",
+          link: "JSON",
+          icon: "material-symbols:data-object-rounded",
+        },
       ],
     },
     {
