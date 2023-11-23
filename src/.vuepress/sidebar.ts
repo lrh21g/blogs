@@ -112,6 +112,11 @@ export default sidebar({
           link: "JSON",
           icon: "material-symbols:data-object-rounded",
         },
+        {
+          text: "网络请求",
+          link: "网络请求",
+          icon: "material-symbols:network-node",
+        },
       ],
     },
     {
