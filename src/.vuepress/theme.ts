@@ -150,7 +150,7 @@ export default hopeTheme({
       // gfm: true, // 是否支持完整的 GFM 语法
       align: true, // 是否启用自定义对齐格式支持
       attrs: true, // 是否启用为 Markdown 元素添加属性
-      container: true, // 是否启用自定义容器支持
+      hint: true, // 是否启用自定义容器支持
       imgSize: true, // 是否启用图片大小
       // lazyLoad: true, // 是否使用原生方式懒加载页面图片
       mark: true, // 是否启用图片标注支持
