@@ -1,0 +1,1 @@
+import{_ as t}from"./plugin-vue_export-helper-x3n3nnut.js";import{o as a,c as o,a as e,b as r}from"./app-VLgNDF8W.js";const c={},s=e("h1",{id:"语法",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#语法","aria-hidden":"true"},"#"),r(" 语法")],-1),_=[s];function n(d,i){return a(),o("div",null,_)}const f=t(c,[["render",n],["__file","语法.html.vue"]]);export{f as default};
