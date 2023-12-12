@@ -145,7 +145,7 @@ export default sidebar({
       icon: 'material-symbols:design-services',
       prefix: '设计模式/',
       collapsible: true,
-      children: ['README'],
+      children: ['SOLID', '创建型设计模式', '结构型设计模式', '行为型设计模式'],
     },
     {
       text: 'Canvas',
