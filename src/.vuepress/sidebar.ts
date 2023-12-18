@@ -230,10 +230,16 @@ export default sidebar({
   ],
   '/前端框架/项目搭建/': [
     {
-      text: '项目规范',
+      text: '编程规范',
+      icon: 'material-symbols:warning-outline-rounded',
       prefix: '',
-      collapsible: true,
-      children: ['编程规范'],
+      link: '编程规范',
+    },
+    {
+      text: '脚手架',
+      icon: 'material-symbols:rule-settings-rounded',
+      prefix: '',
+      link: '脚手架',
     },
   ],
   '/前端框架/Vue/': [
