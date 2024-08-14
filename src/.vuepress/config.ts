@@ -1,13 +1,13 @@
 import { defineUserConfig } from 'vuepress'
-import { getDirname, path } from '@vuepress/utils'
+import { getDirname, path } from 'vuepress/utils'
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components'
 // import { docsearchPlugin } from '@vuepress/plugin-docsearch'
-import { cut } from "nodejs-jieba"
-import { searchProPlugin } from 'vuepress-plugin-search-pro'
+// import { cut } from "nodejs-jieba"
+// import { searchProPlugin } from 'vuepress-plugin-search-pro'
 
 import theme from './theme.js'
 
-// const __dirname = getDirname(import.meta.url)
+const __dirname = getDirname(import.meta.url)
 
 export default defineUserConfig({
   // ========== 站点配置 ==========
@@ -54,16 +54,16 @@ export default defineUserConfig({
       // 组件目录的绝对路径
       componentsDir: path.resolve(__dirname, './components'),
     }),
-    searchProPlugin({
-      // 索引全部内容
-      indexContent: true,
-      autoSuggestions: true,
-      // hotReload: true,
-      indexOptions: {
-        tokenize: (text, fieldName) =>
-          fieldName === "id" ? [text] : cut(text, true),
-      },
-    }),
+    // searchProPlugin({
+    //   // 索引全部内容
+    //   indexContent: true,
+    //   autoSuggestions: true,
+    //   // hotReload: true,
+    //   indexOptions: {
+    //     tokenize: (text, fieldName) =>
+    //       fieldName === "id" ? [text] : cut(text, true),
+    //   },
+    // }),
   ],
 
   shouldPrefetch: false,

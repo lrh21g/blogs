@@ -1,7 +1,7 @@
 import { hopeTheme } from 'vuepress-theme-hope'
 
-import navbar from './navbar'
-import sidebar from './sidebar'
+import navbar from './navbar.ts'
+import sidebar from './sidebar.ts'
 
 export default hopeTheme({
   // ========== 主题基本选项 ==========
@@ -46,12 +46,11 @@ export default hopeTheme({
   darkmode: 'switch', // 深色模式选项。switch - 在深色模式，浅色模式和自动之间切换
   themeColor: true, // 主题色选项配置
   fullscreen: false, // 是否显示全屏按钮
-  backToTop: true, // 是否显示返回顶部按钮。如果设置为数字，则该数字为触发临界值 (默认临界值为 300px)
   pure: false, // 是否开启纯净模式
 
   // ========== 主题布局选项 - 导航栏 ==========
   navbar: navbar, // 导航栏配置
-  navbarIcon: true, // 是否在导航栏显示图标
+  // navbarIcon: true, // 是否在导航栏显示图标
   // navbarLayout: {
   //   left: ['Brand'],
   //   center: ['Links'],
@@ -68,7 +67,6 @@ export default hopeTheme({
 
   // ========== 主题布局选项 - 侧边栏 ==========
   sidebar: sidebar, // 侧边栏配置
-  sidebarIcon: true, // 是否在侧边栏显示图标
   // sidebarSorter: ["readme", "order", "title"], // 结构侧边栏排序器
   headerDepth: 2, // 侧边栏嵌套的标题深度
 
@@ -116,7 +114,6 @@ export default hopeTheme({
     description: '知足且上进，温柔而坚定。', // 口号、座右铭或介绍语
     intro: '/intro.html', // 博主的个人介绍地址，填写后将可以点击“博主信息”中的头像或姓名进入个人介绍页
     medias: {}, // 博主的媒体链接配置
-    roundAvatar: true, // 是否剪裁头像为圆形形状
     sidebarDisplay: 'mobile', // 是否在侧边栏展示博主信息： mobile - 在移动视图中显示在侧边栏中, always - 总是展示在侧边栏中, none - 永远不在侧边栏展示
     timeline: '昨日不在', // 时间轴的顶部文字
     articlePerPage: 10, // 每页的文章数量
@@ -143,6 +140,14 @@ export default hopeTheme({
     blog: true,
     // blog: {
     //   autoExcerpt: true, // 是否为每个页面生成摘录
+    // },
+
+    // shiki: {
+    //   // 你想要使用的主题
+    //   themes: {
+    //     light: "one-light",
+    //     dark: "one-dark-pro",
+    //   },
     // },
 
     // Disable features you don't want here
