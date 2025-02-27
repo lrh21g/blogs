@@ -7,14 +7,12 @@
 要在 `Form` 中逐一调用 `FormItem` 的验证方法，而 `Form` 和 `FormItem` 是独立的，**需要预先将 `FormItem` 的每个实例缓存在 `Form` 中**。当每个 `FormItem` 渲染时，将其自身（this）作为参数通过 dispatch 组件通信方法派发到 `Form` 组件中，然后通过一个数组缓存起来；同理当 `FormItem` 销毁时，将其从 `Form` 缓存的数组中移除。
 
 ``` md
-/docs/.vuepress/components/vue2/formValidator
+../files/Vue2Components/formValidator
   |--- form.vue
   |--- formIndex.vue
   |--- formItem.vue
   |--- input.vue
 ```
-
-<!-- <vue2-formValidator-formIndex /> -->
 
 ::: details formValidator/form.vue
 
@@ -45,7 +43,7 @@
 显示一个信息提示组件的流程：`入口 alert.js` --> `info()` --- `add()` ---> `创建实例 notification.js` --- `add()` ---> `增加数据` --> `渲染alert.vue`
 
 ``` md
-/docs/.vuepress/components/vue2/alert
+../files/Vue2Components/alert
   |--- alert.js
   |--- alert.vue
   |--- alertIndex.vue
@@ -89,7 +87,7 @@
 ## 可用 Render 自定义列的表格组件
 
 ``` md
-/docs/.vuepress/components/vue2/renderTable
+../files/Vue2Components/renderTable
   |--- render.js
   |--- renderTableIndex.vue
   |--- tableRender.vue
@@ -124,7 +122,7 @@
 + 方案一: `slot-scope` 实现，同时兼容 `Render` 函数的旧用法。适用于组件层级简单的表格。
 
   ``` md
-  docs/.vuepress/components/vue2/slotScopeTable
+  ../files/Vue2Components/slotScopeTable
     |--- render.js
     |--- slotScopeTableIndex1.vue
     |--- tableRender1.vue -- Table组件
@@ -182,7 +180,7 @@
 + 方案三: 将 `slot-scope` 集成在 `Table组件` 中，并使用 `provide` / `inject` 进行数据传递，用于组件层级复杂的表格。不会破坏原有的任何内容，但会额外支持 `slot-scope` 用法，关键是改动简单。
 
   ``` md
-  docs/.vuepress/components/vue2/slotScopeTable
+  ../files/Vue2Components/slotScopeTable
     |--- render.js
     |--- slot.js
     |--- slotScopeTableIndex3.vue
@@ -225,12 +223,12 @@
 这类组件一般都是**数据驱动型**的，父级有一个字段 children，然后递归。
 
 ``` md
-/docs/.vuepress/components/vue2/tree
+../files/Vue2Components/tree
   |--- node.vue
   |--- tree.vue
   |--- treeIndex.vue
 
-/docs/.vuepress/components/vue2/utils
+../files/Vue2Components/utils
   |--- assist.js
 ```
 

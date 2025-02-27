@@ -1,7 +1,10 @@
 import { hopeTheme } from 'vuepress-theme-hope'
+import { getDirname, path } from 'vuepress/utils'
 
 import navbar from './navbar.ts'
 import sidebar from './sidebar.ts'
+
+const __dirname = getDirname(import.meta.url)
 
 export default hopeTheme({
   // ========== 主题基本选项 ==========
@@ -41,8 +44,6 @@ export default hopeTheme({
   // },
 
   // ========== 主题外观选项 ==========
-  iconAssets: 'iconify', // 全局设置图标资源，内置关键字 "iconfont"、"iconify"、"fontawesome" 和 "fontawesome-with-brand 支持。
-  // iconPrefix: '', // 通常情况下，它可以识别 iconAssets 并自动设置，如果识别失败，你可以手动设置图标的 FontClass 前缀。
   darkmode: 'switch', // 深色模式选项。switch - 在深色模式，浅色模式和自动之间切换
   themeColor: true, // 主题色选项配置
   fullscreen: false, // 是否显示全屏按钮
@@ -136,11 +137,105 @@ export default hopeTheme({
   //   }, // 加密配置，为一个对象，键名为匹配的路径，键值为对应的密码，接受字符串或字符串数组。
   // },
 
+  // Disable features you don't want here
+  markdown: {
+    // Markdown 行为配置
+    // gfm: true, // 是否支持完整的 GFM 语法
+    // vPre: true, // 是否启用 v-pre 容器
+    // breaks: true, // 是否将段落中的 \n 转换为 <br>
+    // linkify: true, // 是否将文本中的 URL 转换为链接
+    // figure: true, // 是否将独立的 <img> 转换为 <figure>
+    // imgLazyload: true, // 是否启用图片懒加载
+    // highlighter: "shiki", // Markdown 代码块高亮器。可以选择 "prismjs"、"shiki"、false 或一个带有 type 字段的对象，声明高亮器名称和其他插件选项。
+    // linksCheck: true, // 是否启用 @vuepress/plugin-links-check 插件，提供 Markdown 链接检查
+
+    // Markdown 语法配置
+    component: true, // 是否启用组件支持
+    footnote: true, // 是否启用脚注格式支持
+    // imgMark: true, // 是否启用图片标记
+    imgSize: true, // 是否启用图片大小
+    // obsidianImgSize: true, // 是否启用 Obsidian 图片大小
+    // include: true, // 是否启用 Markdown 导入支持
+    include: {
+      resolvePath: (file) => {
+        if (file.startsWith("@src"))
+          return file.replace("@src", path.resolve(__dirname, ".."));
+
+        return file;
+      },
+    },
+    tabs: true, // 是否启用选项卡支持
+    tasklist: true, // 是否启用任务列表格式支持
+    // math: true, // 是否启用数学公式支持，设置 true 来自动检测已安装的 katex/mathjax，或提供插件选项
+    // revealjs: true, // 控制 @vuepress/plugin-revealjs，提供幻灯片支持。设置 true 来直接启用它，或提供插件选项
+
+    // Markdown 样式化配置
+    align: true, // 是否启用自定义对齐
+    // attrs: true, // 是否启用属性自定义支持
+    mark: true, // 是否启用标记支持
+    hint: true, // 是否启用自定义容器支持
+    sup: true, // 是否启用上标支持
+    sub: true, // 是否启用下标支持
+    // spoiler: true, // 是否启用隐藏内容支持
+    // stylize: true, // 样式化内联标记以创建所需的片段
+    // 对行内语法进行样式化以创建代码片段
+    stylize: [
+      {
+        matcher: 'Recommanded',
+        replacer: ({ tag }) => {
+          if (tag === 'em')
+            return {
+              tag: 'Badge',
+              attrs: { type: 'tip' },
+              content: 'Recommended',
+            }
+        },
+      },
+    ],
+
+    // Markdown 图表配置
+    // chartjs: true, // 是否启用 Chart.js 支持
+    // echarts: true, // 是否启用 ECharts 支持
+    // flowchart: true, // 是否启用流程图支持
+    // mermaid: true, // 是否启用 Mermaid 支持，可以传入一个对象作为 Mermaid 的配置选项
+    // plantuml: true, // 是否启用 plantuml 支持
+    
+    // Markdown 代码配置  
+    codeTabs: true, // 是否启用选项卡支持
+    playground: {
+      presets: ['ts', 'vue', 'unocss'],
+    }, // 交互演示
+    vuePlayground: true, // 是否启用 Vue 交互演示支持
+    // sandpack: true, // 是否启用 Sandpack 交互演示支持
+    demo: {
+      // jsLib: [], // CodePen, JsFiddle 需要引入的外部 JS 库
+      // cssLib: [], // CodePen, JsFiddle 需要引入的外部 CSS 库
+      jsfiddle: false, // 是否显示 JSFiddle 按钮
+      codepen: false, // 是否显示 CodePen 按钮
+      // codepenLayout: "left", // CodePen 编辑器布局 "top" | "left" | "right"
+      // codepenEditors: "101", // CodePen 编辑器状态
+      // editors: "101", // CodePen 编辑器显示情况，第一位代表 HTML ，第二位代表 JS，第三位代表演示页面
+    }, // 是否启用代码演示支持   
+  },
+
   plugins: {
-    blog: true,
+    // 博客配置
+    blog: true, // 启用博客功能
     // blog: {
     //   autoExcerpt: true, // 是否为每个页面生成摘录
     // },
+
+    // 图标设置
+    icon: {
+      assets: 'iconify', // 要使用的图标资源。内置关键字 "iconify"、"fontawesome" 和 "fontawesome-with-brand 支持
+      // prefix: '', // 图标组件的前缀。默认情况下，插件将使用 iconfont icon- 用于 iconfont 类型，空字符串用于所有其他类型
+    },
+
+    // 搜索插件配置
+    slimsearch: true, // @vuepress/plugin-slimsearch
+
+    // 版权信息插件配置
+    copyright: true, // 默认行为是全局启用插件并使用主题选项中的作者和协议名称
 
     // shiki: {
     //   // 你想要使用的主题
@@ -148,81 +243,6 @@ export default hopeTheme({
     //     light: "one-light",
     //     dark: "one-dark-pro",
     //   },
-    // },
-
-    // Disable features you don't want here
-    mdEnhance: {
-      // gfm: true, // 是否支持完整的 GFM 语法
-      align: true, // 是否启用自定义对齐格式支持
-      attrs: true, // 是否启用为 Markdown 元素添加属性
-      hint: true, // 是否启用自定义容器支持
-      imgSize: true, // 是否启用图片大小
-      // lazyLoad: true, // 是否使用原生方式懒加载页面图片
-      mark: true, // 是否启用图片标注支持
-      tasklist: true, // 是否启用任务列表格式支持,
-      include: true, // 支持导入其他文件
-      tabs: true, // 添加选项卡支持
-      codetabs: true, // 是否启用代码块分组
-      demo: {
-        jsfiddle: false // 是否显示 JSFiddle 按钮
-      }, // 是否启用代码案例支持
-      playground: {
-        presets: ['ts', 'vue'],
-      }, // 交互演示
-      // vpre: true, // 启用 v-pre 容器
-      vuePlayground: true, // 是否启用 Vue 交互演示支持
-      sub: true, // 是否启用下角标功能
-      sup: true, // 是否启用上角标
-      footnote: true, // 是否支持脚注
-      // katex: true, // 是否通过 KaTeX\KaTeXKATEX 启用 TeX\TeXTEX 语法支持
-      // chart: true, // 支持图表
-      // echarts: true, // 是否使用 ECharts 提供相应功能图表
-      // flowchart: true, // 是否启用流程图支持
-      // mermaid: true, // 是否启用 Mermaid 支持
-      // 是否启用幻灯片支持
-      // presentation: {
-      //   plugins: ['highlight', 'math', 'search', 'notes', 'zoom'],
-      // },
-      // 对行内语法进行样式化以创建代码片段
-      stylize: [
-        {
-          matcher: 'Recommanded',
-          replacer: ({ tag }) => {
-            if (tag === 'em')
-              return {
-                tag: 'Badge',
-                attrs: { type: 'tip' },
-                content: 'Recommanded',
-              }
-          },
-        },
-      ],
-    },
-
-    // If you don't need comment feature, you can remove following option
-    // The following config is for demo ONLY, if you need comment feature, please generate and use your own config, see comment plugin documentation for details.
-    // To avoid disturbing the theme developer and consuming his resources, please DO NOT use the following config directly in your production environment!!!!!
-    // comment: {
-    //   /**
-    //    * Using Giscus
-    //    */
-    //   provider: 'Giscus',
-    //   repo: 'vuepress-theme-hope/giscus-discussions',
-    //   repoId: 'R_kgDOG_Pt2A',
-    //   category: 'Announcements',
-    //   categoryId: 'DIC_kwDOG_Pt2M4COD69',
-
-    //   /**
-    //    * Using Twikoo
-    //    */
-    //   // provider: "Twikoo",
-    //   // envId: "https://twikoo.ccknbc.vercel.app",
-
-    //   /**
-    //    * Using Waline
-    //    */
-    //   // provider: "Waline",
-    //   // serverURL: "https://vuepress-theme-hope-comment.vercel.app",
     // },
   },
 })
