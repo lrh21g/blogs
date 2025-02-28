@@ -1,16 +1,23 @@
 {
   "name": "blogs",
-  "description": "LRH's blogs",
-  "version": "2.0.0",
-  "license": "MIT",
   "type": "module",
+  "version": "2.0.0",
+  "packageManager": "pnpm@10.4.1",
+  "description": "LRH's blogs",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.19.0"
+  },
   "scripts": {
     "docs:build": "vuepress-vite build src",
     "docs:clean-dev": "vuepress-vite dev src --clean-cache",
     "docs:dev": "vuepress-vite dev src",
-    "docs:update-package": "pnpm dlx vp-update"
+    "docs:update-package": "pnpm dlx vp-update",
+    "commit": "git-cz",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
-  "devDependencies": {
+  "dependencies": {
     "@vue/repl": "^4.5.1",
     "@vuepress/bundler-vite": "2.0.0-rc.20",
     "@vuepress/plugin-slimsearch": "2.0.0-rc.61",
@@ -18,5 +25,24 @@
     "vue": "^3.5.13",
     "vuepress": "2.0.0-rc.20",
     "vuepress-theme-hope": "2.0.0-rc.73"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.3.0",
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@commitlint/types": "^19.5.0",
+    "commitizen": "^4.3.1",
+    "cz-git": "^1.11.0",
+    "eslint": "^9.21.0",
+    "eslint-config-vuepress": "^5.2.4",
+    "eslint-plugin-format": "^1.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.3",
+    "typescript": "^5.7.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-git"
+    }
   }
 }
