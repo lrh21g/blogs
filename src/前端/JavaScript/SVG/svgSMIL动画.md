@@ -28,13 +28,7 @@ SMIL 动画指在 SVG 集成了 Synchronized Multimedia Integration Language (SM
 ```html
 <svg width="500px" height="500px" viewBox="0 0 500 500">
   <rect x="0" y="0" width="100" height="100" fill="#feac5e">
-    <animate
-      attributeName="x"
-      from="0"
-      to="500"
-      dur="2s"
-      repeatCount="indefinite"
-    />
+    <animate attributeName="x" from="0" to="500" dur="2s" repeatCount="indefinite" />
   </rect>
 </svg>
 ```
@@ -44,12 +38,7 @@ SMIL 动画指在 SVG 集成了 Synchronized Multimedia Integration Language (SM
 ::: normal-demo
 
 ```html
-<svg
-  width="65px"
-  height="65px"
-  viewBox="0 0 66 66"
-  xmlns="http://www.w3.org/2000/svg"
->
+<svg width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
   <g>
     <!-- 实现旋转动画 -->
     <animateTransform

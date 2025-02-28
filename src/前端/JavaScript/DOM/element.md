@@ -135,7 +135,7 @@
 ### 添加元素方法
 
 - `element.after()`
-  
+
   **语法** ： `element.after(node1, node2, ..., nodeN)`
 
   **描述** ： 在当前元素后面插入一个（或多个） `Node` 节点或 `DOMString` （以 `Text` 的形式插入）
@@ -248,7 +248,7 @@
   **语法** ： `element.getBoundingClientRect()`
 
   **描述** ： 返回当前元素的 `DOMRect` 对象，提供元素节点的大小、位置等信息。
-  
+
   - `width` ： 元素的宽度（包含了元素本身宽度 + `padding` + `border`）。
   - `height` ： 元素的高度（包含了元素本身高度 + `padding` + `border`）。
   - `x` ： 元素左上角相对于视口的横坐标。
@@ -256,7 +256,7 @@
   - `left` ： 元素左上角相对于视口的横坐标。与 `x` 属性相等。
   - `top` ： 元素左上角相对于视口的纵坐标。与 `y` 属性相等。
   - `right` ： 元素右下角相对于视口的横坐标（相当于 `x + width`）。
-  - `bottom` ：  元素右下角相对于视口的纵坐标（相当于 `y + height`）。
+  - `bottom` ： 元素右下角相对于视口的纵坐标（相当于 `y + height`）。
 
   元素相对于视口（viewport）的位置，会随着页面滚动变化，因此表示位置的四个属性值，都不是固定不变的。其绝对位置为 `(left + window.scrollX, top + window.scrollY)` 。
 
@@ -402,7 +402,7 @@
 
   **语法** ： `element.getAnimations(options)`
 
-  ***描述** ： 返回当前元素以及其子元素的所有 `Animation` 对象，如果没有则返回空数组。
+  **\*描述** ： 返回当前元素以及其子元素的所有 `Animation` 对象，如果没有则返回空数组。
 
   **参数** ：
 

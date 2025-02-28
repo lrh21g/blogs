@@ -49,14 +49,14 @@ export default sidebar({
       collapsible: true,
       children: [
         {
-          text: "类型概述",
-          link: "类型概述",
-          icon: "material-symbols:file-copy-outline-rounded",
+          text: '类型概述',
+          link: '类型概述',
+          icon: 'material-symbols:file-copy-outline-rounded',
         },
         {
-          text: "基础类型",
-          link: "基础类型",
-          icon: "material-symbols:file-copy-outline-rounded",
+          text: '基础类型',
+          link: '基础类型',
+          icon: 'material-symbols:file-copy-outline-rounded',
         },
         {
           text: 'Object',
@@ -65,9 +65,9 @@ export default sidebar({
           children: ['对象', '原型与继承', 'Reflect'],
         },
         {
-          text: "Class",
-          link: "Class",
-          icon: "material-symbols:file-copy-outline-rounded",
+          text: 'Class',
+          link: 'Class',
+          icon: 'material-symbols:file-copy-outline-rounded',
         },
         {
           text: 'Array',
@@ -76,9 +76,9 @@ export default sidebar({
           children: ['数组', 'ArrayBuffer'],
         },
         {
-          text: "Set和Map",
-          link: "Set和Map",
-          icon: "material-symbols:file-copy-outline-rounded",
+          text: 'Set和Map',
+          link: 'Set和Map',
+          icon: 'material-symbols:file-copy-outline-rounded',
         },
         {
           text: '函数',
@@ -93,29 +93,29 @@ export default sidebar({
           children: ['异步', 'EventLoop', 'Promise', 'Generator', 'async'],
         },
         {
-          text: "正则表达式",
-          link: "RegExp",
-          icon: "material-symbols:regular-expression-rounded",
+          text: '正则表达式',
+          link: 'RegExp',
+          icon: 'material-symbols:regular-expression-rounded',
         },
         {
-          text: "Math和Date",
-          link: "Math和Date",
-          icon: "material-symbols:calculate-outline-rounded",
+          text: 'Math和Date',
+          link: 'Math和Date',
+          icon: 'material-symbols:calculate-outline-rounded',
         },
         {
-          text: "JavaScript API",
-          link: "API",
-          icon: "material-symbols:api-rounded",
+          text: 'JavaScript API',
+          link: 'API',
+          icon: 'material-symbols:api-rounded',
         },
         {
-          text: "JSON",
-          link: "JSON",
-          icon: "material-symbols:data-object-rounded",
+          text: 'JSON',
+          link: 'JSON',
+          icon: 'material-symbols:data-object-rounded',
         },
         {
-          text: "网络请求",
-          link: "网络请求",
-          icon: "material-symbols:network-node",
+          text: '网络请求',
+          link: '网络请求',
+          icon: 'material-symbols:network-node',
         },
       ],
     },
@@ -150,7 +150,7 @@ export default sidebar({
     {
       text: 'Canvas',
       prefix: 'Canvas/',
-      icon: 'material-symbols:drive-file-move-outline-rounded',      
+      icon: 'material-symbols:drive-file-move-outline-rounded',
       collapsible: true,
       children: [
         'canvas基础',

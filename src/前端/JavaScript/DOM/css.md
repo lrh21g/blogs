@@ -84,7 +84,7 @@
   **语法** ： `element.style.item(index)`
 
   **描述** ： 返回 `index` 位置的 CSS 属性名。
-  
+
   - 如果未提供 `index` ，则会报错。
   - 如果 `index` 超出范围，则返回 `null` 。
 
@@ -142,7 +142,7 @@ CSS 接口是一个工具接口，无法创建该类型的对象，但可以使�
     document.querySelector('#' + CSS.escape('foo#bar'))
     // 即： document.querySelector('#foo\\#bar')
     ```
-  
+
   - `CSS.supports()`
 
     **语法** ： `CSS.supports(property, value)`
@@ -221,7 +221,7 @@ styleObj.backgroundColor
   **语法** ： `CSSStyleSheet.insertRule(rule, index)`
 
   **描述** ： 在样式表中指定位置 `index` （可选，默认值为 `0`）插入 CSS 规则 `rule` ，并返回新插入规则的位置索引。
-  
+
   - 如果插入位置大于现有规则的数目，会报错。
   - 浏览器对脚本在样式表里面插入规则有很多限制，最好放在 `try...catch` 里使用。
 
@@ -229,13 +229,13 @@ styleObj.backgroundColor
 
   **语法** ： `CSSStyleSheet.replace(text)`
 
-  **描述** ： 以异步方式将样式表的内容替换为传入的内容  `text` 。返回一个与 `CSSStyleSheet` 对象解析的 `Promise` 。
+  **描述** ： 以异步方式将样式表的内容替换为传入的内容 `text` 。返回一个与 `CSSStyleSheet` 对象解析的 `Promise` 。
 
 - `CSSStyleSheet.replaceSync()`
 
   **语法** ： `CSSStyleSheet.replaceSync(text)`
 
-  **描述** ： 以同步方式将样式表的内容替换为传入的内容  `text` 。
+  **描述** ： 以同步方式将样式表的内容替换为传入的内容 `text` 。
 
 ## CSSRuleList 接口
 
@@ -307,11 +307,11 @@ let ruleItem = cssRuleList[0]
 **描述** ： 返回 `MediaQueryList` 实例，表示指定的媒体查询字符串 `mediaQueryString` 是否匹配当前文档。
 
 - `MediaQueryList` 实例属性
+
   - `MediaQueryList.matches` ：返回布尔值，表示指定的媒体查询字符串是否匹配当前文档。
   - `MediaQueryList.media` ：返回媒体查询字符串。
-  
+
 - `MediaQueryList` 实例方法
   - `MediaQueryList.onchange` ：监听函数，当媒体查询字符串匹配当前文档时，执行监听函数。
   - `MediaQueryList.addListener()` ：添加监听函数。当媒体查询字符串匹配当前文档时，执行监听函数。
   - `MediaQueryList.removeListener()` ：移除监听函数。
-  

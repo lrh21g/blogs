@@ -191,7 +191,7 @@ export default function model(
 
   示例 `<input v-model="messgae" />` 生成的 `code` 为 `if($event.target.composing)return;message=$event.target.value`
 
-- 执行 `` addProp(el, 'value', `(${value})`) `` ，修改 AST 元素，给 `el` 添加一个 `prop`,相当于在 `input` 上动态绑定了 `value`
+- 执行 ``addProp(el, 'value', `(${value})`)`` ，修改 AST 元素，给 `el` 添加一个 `prop`,相当于在 `input` 上动态绑定了 `value`
 - 执行 `addHandler(el, event, code, null, true)` ，给 `el` 添加事件处理，相当于在 `input` 上绑定了 `input` 事件
 
   示例 `<input v-model="messgae" />` 通过 `addProp` 和 `addHandler` 处理之后，转换成模板如下
@@ -451,7 +451,7 @@ let vm = new Vue({
   }
   ```
 
-- 在执行完 `genDirectives` 之后，会执行 `genData` 函数中 `` if (el.model) { data += `model:{value:${el.model.value},callback:${el.model.callback},expression:${el.model.expression}},` } `` 逻辑。
+- 在执行完 `genDirectives` 之后，会执行 `genData` 函数中 ``if (el.model) { data += `model:{value:${el.model.value},callback:${el.model.callback},expression:${el.model.expression}},` }`` 逻辑。
 
   对于示例，父组件最终生成的 `render` 代码如下：
 

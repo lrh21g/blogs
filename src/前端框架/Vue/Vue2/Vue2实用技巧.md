@@ -2,7 +2,7 @@
 
 ## 全局组件注册
 
-``` javascript
+```javascript
 // 目录
 // src
 //  | --- components
@@ -35,7 +35,7 @@ requireComponent.keys().forEach(fileName => {
 
 ## 权限指令
 
-``` javascript
+```javascript
 // permission.js
 import store from '@/store'
 export default {

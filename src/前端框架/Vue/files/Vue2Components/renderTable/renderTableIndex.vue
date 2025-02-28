@@ -1,10 +1,6 @@
-<template>
-  <div>
-    <table-render :columns="columns" :data="data"></table-render>
-  </div>
-</template>
 <script>
-import TableRender from './tableRender.vue';
+import TableRender from './tableRender.vue'
+
 export default {
   components: { TableRender },
   data() {
@@ -15,7 +11,7 @@ export default {
           key: 'name',
           // h: createElement
           render: (h, { row, index }) => {
-            let edit;
+            let edit
             // 当前行为聚焦行时
             if (this.editIndex === index) {
               edit = [
@@ -25,22 +21,23 @@ export default {
                   },
                   on: {
                     input: (event) => {
-                      this.editName = event.target.value;
+                      this.editName = event.target.value
                     },
                   },
                 }),
-              ];
-            } else {
-              edit = row.name;
+              ]
             }
-            return h('div', [edit]);
+            else {
+              edit = row.name
+            }
+            return h('div', [edit])
           },
         },
         {
           title: '年龄',
           key: 'age',
           render: (h, { row, index }) => {
-            let edit;
+            let edit
             // 当前行为聚焦行时
             if (this.editIndex === index) {
               edit = [
@@ -50,21 +47,22 @@ export default {
                   },
                   on: {
                     input: (event) => {
-                      this.editAge = event.target.value;
+                      this.editAge = event.target.value
                     },
                   },
                 }),
-              ];
-            } else {
-              edit = row.age;
+              ]
             }
-            return h('div', [edit]);
+            else {
+              edit = row.age
+            }
+            return h('div', [edit])
           },
         },
         {
           title: '出生日期',
           render: (h, { row, index }) => {
-            let edit;
+            let edit
             // 当前行为聚焦行时
             if (this.editIndex === index) {
               edit = [
@@ -74,26 +72,27 @@ export default {
                   },
                   on: {
                     input: (event) => {
-                      this.editBirthday = event.target.value;
+                      this.editBirthday = event.target.value
                     },
                   },
                 }),
-              ];
-            } else {
-              const date = new Date(parseInt(row.birthday));
-              const year = date.getFullYear();
-              const month = date.getMonth() + 1;
-              const day = date.getDate();
-              edit = `${year}-${month}-${day}`;
+              ]
             }
-            return h('div', [edit]);
+            else {
+              const date = new Date(Number.parseInt(row.birthday))
+              const year = date.getFullYear()
+              const month = date.getMonth() + 1
+              const day = date.getDate()
+              edit = `${year}-${month}-${day}`
+            }
+            return h('div', [edit])
           },
         },
         {
           title: '地址',
           key: 'address',
           render: (h, { row, index }) => {
-            let edit;
+            let edit
             // 当前行为聚焦行时
             if (this.editIndex === index) {
               edit = [
@@ -103,15 +102,16 @@ export default {
                   },
                   on: {
                     input: (event) => {
-                      this.editAddress = event.target.value;
+                      this.editAddress = event.target.value
                     },
                   },
                 }),
-              ];
-            } else {
-              edit = row.address;
+              ]
             }
-            return h('div', [edit]);
+            else {
+              edit = row.address
+            }
+            return h('div', [edit])
           },
         },
         {
@@ -124,15 +124,15 @@ export default {
                   {
                     on: {
                       click: () => {
-                        this.data[index].name = this.editName;
-                        this.data[index].age = this.editAge;
-                        this.data[index].birthday = this.editBirthday;
-                        this.data[index].address = this.editAddress;
-                        this.editIndex = -1;
+                        this.data[index].name = this.editName
+                        this.data[index].age = this.editAge
+                        this.data[index].birthday = this.editBirthday
+                        this.data[index].address = this.editAddress
+                        this.editIndex = -1
                       },
                     },
                   },
-                  '保存'
+                  '保存',
                 ),
                 h(
                   'button',
@@ -142,29 +142,30 @@ export default {
                     },
                     on: {
                       click: () => {
-                        this.editIndex = -1;
+                        this.editIndex = -1
                       },
                     },
                   },
-                  '取消'
+                  '取消',
                 ),
-              ];
-            } else {
+              ]
+            }
+            else {
               return h(
                 'button',
                 {
                   on: {
                     click: () => {
-                      this.editName = row.name;
-                      this.editAge = row.age;
-                      this.editAddress = row.address;
-                      this.editBirthday = row.birthday;
-                      this.editIndex = index;
+                      this.editName = row.name
+                      this.editAge = row.age
+                      this.editAddress = row.address
+                      this.editBirthday = row.birthday
+                      this.editIndex = index
                     },
                   },
                 },
-                '修改'
-              );
+                '修改',
+              )
             }
           },
         },
@@ -201,7 +202,13 @@ export default {
       editAge: '', // 第二列输入框
       editBirthday: '', // 第三列输入框
       editAddress: '', // 第四列输入框
-    };
+    }
   },
-};
+}
 </script>
+
+<template>
+  <div>
+    <TableRender :columns="columns" :data="data" />
+  </div>
+</template>

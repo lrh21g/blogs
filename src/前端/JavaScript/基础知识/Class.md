@@ -258,7 +258,6 @@ Child.parentStaticObj // {}
 
 child instanceof Parent // true
 
-
 class Child2 extends Parent {
   publicSameNameProp = 'child2PublicSameNameProp'
 }
@@ -407,7 +406,7 @@ ECMAScript 的原生构造函数大致包括 `Boolean()`、`Number()`、`String(
 - 继承 `Object`
 
   继承 `Object` 存在行为差异。`NewObj` 继承了 `Object`，但是无法通过 `super` 方法向父类 `Object` 传参。
-[]
+  []
   因为 ES6 改变了 `Object` 构造函数的行为，一旦发现 `Object` 方法不是通过 `new Object()` 形式调用，ES6 规定 `Object` 构造函数会忽略参数。
 
   ```javascript

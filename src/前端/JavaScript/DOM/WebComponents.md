@@ -32,18 +32,18 @@ Web Components 由自定义元素（Custom element）、影子 DOM （Shadow DOM
 
 - 自主定制元素（Autonomous custom elements）：独立元素，不继承任何其他内置 HTML 元素。可以直接写成 HTML 标签的形式。例如：`<popup-info>` / `document.createElement("popup-info")` 。
 
-    ```javascript
-    class PopUpInfo extends HTMLElement {
-      constructor() {
-        // 必须首先调用 super 方法
-        super()
+  ```javascript
+  class PopUpInfo extends HTMLElement {
+    constructor() {
+      // 必须首先调用 super 方法
+      super()
 
-        // ...
-      }
+      // ...
     }
+  }
 
-    customElements.define('popup-info', PopUpInfo)
-    ```
+  customElements.define('popup-info', PopUpInfo)
+  ```
 
 - 自定义内置元素（Customized built-in elements）： 继承自基本的 HTML 元素。在创建时，必须指定所需扩展的元素；使用时，需要先写出基本的元素标签，并通过 is 属性指定 custom element 的名称。例如：`<ul is="expanding-list">` / `document.createElement("ul", { is: "expanding-list" })` 。
 
@@ -140,13 +140,13 @@ for (let color of ['red', 'green', 'blue']) {
   const div = document.createElement('div')
   const shadowDOM = div.attachShadow({ mode: 'open' })
   document.body.appendChild(div)
-  shadowDOM.innerHTML = ` 
-    <p>Make me ${color}</p> 
-    <style> 
-    p { 
-      color: ${color}; 
-    } 
-    </style> 
+  shadowDOM.innerHTML = `
+    <p>Make me ${color}</p>
+    <style>
+    p {
+      color: ${color};
+    }
+    </style>
   `
 }
 ```
@@ -164,7 +164,7 @@ for (let color of ['red', 'green', 'blue']) {
       <span slot="value">custom-cell value</span>
     </custom-cell>
   </body>
-  
+
   <template id="custom-cell-template">
     <style>
       .cell {
@@ -202,11 +202,9 @@ for (let color of ['red', 'green', 'blue']) {
           // 通过 <template> 元素的 content 属性获取 DocumentFragment 的引用
           var template = document.getElementById('custom-cell-template').content
           // 将一个 Shadow DOM 附加到自定义元素上
-          const shadowRoot = this.attachShadow({ mode: 'open' }).appendChild(
-            template.cloneNode(true)
-          )
+          const shadowRoot = this.attachShadow({ mode: 'open' }).appendChild(template.cloneNode(true))
         }
-      }
+      },
     )
   </script>
 </html>

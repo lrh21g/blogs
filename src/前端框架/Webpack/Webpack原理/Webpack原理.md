@@ -6,7 +6,7 @@ Webpack 本质上是一种事件流机制。通过事件流将各种插件串联
 
 `Tapable` 和 Node.js 中的 `EventEmitter` 类似，包括多种类型，通过事件的注册和监听，触发 Webpack 生命周期中的函数方法。
 
-``` javascript
+```javascript
 const {
   SyncHook,
   SyncBailHook,
@@ -24,26 +24,26 @@ const {
 
 Hook 类型可以分为同步（Sync）和异步（Async），异步又分为并行和串行
 
-+ 同步 Hook
-  + `SyncHook` - 串行
-  + `SyncBailHook` - 串行
-  + `SyncWaterfallHook` - 串行
-  + `SyncLoopHook` - 循环
-+ 异步 Hook
-  + `AsyncSeries*` 串行
-    + `AsyncSeriesHook`
-    + `AsyncSeriesBailHook`
-    + `AsyncSeriesWaterfallHook`
-  + `AsyncParallel*` 并行
-    + `AsyncParallelHook`
-    + `AsyncParallelBailHook`
+- 同步 Hook
+  - `SyncHook` - 串行
+  - `SyncBailHook` - 串行
+  - `SyncWaterfallHook` - 串行
+  - `SyncLoopHook` - 循环
+- 异步 Hook
+  - `AsyncSeries*` 串行
+    - `AsyncSeriesHook`
+    - `AsyncSeriesBailHook`
+    - `AsyncSeriesWaterfallHook`
+  - `AsyncParallel*` 并行
+    - `AsyncParallelHook`
+    - `AsyncParallelBailHook`
 
 ### Hook 使用方式分类
 
-+ Basic ： 基础类型，不关心函数的返回值，不根据返回值做事情，会一直执行到底。包括 `SyncHook` 、 `AsyncParallelHook` 、 `AsyncSeriesHook` 。
-+ Bail ： 按回调栈顺序依次执行回调，但是如果其中一个回调函数返回结果 `result !== undefined` ，则退出回调栈调。包括 `SyncBailHook` 、`AsyncSeriesBailHook` 、`AsyncParallelBailHook` 。
-+ Waterfal ： 瀑布式，如果上一个回调函数的结果 `result !== undefined`，则会被作为下一个回调函数的第一个参数。包括 `SyncWaterfallHook` 、 `AsyncSeriesWaterfallHook` 。
-+ Loop ： 循环类型，如果该监听函数返回 `true` ，则这个监听函数会反复执行；如果返回 `undefined` 则退出循环。包括 `SyncLoopHook` 。
+- Basic ： 基础类型，不关心函数的返回值，不根据返回值做事情，会一直执行到底。包括 `SyncHook` 、 `AsyncParallelHook` 、 `AsyncSeriesHook` 。
+- Bail ： 按回调栈顺序依次执行回调，但是如果其中一个回调函数返回结果 `result !== undefined` ，则退出回调栈调。包括 `SyncBailHook` 、`AsyncSeriesBailHook` 、`AsyncParallelBailHook` 。
+- Waterfal ： 瀑布式，如果上一个回调函数的结果 `result !== undefined`，则会被作为下一个回调函数的第一个参数。包括 `SyncWaterfallHook` 、 `AsyncSeriesWaterfallHook` 。
+- Loop ： 循环类型，如果该监听函数返回 `true` ，则这个监听函数会反复执行；如果返回 `undefined` 则退出循环。包括 `SyncLoopHook` 。
 
 ![webpack_tapable](../files/images/webpack_tapable.drawio.png)
 
@@ -60,16 +60,16 @@ Tapable 的执行流程可以分为四步：
 
 `Compiler` 和 `Compilation` 都是继承自 `Tapable`
 
-+ `Compiler` ： 每个 Webpack 的配置，对应一个 `Compiler` 对象，记录着整个 Webpack 的生命周期。webpack 启动后会创建 `compiler` 对象，该对象一直存活知道结束退出。
-+ `Compilation` ： 在构建的过程中，每次构建都会产生一次 `Compilation`， `Compilation` 是构建周期的产物。
+- `Compiler` ： 每个 Webpack 的配置，对应一个 `Compiler` 对象，记录着整个 Webpack 的生命周期。webpack 启动后会创建 `compiler` 对象，该对象一直存活知道结束退出。
+- `Compilation` ： 在构建的过程中，每次构建都会产生一次 `Compilation`， `Compilation` 是构建周期的产物。
 
 ### Compiler
 
 整个 `Compiler` 完整地展现了 Webpack 的构建流程：
 
-+ 准备阶段 ： `make` 之前做的事情都属于准备阶段，这阶段的 callback 入参以 `compiler` 为主；
-+ 编译阶段 ： 该阶段以 `compilation` 的钩子为主，callback 入参以 `compilation` 为主；
-+ 产出阶段 ： 该阶段从 `compilation` 开始，最后回到 `Compiler` 钩子上，callback 传入参数是跟结果相关的数据，包括 `stats`、`error`。
+- 准备阶段 ： `make` 之前做的事情都属于准备阶段，这阶段的 callback 入参以 `compiler` 为主；
+- 编译阶段 ： 该阶段以 `compilation` 的钩子为主，callback 入参以 `compilation` 为主；
+- 产出阶段 ： 该阶段从 `compilation` 开始，最后回到 `Compiler` 钩子上，callback 传入参数是跟结果相关的数据，包括 `stats`、`error`。
 
 #### Compiler 钩子
 
@@ -164,19 +164,19 @@ Tapable 的执行流程可以分为四步：
 
 在 Webpack 的回调函数中会得到 `stats` 对象。这个对象实际来自于 `Compilation.getStats()`，返回的是主要含有 `modules`、`chunks` 和 `assets` 三个属性值的对象。
 
-+ `modules` ：记录了所有解析后的模块。在每个 `module` 中，包含如下信息：
-  + 基本信息：包括最基本的内容、大小、`id`；
-  + 依赖关系：`module.reasons` 对象描述了这个模块被加入依赖图表的理由，包含了引入的方式、引入的 `module` 信息及其对应代码在第几行第几列等，可以通过这个计算出 `module` 之间的依赖关系图表（`graph`）；
-  + `chunks` 和 `assets` 关系：`module.chunks` 和 `module.assets` 包含到 `chunks` 和 `assets` 中的对应 `id` 等；
-  + 被 webpack 处理的后的信息：包含 `module.failed`、`module.errors`、`module.warnings`等。
-+ `chunks` ：记录了所有 `chunk`；在每个 `chunk` 中，包含如下信息：
-  + 基本信息：包括最基本的内容、大小、`id`；
-  + 来源：`chunk.origins` 对象描述了这个模块被加入的理由，包含了引入的方式、引入的 `module` 信息及其对应代码在第几行第几列等，可以通过这个计算出 `module` 之间的依赖关系图表（`graph`）；
-  + 引用关系：`chunk.parents` 和 `chunk.children` 被引用和引用的 `ids`；
-  + 包含和被包含：`chunk.files` 和 `chunk.modules` 包含到 `assets` 和自己包含 `modules` 中信息等。
-+ `assets` ：记录了所有要生成的文件。
+- `modules` ：记录了所有解析后的模块。在每个 `module` 中，包含如下信息：
+  - 基本信息：包括最基本的内容、大小、`id`；
+  - 依赖关系：`module.reasons` 对象描述了这个模块被加入依赖图表的理由，包含了引入的方式、引入的 `module` 信息及其对应代码在第几行第几列等，可以通过这个计算出 `module` 之间的依赖关系图表（`graph`）；
+  - `chunks` 和 `assets` 关系：`module.chunks` 和 `module.assets` 包含到 `chunks` 和 `assets` 中的对应 `id` 等；
+  - 被 webpack 处理的后的信息：包含 `module.failed`、`module.errors`、`module.warnings`等。
+- `chunks` ：记录了所有 `chunk`；在每个 `chunk` 中，包含如下信息：
+  - 基本信息：包括最基本的内容、大小、`id`；
+  - 来源：`chunk.origins` 对象描述了这个模块被加入的理由，包含了引入的方式、引入的 `module` 信息及其对应代码在第几行第几列等，可以通过这个计算出 `module` 之间的依赖关系图表（`graph`）；
+  - 引用关系：`chunk.parents` 和 `chunk.children` 被引用和引用的 `ids`；
+  - 包含和被包含：`chunk.files` 和 `chunk.modules` 包含到 `assets` 和自己包含 `modules` 中信息等。
+- `assets` ：记录了所有要生成的文件。
 
-  ``` javascript
+  ```javascript
   {
     "chunkNames": [], // 这个 asset 包含的 chunk
     "chunks": [10, 6], // 这个 asset 包含的 chunk 的 id
@@ -188,72 +188,76 @@ Tapable 的执行流程可以分为四步：
 
 `Stats` 对象本质上来自于 `lib/Stats.js` 的类实例，常用的方法：
 
-+ `stats.hasWarnings()`
-+ `stats.hasErrors()`
-+ `stats.toJson()`
-+ `stats.toString()`
+- `stats.hasWarnings()`
+- `stats.hasErrors()`
+- `stats.toJson()`
+- `stats.toString()`
 
 ## Webpack 工作流程
 
 1. 初始化阶段：
-   + **初始化参数**：从配置文件、 配置对象、Shell 参数中读取，与默认配置结合得出最终的参数
-   + **创建编译器对象**：用上一步得到的参数创建 `Compiler` 对象
-   + **初始化编译环境**：包括注入内置插件、注册各种模块工厂、初始化 `RuleSet` 集合、加载配置的插件等
-   + **开始编译**：执行 `compiler` 对象的 `run` 方法
-   + **确定入口**：根据配置中的 `entry` 找出所有的入口文件，调用 `compilition.addEntry` 将入口文件转换为 `dependence` 对象（依赖对象，webpack 基于该类型记录模块间依赖关系）
+   - **初始化参数**：从配置文件、 配置对象、Shell 参数中读取，与默认配置结合得出最终的参数
+   - **创建编译器对象**：用上一步得到的参数创建 `Compiler` 对象
+   - **初始化编译环境**：包括注入内置插件、注册各种模块工厂、初始化 `RuleSet` 集合、加载配置的插件等
+   - **开始编译**：执行 `compiler` 对象的 `run` 方法
+   - **确定入口**：根据配置中的 `entry` 找出所有的入口文件，调用 `compilition.addEntry` 将入口文件转换为 `dependence` 对象（依赖对象，webpack 基于该类型记录模块间依赖关系）
 2. 构建阶段：
-   + **编译模块(make)**：根据 `entry` 对应的 `dependence` 创建 `module` 对象，调用 `loader` 将模块转译为标准 JS 内容，调用 JS 解释器将内容转换为 `AST` 对象，从中找出该模块依赖的模块，再 递归 本步骤直到所有入口依赖的文件都经过了本步骤的处理
-   + **完成模块编译**：上一步递归处理所有能触达到的模块后，得到了每个模块被翻译后的内容以及它们之间的 依赖关系图
+   - **编译模块(make)**：根据 `entry` 对应的 `dependence` 创建 `module` 对象，调用 `loader` 将模块转译为标准 JS 内容，调用 JS 解释器将内容转换为 `AST` 对象，从中找出该模块依赖的模块，再 递归 本步骤直到所有入口依赖的文件都经过了本步骤的处理
+   - **完成模块编译**：上一步递归处理所有能触达到的模块后，得到了每个模块被翻译后的内容以及它们之间的 依赖关系图
 3. 生成阶段：
-   + **输出资源(seal)**：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 `Chunk`，再把每个 `Chunk` 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会
-   + **写入文件系统(emitAssets)**：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
+   - **输出资源(seal)**：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 `Chunk`，再把每个 `Chunk` 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会
+   - **写入文件系统(emitAssets)**：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
 
 ![webpack](../files/images/webpack.drawio.png)
 
 1. 初始化阶段
-   + 将 `process.args + webpack.config.js` 合并成用户配置
-   + 调用 `validateSchema` 校验配置
-   + 调用 `getNormalizedWebpackOptions + applyWebpackOptionsBaseDefaults` 合并出最终配置
-   + 创建 `compiler` 对象
-   + 遍历用户定义的 `plugins` 集合，执行插件的 `apply` 方法
-   + 调用 `new WebpackOptionsApply().process` 方法，加载各种内置插件
 
-      主要逻辑集中在 `WebpackOptionsApply` 类，webpack 内置了数百个插件，这些插件并不需要我们手动配置，`WebpackOptionsApply` 会在初始化阶段根据配置内容动态注入对应的插件，包括：
+   - 将 `process.args + webpack.config.js` 合并成用户配置
+   - 调用 `validateSchema` 校验配置
+   - 调用 `getNormalizedWebpackOptions + applyWebpackOptionsBaseDefaults` 合并出最终配置
+   - 创建 `compiler` 对象
+   - 遍历用户定义的 `plugins` 集合，执行插件的 `apply` 方法
+   - 调用 `new WebpackOptionsApply().process` 方法，加载各种内置插件
 
-     + 注入 `EntryOptionPlugin` 插件，处理 `entry` 配置
-     + 根据 `devtool` 值判断后续用那个插件处理 `sourcemap`，可选值：`EvalSourceMapDevToolPlugin`、`SourceMapDevToolPlugin`、`EvalDevToolModulePlugin`
-     + 注入 `RuntimePlugin` ，用于根据代码内容动态注入 webpack 运行时
-   + 启动 webpack ，触发 `lib/webpack.js` 文件中 `createCompiler` 方法
-   + `createCompiler` 方法内部调用 `WebpackOptionsApply` 插件
-   + `WebpackOptionsApply` 定义在 `lib/WebpackOptionsApply.js` 文件，内部根据 `entry` 配置决定注入 `entry` 相关的插件，包括：`DllEntryPlugin`、`DynamicEntryPlugin`、`EntryPlugin`、`PrefetchPlugin`、`ProgressPlugin`、`ContainerPlugin`
-   + `Entry` 相关插件，如 `lib/EntryPlugin.js` 的 `EntryPlugin` 监听 `compiler.make` 钩子
-   + `lib/compiler.js` 的 `compile` 函数内调用 `this.hooks.make.callAsync`
-   + 触发 `EntryPlugin` 的 `make` 回调，在回调中执行 `compilation.addEntry` 函数
-   + `compilation.addEntry` 函数内部经过一坨与主流程无关的 hook 之后，再调用 `handleModuleCreate` 函数，正式开始构建内容
+     主要逻辑集中在 `WebpackOptionsApply` 类，webpack 内置了数百个插件，这些插件并不需要我们手动配置，`WebpackOptionsApply` 会在初始化阶段根据配置内容动态注入对应的插件，包括：
+
+     - 注入 `EntryOptionPlugin` 插件，处理 `entry` 配置
+     - 根据 `devtool` 值判断后续用那个插件处理 `sourcemap`，可选值：`EvalSourceMapDevToolPlugin`、`SourceMapDevToolPlugin`、`EvalDevToolModulePlugin`
+     - 注入 `RuntimePlugin` ，用于根据代码内容动态注入 webpack 运行时
+
+   - 启动 webpack ，触发 `lib/webpack.js` 文件中 `createCompiler` 方法
+   - `createCompiler` 方法内部调用 `WebpackOptionsApply` 插件
+   - `WebpackOptionsApply` 定义在 `lib/WebpackOptionsApply.js` 文件，内部根据 `entry` 配置决定注入 `entry` 相关的插件，包括：`DllEntryPlugin`、`DynamicEntryPlugin`、`EntryPlugin`、`PrefetchPlugin`、`ProgressPlugin`、`ContainerPlugin`
+   - `Entry` 相关插件，如 `lib/EntryPlugin.js` 的 `EntryPlugin` 监听 `compiler.make` 钩子
+   - `lib/compiler.js` 的 `compile` 函数内调用 `this.hooks.make.callAsync`
+   - 触发 `EntryPlugin` 的 `make` 回调，在回调中执行 `compilation.addEntry` 函数
+   - `compilation.addEntry` 函数内部经过一坨与主流程无关的 hook 之后，再调用 `handleModuleCreate` 函数，正式开始构建内容
+
 2. 构建阶段
-   + 调用 `handleModuleCreate` ，根据文件类型构建 `module` 子类
-   + 调用 `loader-runner` 仓库的 `runLoaders` 转译 `module` 内容，通常是从各类资源类型转译为 JavaScript 文本
-   + 调用 `acorn` 将 JS 文本解析为 `AST`
-   + 遍历 `AST`，触发各种钩子
-   + 在 `HarmonyExportDependencyParserPlugin` 插件监听 `exportImportSpecifier` 钩子，解读 JS 文本对应的资源依赖
-   + 调用 `module` 对象的 `addDependency` 将依赖对象加入到 `module` 依赖列表中
-   + AST 遍历完毕后，调用 `module.handleParseResult` 处理模块依赖
-   + 对于 `module` 新增的依赖，调用 `handleModuleCreate` ，控制流回到第一步
-   + 所有依赖都解析完毕后，构建阶段结束
+   - 调用 `handleModuleCreate` ，根据文件类型构建 `module` 子类
+   - 调用 `loader-runner` 仓库的 `runLoaders` 转译 `module` 内容，通常是从各类资源类型转译为 JavaScript 文本
+   - 调用 `acorn` 将 JS 文本解析为 `AST`
+   - 遍历 `AST`，触发各种钩子
+   - 在 `HarmonyExportDependencyParserPlugin` 插件监听 `exportImportSpecifier` 钩子，解读 JS 文本对应的资源依赖
+   - 调用 `module` 对象的 `addDependency` 将依赖对象加入到 `module` 依赖列表中
+   - AST 遍历完毕后，调用 `module.handleParseResult` 处理模块依赖
+   - 对于 `module` 新增的依赖，调用 `handleModuleCreate` ，控制流回到第一步
+   - 所有依赖都解析完毕后，构建阶段结束
 3. 生成阶段
-   + 构建本次编译的 `ChunkGraph` 对象；
-   + 遍历 `compilation.modules` 集合，将 `module` 按 `entry/动态引入` 的规则分配给不同的 Chunk 对象；
-   + `compilation.modules` 集合遍历完毕后，得到完整的 `chunks` 集合对象，调用 `createXxxAssets` 方法
-   + `createXxxAssets` 遍历 `module/chunk` ，调用 `compilation.emitAssets` 方法将资 `assets` 信息记录到 `compilation.assets` 对象中
-   + 触发 `seal` 回调，控制流回到 `compiler` 对象
 
-      这一步的关键逻辑是将 `module` 按规则组织成 `chunks` ，webpack 内置的 `chunk` 封装规则比较简单：
+   - 构建本次编译的 `ChunkGraph` 对象；
+   - 遍历 `compilation.modules` 集合，将 `module` 按 `entry/动态引入` 的规则分配给不同的 Chunk 对象；
+   - `compilation.modules` 集合遍历完毕后，得到完整的 `chunks` 集合对象，调用 `createXxxAssets` 方法
+   - `createXxxAssets` 遍历 `module/chunk` ，调用 `compilation.emitAssets` 方法将资 `assets` 信息记录到 `compilation.assets` 对象中
+   - 触发 `seal` 回调，控制流回到 `compiler` 对象
 
-     + `entry` 及 `entry` 触达到的模块，组合成一个 `chunk`
-     + 使用动态引入语句引入的模块，各自组合成一个 `chunk`
-     + `chunk` 是输出的基本单位，默认情况下这些 `chunks` 与最终输出的资源一一对应，而通过动态引入语句引入的模块，也对应会打包出相应的资源。
+     这一步的关键逻辑是将 `module` 按规则组织成 `chunks` ，webpack 内置的 `chunk` 封装规则比较简单：
+
+     - `entry` 及 `entry` 触达到的模块，组合成一个 `chunk`
+     - 使用动态引入语句引入的模块，各自组合成一个 `chunk`
+     - `chunk` 是输出的基本单位，默认情况下这些 `chunks` 与最终输出的资源一一对应，而通过动态引入语句引入的模块，也对应会打包出相应的资源。
 
 ## 参考
 
-+ [万字总结 一文吃透 Webpack 核心原理](https://mp.weixin.qq.com/s/SbJNbSVzSPSKBe2YStn2Zw)
-+ [Webpack 从零入门到工程化实战](https://www.imooc.com/read/29)
+- [万字总结 一文吃透 Webpack 核心原理](https://mp.weixin.qq.com/s/SbJNbSVzSPSKBe2YStn2Zw)
+- [Webpack 从零入门到工程化实战](https://www.imooc.com/read/29)

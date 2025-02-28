@@ -15,17 +15,17 @@
 ```javascript
 let setInstance = new Set()
 
-setInstance.add(1) // Set(1) {1}
-setInstance.add('hello world') // Set(2) {1, 'hello world'}
+setInstance.add(1) // Set(1) {1}
+setInstance.add('hello world') // Set(2) {1, 'hello world'}
 
 let obj = { a: '1'}
-setInstance.add(obj) // Set(3) {1, 'hello world', { a: '1'}}
+setInstance.add(obj) // Set(3) {1, 'hello world', { a: '1'}}
 
-setInstance.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
-setInstance.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
+setInstance.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
+setInstance.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
 
-setInstance.add(+0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
-setInstance.add(-0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
+setInstance.add(+0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
+setInstance.add(-0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
 
 setInstance.has(1) // true
 setInstance.has('Hello World'.toLowerCase()) // true
@@ -37,7 +37,7 @@ setInstance.has(1) // false
 
 let arr1 = [1, 2, 3]
 // 当 new Set 的参数是一个数组，数组的元素会自动成为 Set 的元素
-console.log(new Set(arr1)) // Set(3) {1, 2, 3}
+console.log(new Set(arr1)) // Set(3) {1, 2, 3}
 
 // 数组去重
 let elementRepeatArr = [1, 2, 3, 3, 3, 4, 4, 4]
@@ -46,13 +46,13 @@ console.log(elementRepeatArrToSet.size) // 4
 console.log([...elementRepeatArrToSet]) // [1, 2, 3, 4]
 
 // 字符去重
-console.log([...new Set('abcccddd')].join('')) // 'abcd​​'
+console.log([...new Set('abcccddd')].join('')) // 'abcd'
 
 // 大小写敏感
 let textStr = 'hello L'
 let textStrToSet = new Set(textStr)
 console.log(textStrToSet.size) // 6
-console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
+console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
 ```
 
 ### Set 的实例属性和方法
@@ -79,21 +79,21 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   ```javascript
   let set = new Set()
 
-  set.add(1) // Set(1) {1}
+  set.add(1) // Set(1) {1}
   // 链式调用
-  set.add('hello world').add({ a: '1'}) // Set(3) {1, 'hello world', { a: '1'}}
+  set.add('hello world').add({ a: '1'}) // Set(3) {1, 'hello world', { a: '1'}}
 
-  set.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
-  set.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
+  set.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
+  set.add(NaN) // Set(4) {1, 'hello world', { a: '1'}, NaN}
 
-  set.add(+0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
-  set.add(-0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
+  set.add(+0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
+  set.add(-0) // Set(5) {1, 'hello world', { a: '1'}, NaN, 0}
   ```
 
 - `Set.prototype.delete()`
 
   **语法：** `setInstance.delete(value)`
-  
+
   **描述：** 从 `Set` 对象中删除指定的值 `value`（如果该值在 `Set` 中），成功删除返回 `true`，否则返回 `false`。
 
   - 对象是通过引用比较的，如果需要删除，则需要提供原始对象的引用，否则就需要通过检查对象的对应属性进行删除。
@@ -101,11 +101,11 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   ```javascript
   let set = new Set()
 
-  set.add(1) // Set(1) {1}
-  set.add('hello world') // Set(2) {1, 'hello world'}
+  set.add(1) // Set(1) {1}
+  set.add('hello world') // Set(2) {1, 'hello world'}
 
   let obj = { a: '1'}
-  set.add(obj) // Set(3) {1, 'hello world', { a: '1'}}
+  set.add(obj) // Set(3) {1, 'hello world', { a: '1'}}
 
   set.delete(1) // true
   set.delete(obj) // true
@@ -123,11 +123,11 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   ```javascript
   let set = new Set()
 
-  set.add(1) // Set(1) {1}
-  set.add('hello world') // Set(2) {1, 'hello world'}
+  set.add(1) // Set(1) {1}
+  set.add('hello world') // Set(2) {1, 'hello world'}
 
   let obj = { a: '1'}
-  set.add(obj) // Set(3) {1, 'hello world', { a: '1'}}
+  set.add(obj) // Set(3) {1, 'hello world', { a: '1'}}
 
   set.has(1) // true
   set.has('foo') // false
@@ -144,8 +144,8 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   ```javascript
   let set = new Set()
 
-  set.add(1) // Set(1) {1}
-  set.add('hello world') // Set(2) {1, 'hello world'}
+  set.add(1) // Set(1) {1}
+  set.add('hello world') // Set(2) {1, 'hello world'}
 
   set.size // 2
   set.clear()
@@ -157,7 +157,7 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   **语法：** `setInstance.keys()` / `setInstance.values()`
 
   **描述：** 按照插入顺序，返回元素的**键名**（或**键值**）迭代器对象。
-  
+
   由于 `Set` 结构没有键名，只有键值（或者说键名和键值是同一个值），所以 `keys()` 方法和 `values()` 方法的行为完全一致。
 
   ```javascript
@@ -197,7 +197,7 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   }
   // ['red', 'red']
   // ['blue', 'blue']
-  // [1, 1]
+  // [1, 1]
   // ['hello world', 'hello world']
   // [['yellow', 'black'], ['yellow', 'black']]
 
@@ -215,11 +215,14 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   **参数：**
 
   - `callback` ：为集合中每个元素执行的回调函数，该函数接收如下参数：
+
     - `value` ：当前正在处理的 `Set` 元素的键值。
     - `key` ：当前正在处理的 `Set` 的元素键名。
 
       由于 `Set` 对象中没有键（`key`），该值为 `Set` 中元素的值，为了和 `Map` 以及 `Array` 的 `forEach()` 函数用法保持一致。
+
     - `set` ：调用 `forEach()` 的 `Set` 对象。
+
   - `thisArg` ：在执行 `callbackFn` 时作为 `this` 使用。
 
   ```javascript
@@ -270,7 +273,7 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
   console.log([...elementRepeatArrToSet]) // [1, 2, 3, 4]
 
   // 字符去重
-  console.log([...new Set('abcccddd')].join('')) // 'abcd​​'
+  console.log([...new Set('abcccddd')].join('')) // 'abcd'
   ```
 
 ## WeakSet
@@ -292,7 +295,7 @@ console.log(textStrToSet) // Set(6) {'h', 'e', 'l', 'o', ' ', 'L'}
 
 ```javascript
 new WeakSet([1, 2]) // 数组成员不是对象，加入 WeakSet 会报错： Uncaught TypeError: Invalid value used in weak set
-new WeakSet([[1, 2], [3, 4]]) // WeakSet {[1, 2], [3, 4]}
+new WeakSet([[1, 2], [3, 4]]) // WeakSet {[1, 2], [3, 4]}
 ```
 
 ### WeakSet 的实例方法
@@ -319,8 +322,8 @@ new WeakSet([[1, 2], [3, 4]]) // WeakSet {[1, 2], [3, 4]}
 const weakSetInstance = new WeakSet()
 let obj = {}
 
-weakSetInstance.add(window) // WeakSet {Window
-weakSetInstance.add(obj) // WeakSet {{}, Window}
+weakSetInstance.add(window) // WeakSet {Window
+weakSetInstance.add(obj) // WeakSet {{}, Window}
 
 weakSetInstance.has(window) // true
 weakSetInstance.has({}) // false ：不是同一个引用
@@ -344,7 +347,7 @@ weakSetInstance.has(window) // false
   // 只要 WeakSet 中任何元素从 DOM 树中被删除，垃圾回收程序就可以忽略其存在，
   // 而立即释放其内存（假设没有其他地方引用这个对象）。
   const disabledElements = new WeakSet()
-  const loginButton = document.querySelector('#login') 
+  const loginButton = document.querySelector('#login')
   // 通过加入对应集合，给这个节点打上“禁用”标签
   disabledElements.add(loginButton)
   ```
@@ -435,7 +438,7 @@ mapInstance.get('a') // undefined
   console.log(str) // '{"dataType":"Map","value":[["a",1]]}'
 
   const newValue = JSON.parse(str, reviver)
-  console.log(newValue) // Map(1) {'a' => 1}
+  console.log(newValue) // Map(1) {'a' => 1}
   ```
 
 ### Map 的实例属性和方法
@@ -665,7 +668,7 @@ strMapToObj(myMap) // { yes: true, no: false }
 // 对象转为 Map ： 使用 Object.entries()
 let obj = { a: 1, b: 2 }
 let map = new Map(Object.entries(obj))
-// Map {'a' => 1, 'b' => 2}
+// Map {'a' => 1, 'b' => 2}
 
 // 对象转为 Map ： 定义转化函数
 function objToStrMap(obj) {
@@ -717,7 +720,7 @@ jsonToMap('[[true,7],[{"foo":3},["abc"]]]')
 
 - `WeakMap` 只接受对象（`null`除外）和 `Symbol` 值作为键名，不接受其他类型的值作为键名。
 - `WeakMap` 的键名所指向的对象，不计入垃圾回收机制。
-  
+
   只要所引用的对象的其他引用都被清除，垃圾回收机制就会释放该对象所占用的内存。也就是说，一旦不再需要， `WeakMap` 里面的键名对象和所对应的键值对会自动消失，不用手动删除引用。
 
 - 正因为 `WeakMap` 的键是弱引用的，`WeakMap` 的 `key` 是不可枚举的。
@@ -796,14 +799,14 @@ weakMapInstance.has(fooObj) // false
   // 将这个状态（该DOM 节点对象）作为键名存放在 WeakMap 中
   // 一旦 DOM 节点被删除，该状态会自动消失，不会存在内存泄漏的风险
 
-  let myWeakmap = new WeakMap()
+  let myWeakMap = new WeakMap()
 
-  myWeakmap.set(document.getElementById('logo'), { timesClicked: 0 })
+  myWeakMap.set(document.getElementById('logo'), { timesClicked: 0 })
 
   document.getElementById('logo').addEventListener(
     'click',
     function () {
-      let logoData = myWeakmap.get(document.getElementById('logo'))
+      let logoData = myWeakMap.get(document.getElementById('logo'))
       logoData.timesClicked++
     },
     false
@@ -890,7 +893,7 @@ const getImageCached = makeWeakCached(getImage)
 
   - 一旦该对象被垃圾回收机制清除，注册表就会在清除完成后，调用注册的回调函数 `callbackFn` ，并将 `heldValue` （可以是任意类型的值）作为参数传入回调函数。
   - `unregisterToken` 作为标记值，用于标记已经注册的回调函数。标记值必须是对象，一般使用原始对象 `target`，属于**弱引用**。
-  
+
 - `FinalizationRegistry.prototype.unregister(unregisterToken)` ：用于取消观察的目标对象 `target`
 
 ```javascript

@@ -1,6 +1,6 @@
 # MutationObserver
 
-`MutationObserver`  接口异步监视 DOM 的变动，例如节点的增减、属性变动、文本内容变动等。
+`MutationObserver` 接口异步监视 DOM 的变动，例如节点的增减、属性变动、文本内容变动等。
 
 - 当所有 DOM 的变动都完成后，才会运行（即异步触发）。
 - DOM 的变化记录会被封装成一个数组（包含多条 DOM 的变动），在 `MutationObserver` 的回调函数中返回。
@@ -49,7 +49,7 @@
   **语法** ：`mutationObserver.takeRecords()`
 
   **描述** ：返回一个 `MutationRecord` 对象列表，包含所有 DOM 变化记录的数组。该方法会清空变化记录队列，不再处理未处理的变动。
-  
+
   - 常用于在断开观察者之前立即获取所有未处理的更改记录，以便在停止观察者时可以处理任何未处理的更改。
   - `MutationRecord` 对象表示 DOM 的变化记录，包含以下属性：
     - `type` ：字符串，表示 DOM 的变化类型。可能的值有：`'attributes'`（DOM 的属性变化）、`'characterData'`（DOM 的文本内容变化）、`'childList'`（DOM 的子节点变化）。

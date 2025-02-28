@@ -79,6 +79,7 @@ document.location.password // 'password'
 - `history.length` ： 只读属性。返回一个整数（Integer），表示会话历史中元素的数目，包括当前加载的页。
 
 - `history.scrollRestoration` ： 允许 Web 应用程序在历史导航上显式地设置默认滚动恢复行为。属性值如下：
+
   - `auto` ： 将恢复用户已滚动到的页面上的位置。
   - `manual` ： 未还原页上的位置。用户必须手动滚动到该位置。
 

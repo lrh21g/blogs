@@ -110,7 +110,7 @@
 
   **语法** ： `document.writeln(string)`
 
-  **描述** ： 与  `document.write(string)` 方法一致，但会在每次调用后添加一个换行符。
+  **描述** ： 与 `document.write(string)` 方法一致，但会在每次调用后添加一个换行符。
 
   - `document.writeln()` 方法添加的是 ASCII 码的换行符，渲染成 HTML 网页时不起作用，即在网页上显示不出换行。网页上的换行，必须显式写入` <br>` 。
 
@@ -211,7 +211,7 @@
   **语法** ： `document.createTextNode(data)`
 
   **描述** ： 创建一个包含指定文本数据 `data` 的文本节点，并返回。
-  
+
   - 可以用来转义 HTML 字符。
   - 不对单引号和双引号转义，所以不能用来对 HTML 属性赋值。
 
@@ -261,7 +261,7 @@
   **语法** ： `document.getElementsByClassName(names)`
 
   **描述** ： 返回一个类数组对象，包含匹配 `class` 类名（大小写敏感）的所有元素节点。
-  
+
   - 不仅可用在 `document` 对象上，也可用在任何元素节点上。调用该方法的元素将作为本次查找的根元素。
 
   **参数** ：

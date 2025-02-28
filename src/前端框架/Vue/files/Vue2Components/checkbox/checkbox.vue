@@ -1,30 +1,12 @@
-<template>
-  <label>
-    <span>
-      <input
-        v-if="group"
-        type="checkbox"
-        :disabled="disabled"
-        :value="label"
-        v-model="model"
-        @change="change"
-      />
-      <input
-        v-else
-        type="checkbox"
-        :disabled="disabled"
-        :checked="currentValue"
-        @change="change"
-      />
-    </span>
-    <slot></slot>
-  </label>
-</template>
+<!-- eslint-disable vue/custom-event-name-casing -->
+<!-- eslint-disable vue/require-explicit-emits -->
+
 <script>
-import { findComponentUpward } from '../utils/assist.js';
-import Emitter from '../mixins/emitter.js';
+import Emitter from '../mixins/emitter.js'
+import { findComponentUpward } from '../utils/assist.js'
+
 export default {
-  name: 'iCheckbox',
+  name: 'ICheckbox',
   mixins: [Emitter],
   props: {
     disabled: {
@@ -53,47 +35,73 @@ export default {
       model: [],
       group: false,
       parent: null,
-    };
+    }
+  },
+  watch: {
+    value(val) {
+      if (val === this.trueValue || val === this.falseValue) {
+        this.updateModel()
+      }
+      else {
+        throw new Error('Value should be trueValue or falseValue.')
+      }
+    },
   },
   mounted() {
-    this.parent = findComponentUpward(this, 'iCheckboxGroup');
+    this.parent = findComponentUpward(this, 'iCheckboxGroup')
     if (this.parent) {
-      this.group = true;
+      this.group = true
     }
     if (this.group) {
-      this.parent.updateModel(true);
-    } else {
-      this.updateModel();
+      this.parent.updateModel(true)
+    }
+    else {
+      this.updateModel()
     }
   },
   methods: {
     change(event) {
       if (this.disabled) {
-        return false;
+        return false
       }
-      const checked = event.target.checked;
-      this.currentValue = checked;
-      const value = checked ? this.trueValue : this.falseValue;
-      this.$emit('input', value);
+      const checked = event.target.checked
+      this.currentValue = checked
+      const value = checked ? this.trueValue : this.falseValue
+      this.$emit('input', value)
       if (this.group) {
-        this.parent.change(this.model);
-      } else {
-        this.$emit('on-change', value);
-        this.dispatch('iFormItem', 'on-form-change', value);
+        this.parent.change(this.model)
+      }
+      else {
+        this.$emit('on-change', value)
+        this.dispatch('iFormItem', 'on-form-change', value)
       }
     },
     updateModel() {
-      this.currentValue = this.value === this.trueValue;
+      this.currentValue = this.value === this.trueValue
     },
   },
-  watch: {
-    value(val) {
-      if (val === this.trueValue || val === this.falseValue) {
-        this.updateModel();
-      } else {
-        throw 'Value should be trueValue or falseValue.';
-      }
-    },
-  },
-};
+}
 </script>
+
+<template>
+  <label>
+    <span>
+      <input
+        v-if="group"
+        v-model="model"
+        type="checkbox"
+        :disabled="disabled"
+        :value="label"
+        @change="change"
+      >
+      <input
+        v-else
+        type="checkbox"
+        :disabled="disabled"
+        :checked="currentValue"
+        @change="change"
+      >
+    </span>
+    <slot />
+  </label>
+</template>

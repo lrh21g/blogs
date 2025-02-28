@@ -38,10 +38,12 @@ function refreshPopupWindow() {
 ### window.frames 、 window.length 、 window.frameElement
 
 - `window.frames` ： 返回当前窗口，一个类数组对象，列出了当前窗口的所有直接子窗口。包括 `frame` 元素和 `iframe` 元素。
+
   - `window.frames[0]` 表示页面中第一个框架窗口。`frames` 属性实际上是 `window` 对象的别名。
   - 如果 `iframe` 元素设置了 `id` 或 `name` 属性，可以用属性值，引用该 `iframe` 窗口。例如： `<iframe name="myIFrame">` 可以用 `frames['myIFrame']` 或者 `frames.myIFrame` 来引用。
 
 - `window.length` ： 返回当前窗口中包含的框架数量 (框架包括 `frame` 和 `iframe` 两种元素)。
+
   - 如果当前网页不包含 `frame` 和 `iframe` 元素，`window.length` 返回为 `0` 。
   - `window.frames.length` 与 `window.length` 应该是相等的： `window.frames.length === window.length` 。
 
@@ -106,7 +108,7 @@ function refreshPopupWindow() {
 - `window.prompt(message, defaultValue)` ：显示一个带有可选的信息的对话框，提示用户输入一些文本，并等待用户提交文本或取消对话框。往往用来获取用户输入的数据。
 
   - `window.prompt()` 参数：
-  
+
     - `message` ：可选值。向用户显示的一串文本（可以使用 `\n` 指定换行）。如果在提示窗口中没有什么可显示的，可以省略。
     - `defaultValue` ：可选值。一个字符串，包含文本输入字段中显示的默认值。
 
@@ -169,7 +171,7 @@ function refreshPopupWindow() {
         - `personalbar` ：是否显示用户自己安装的工具栏。
         - `status` ：是否显示状态栏。
         - `close` ：新窗口是否显示关闭按钮。
-  
+
   - `window.open()` 返回值：一个 `WindowProxy` 对象。只要符合同源策略安全要求，返回的引用就可用于访问新窗口的属性和方法。
 
 - `window.close()` ：关闭当前窗口或某个指定的窗口。一般只用来关闭 `window.open` 方法新建的窗口。
@@ -193,6 +195,7 @@ function refreshPopupWindow() {
 - `window.scrollTo() / window.scroll()` ：将文档滚动到绝对位置（单位像素）。
 
   - `window.scrollTo(x-coord, y-coord)`
+
     - `x-coord` ：文档中的横轴坐标。
     - `y-coord` ：文档中的纵轴坐标。
 
@@ -204,6 +207,7 @@ function refreshPopupWindow() {
 - `window.scrollBy()` ：将网页滚动到相关距离（单位像素）。
 
   - `window.scrollBy(x-coord, y-coord)`
+
     - `x-coord` ：水平向右滚动的像素。
     - `y-coord` ：垂直向下滚动的像素。
 
@@ -341,6 +345,7 @@ window.requestAnimationFrame(step)
 `window.requestIdleCallback(callback, options)` 方法插入一个函数，该函数将在浏览器空闲时期被调用。如果多次执行 `window.requestIdleCallback()`，指定多个回调函数，那么这些回调函数将排成一个队列，按照先进先出的顺序执行。
 
 - `callback` ：一个在事件循环空闲时即将被调用的函数的引用。函数会接收到一个名为 `IdleDeadline` 的参数，包含如下属性和方法：
+
   - `didTimeout` 属性：布尔值，表示是否为超时调用。
   - `timeRemaining()` 方法：返回该空闲时段剩余的毫秒数。
 
@@ -415,7 +420,7 @@ window.onerror = function (message, filename, lineno, colno, error) {
 
 - `window.onmessage` ： `message` 事件的监听函数，当窗口接收到消息(例如：从另一个浏览上下文调用 `window.postMessage()`)时触发。
 
-- `window.onmessageerror` ： `MessageError`  事件的监听函数，当 `window` 对象收到无法反序列化的消息时触发。
+- `window.onmessageerror` ： `MessageError` 事件的监听函数，当 `window` 对象收到无法反序列化的消息时触发。
 
 - `window.onpagehide` ： `pagehide` 事件的监听函数，当浏览器在显示与会话历史记录不同的页面的过程中隐藏当前页面时触发（页面隐藏）。
 

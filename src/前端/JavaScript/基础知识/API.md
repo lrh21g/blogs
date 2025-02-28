@@ -164,7 +164,7 @@ Web Crypto API 的 `SubtleCrypto` 接口提供了底层加密函数，支持一�
     ```javascript
     const encoder = new TextEncoder()
     const view = encoder.encode('你好')
-    console.log(view) // Uint8Array(6) [228, 189, 160, 229, 165, 189]
+    console.log(view) // Uint8Array(6) [228, 189, 160, 229, 165, 189]
     ```
 
   - `textEncoder.encodeInto(string, uint8Array)` 方法：接收一个字符串 `string` 和一个目标 `Uint8Array` ，将生成的 UTF-8 编码的文本放入目标数组中，并返回一个指示编码进度的字典对象。
@@ -191,7 +191,7 @@ Web Crypto API 的 `SubtleCrypto` 接口提供了底层加密函数，支持一�
 - `TextEncoderStream` 实例属性
 
   - `textEncoderStream.encoding` ：只读。返回一个字符串，表示 `TextEncoderStream` 实例的编码方式。默认值为 `"utf-8"` 。
-  
+
   - `textEncoderStream.readable` ：只读。返回一个 `ReadableStream` 对象，表示可读的字节数据流。
 
   - `textEncoderStream.writable` ：只读。返回一个 `WritableStream` 对象，表示将流数据写入目的地（称为接收器）提供了一个标准的抽象。
@@ -226,13 +226,13 @@ Web Crypto API 的 `SubtleCrypto` 接口提供了底层加密函数，支持一�
 - `TextDecoderStream` 实例属性
 
   - `textDecoderStream.encoding` ：只读。返回一个字符串，表示 `TextDecoderStream` 实例的编码方式。默认值为 `"utf-8"` 。
-  
+
   - `textDecoderStream.fatal` ：只读。返回一个布尔值，表示 `TextDecoderStream` 对象的错误模式是否设置为 `fatal`。
-  
+
   - `textDecoderStream.ignoreBOM` ：只读。返回一个布尔值，表示 `TextDecoderStream` 对象是否忽略 BOM。
-  
+
   - `textDecoderStream.readable` ：只读。返回一个 `ReadableStream` 对象，表示可读的字节数据流。
-  
+
   - `textDecoderStream.writable` ：只读。返回一个 `WritableStream` 对象，表示将流数据写入目的地（称为接收器）提供了一个标准的抽象。
 
 ## Notifications API
@@ -315,7 +315,7 @@ Performance API 是一组用于衡量 web 应用性能的标准，由多个 API 
 - High Resolution Time API ：用于衡量时间的 API。定义了 `performance.now()` 方法返回一个微秒精度的浮点值。
 
   `performance.now()` 计时器采用相对度量。该计时器在执行上下文创建时从 0 开始计时。例如， 打开页面或创建工作线程时，`performance.now()` 会从 0 开始计时。
-  
+
   由于该计时器在不同上下文中初始化时可能存在时间差，因此不同上下文之间如果没有共享参照点则不可能直接比较 `performance.now()`。 `performance.timeOrigin` 属性返回计时器初始化时全局系统时钟的值。
 
   ```javascript
@@ -345,7 +345,7 @@ Performance API 是一组用于衡量 web 应用性能的标准，由多个 API 
 
   console.log(performanceNavigationTimingEntry)
 
-  console.log(performanceNavigationTimingEntry.loadEventEnd - performanceNavigationTimingEntry.loadEventStart) 
+  console.log(performanceNavigationTimingEntry.loadEventEnd - performanceNavigationTimingEntry.loadEventStart)
   // 0.805000017862767
   ```
 

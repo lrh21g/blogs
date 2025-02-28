@@ -1,6 +1,6 @@
 ---
 category: Canvas
-tag: 
+tag:
   - Canvas
 ---
 
@@ -8,10 +8,10 @@ tag:
 
 ## 色彩 Colors
 
-+ `fillStyle = color` 设置图形填充的颜色
-+ `strokeStyle = color` 设置图形轮廓的颜色
+- `fillStyle = color` 设置图形填充的颜色
+- `strokeStyle = color` 设置图形轮廓的颜色
 
-``` javascript
+```javascript
 ctx.fillStyle = "orange";
 ctx.fillStyle = "#FFA500";
 ctx.fillStyle = "rgb(255,165,0)";
@@ -75,7 +75,7 @@ drawColor();
 
 `globalAlpha = transparencyValue` : 会影响到 canvas 中所有图形的透明度，有效范围 `0.0（完全透明） - 1（完全不透明）` 。
 
-``` javascript
+```javascript
 // 设置全局透明度
 ctx.globalAlpha = 0.2;
 
@@ -92,9 +92,9 @@ ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 
 **线宽是指给定路径的中心到两边的粗细，即在路径的两边各绘制线宽的一半。** 假设使用网格代替 canvas 坐标格，每一格对应屏幕上一个像素点。
 
-+ 填充 (2, 1) 至 (5, 5) 的矩形。整个区域的边界正好处于像素边界上，这样得到的矩形有着清晰的边缘
-+ 绘制一条从 (3, 1) 至 (3, 5) ，宽度为 1px 的线条。实际填充区域（深蓝色部分）是在路径两边进行描边，在路径两旁绘制各一半的像素。由于 1 倍显示屏幕最小宽度就是 1 像素，于是进行了边缘柔化处理，看上去就是 2px ，实际上是按照 1px 进行渲染的，线条的颜色模糊也是因为边缘柔化所导致的。
-+ 绘制一条从 (3.5, 1) 至 (3.5, 5) ，宽度为 1px 的线条。线条边缘正好处于像素边界上，则填充出来就是准确的宽为 1px 的线条
+- 填充 (2, 1) 至 (5, 5) 的矩形。整个区域的边界正好处于像素边界上，这样得到的矩形有着清晰的边缘
+- 绘制一条从 (3, 1) 至 (3, 5) ，宽度为 1px 的线条。实际填充区域（深蓝色部分）是在路径两边进行描边，在路径两旁绘制各一半的像素。由于 1 倍显示屏幕最小宽度就是 1 像素，于是进行了边缘柔化处理，看上去就是 2px ，实际上是按照 1px 进行渲染的，线条的颜色模糊也是因为边缘柔化所导致的。
+- 绘制一条从 (3.5, 1) 至 (3.5, 5) ，宽度为 1px 的线条。线条边缘正好处于像素边界上，则填充出来就是准确的宽为 1px 的线条
 
 ![canvas_line_width](./files/images/canvas_line_width.drawio.png)
 
@@ -102,9 +102,9 @@ ctx.fillStyle = "rgba(255, 0, 0, 0.5)";
 
 `lineCap = type` : 设置线条末端样式
 
-+ `butt` : 默认值，线段末端以方形结束。
-+ `round` : 线段末端以圆形结束。端点处加上了半径为一半线宽的半圆。
-+ `square` : 线段末端以方形结束。端点处加上了等宽且高度为一半线宽的方块。
+- `butt` : 默认值，线段末端以方形结束。
+- `round` : 线段末端以圆形结束。端点处加上了半径为一半线宽的半圆。
+- `square` : 线段末端以方形结束。端点处加上了等宽且高度为一半线宽的方块。
 
 ::: normal-demo
 
@@ -146,9 +146,9 @@ drawLineCap();
 
 `lineJoin = type` : 设定线条与线条间接合处的样式。
 
-+ `round` : 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。圆角的半径是线段的宽度。
-+ `bevel` : 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
-+ `miter` : 默认值。通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
+- `round` : 通过填充一个额外的，圆心在相连部分末端的扇形，绘制拐角的形状。圆角的半径是线段的宽度。
+- `bevel` : 在相连部分的末端填充一个额外的以三角形为底的区域， 每个部分都有各自独立的矩形拐角。
+- `miter` : 默认值。通过延伸相连部分的外边缘，使其相交于一点，形成一个额外的菱形区域。这个设置可以通过 `miterLimit` 属性看到效果。
 
 ::: normal-demo
 
@@ -192,7 +192,7 @@ drawLineJoin();
 
 `setLineDash(segments)` : 设置当前虚线样式。使用一组值来指定描述模式的线和间隙的交替长度。
 
-+ `segments` : `Array` 数组。一组描述交替绘制线段和间距（坐标空间单位）长度的数字。如果数组元素的数量是奇数， 数组的元素会被复制并重复。例如， [5, 15, 25] 会变成 [5, 15, 25, 5, 15, 25]。
+- `segments` : `Array` 数组。一组描述交替绘制线段和间距（坐标空间单位）长度的数字。如果数组元素的数量是奇数， 数组的元素会被复制并重复。例如， [5, 15, 25] 会变成 [5, 15, 25, 5, 15, 25]。
 
 ::: normal-demo
 
@@ -322,8 +322,8 @@ draw();
 
 `gradient.addColorStop(offset, color)` : 添加一个由偏移值和颜色值指定的断点到渐变。
 
-+ `offset` : `0 - 1` 之间的值，超出范围将抛出 `INDEX_SIZE_ERR` 错误
-+ `color` : CSS颜色值。如果颜色值不能被解析为有效的CSS颜色值，将抛出 `SYNTAX_ERR` 错误。
+- `offset` : `0 - 1` 之间的值，超出范围将抛出 `INDEX_SIZE_ERR` 错误
+- `color` : CSS颜色值。如果颜色值不能被解析为有效的CSS颜色值，将抛出 `SYNTAX_ERR` 错误。
 
 ::: normal-demo
 
@@ -365,19 +365,19 @@ draw();
 
 `createPattern(image, repetition)` : 指定图像 (`CanvasImageSource`) 创建模式。通过 `repetition` 参数在指定的方向上重复元图像。此方法返回一个 `CanvasPattern` 对象。
 
-+ `image` ： 作为重复图像源的 `CanvasImageSource` 对象。
-  + `HTMLImageElement` : `<img>` 元素
-  + `HTMLVideoElement` : `<video>` 元素，例如捕获摄像头视频产生的图像信息。
-  + `HTMLCanvasElement`
-  + `CanvasRenderingContext2D`
-  + `ImageBitmap`
-  + `ImageData`
-  + `Blob`
-+ `repetition` : 指定如何重复图像。
-  + `repeat` 水平和垂直平铺。当 `repetition` 属性值为 `空字符串''` 或者 `null` ，也会按照 `repeat` 进行渲染。
-  + `repeat-x` 仅水平平铺。
-  + `repeat-y` 仅垂直平铺。
-  + `no-repeat` 不平铺。
+- `image` ： 作为重复图像源的 `CanvasImageSource` 对象。
+  - `HTMLImageElement` : `<img>` 元素
+  - `HTMLVideoElement` : `<video>` 元素，例如捕获摄像头视频产生的图像信息。
+  - `HTMLCanvasElement`
+  - `CanvasRenderingContext2D`
+  - `ImageBitmap`
+  - `ImageData`
+  - `Blob`
+- `repetition` : 指定如何重复图像。
+  - `repeat` 水平和垂直平铺。当 `repetition` 属性值为 `空字符串''` 或者 `null` ，也会按照 `repeat` 进行渲染。
+  - `repeat-x` 仅水平平铺。
+  - `repeat-y` 仅垂直平铺。
+  - `no-repeat` 不平铺。
 
 ::: normal-demo
 
@@ -407,10 +407,10 @@ draw();
 
 ## 阴影 Shadows
 
-+ `shadowOffsetX = float` : 设定阴影在 X 轴的延伸距离。不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，默认为 0。
-+ `shadowOffsetY = float` : 设定阴影在 Y 轴的延伸距离。不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，默认为 0。
-+ `shadowBlur = float` : 设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。
-+ `shadowColor = color` : 标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。
+- `shadowOffsetX = float` : 设定阴影在 X 轴的延伸距离。不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，默认为 0。
+- `shadowOffsetY = float` : 设定阴影在 Y 轴的延伸距离。不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，默认为 0。
+- `shadowBlur = float` : 设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。
+- `shadowColor = color` : 标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。
 
 ::: normal-demo
 

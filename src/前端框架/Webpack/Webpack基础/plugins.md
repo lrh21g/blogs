@@ -2,16 +2,16 @@
 
 **Plugin（插件）** 目的在于解决 loader 无法实现的其他事。参与打包整个过程、打包优化和压缩、配置编译时的变量、极其灵活。
 
-+ Plugin 是一个独立的模块，模块对外暴露一个 JavaScript 函数
-+ 函数的原型 (prototype) 上定义了一个注入 `compiler` 对象的 `apply` 方法。 `apply` 函数中，需要有通过 `compiler` 对象挂载的 webpack 事件钩子，钩子的回调中，能拿到当前编译的 `compilation` 对象，如果是异步编译插件的话可以拿到回调 `callback`
-+ 完成自定义子编译流程并处理 `complition` 对象的内部数据
-+ 如果异步编译插件的话，数据处理完成后执行 `callback` 回调
+- Plugin 是一个独立的模块，模块对外暴露一个 JavaScript 函数
+- 函数的原型 (prototype) 上定义了一个注入 `compiler` 对象的 `apply` 方法。 `apply` 函数中，需要有通过 `compiler` 对象挂载的 webpack 事件钩子，钩子的回调中，能拿到当前编译的 `compilation` 对象，如果是异步编译插件的话可以拿到回调 `callback`
+- 完成自定义子编译流程并处理 `complition` 对象的内部数据
+- 如果异步编译插件的话，数据处理完成后执行 `callback` 回调
 
 ## CleanWebpackPlugin
 
 在打包前清理上一次项目生成的 bundle 文件，它会根据 `output.path` 自动清理文件夹。
 
-``` javascript
+```javascript
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
 
 HotModuleReplacementPlugin 是 webpack 模块自带的。
 
-``` javascript
+```javascript
 const webpack = require('webpack');
 
 module.exports = {
@@ -39,9 +39,9 @@ module.exports = {
 
 ## HtmlWebpackPlugin
 
-生成一个 HTML5 文件。将 webpack 中 `entry` 配置的相关入口 `chunk`，以及  `extract-text-webpack-plugin` 抽取的 css 样式 插入到该插件提供的 `template` 或者 `templateContent` 配置项指定的内容基础上，生成一个 html 文件。
+生成一个 HTML5 文件。将 webpack 中 `entry` 配置的相关入口 `chunk`，以及 `extract-text-webpack-plugin` 抽取的 css 样式 插入到该插件提供的 `template` 或者 `templateContent` 配置项指定的内容基础上，生成一个 html 文件。
 
-``` javascript
+```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -74,14 +74,14 @@ module.exports = {
 
 与 `ExtractTextWebpackPlugin` 相比：
 
-+ 异步加载
-+ 没有重复的编译（性能）
-+ 更容易使用
-+ 针对 CSS 开发
+- 异步加载
+- 没有重复的编译（性能）
+- 更容易使用
+- 针对 CSS 开发
 
 **不要同时使用 `style-loader` 与 `MiniCssExtractPlugin`**
 
-``` javascript
+```javascript
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isDevMode = process.env.NODE_ENV !== 'production';
 
@@ -105,7 +105,7 @@ module.exports = {
 
 使用 `ExtractTextWebpackPlugin`
 
-``` javascript
+```javascript
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -133,7 +133,7 @@ module.exports = {
 
 使用 [cssnano](https://cssnano.co/) 优化和压缩 CSS。
 
-``` javascript
+```javascript
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
@@ -178,7 +178,7 @@ module.exports = {
 
 压缩 JavaScript。
 
-``` javascript
+```javascript
 const TerserPlugin = require('terser-webpack-plugin'); // 压缩js代码
 
 module.exports = {
@@ -206,7 +206,7 @@ module.exports = {
 
 将前端打包好的资源文件进一步压缩，生成指定的、体积更小的压缩文件。
 
-``` javascript
+```javascript
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
@@ -227,12 +227,12 @@ module.exports = {
 
 传递给 `DefinePlugin` 的每个键都是一个标识符或多个以 `.` 连接的标识符。
 
-+ 如果该值为字符串，它将被作为代码片段来使用。
-+ 如果该值不是字符串，则将被转换成字符串（包括函数方法）。
-+ 如果值是一个对象，则它所有的键将使用相同方法定义。
-+ 如果键添加 `typeof` 作为前缀，它会被定义为 `typeof` 调用。
+- 如果该值为字符串，它将被作为代码片段来使用。
+- 如果该值不是字符串，则将被转换成字符串（包括函数方法）。
+- 如果值是一个对象，则它所有的键将使用相同方法定义。
+- 如果键添加 `typeof` 作为前缀，它会被定义为 `typeof` 调用。
 
-``` javascript
+```javascript
 const webpack = require('webpack');
 
 module.exports = {
@@ -256,7 +256,7 @@ module.exports = {
 
 自动加载模块，而不必到处 `import` 或 `require`。
 
-``` javascript
+```javascript
 new webpack.ProvidePlugin({
   identifier: ['module1', 'property1'],
 });
@@ -264,7 +264,7 @@ new webpack.ProvidePlugin({
 
 任何时候，当 `identifier` 被当作未赋值的变量时，`module` 就会自动被加载，并且 `identifier` 会被这个 `module` 输出的内容所赋值。（模块的 `property` 用于支持命名导出(named export)）。
 
-``` javascript
+```javascript
 const webpack = require('webpack');
 
 module.exports = {
@@ -282,9 +282,9 @@ module.exports = {
 
 `DllPlugin` 和 `DllReferencePlugin` 用某种方法实现了拆分 bundles，同时还大幅度提升了构建的速度。`DLL` 一词代表微软最初引入的动态链接库。
 
-+ `DllPlugin` ：用于在单独的 webpack 配置中创建一个 `dll-only-bundle`。 此插件会生成一个名为 `manifest.json` 的文件，这个文件是用于让 `DllReferencePlugin` 能够映射到相应的依赖上。
-+ `DllReferencePlugin` ：把 `dll-only-bundles` 引用到需要的预编译的依赖中。
-+ `AddAssetHtmlPlugin` ：将打包的 `DLL` 库引入到 HTML 模块中。
+- `DllPlugin` ：用于在单独的 webpack 配置中创建一个 `dll-only-bundle`。 此插件会生成一个名为 `manifest.json` 的文件，这个文件是用于让 `DllReferencePlugin` 能够映射到相应的依赖上。
+- `DllReferencePlugin` ：把 `dll-only-bundles` 引用到需要的预编译的依赖中。
+- `AddAssetHtmlPlugin` ：将打包的 `DLL` 库引入到 HTML 模块中。
 
 ```javascript
 // config/webpack.dll.js
@@ -362,12 +362,12 @@ module.exports = {
 
 ## HappyPack
 
-`HappyPack` 让 webpack  把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程，提升构建速度。
+`HappyPack` 让 webpack 把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程，提升构建速度。
 
 注：
 
-+ `HappyPack` 对 `file-loader`、`url-loader` 支持的不友好，所以不建议对这些 `loader` 使用。
-+ 由于 JavaScript 是单线程模型，要想发挥多核 CPU 的能力，只能通过多进程去实现，而无法通过多线程实现。
+- `HappyPack` 对 `file-loader`、`url-loader` 支持的不友好，所以不建议对这些 `loader` 使用。
+- 由于 JavaScript 是单线程模型，要想发挥多核 CPU 的能力，只能通过多进程去实现，而无法通过多线程实现。
 
 ```javascript
 const path = require('path');

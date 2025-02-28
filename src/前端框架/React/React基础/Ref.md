@@ -98,7 +98,7 @@ function MeasureExample() {
 - DOM 元素：会将真实 DOM 绑定在 `this.refs` （组件实例下的 refs）属性上
 - 类组件：会将子组件的实例绑定在 `this.refs` 上
 
-```js
+```jsx
 class Child extends React.Component {
   render() {
     return (
@@ -113,9 +113,9 @@ class Child extends React.Component {
 class Parent extends React.Component {
   componentDidMount() {
     console.log('currentDOMRef', this.refs.currentDOMRef)
-    // 输出为 currentDOMRef :  <div>​【Parent】​</div>​
+    // 输出为 currentDOMRef :  <div>Parent】</div>
     console.log('currentChildCompRef', this.refs.currentChildCompRef)
-    // 输出为 currentChildCompRef :  Child {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
+    // 输出为 currentChildCompRef :  Child {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
   }
 
   render() {
@@ -134,7 +134,7 @@ class Parent extends React.Component {
 
 使用函数 Ref 标记 DOM 元素或类组件时（函数组件没有实例，不能被 Ref 标记），将作为 callback 形式，等到真实 DOM 创建，执行 callback，获取到 DOM 元素或者组件实例。
 
-```js
+```jsx
 class Child extends React.Component {
   render() {
     return (
@@ -152,9 +152,9 @@ class Parent extends React.Component {
 
   componentDidMount() {
     console.log('currentDOMRef : ', this.currentDOMRef)
-    // 输出为 currentDOMRef :  <div>​【Parent】​</div>​
+    // 输出为 currentDOMRef :  <div>【Parent】</div>
     console.log('currentChildCompRef : ', this.currentChildCompRef)
-    // 输出为 currentChildCompRef :  Child {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
+    // 输出为 currentChildCompRef :  Child {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
   }
 
   render() {
@@ -191,9 +191,9 @@ class Parent extends React.Component {
 
   componentDidMount() {
     console.log('currentDOMRef : ', this.currentDOMRef)
-    // 输出为 currentDOMRef :  <div>​【Parent】​</div>​
+    // 输出为 currentDOMRef :  <div>>【Parent】</div>
     console.log('currentChildCompRef : ', this.currentChildCompRef)
-    // 输出为 currentChildCompRef :  Child {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
+    // 输出为 currentChildCompRef :  Child {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
   }
 
   render() {
@@ -328,8 +328,8 @@ function Parent() {
     // {current: {…}}
     //   current:
     //     buttonDOM: button
-    //     childInstance: Child {props: {…}, context: {…}, refs: {…}, updater: {…}, grandChildInstance: GrandChild, …}
-    //     grandChildInstance: GrandChild {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
+    //     childInstance: Child {props: {…}, context: {…}, refs: {…}, updater: {…}, grandChildInstance: GrandChild, …}
+    //     grandChildInstance: GrandChild {props: {…}, context: {…}, refs: {…}, updater: {…}, _reactInternals: FiberNode, …}
     //     [[Prototype]]: Object
     //   [[Prototype]]: Object
   }, [])
@@ -351,8 +351,8 @@ function Parent() {
 function HOC(Component) {
   class Wrap extends React.Component {
     render() {
-      const { forwardedRef, ...otherprops } = this.props
-      return <Component ref={forwardedRef} {...otherprops} />
+      const { forwardedRef, ...otherProps } = this.props
+      return <Component ref={forwardedRef} {...otherProps} />
     }
   }
   return React.forwardRef((props, ref) => (
@@ -460,7 +460,7 @@ function Parent() {
 - 子组件使用 `useImperativeHandle` 接受父组件 `ref`，并将 `createHandle` 处理函数传递给 `ref`。
 - 父组件可以调用 `ref` 下的处理函数控制子组件。
 
-```js
+```jsx
 function Child(props, ref) {
   const inputRef = useRef(null)
   const [inputValue, setInputValue] = useState('')
@@ -491,7 +491,7 @@ function Child(props, ref) {
   )
 }
 
-const ForwarChild = React.forwardRef(Child)
+const ForwardChild = React.forwardRef(Child)
 
 function Parent() {
   const childInstance = useRef(null) /* 获取子组件实例 */
@@ -507,7 +507,7 @@ function Parent() {
       <div>【Parent Component】</div>
       <button onClick={handleClick}> 控制子组件 </button>
 
-      <ForwarChild ref={childInstance} />
+      <ForwardChild ref={childInstance} />
     </div>
   )
 }

@@ -15,12 +15,7 @@ tag:
 ```html
 <div class="line-draw">
   <svg x="0px" y="0px" viewBox="0 0 300 200" class="line-draw-svg">
-    <path
-      class="letter-i"
-      d="M82.4,127.1V75.6h6.8v51.5H82.4z"
-      stroke="none"
-      fill="none"
-    />
+    <path class="letter-i" d="M82.4,127.1V75.6h6.8v51.5H82.4z" stroke="none" fill="none" />
     <path
       class="letter-s"
       d="M98.9,110.6l6.4-0.6c0.3,2.6,1,4.7,2.1,6.3s2.8,3,5.2,4s5,1.5,7.9,1.5c2.6,0,4.9-0.4,6.9-1.2
@@ -214,13 +209,7 @@ window.onload = function () {
 ::: normal-demo
 
 ```html
-<svg
-  class="social"
-  xmlns="http://www.w3.org/2000/svg"
-  width="100"
-  height="100"
-  viewBox="0 0 100 100"
->
+<svg class="social" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
   <path
     class="path"
     style="

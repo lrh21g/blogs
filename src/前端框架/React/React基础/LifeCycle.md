@@ -314,7 +314,7 @@ class ExampleComponent extends React.Component {
     }, 3000)
 
     /* 事件监听 */
-    this.divDomRef.current.addEventListener('click', this.handerClick)
+    this.divDomRef.current.addEventListener('click', this.handlerClick)
 
     /* 数据请求 */
     this.fetchData()
@@ -324,10 +324,10 @@ class ExampleComponent extends React.Component {
     clearTimeout(this.timer) /* 清除延时器 */
 
     /* 卸载事件监听器 */
-    this.node.removeEventListener('click', this.handerClick)
+    this.node.removeEventListener('click', this.handlerClick)
   }
 
-  handerClick = () => {}
+  handlerClick = () => {}
 
   fetchData = () => {}
 
@@ -362,7 +362,7 @@ class ExampleComponent extends React.Component {
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    // 判断 list 是否新增元素，捕获滚动​​位置以便稍后调整滚动位置
+    // 判断 list 是否新增元素，捕获滚动位置以便稍后调整滚动位置
     if (prevProps.list.length < this.props.list.length) {
       const list = this.listRef.current
       return list.scrollHeight - list.scrollTop
@@ -528,14 +528,14 @@ UNSAFE_componentWillUpdate(nextProps, nextState)
 ```js
 useEffect(() => {
   // ... effect function
-  return destoryCallback // destory function
+  return destroyCallback // destroy function
 }, deps)
 ```
 
-- 第一个参数为 **callback 回调函数** 。可在回调函数中返回 destoryCallback 清除函数
+- 第一个参数为 **callback 回调函数** 。可在回调函数中返回 destroyCallback 清除函数
   - **callback 回调函数** : 在组件渲染完毕之后执行的 effect （副作用）。默认情况下，effect 将在每轮渲染结束后执行。回到函数不会阻塞浏览器绘制视图。
-  - **destoryCallback 清除函数** : 用于在行下一个 effect 之前，清除上一个 callback 回调函数产生的 effect 。通常应用于，组件卸载时，需要清除 effect 创建的诸如订阅或计时器 ID 等资源。
-- 第二个参数作为 **依赖项数组**。只有当依赖项数组改变时，才会执行上一次 callback 回调函数返回的 destoryCallback 清除函数，和执行新的 effect （即：callback 回调函数）。
+  - **destroyCallback 清除函数** : 用于在行下一个 effect 之前，清除上一个 callback 回调函数产生的 effect 。通常应用于，组件卸载时，需要清除 effect 创建的诸如订阅或计时器 ID 等资源。
+- 第二个参数作为 **依赖项数组**。只有当依赖项数组改变时，才会执行上一次 callback 回调函数返回的 destroyCallback 清除函数，和执行新的 effect （即：callback 回调函数）。
   - 默认情况下，effect 会在每轮组件渲染完成后执行。
   - 使用依赖项数组优化方式，需确保数组中包含了所有外部作用域中会发生变化且在 effect 中使用的变量，否则代码会引用到先前渲染中的旧变量。
   - 如果只需要执行只运行一次的 effect（仅在组件挂载和卸载时执行），依赖项可传递为一个空数组（`[]`）
@@ -561,7 +561,7 @@ useEffect(() => {
 ```js
 useLayoutEffect(() => {
   // ... effect function
-  return destoryCallback // destory function
+  return destroyCallback // destroy function
 }, deps)
 ```
 
@@ -655,7 +655,7 @@ useEffect(() => {
 
 #### componentWillUnmount 替代方案
 
-在 `componentDidMount` 的前提下，`useEffect` 第一个参数 callback 回调函数 的返回函数（即：destoryCallback 清除函数），可以作为 `componentWillUnmount` 使用。用于在行下一个 effect 之前，清除上一个 callback 回调函数产生的 effect 。通常应用于，组件卸载时，需要清除 effect 创建的诸如订阅或计时器 ID 等资源。
+在 `componentDidMount` 的前提下，`useEffect` 第一个参数 callback 回调函数 的返回函数（即：destroyCallback 清除函数），可以作为 `componentWillUnmount` 使用。用于在行下一个 effect 之前，清除上一个 callback 回调函数产生的 effect 。通常应用于，组件卸载时，需要清除 effect 创建的诸如订阅或计时器 ID 等资源。
 
 ```js
 useEffect(() => {
@@ -757,18 +757,18 @@ import { debounce } from 'lodash'
 class ScrollView extends React.Component {
   /* ========== 自定义事件 ========== */
   /* 控制滚动条滚动 */
-  handerScroll = e => {
+  handlerScroll = e => {
     const { scroll } = this.props
     scroll && scroll(e)
-    this.handerScrolltolower()
+    this.handlerScrollToLower()
   }
   /* 判断滚动条是否到底部 */
-  handerScrolltolower() {
-    const { scrolltolower } = this.props
+  handlerScrollToLower() {
+    const { scrollToLower } = this.props
     const { scrollHeight, scrollTop, offsetHeight } = this.node
     if (scrollHeight === scrollTop + offsetHeight) {
       /* 到达容器底部位置 */
-      scrolltolower && scrolltolower()
+      scrollToLower && scrollToLower()
     }
   }
   node = null
@@ -779,8 +779,8 @@ class ScrollView extends React.Component {
     this.state = {
       list: [] /* 初始化 Data */,
     }
-    this.handerScrolltolower = debounce(
-      this.handerScrolltolower,
+    this.handlerScrollToLower = debounce(
+      this.handlerScrollToLower,
       200
     ) /* 防抖处理 */
   }
@@ -803,13 +803,13 @@ class ScrollView extends React.Component {
   componentDidUpdate(prevProps, prevState, snapshot) {
     console.log('scrollView容器高度变化:', this.node.scrollHeight - snapshot)
   }
-  /* 绑定事件监听器 - 监听scorll事件 */
+  /* 绑定事件监听器 - 监听scroll事件 */
   componentDidMount() {
-    this.node.addEventListener('scroll', this.handerScroll)
+    this.node.addEventListener('scroll', this.handlerScroll)
   }
   /* 解绑事件监听器 */
   componentWillUnmount() {
-    this.node.removeEventListener('scroll', this.handerScroll)
+    this.node.removeEventListener('scroll', this.handlerScroll)
   }
   render() {
     const { list } = this.state
@@ -864,7 +864,7 @@ function ExampleComponent() {
   }
 
   /* 滚动到底部触发 */
-  const handerScrolltolower = () => {
+  const handlerScrollToLower = () => {
     console.log('scroll已经到底部')
     getData()
   }
@@ -878,7 +878,7 @@ function ExampleComponent() {
     <ScrollView
       data={data}
       component={Item} /* Item 渲染的单元组件 */
-      scrolltolower={handerScrolltolower}
+      scrollToLower={handlerScrollToLower}
       scroll={() => {}}
     />
   )

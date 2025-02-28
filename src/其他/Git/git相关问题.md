@@ -6,7 +6,7 @@
 
 解决方法：重新设置用户名（user.name）和邮箱（user.email），再重新生成 ssh公钥 即可。
 
-``` bash
+```bash
 # 1、重新设置用户名（user.name）和邮箱（user.email）
 # 对当前用户所有仓库，设置用户名
 $ git config --global user.name 'your_name'
@@ -25,7 +25,7 @@ $ ssh-keygen -t rsa -C "your_email@domain.com"
 
 解决方案：将远程库同步到本地库
 
-``` bash
+```bash
 # 将远程库中的更新合并到本地库中
 # --rebash 取消掉本地库中刚刚的 commit，并将 commit 接到更新后的版本库中
 $ git pull --rebash origin master
@@ -41,7 +41,7 @@ $ git push -u origin master
 
 解决方法：windows 中的换行符为 CRLF，而在 Linux/Mac 下的换行符为 LF
 
-``` bash
+```bash
 # core.autocrlf 设置 false 不转换符号。默认为 true
 $ git config --global core.autocrlf false
 ```
@@ -50,7 +50,7 @@ $ git config --global core.autocrlf false
 
 解决方法：
 
-+ 找到 `.git` 目录下体积比较大的文件，进行重建索引(将 xxxx.pack 替换你实际需要删除的pack) : `git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch .git/objects/pack/xxxxx.pack' --prune-empty`
-+ 删除和重建的索引 : `git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin`
-+ 设置reflog过期 : `git reflog expire --expire=now --all`
-+ 清理垃圾 : `git gc --aggressive --prune=now`
+- 找到 `.git` 目录下体积比较大的文件，进行重建索引(将 xxxx.pack 替换你实际需要删除的pack) : `git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch .git/objects/pack/xxxxx.pack' --prune-empty`
+- 删除和重建的索引 : `git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin`
+- 设置reflog过期 : `git reflog expire --expire=now --all`
+- 清理垃圾 : `git gc --aggressive --prune=now`

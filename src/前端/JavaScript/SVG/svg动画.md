@@ -28,14 +28,7 @@ SVG 描边动画通过 `stroke-dashoffset` 和 `stroke-dasharray` 来实现。
 `stroke-dasharray` 和 `stroke-dashoffset` 的值都为 `300` ， dash 模式开始的距离(`stroke-dashoffset`)为 300 ，正好对应描边的点划线(`stroke-dasharray`)的缺口，则该线段为不可见的状态。当将 `stroke-dashoffset` 设置为 `0` 的时候，该线段则可以显示出来。
 
 ```html
-<svg
-  x="0px"
-  y="0px"
-  width="300px"
-  height="100px"
-  viewBox="0 0 300 100"
-  class="svg"
->
+<svg x="0px" y="0px" width="300px" height="100px" viewBox="0 0 300 100" class="svg">
   <line x1="20" y1="50" x2="200" y2="50" stroke="#000" stroke-width="1"></line>
 </svg>
 
@@ -66,19 +59,9 @@ SVG 描边动画通过 `stroke-dashoffset` 和 `stroke-dasharray` 来实现。
 
 ```html
 <button class="stroke-edge-btn">开始动画</button>
-<svg
-  class="checkmark"
-  style="display: none"
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 52 52"
->
+<svg class="checkmark" style="display: none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
   <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-  <path
-    class="checkmark__check"
-    fill="none"
-    stroke="#fff"
-    d="M 14.1 27.2 l 7.1 7.2 16.7 -16.8"
-  />
+  <path class="checkmark__check" fill="none" stroke="#fff" d="M 14.1 27.2 l 7.1 7.2 16.7 -16.8" />
 </svg>
 ```
 
@@ -583,13 +566,7 @@ c-0.961,0.624-1.609,1.296-1.945,2.016l-0.936,3.888l0.936,1.944C403.168,56.037,40
     version="1.1"
   >
     <defs>
-      <linearGradient
-        id="gradient"
-        gradientUnits="userSpaceOnUse"
-        gradientTransform="rotate(0)"
-        x2="800"
-        y2="0"
-      >
+      <linearGradient id="gradient" gradientUnits="userSpaceOnUse" gradientTransform="rotate(0)" x2="800" y2="0">
         <stop offset="0" stop-color="#FFFFFF" stop-opacity="0" />
         <stop offset="0.25" stop-color="#FFFFFF" stop-opacity="0.25" />
         <stop offset="1" stop-color="#FFFFFF" stop-opacity="1" />
@@ -597,16 +574,7 @@ c-0.961,0.624-1.609,1.296-1.945,2.016l-0.936,3.888l0.936,1.944C403.168,56.037,40
       <mask id="mask" maskUnits="userSpaceOnUse">
         <rect width="800" height="300" fill="url(#gradient)" />
       </mask>
-      <text
-        id="txt"
-        x="400"
-        y="150"
-        font-family="Arial Black"
-        font-size="60"
-        text-anchor="middle"
-      >
-        ISUX AWESOME
-      </text>
+      <text id="txt" x="400" y="150" font-family="Arial Black" font-size="60" text-anchor="middle">ISUX AWESOME</text>
     </defs>
     <use xlink:href="#txt" fill="#FFDD00" mask="url(#mask)" />
   </svg>

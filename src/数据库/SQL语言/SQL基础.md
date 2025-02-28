@@ -1,11 +1,11 @@
 # SQL 基础
 
-+ 创建数据库： `CREATE DATABASE <database_name>`
-+ 删除数据库： `DROP DATABASE <database_name>`
-+ 创建数据库中的表： `CREATE TABLE <table_name>`
-+ 删除数据库中的表： `DROP TABLE <table_name>`
+- 创建数据库： `CREATE DATABASE <database_name>`
+- 删除数据库： `DROP DATABASE <database_name>`
+- 创建数据库中的表： `CREATE TABLE <table_name>`
+- 删除数据库中的表： `DROP TABLE <table_name>`
 
-``` sql
+```sql
 -- 使用 Navicat 设计表。导出 SQL 文件如下：
 
 -- 数据表和字段使用反引号，是为了避免它们名称与 MySQL 保留字段相同
@@ -46,7 +46,7 @@ CREATE TABLE `player`  (
   -- UNIQUE INDEX   唯一索引。可设置其他索引方式 NORMAL INDEX（普通索引）
   --                唯一索引和普通索引的区别在于它对字段进行了唯一性的约束
   UNIQUE INDEX `player_name`(`player_name`) USING BTREE
-) 
+)
 -- ENGINE = InnoDB  存储规则采用 InnoDB
 -- ROW_FORMAT       设置行格式。Dynamic 基于compact格式，提高存储容量，支持大索引（large index）3072字节，由innodb_large_prefix参数控制。
 ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
@@ -54,7 +54,7 @@ ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dyna
 
 SQL 大小写问题：
 
-+ 表名、表别名、字段名、字段别名等都小写
-+ SQL保留字、函数名、绑定变量等都大写
+- 表名、表别名、字段名、字段别名等都小写
+- SQL保留字、函数名、绑定变量等都大写
 
 注：数据表的字段名推荐使用**下划线**命名。

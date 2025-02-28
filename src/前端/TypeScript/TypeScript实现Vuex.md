@@ -1,6 +1,6 @@
 # TypeScript 实现 Vuex
 
-``` typescript
+```typescript
 import { App, inject } from 'vue';
 
 // provide / inject

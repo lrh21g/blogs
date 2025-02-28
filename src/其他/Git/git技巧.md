@@ -2,7 +2,7 @@
 
 ## Git 修改分支名称
 
-``` bash
+```bash
 # 老分支名: oldBranchName 新分支名: newBranchName
 
 # 1、本地分支重命名（未推送至远程）
@@ -19,7 +19,7 @@ $ git branch --set-upstream-to origin/newBranchName
 
 ## 恢复删除分支中指定的提交
 
-``` bash
+```bash
 # 1、使用 git reflog 查看提交记录，找到需要回复的 commit
 $ git reflog
 
@@ -40,22 +40,22 @@ $ git branch <new-branch-name> <commit>
 
 Git 没有改变历史的工具，可以使用变基工具来变基一系列提交，基于它们原来的 HEAD 而不是将其移动到另一个新的上面。通过交互式变基工具，可以在任何想要修改的提交后停止，然后修改信息、添加文件或做任何想做的事情。
 
-``` bash
+```bash
 # 如果想要修改提交，则需要指定到修改提交的父提交
 git rebase -i <commit-parentid>
 ```
 
-+ 修改历史提交记录中提交信息：使用 `reword` 指令
-+ 将连续多个 commit 整理成1个：使用 `squash` 指令
-  
+- 修改历史提交记录中提交信息：使用 `reword` 指令
+- 将连续多个 commit 整理成1个：使用 `squash` 指令
+
   基于需要合并的多个 commit 中的第一个，将其他的 commit 前的 `pick` 指令修改为 `squash` 指令。
 
-  ``` bash
+  ```bash
   pick 97664e1452 fix #74622.
   pick 0ef0d2d65a fix #109765.
   pick 67f3113760 terminal: update typeahead tests -- change test
   pick 2aaff002dd fix #40713.
-  
+
   # 将 97664e1452、0ef0d2d65a、67f3113760、2aaff002dd 合并成一个 commit
   # 则将 97664e1452 保持不变，0ef0d2d65a、67f3113760、2aaff002dd 前的指令修改为 squash
   pick 97664e1452 fix #74622.
@@ -64,16 +64,16 @@ git rebase -i <commit-parentid>
   squash 2aaff002dd fix #40713.
   ```
 
-+ 将间隔的 commit 整理成1个：使用 `squash` 指令
+- 将间隔的 commit 整理成1个：使用 `squash` 指令
 
   基于需要合并间隔的 commit 中的第一个，将其他的 commit 前的移动到第一个后面，并将 `pick` 指令修改为 `squash` 指令。
 
-  ``` bash
+  ```bash
   pick 97664e1452 fix #74622.
   pick 0ef0d2d65a fix #109765.
   pick 67f3113760 terminal: update typeahead tests -- change test
   pick 2aaff002dd fix #40713.
-  
+
   # 将 97664e1452、2aaff002dd 合并成一个 commit
   # 则将原有的 pick 2aaff002dd 移动到 pick 97664e1452 后面，并修改为 squash 2aaff002dd
   pick 97664e1452 fix #74622.
@@ -84,7 +84,7 @@ git rebase -i <commit-parentid>
 
 示例：修改历史提交记录中提交信息
 
-``` bash
+```bash
 # 查看最近3条的提交记录简洁版本
 $ git log --oneline -n3
 67817c33a1 (HEAD -> master, origin/master, origin/HEAD) fix #40713.

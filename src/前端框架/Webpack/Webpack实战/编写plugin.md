@@ -2,12 +2,12 @@
 
 plugin 通过监听 `compiler` 的 `hook` 特定时机，然后处理 `stats` （主要包含 `modules`、`chunks` 和 `assets` 三个属性值的对象）。
 
-+ Webapck 的插件必须要是一个类
-+ 该类必须包含一个 `apply` 的函数，该函数接收 `compiler` 对象参数
-+ 该类可以使用 Webpack 的 `compiler` 和 `Compilation` 对象的钩子
-+ 可自定义自己的钩子系统
+- Webapck 的插件必须要是一个类
+- 该类必须包含一个 `apply` 的函数，该函数接收 `compiler` 对象参数
+- 该类可以使用 Webpack 的 `compiler` 和 `Compilation` 对象的钩子
+- 可自定义自己的钩子系统
 
-``` javascript
+```javascript
 // 使用了异步的 emit.tapAsync 钩子，然后在 Compilation 对象上增加了一个 assets 文件 filelist.md，内容为获取到的 compilation.assets 的文件名（filename）
 class FileListPlugin {
   apply(compiler) {
@@ -44,29 +44,29 @@ module.exports = FileListPlugin;
 
 `prefetch-webpack-plugin` 将打包中遇见的 `import()` 或者 `require.ensure()` 这类异步懒加载的模块使用 `<link>` 标签的 `rel = prefetch` 进行预加载。即：将需要异步加载的模块，提前放到页面的 HTML 中进行预加载（需要浏览器支持）。
 
-``` javascript
+```javascript
 // 通过魔法注释，实现 Prefetch 或者 Preload 标注。使用魔法注释，即可标注一个模块是否需要预取/预加载。
 // 获取 chunk 对象的时候，获取到标注，从而根据这个注释给页面增加 <link rel="prefetch"> 标签
 import(/* webpackPrefetch: true */ './lazy');
 ```
 
-+ `/* webpackPrefetch: true */` ：把主加载流程加载完毕，在空闲时在加载其它，等再点击其他时，只需要从缓存中读取即可，性能更好，推荐使用；能够提高代码利用率，把一些交互后才能用到的代码写到异步组件里，通过懒加载的形式，去把这块的代码逻辑加载进来，性能提升，页面访问速度更快。
-+ `/* webpackPreload: true */` : 和主加载流程一起并行加载。
+- `/* webpackPrefetch: true */` ：把主加载流程加载完毕，在空闲时在加载其它，等再点击其他时，只需要从缓存中读取即可，性能更好，推荐使用；能够提高代码利用率，把一些交互后才能用到的代码写到异步组件里，通过懒加载的形式，去把这块的代码逻辑加载进来，性能提升，页面访问速度更快。
+- `/* webpackPreload: true */` : 和主加载流程一起并行加载。
 
 ### 实现原理
 
 1. 利用 `compiler.compilation` 得到 `Compilation` 对象；
 2. 在 `Compilation` 对象中监听 `html-webpack-plugin` 的钩子，拿到 HTML 对象。此处需要区分 `html-webpack-plugin` 的版本：
-   + 在 3.x 版本，`html-webpack-plugin` 的钩子是直接挂在 `Compilation` 对象上的，使用的是 `compilation.hooks.htmlWebpackPluginAfterHtmlProcessing`；
-   + 在 4.x 版本中，`html-webpack-plugin` 使用 `Tapable` 实现了自定义钩子，需要使用 `HtmlWebpackPlugin.getHooks(compilation)` 的方式获取自定义的钩子。
+   - 在 3.x 版本，`html-webpack-plugin` 的钩子是直接挂在 `Compilation` 对象上的，使用的是 `compilation.hooks.htmlWebpackPluginAfterHtmlProcessing`；
+   - 在 4.x 版本中，`html-webpack-plugin` 使用 `Tapable` 实现了自定义钩子，需要使用 `HtmlWebpackPlugin.getHooks(compilation)` 的方式获取自定义的钩子。
 3. 从 `Compilation` 对象中读取当前 HTML 页面的所有 `chunks`，筛选异步加载的 `chunk` 模块，此处有两种情况：
-   + **生成多个 HTML 页面**， `html-webpack-plugin` 插件会设置 `chunks` 选项，需要从 `Compilation.chunks` 来选取 HTML 页面真正用到的 `chunks`，然后在从 `chunks` 中过滤出 `Prefetch chunk`；
-   + **单页应用**，不存在 `chunks` 选项，默认 `chunks='all'`，需要从全部 `Compilation.chunks` 中过滤出 `Prefetch chunk`。
-4. 结合 Webpack 配置的 `publicPath` 得到异步 `chunk` 的实际线上地址，然后修改  `html-webpack-plugin` 钩子得到的 HTML 对象，给 HTML 的 `<head>` 添加 `<link rel="prefetch">` 内容。
+   - **生成多个 HTML 页面**， `html-webpack-plugin` 插件会设置 `chunks` 选项，需要从 `Compilation.chunks` 来选取 HTML 页面真正用到的 `chunks`，然后在从 `chunks` 中过滤出 `Prefetch chunk`；
+   - **单页应用**，不存在 `chunks` 选项，默认 `chunks='all'`，需要从全部 `Compilation.chunks` 中过滤出 `Prefetch chunk`。
+4. 结合 Webpack 配置的 `publicPath` 得到异步 `chunk` 的实际线上地址，然后修改 `html-webpack-plugin` 钩子得到的 HTML 对象，给 HTML 的 `<head>` 添加 `<link rel="prefetch">` 内容。
 
 ### 代码实现
 
-``` javascript
+```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 class PrefetchPlugin {

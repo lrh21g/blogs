@@ -4,7 +4,7 @@
 
 ### 基础类型
 
-``` typescript
+```typescript
 // ===== 【Boolean】 - true / false =====
 let bool: boolean = false;
 
@@ -83,7 +83,7 @@ bar = foo; // error: Type 'number' is not assignable to type 'bigint'.
 
 `Tuple` (元组) 类型 表示一个已知元素数量和类型的数组。确切地说，是已知数组中每一个位置上元素的类型。
 
-``` typescript
+```typescript
 // TypeScript 2.6+ 要求元组赋值必须类型和个数都对应。
 let tuple: [string, number] = ['hello', 10];
 
@@ -121,7 +121,7 @@ const arr: readonly (string | number)[] = ['lrh', 21, '1', '1'] as const;
 
 枚举使用 `enum` 关键字定义，支持数字和字符串枚举。
 
-``` typescript
+```typescript
 // ===== 【枚举（enum）】 =====
 // 默认情况下，从 0 开始为元素编号
 enum Color { Red, Green, Blue };
@@ -132,13 +132,13 @@ enum Color { Red = 1, Green = 2, Blue = 4 }
 let c: Color = Color.Green; // 2
 ```
 
-+ 数字枚举
+- 数字枚举
 
   枚举默认为数字类型，从 `0` 开始一次累加。
 
   数字枚举在定义的时候，可以使用计算值和常量。如果某个字段使用了计算值或常量，那么该字段后面紧接着的字段必须设置初始值，不能使用默认的递增值。
 
-  ``` typescript
+  ```typescript
   // 指定部分字段，其他使用默认递增索引
   enum Status {
     Ok = 200,
@@ -156,11 +156,11 @@ let c: Color = Color.Green; // 2
   }
   ```
 
-+ 反向映射
+- 反向映射
 
   定义一个枚举值的时候，可以通过 `Enum['key']` 或者 `Enum.key` 的形式获取对应的值 value。**TypeScript 支持反向映射，但是只支持数字枚举**。
 
-  ``` typescript
+  ```typescript
   enum Status {
     Success = 200,
     NotFound = 404,
@@ -188,13 +188,13 @@ let c: Color = Color.Green; // 2
   // }
   ```
 
-+ 字符串枚举
+- 字符串枚举
 
   字符串枚举值要求每个字段的值都必须是**字符串字面量**，或者是**该枚举值中另一个字符串枚举成员**。
 
   枚举值中可以使用其他枚举成员。**其他枚举成员指的是同一个枚举值中的枚举成员**，因为字符串枚举不能使用常量或者计算值，所以不能使用其他枚举值中的成员。
 
-  ``` typescript
+  ```typescript
   enum Message {
     Error = "Sorry, error",
     Success = "Hoho, success"
@@ -209,27 +209,28 @@ let c: Color = Color.Green; // 2
   console.log(Message.ServerError); // 'error message'
   ```
 
-+ 异构枚举
+- 异构枚举
 
   异构枚举是指枚举值中既有数字类型又有字符串类型。**不建议使用**，因为枚举值的特点往往是相似的。
 
-  ``` typescript
+  ```typescript
   enum Result {
     Faild = 0,
     Success = "Success"
   }
   ```
 
-+ 枚举成员类型和联合枚举类型
+- 枚举成员类型和联合枚举类型
 
   如果枚举值里**所有成员的值都是字面量类型的值**，那么这个枚举的每个成员和枚举值本身都可作为类型来使用。满足条件的枚举成员的值有：
-  + 不带初始值的枚举成员: `enum E { A }`
-  + 值为字符串字面量: `enum E { A = 'a' }`
-  + 值为数值字面量，或者带 `-` 符号的数值字面量：`enum E { A = 1 }`、`enum E { A = -1 }`
+
+  - 不带初始值的枚举成员: `enum E { A }`
+  - 值为字符串字面量: `enum E { A = 'a' }`
+  - 值为数值字面量，或者带 `-` 符号的数值字面量：`enum E { A = 1 }`、`enum E { A = -1 }`
 
   1. 枚举成员类型
 
-     ``` typescript
+     ```typescript
       enum Animal {
         Dog = 1,
         Cat = 2
@@ -240,28 +241,28 @@ let c: Color = Color.Green; // 2
       let dog: Dog = {
         type: Animal.Dog
       };
-      ```
+     ```
 
   2. 联合枚举类型
 
-    ``` typescript
-    enum Status {
-      Off,
-      On
-    }
-    interface Light {
-      status: Status;
-    }
-    const light1: Light = {
-      status: Status.Off
-    };
-    ```
+  ```typescript
+  enum Status {
+    Off,
+    On
+  }
+  interface Light {
+    status: Status;
+  }
+  const light1: Light = {
+    status: Status.Off
+  };
+  ```
 
-+ const enum
+- const enum
 
   如果使用枚举只是为了让程序可读性好，而不需要编译后的对象，则可以使用 `const enum`（完全嵌入的枚举），在代码编译后不会创建这个对象，只会从枚举里拿到相应的值进行替换。
 
-  ``` typescript
+  ```typescript
   const enum Animal {
     Dog,
     Cat
@@ -273,7 +274,7 @@ let c: Color = Color.Green; // 2
 
 在编程阶段，不清楚为一个变量指定什么类型，则需要用到 `Any` 类型。任何类型都可以被归为 `Any` 类型。
 
-``` typescript
+```typescript
 let notSure: any = 4;
 notSure = 'maybe a string instead';
 // 使用 any 来指定数组中元素类型为任意类型
@@ -286,7 +287,7 @@ let list: any[] = [1, true, 'free'];
 
 使用场景：当一个函数没有返回值时，通常返回值类型是 void。
 
-``` typescript
+```typescript
 function warnUser(): void {
   console.log('This is my warning message');
 }
@@ -296,13 +297,13 @@ function warnUser(): void {
 
 `never` 类型：永不存在的值的类型。使用场景有：
 
-+ 抛出异常的返回值类型
-+ 根本不会有返回值的函数表达式 或 箭头函数表达式的返回值类型
-+ 变量被用不为真的类型保护所约束时
+- 抛出异常的返回值类型
+- 根本不会有返回值的函数表达式 或 箭头函数表达式的返回值类型
+- 变量被用不为真的类型保护所约束时
 
 `never` 是任何类型的子类型，可以赋值给任何类型。没有任何类型是 `never` 的子类型或可以赋值给 `never` 类型（除了 `never` 本身之外）。 `any` 也不可以赋值给 `never`。
 
-``` typescript
+```typescript
 // 示例一：抛出异常场景
 const errorFunc = (message: string): never => {
   throw new Error(message); // 抛出异常
@@ -322,7 +323,7 @@ neverVariable = 123; // error 不能将类型"number"分配给类型"never"
 
 `unknown` 类型：表示未知类型，相对于 `any` 是安全的。
 
-``` typescript
+```typescript
 // 1、任何类型的值都可以赋值给 unknown 类型
 let value1: unknown;
 value1 = "a";
@@ -375,7 +376,7 @@ type type11 = Types<unknown>; // type10 => {}
 
 取多个类型的并集。使用 `&` 符号，被 `&` 符链接的多个类型构成一个交叉类型
 
-``` typescript
+```typescript
 const merge = <T, U>(arg1: T, arg2: U): T & U => {
   let res = <T & U>{}; // 指定返回值的类型兼备T和U两个类型变量代表的类型的特点
   res = Object.assign(arg1, arg2); // 使用 Object.assign 方法，返回一个合并后的对象；
@@ -387,7 +388,7 @@ const merge = <T, U>(arg1: T, arg2: U): T & U => {
 
 使用 `|` 符号，只要符合联合类型中的任何一种类型即可
 
-``` typescript
+```typescript
 const getLength = (content: string | number): number => {
   if (typeof content === "string") return content.length;
   else return content.toString().length;
@@ -396,13 +397,13 @@ const getLength = (content: string | number): number => {
 
 ### null 和 undefined 知识点补充
 
-+ 严格模式下，null和undefined赋值给其它类型值
+- 严格模式下，null和undefined赋值给其它类型值
 
   在 `tsconfig.json` 中将 `strictNullChecks` 设为 `true` 后，**不能**再将 `undefined` 和 `null` **赋值给除它们自身和void 之外的任意类型值**，但有时需要给一个其它类型的值设置初始值为空，然后再进行赋值，这时可以自己**使用联合类型**来实现 `null` 或 `undefined` 赋值给其它类型
 
   注意：`string | undefined`、`string | null` 和 `string | undefined | null` 是三种不同的类型。
 
-  ``` typescript
+  ```typescript
   let str = "lison";
   str = null; // error 不能将类型“null”分配给类型“string”
   // string | null - 表示既可以是 string 类型也可以是 null 类型
@@ -411,11 +412,11 @@ const getLength = (content: string | number): number => {
   strNull = undefined; // error 不能将类型“undefined”分配给类型“string | null”
   ```
 
-+ 可选参数和可选属性
+- 可选参数和可选属性
 
   开启了 `strictNullChecks`，可选参数会被自动加上 `| undefined`
 
-  ``` typescript
+  ```typescript
   const sum = (x: number, y?: number) => {
     return x + (y || 0);
   };
@@ -431,7 +432,7 @@ const getLength = (content: string | number): number => {
 
 **使用 type 关键字定义类型别名**，之后只要使用这个类型的地方，都可以用类型别名替代，但并不是创建了一个新类型。
 
-``` typescript
+```typescript
 // 基本使用
 type TypeString = string;
 let str: TypeString;
@@ -464,13 +465,13 @@ let ccc: Child<string> = {
 
 注意：
 
-+ 只能在对象属性中引用自己，不能直接使用。
-+ 当类型别名为接口起别名时，不能使用 `extends` 和 `implements`
+- 只能在对象属性中引用自己，不能直接使用。
+- 当类型别名为接口起别名时，不能使用 `extends` 和 `implements`
 
 接口和类型别名有时可以起到同样的作用，什么时候用类型别名，什么时候用接口：
 
-+ 当定义的类型要用于拓展，即使用 `implements` 等修饰符时，用接口。
-+ 当无法通过接口，并且需要使用联合类型或元组类型时，用类型别名。
+- 当定义的类型要用于拓展，即使用 `implements` 等修饰符时，用接口。
+- 当无法通过接口，并且需要使用联合类型或元组类型时，用类型别名。
 
 ### 字面量类型
 
@@ -478,9 +479,9 @@ let ccc: Child<string> = {
 
 当字面量类型与联合类型结合的时候,可以模拟一个类似于枚举的效果。
 
-+ 字符串字面量类型：即字符串常量，与字符串类型不同的是它是**具体的值**。
+- 字符串字面量类型：即字符串常量，与字符串类型不同的是它是**具体的值**。
 
-  ``` typescript
+  ```typescript
   type Name = "Tom";
   const name1: Name = "test"; // error 不能将类型“"test"”分配给类型“"Tom"”
   const name2: Name = "Tom";
@@ -493,9 +494,9 @@ let ccc: Child<string> = {
   getDirectionFirstLetter("east");
   ```
 
-+ 数字字面量类型：指定类型为**具体的值**。
+- 数字字面量类型：指定类型为**具体的值**。
 
-  ``` typescript
+  ```typescript
   type Age = 18;
   interface Info {
     name: string;
@@ -523,23 +524,23 @@ let ccc: Child<string> = {
 
 在一些定义中如果没有明确指定类型，编译器会自动推断出适合的类型。
 
-+ 基础推论: 根据右侧的值推断左侧变量的类型。
+- 基础推论: 根据右侧的值推断左侧变量的类型。
 
-  ``` typescript
+  ```typescript
   let name = "lison";
   name = 123; // error 不能将类型“123”分配给类型“string”
   ```
 
-+ 多类型联合: 当定义一个数组或元组这种包含多个元素的值的时候，多个元素可以有不同的类型，TypeScript 会将多个类型合并起来，组成一个联合类型。
+- 多类型联合: 当定义一个数组或元组这种包含多个元素的值的时候，多个元素可以有不同的类型，TypeScript 会将多个类型合并起来，组成一个联合类型。
 
-  ``` typescript
+  ```typescript
   let arr = [1, "a"];
   arr = ["b", 2, false]; // error 不能将类型“false”分配给类型“string | number”
   ```
 
-+ 上下文类型: 根据左侧的类型推断右侧的一些类型。
+- 上下文类型: 根据左侧的类型推断右侧的一些类型。
 
-  ``` typescript
+  ```typescript
   // 表达式左侧是 window.onmousedown(鼠标按下时发生事件)
   // 因此 TypeScript 会推断赋值表达式右侧函数的参数是事件对象
   // 表达式左侧是 mousedown 事件，所以 TypeScript 推断 mouseEvent 的类型是 MouseEvent。
@@ -557,7 +558,7 @@ let ccc: Child<string> = {
 
 通过和泛型结合使用，TypeScript 就可以检查使用了动态属性名的代码。
 
-``` typescript
+```typescript
 // 使用泛型，并且约束泛型变量 K 的类型是 "keyof T"
 // 即：类型 T 的所有字段名组成的联合类型
 function getValue<T, K extends keyof T>(obj: T, names: K[]): T[K][] {
@@ -580,7 +581,7 @@ values = getValue(info, ["age"]);
 
 当 `tsconfig.json` 里 `strictNullChecks` 设为 `false` 时，通过索引访问操作符和索引类型查询操作符可以选出类型不为 `never & undefined & null` 的类型。
 
-``` typescript
+```typescript
 // 接口的索引类型是 string 类型
 // 实现该接口的对象的属性名可以设置为 数值类型 的值
 interface Obj<T> {
@@ -620,10 +621,10 @@ TypeScript 有时不如我们了解一个值的类型，这时希望 TypeScript 
 
 类型断言，把某个值强行指定为特定类型。主要形式有:
 
-+ `<type>value` 形式: 这种形式在 JSX 代码中不可以使用，而且也是 TSLint 不建议的写法
-+ `value as type` 形式: **推荐写法**
+- `<type>value` 形式: 这种形式在 JSX 代码中不可以使用，而且也是 TSLint 不建议的写法
+- `value as type` 形式: **推荐写法**
 
-``` typescript
+```typescript
 const getStrLength = (target: string | number): number => {
   // 当 TypeScript 不确定一个联合类型的变量是哪个类型的时候
   // 而此时只能访问此联合类型的所有类型里共有的属性或方法
@@ -638,21 +639,21 @@ const getStrLength = (target: string | number): number => {
 
 类型断言涉及的两种数据类型必须具有**重叠关系** ：
 
-+ A、B 两者都是类，且**具有**继承关系（ `extends` 关系）。在绝大多数场景下，都是把父类的对象变量断言成子类。
-+ A、B 两者都是类，但**没有**继承关系。A、B 两个类中的任意一个类上的所有 `public` 实例属性（不包括静态属性）和实例方法，与另外一个类上的所有 `public` 实例属性（不包括静态属性）和实例方法**完全相同或者是另一个类的子集**，则两个类可互相断言，否则不能互相断言。
-+ A 是类，B 是接口，并且 A 类**实现了** B 接口 `implements` (用来指定一个类要继承的接口 - 类继承接口)。则 A 的对象变量可以断言程 B 接口类型，同样 B 接口类型的对象变量可以断言成 A 类型。
-+ A 是类，B 是接口，并且 A 类**没有实现** B 接口 `implements`。则两者的断言需要满足类的 `public` 实例属性（不包括静态属性）和实例方法**完全相同或者是另一个类的子集**。
-+ A 是类，B 是 `type` 定义的数据类型，并且 A 类**实现了** B `type` 定义的数据类型 `implements`。则 A 的对象变量可以断言成 B `type` 定义的对象数据类型，同样，B `type` 定义的对象数据类型的对象变量也可以断言成 A 类型。
-+ A 是类，B 是 `type` 定义的数据类型，并且 A 类**没有实现** B `type` 定义的数据类型。则两者的断言需要满足类的 `public` 实例属性（不包括静态属性）和实例方法**完全相同或者是另一个类的子集**。
-+ A 是一个函数上参数变量的**联合类型** （例如 `string | number`）。则，函数内部可以断言成 string 或 number 类型。
-+ 多个类组成的**联合类型** ，例如：`let vechile: Car | Bus | Trunck` ，vechile 可以断言成其中任意一种数据类型，例如： `vechile as Ca`
-+ 任何数据类型都可以断言成 `any` 或 `unknown` 类型。 `any` 或 `unknown` 类型也可以断言成任何其他数据类型。
+- A、B 两者都是类，且**具有**继承关系（ `extends` 关系）。在绝大多数场景下，都是把父类的对象变量断言成子类。
+- A、B 两者都是类，但**没有**继承关系。A、B 两个类中的任意一个类上的所有 `public` 实例属性（不包括静态属性）和实例方法，与另外一个类上的所有 `public` 实例属性（不包括静态属性）和实例方法**完全相同或者是另一个类的子集**，则两个类可互相断言，否则不能互相断言。
+- A 是类，B 是接口，并且 A 类**实现了** B 接口 `implements` (用来指定一个类要继承的接口 - 类继承接口)。则 A 的对象变量可以断言程 B 接口类型，同样 B 接口类型的对象变量可以断言成 A 类型。
+- A 是类，B 是接口，并且 A 类**没有实现** B 接口 `implements`。则两者的断言需要满足类的 `public` 实例属性（不包括静态属性）和实例方法**完全相同或者是另一个类的子集**。
+- A 是类，B 是 `type` 定义的数据类型，并且 A 类**实现了** B `type` 定义的数据类型 `implements`。则 A 的对象变量可以断言成 B `type` 定义的对象数据类型，同样，B `type` 定义的对象数据类型的对象变量也可以断言成 A 类型。
+- A 是类，B 是 `type` 定义的数据类型，并且 A 类**没有实现** B `type` 定义的数据类型。则两者的断言需要满足类的 `public` 实例属性（不包括静态属性）和实例方法**完全相同或者是另一个类的子集**。
+- A 是一个函数上参数变量的**联合类型** （例如 `string | number`）。则，函数内部可以断言成 string 或 number 类型。
+- 多个类组成的**联合类型** ，例如：`let vechile: Car | Bus | Trunck` ，vechile 可以断言成其中任意一种数据类型，例如： `vechile as Ca`
+- 任何数据类型都可以断言成 `any` 或 `unknown` 类型。 `any` 或 `unknown` 类型也可以断言成任何其他数据类型。
 
 应用场景：
 
-+ 调用每一个类型独有的方法
+- 调用每一个类型独有的方法
 
-  ``` typescript
+  ```typescript
   class Vechile {
     static count: number = 3;
     public brand: string; // 品牌
@@ -733,9 +734,9 @@ const getStrLength = (target: string | number): number => {
   export { Customer };
   ```
 
-+ 对象中的 `Symbol` 数据类型取值问题
+- 对象中的 `Symbol` 数据类型取值问题
 
-  ``` typescript
+  ```typescript
   let symid = Symbol('objid');
   let obj = { [symid]: 101, username: 'wangwu', age: 23 };
   let username = obj['username'];
@@ -747,9 +748,9 @@ const getStrLength = (target: string | number): number => {
   // let symidunknown = symid as unknown// 可以转换成 unknown,正确
   ```
 
-+ 加法计算
+- 加法计算
 
-  ``` typescript
+  ```typescript
   function add(a: string | number, b: string | number ) {
     return (a as any) + (b as any)
   }
@@ -761,7 +762,7 @@ const getStrLength = (target: string | number): number => {
 
 ⾮空断言，写法为：**`x!` - 将从 x 值域中排除 `null` 和 `undefined`**。
 
-``` typescript
+```typescript
 function getSplicedStr(num: number | null): string {
 
   // 在函数 getSplicedStr 里定义一个函数 getRes
@@ -789,7 +790,7 @@ function getSplicedStr(num: number | null): string {
 
 类型保护是可执行运行时检查的一种表达式，用于确保该类型在一定的范围内。
 
-``` typescript
+```typescript
 const valueList = [123, "abc"];
 
 const getRandomValue = () => {
@@ -819,7 +820,7 @@ if (isString(item)) {
 
 对于 `n in x` 表达式，其中 `n` 是字符串文字或字符串文字类型，而 `x` 是联合类型。
 
-``` typescript
+```typescript
 interface Admin {
   name: string;
   privileges: string[];
@@ -846,7 +847,7 @@ function printEmployeeInformation(emp: UnknownEmployee) {
 
 对 `typeof` 的处理有特殊要求：**只能使用 `=` 和 `!` 两种形式来比较**。`type` 只能是`number`、`string`、`boolean`和`symbol`四种类型
 
-``` typescript
+```typescript
 if (typeof item === "string") {
   console.log(item.length);
 } else {
@@ -858,7 +859,7 @@ if (typeof item === "string") {
 
 `instanceof` 用来判断一个实例是不是某个构造函数创建的，或者是不是使用 ES6 语法的某个类创建的。
 
-``` typescript
+```typescript
 class CreateByClass1 {
   public age = 18;
   constructor() {}
@@ -882,7 +883,7 @@ if (item instanceof CreateByClass1) {
 
 ### is 关键字
 
-``` typescript
+```typescript
 // test is string
 // 判断 test 是不是 string 类型，并根据结果返回 boolean 相关类型
 function isString(test: any): test is string {
@@ -907,7 +908,7 @@ example('hello world');
 
 TypeScript 借助旧类型创建一个新类型的方式，就是映射类型，它可以用相同的形式去转换旧类型中的每个属性。TypeScript 2.9+，支持用 `number` 和 `symbol` 命名的属性
 
-``` typescript
+```typescript
 const stringIndex = "a";
 const numberIndex = 1;
 const symbolIndex = Symbol();
@@ -931,7 +932,7 @@ let key: keys = symbolIndex; // right
 
 使用映射类型包装一个类型的属性后，也可以进行逆向操作，也就是拆包
 
-``` typescript
+```typescript
 // 定义映射类型，将一个属性拆分成get/set方法
 type Proxy<T> = {
   get(): T;
@@ -979,7 +980,7 @@ let originalProps = unproxify(proxyProps);
 
 使用 `+` 和 `-` 符号作为前缀来指定增加还是删除修饰符
 
-``` typescript
+```typescript
 interface Info { name: string; age: number; }
 // 经过 ReadonlyInfo 创建的接口类型，属性是可选且只读的
 type ReadonlyInfo<T> = { +readonly [P in keyof T]+?: T[P] };
@@ -1000,7 +1001,7 @@ info2.name = ""; // right, can edit
 
 在元组和数组上的映射类型会生成新的元组和数组，并不会创建一个新的类型，这个类型上会具有 `push`、`pop` 等数组方法和数组属性。
 
-``` typescript
+```typescript
 // MapToPromise 返回一个将传入的类型的所有字段的值转为 Promise，
 // 且 Promise 的 resolve 回调函数的参数类型为这个字段类型
 type MapToPromise<T> = { [K in keyof T]: Promise<T[K]> };
@@ -1020,7 +1021,7 @@ let tuple: promiseTuple = [
 
 以一个条件表达式进行类型关系检测，然后在后面两种类型中选择一个。
 
-``` typescript
+```typescript
 // 如果 T 可以赋值给 U 类型，则是 X 类型，否则是 Y 类型。
 T extends U ? X : Y
 ```
@@ -1029,12 +1030,11 @@ T extends U ? X : Y
 
 当待检测的类型是联合类型，则该条件类型被称为“分布式条件类型”，在实例化时会自动分发成联合类型
 
-``` typescript
+```typescript
 // 条件类型的作用：找出从 T 中出去 U 中存在的类型，得到剩下的类型
 type Diff<T, U> = T extends U ? never : T;
 type Test = Diff<string | number | boolean, undefined | number>;
 // Test的类型为 string | boolean
-
 
 // [K in keyof T] 用于遍历 T 的所有属性名
 // 如果属性值为 Function 类型，则值为属性名字面量类型，否则为 never 类型
@@ -1052,10 +1052,10 @@ type Test = Type<Part>; // Test的类型为"updatePart"
 
 ### infer（条件类型的类型推断）
 
-+ 如果传入的类型是一个数组，则返回它元素的类型；
-+ 如果是一个普通类型，则直接返回这个类型。
+- 如果传入的类型是一个数组，则返回它元素的类型；
+- 如果是一个普通类型，则直接返回这个类型。
 
-``` typescript
+```typescript
 // 需要通过索引访问类型 T[number] 来获取类型的
 type Type<T> = T extends any[] ? T[number] : T;
 type test1 = Type<string[]>; // test1 的类型为 string
@@ -1123,7 +1123,7 @@ createInstance(StudentClass, ['lrh02', 25]).getInfo();
 
 `Readonly<Type>` 适用于将一个对象中的每一个属性转换为**只读**的场景
 
-``` typescript
+```typescript
 type Readonly<T> = {
   readonly [P in keyof T]: T[P];
 }
@@ -1141,7 +1141,7 @@ type ReadonlyUser = Readonly<User>
 
 `Partial<Type>`: 适用于将一个对象中的每一个属性转换为**可选**的场景
 
-``` typescript
+```typescript
 type Partial<T> = {
   [P in keyof T]?: T[P];
 }
@@ -1159,7 +1159,7 @@ type PartialUser = Partial<User>
 
 `Pick<Type, Keys>`: 返回一个对象中指定字段的值组成的对象
 
-``` typescript
+```typescript
 type Pick<T, K extends keyof T> = {
   [P in K]: T[P];
 }
@@ -1177,7 +1177,7 @@ type PickUser = Pick<User, "username" | "id">
 
 `Record<Keys, Type>`: 适用于将一个对象中的每一个属性转换为**其他值**的场景
 
-``` typescript
+```typescript
 type Record<K extends keyof any, T> = {
   [P in K]: T;
 }
@@ -1205,7 +1205,7 @@ const lengths = mapObject(names, s => s.length);
 
 `Omit<Type, Keys>`：从类型 Type 中获取所有属性，然后从中剔除 Keys 属性后构造一个类型。
 
-``` typescript
+```typescript
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
 // ==============================
@@ -1226,7 +1226,7 @@ const todo: TodoPreview = {
 
 `Exclude<Type, ExcludedUnion>`: 从 Type 中去掉可以赋值给 ExcludedUnion 的类型
 
-``` typescript
+```typescript
 type Exclude<T, U> = T extends U ? never : T;
 
 type Type = Exclude<"a" | "b" | "c", "a" | "b">;
@@ -1239,7 +1239,7 @@ type Type2 = Exclude<string | number | boolean, string | number>;
 
 `Extract<Type, Union>`: 选取 Type 中可以赋值给 Union 的类型
 
-``` typescript
+```typescript
 type Extract<T, U> = T extends U ? T : never;
 
 type Type = Extract<"a" | "b" | "c", "a" | "c" | "f">;
@@ -1279,7 +1279,7 @@ function cross<T, U, V>(objOne: CrossType<T>, objTwo: CrossType<U>, objThree?: C
 
 `NonNullable<Type>`: 从 Type 中去掉 `null` 和 `undefined`
 
-``` typescript
+```typescript
 type NonNullable<T> = T extends null | undefined ? never : T;
 
 type Type = NonNullable<string | number | undefined | null>;
@@ -1290,7 +1290,7 @@ type Type = NonNullable<string | number | undefined | null>;
 
 `ReturnType<Type>`: 获取函数类型返回值类型
 
-``` typescript
+```typescript
 type ReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : any;
 
 type Type = ReturnType<() => string>;
@@ -1305,7 +1305,7 @@ type Type2 = ReturnType<(arg: number) => void)>
 
 InstanceType 条件类型要求泛型变量 T 类型是创建实例为 any 类型的构造函数，而它本身则通过判断 T 是否是构造函数类型来确定返回的类型。如果是构造函数，使用 infer 可以自动推断出 R 的类型，即实例类型；否则返回的是 any 类型。
 
-``` typescript
+```typescript
 type InstanceType<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any;
 
 class A {

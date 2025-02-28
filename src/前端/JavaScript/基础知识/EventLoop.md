@@ -6,7 +6,7 @@
 
 - 宏任务（macrotask）：创建主文档对象、解析 HTML、执行主线（或全局）JavaScript 代码，更改当前 URL 以及各种事件，如页面加载、输入、网络事件和定时器事件（`setTimeout` 、`setInterval` 等）。
 - 微任务（microtask）：`Promise` 回调函数、DOM 发生变化等
-  
+
   所有微任务会在下一次渲染之前执行完成，其目标是在渲染前更新应用程序状态。能够在重新渲染 UI 之前执行指定的行为，避免不必要的 UI 重绘，UI 重绘会使应用程序的状态不连续。
 
 事件循环基于**两个基本原则**：
@@ -116,7 +116,7 @@
   // 注册 10 ms 后延迟执行函数
   setTimeout(() => {
     // 假设执行 setTimeout 回调代码，运行时间为 6 ms
-  }, 10);
+  }, 10)
 
   // 注册每 10 ms 执行的周期函数
   setInterval(() => {
@@ -163,7 +163,7 @@
 
 - 示例二
 
-  ``` javascript
+  ```javascript
   console.log('script start')
 
   setTimeout(function () {
@@ -179,7 +179,7 @@
     })
 
   console.log('script end')
-  
+
   // 执行输出顺序：
   // script start --> script end --> promise1 --> promise2 --> setTimeout
   ```

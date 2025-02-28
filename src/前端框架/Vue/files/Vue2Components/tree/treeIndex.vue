@@ -1,15 +1,6 @@
-<template>
-  <div>
-    <Tree
-      :data="data"
-      show-checkbox
-      @on-toggle-expand="handleToggleExpand"
-      @on-check-change="handleCheckChange"
-    ></Tree>
-  </div>
-</template>
 <script>
-import Tree from './tree.vue';
+import Tree from './tree.vue'
+
 export default {
   components: { Tree },
   data() {
@@ -45,15 +36,26 @@ export default {
           ],
         },
       ],
-    };
+    }
   },
   methods: {
     handleToggleExpand(data) {
-      console.log(data);
+      console.log(data)
     },
     handleCheckChange(data) {
-      console.log(data);
+      console.log(data)
     },
   },
-};
+}
 </script>
+
+<template>
+  <div>
+    <Tree
+      :data="data"
+      show-checkbox
+      @on-toggle-expand="handleToggleExpand"
+      @on-check-change="handleCheckChange"
+    />
+  </div>
+</template>

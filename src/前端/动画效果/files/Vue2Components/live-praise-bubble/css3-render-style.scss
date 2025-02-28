@@ -73,57 +73,68 @@ $bubble_scale: 0.8s;
   // background-size: 188.5px 147px;
 }
 .bl1 {
-  animation: bubble_1 $bubble_time linear 1 forwards,
+  animation:
+    bubble_1 $bubble_time linear 1 forwards,
     bubble_big_1 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl2 {
-  animation: bubble_2 $bubble_time linear 1 forwards,
+  animation:
+    bubble_2 $bubble_time linear 1 forwards,
     bubble_big_2 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl3 {
-  animation: bubble_3 $bubble_time linear 1 forwards,
+  animation:
+    bubble_3 $bubble_time linear 1 forwards,
     bubble_big_1 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl4 {
-  animation: bubble_4 $bubble_time linear 1 forwards,
+  animation:
+    bubble_4 $bubble_time linear 1 forwards,
     bubble_big_2 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl5 {
-  animation: bubble_5 $bubble_time linear 1 forwards,
+  animation:
+    bubble_5 $bubble_time linear 1 forwards,
     bubble_big_1 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl6 {
-  animation: bubble_6 $bubble_time linear 1 forwards,
+  animation:
+    bubble_6 $bubble_time linear 1 forwards,
     bubble_big_3 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl7 {
-  animation: bubble_7 $bubble_time linear 1 forwards,
+  animation:
+    bubble_7 $bubble_time linear 1 forwards,
     bubble_big_1 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl8 {
-  animation: bubble_8 $bubble_time linear 1 forwards,
+  animation:
+    bubble_8 $bubble_time linear 1 forwards,
     bubble_big_3 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl9 {
-  animation: bubble_9 $bubble_time linear 1 forwards,
+  animation:
+    bubble_9 $bubble_time linear 1 forwards,
     bubble_big_2 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl10 {
-  animation: bubble_10 $bubble_time linear 1 forwards,
+  animation:
+    bubble_10 $bubble_time linear 1 forwards,
     bubble_big_1 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }
 .bl11 {
-  animation: bubble_11 $bubble_time linear 1 forwards,
+  animation:
+    bubble_11 $bubble_time linear 1 forwards,
     bubble_big_2 $bubble_scale linear 1 forwards,
     bubble_y $bubble_time linear 1 forwards;
 }

@@ -4,7 +4,7 @@
 
 `BEM`表示`block`（块）、`element`（元素）、`modifier`（修饰符）。
 
-``` css
+```css
 .block { /* styles */ }
 .block__element { /* styles */ }
 .block--modifier { /* styles */ }
@@ -18,13 +18,13 @@
 
 一个块的正式（实际上是半正式的）定义有下面三个基本原则：
 
-+ CSS 中只能使用类名（不能是ID）
-+ 每一个块名应该有一个命名空间（前缀）
-+ 每一条 CSS 规则必须属于一个块
+- CSS 中只能使用类名（不能是ID）
+- 每一个块名应该有一个命名空间（前缀）
+- 每一条 CSS 规则必须属于一个块
 
 例如，一个列表。
 
-``` html
+```html
 <div class="block"></div>
 <div class="block-list"></div>
 ```
@@ -35,7 +35,7 @@
 
 通常，用 `__` （双下划线）连接块和块的子元素。例如：
 
-``` html
+```html
 <div class="block">
   <div class="block__item"></div>
 </div>
@@ -46,12 +46,12 @@
 
 **永远不应该链式命名 BEM 元素**。有两种方法可以绕过长的 BEM 链式命名：
 
-+ 只把子子元素连接到有意义的块
-+ 创建新的块来保存元素
+- 只把子子元素连接到有意义的块
+- 创建新的块来保存元素
 
 #### 只把子元素连接到有意义的块
 
-``` html
+```html
 <article class="article">
   <header class="article__header">
     <h1 class="article__title"></h1>
@@ -66,7 +66,7 @@
 
 #### 创建新的块来保存元素
 
-``` html
+```html
 <div class="block">
   <h3 class="block__title"></h3>
   <ul class="block__list">
@@ -87,7 +87,7 @@
 
 通常，用 `--` （双中划线）连接一个块或者块的子元素的一种状态。例如：
 
-``` html
+```html
 <div class="block">
   <h3 class="block__title"></h3>
   <ul class="block__list">
@@ -101,9 +101,9 @@
 
 对于使用修饰符的样式，重复样式可以进行 CSS 样式的简化
 
-+ 使用 mixin （scss）
+- 使用 mixin （scss）
 
-``` scss
+```scss
 @mixin button {
   padding: 0.5em 0.75em;
 }
@@ -117,9 +117,9 @@
 }
 ```
 
-+ 使用 CSS 属性选择器
+- 使用 CSS 属性选择器
 
-``` css
+```css
 [class*='button']:not([class*='button__']) {
   padding: 0.5em 0.75em;
 }
@@ -127,21 +127,21 @@
 
 ## 命名空间
 
-+ `.l-`：布局(layouts)
-+ `.o-`: 对象(objects)
-+ `.c-`: 组件(components)
-+ `.js`: js的钩子(JavaScript hooks)
-+ `.is-` | `.has-`: 状态类(state classes)
-+ `.t1` | `.s1`: 排版大小(typography sizes)
-+ `.u-`: 实用类(utility classes)
+- `.l-`：布局(layouts)
+- `.o-`: 对象(objects)
+- `.c-`: 组件(components)
+- `.js`: js的钩子(JavaScript hooks)
+- `.is-` | `.has-`: 状态类(state classes)
+- `.t1` | `.s1`: 排版大小(typography sizes)
+- `.u-`: 实用类(utility classes)
 
-### `.l-`  布局(layouts)
+### `.l-` 布局(layouts)
 
 布局分为两个不同的类别 —— **全局布局** 和 **块级布局**
 
-+ 全局布局：应用于所有页面的布局。
-  
-  ``` html
+- 全局布局：应用于所有页面的布局。
+
+  ```html
   <div class="site-header">
     <div class="l-wrap">
       <!-- stuff -->
@@ -154,9 +154,9 @@
   </div>
   ```
 
-+ 块级布局：每一个块（对象或组件）可以能有自己的布局。
+- 块级布局：每一个块（对象或组件）可以能有自己的布局。
 
-  ``` html
+  ```html
   <form class="form l-form" action="#">
     <div class="form__row">
       <div class="form__item l-form__item"></div>
@@ -176,16 +176,16 @@
 
 对象物们都有着以下的属性：
 
-+ 对象使用 `.o-` 前缀
-+ 它们的里面不能包含其他对象或组件
-+ 它们之于上下文是独立的，也意味着对象不应该更改外部任何结构。因此，对象块不能包含任何这些属性/值：
-  + `absolute` 和 `fixed` 定位
-  + `margin`
-  + `padding` (除非使用了background-color。在这种情况下，它不会中断对象外部的对齐)
-  + `float`
-+ 某些对象可以在有意义的情况下忽略 `.o-` 前缀
+- 对象使用 `.o-` 前缀
+- 它们的里面不能包含其他对象或组件
+- 它们之于上下文是独立的，也意味着对象不应该更改外部任何结构。因此，对象块不能包含任何这些属性/值：
+  - `absolute` 和 `fixed` 定位
+  - `margin`
+  - `padding` (除非使用了background-color。在这种情况下，它不会中断对象外部的对齐)
+  - `float`
+- 某些对象可以在有意义的情况下忽略 `.o-` 前缀
 
-``` html
+```html
 <div class="o-countdown l-countdown jsCountdown">
   <div class="o-countdown__inner l-countdown__inner">
     <span data-token="days">3</span>
@@ -212,17 +212,17 @@
 
 组件有着以下属性：
 
-+ 组件使用 `.c-` 前缀
-+ 组件可以包含其他对象和组件
-+ 组件是上下文感知的
+- 组件使用 `.c-` 前缀
+- 组件可以包含其他对象和组件
+- 组件是上下文感知的
 
-``` html
+```html
 <form class="c-form--sidebar l-form--sidebar" action="#">
   <div class="c-form__row">
     <div class="c-form__item l-form__item">
       <label for="fname">
         <span>First Name</span>
-        <input type="text" id="fname" name="fname">
+        <input type="text" id="fname" name="fname" />
       </label>
     </div>
   </div>
@@ -237,7 +237,7 @@
 
 Javascript 钩子（`.js`）表示对象/组件是否需要JavaScript。
 
-``` html
+```html
 <div class="o-countdown jsCountdown">
   <!-- ... -->
 </div>
@@ -247,7 +247,7 @@ Javascript 钩子（`.js`）表示对象/组件是否需要JavaScript。
 
 状态类表示对象/组件的当前状态。
 
-``` html
+```html
 <div class="o-countdown is-animating">
   <!-- ... -->
 </div>
@@ -257,19 +257,20 @@ Javascript 钩子（`.js`）表示对象/组件是否需要JavaScript。
 
 排版类是对象的子集。应该像排列对象那样将相同的一套规则应用于排版类。不应该在排版类中添加margin或padding。而这些margin或padding应该直接添加到组件。
 
-``` html
+```html
 <nav>
-  <a class="s1" href="#" >Link</a>
+  <a class="s1" href="#">Link</a>
 </nav>
 
 <style lang="scss">
-@mixin s1 {
-  font-size: 14px;
-  line-height: 1.25;
-}
-h1, nav a {
-  @include s1;
-}
+  @mixin s1 {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  h1,
+  nav a {
+    @include s1;
+  }
 </style>
 ```
 
@@ -277,7 +278,7 @@ h1, nav a {
 
 通常只包含一个属性，并且包含!important声明。
 
-``` css
+```css
 .u-text-left {
   text-align: left !important;
 }
@@ -291,27 +292,27 @@ h1, nav a {
 
 ## CSS文件组织
 
-``` md
+```md
 - project/
-    |- dist/ # 用于生产环境
-    |- src/ # 所有的开发源代码
-        |- js/
-        |- scss/
-            |- lib/
-                |- _lib.scss # 声明了在项目中使用的库文件。例如：Normalize.css、Typi(排版相关的一个库)、Themify(项目中使用了一个主题的话)
-            |- helpers/ # 项目中封装的 mixins 和 functions
-            |- variables/ # 存储项目中使用的变量。例如：themes、colors、breakpoints
-            |- base/ # 存除了Normalize.css之外的所有resets。例如：重置 margins、paddings和输入框、按钮等元素的样式
-            |- layouts/ # 存放在整个项目中全局使用的布局样式
-            |- objects/ # 存放编写的对象样式
-            |- components/ # 存放编写的组件样式
-            |- styles.scss # 列出变量、对象和组件的样式文件
-            |- _utilities.scss # 存放编写的公用命名空间类。例如：.u-text-center
+  |- dist/ # 用于生产环境
+  |- src/ # 所有的开发源代码
+  |- js/
+  |- scss/
+  |- lib/
+  |- \_lib.scss # 声明了在项目中使用的库文件。例如：Normalize.css、Typi(排版相关的一个库)、Themify(项目中使用了一个主题的话)
+  |- helpers/ # 项目中封装的 mixins 和 functions
+  |- variables/ # 存储项目中使用的变量。例如：themes、colors、breakpoints
+  |- base/ # 存除了Normalize.css之外的所有resets。例如：重置 margins、paddings和输入框、按钮等元素的样式
+  |- layouts/ # 存放在整个项目中全局使用的布局样式
+  |- objects/ # 存放编写的对象样式
+  |- components/ # 存放编写的组件样式
+  |- styles.scss # 列出变量、对象和组件的样式文件
+  |- \_utilities.scss # 存放编写的公用命名空间类。例如：.u-text-center
 ```
 
 ## 参考
 
-+ [[规范] CSS BEM 书写规范](https://github.com/Tencent/tmt-workflow/wiki/%E2%92%9B-[%E8%A7%84%E8%8C%83]--CSS-BEM-%E4%B9%A6%E5%86%99%E8%A7%84%E8%8C%83)
-+ [编写模块化CSS：BEM](https://www.w3cplus.com/css/css-architecture-1.html)
-+ [编写模块化的CSS:命名空间](https://www.w3cplus.com/css/css-architecture-2.html)
-+ [编写模块化的CSS:CSS文件组织结构](https://www.w3cplus.com/css/css-architecture-3.html)
+- [[规范] CSS BEM 书写规范](https://github.com/Tencent/tmt-workflow/wiki/%E2%92%9B-[%E8%A7%84%E8%8C%83]--CSS-BEM-%E4%B9%A6%E5%86%99%E8%A7%84%E8%8C%83)
+- [编写模块化CSS：BEM](https://www.w3cplus.com/css/css-architecture-1.html)
+- [编写模块化的CSS:命名空间](https://www.w3cplus.com/css/css-architecture-2.html)
+- [编写模块化的CSS:CSS文件组织结构](https://www.w3cplus.com/css/css-architecture-3.html)

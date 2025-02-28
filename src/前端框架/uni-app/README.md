@@ -4,29 +4,29 @@
 
 ### scss 中使用特定前缀引用图片路径
 
-+ 创建 `globalVar.scss` 文件，并在 `uni.scss` 文件中引入
+- 创建 `globalVar.scss` 文件，并在 `uni.scss` 文件中引入
 
 ::: details globalVar.scss
 
-``` scss
-$src: "https://csxbank.oss-cn-shanghai-finance-1-pub.aliyuncs.com/sxf/";
+```scss
+$src: 'https://csxbank.oss-cn-shanghai-finance-1-pub.aliyuncs.com/sxf/';
 ```
 
 :::
 
 ::: details uni.scss
 
-``` scss
+```scss
 @import '@/styles/globalVar.scss';
 ```
 
 :::
 
-+ 在 `vue.config.js` 文件中，修改 `globalVar.scss` 文件内容
+- 在 `vue.config.js` 文件中，修改 `globalVar.scss` 文件内容
 
 ::: details vue.config.js
 
-``` javascript
+```javascript
 const globalVarScssPath = './src/styles/globalVar.scss'
 let globalVarScss = fs.readFileSync(globalVarScssPath, { encoding: 'utf-8' })
 
@@ -66,11 +66,11 @@ fs.writeFileSync(globalVarScssPath, globalVarScss, {
 
 :::
 
-+ 在 `vue` 文件中使用
+- 在 `vue` 文件中使用
 
 ::: details uni.scss
 
-``` vue
+```vue
 <style lang="scss" scoped>
 .login-container {
   height: 100%;
@@ -87,11 +87,11 @@ fs.writeFileSync(globalVarScssPath, globalVarScss, {
 
 实现逻辑: 自定义一个 `loader`, 接受源码并处理, 返回源码, 交给 `vue-loader` 继续进行原本的处理逻辑。
 
-+ 修改 `vue.config.js` 配置文件，在 `vue-loader` 前增加自定义 `loader` 处理内容
+- 修改 `vue.config.js` 配置文件，在 `vue-loader` 前增加自定义 `loader` 处理内容
 
 ::: details vue.config.js
 
-``` javascript
+```javascript
 const path = require('path')
 module.exports = {
   transpileDependencies: ['uview-ui'],
@@ -109,11 +109,11 @@ module.exports = {
 
 :::
 
-+ 创建 `customLoader.js` 使用正则匹配替换 `vue` 文件中所有指定格式的图片路径前缀
+- 创建 `customLoader.js` 使用正则匹配替换 `vue` 文件中所有指定格式的图片路径前缀
 
 ::: details customLoader.js
 
-``` javascript
+```javascript
 module.exports = function (source) {
   return source.replace(/\$src\//g, `${process.env.VUE_APP_IMAGE_OSS_SRC}`)
 }
@@ -125,7 +125,7 @@ module.exports = function (source) {
 
 ::: details vue.config.js
 
-``` javascript
+```javascript
 module.exports = {
   css: {
     // 给 sass-loader 传递选项

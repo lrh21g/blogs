@@ -1,16 +1,7 @@
-<template>
-  <div>
-    <tree-node
-      v-for="(item, index) in cloneData"
-      :key="index"
-      :data="item"
-      :show-checkbox="showCheckbox"
-    ></tree-node>
-  </div>
-</template>
 <script>
-import TreeNode from './node.vue';
-import { deepCopy } from '../utils/assist.js';
+import { deepCopy } from '../utils/assist.js'
+import TreeNode from './node.vue'
+
 export default {
   name: 'Tree',
   components: { TreeNode },
@@ -20,7 +11,7 @@ export default {
     data: {
       type: Array,
       default() {
-        return [];
+        return []
       },
     },
     // 是否显示选择框，只进行数据传递
@@ -32,24 +23,35 @@ export default {
   data() {
     return {
       cloneData: [],
-    };
+    }
+  },
+  watch: {
+    data() {
+      this.rebuildData()
+    },
+  },
+  created() {
+    this.rebuildData()
   },
   methods: {
     // 为了不破坏使用者传递的源数据 data，所以会克隆一份数据（cloneData）
     rebuildData() {
-      this.cloneData = deepCopy(this.data);
+      this.cloneData = deepCopy(this.data)
     },
     emitEvent(eventName, data) {
-      this.$emit(eventName, data, this.cloneData);
+      this.$emit(eventName, data, this.cloneData)
     },
   },
-  created() {
-    this.rebuildData();
-  },
-  watch: {
-    data() {
-      this.rebuildData();
-    },
-  },
-};
+}
 </script>
+
+<template>
+  <div>
+    <TreeNode
+      v-for="(item, index) in cloneData"
+      :key="index"
+      :data="item"
+      :show-checkbox="showCheckbox"
+    />
+  </div>
+</template>

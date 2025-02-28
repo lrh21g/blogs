@@ -298,9 +298,9 @@ const p2 = Promise.all([1, 2, 3, Promise.resolve(4)])
 const p3 = Promise.all([1, 2, 3, Promise.reject(5)])
 // 使用 setTimeout，可以在队列为空后执行代码
 setTimeout(() => {
-  console.log(p1) // Promise {<fulfilled>: Array(3)}
-  console.log(p2) // Promise {<fulfilled>: Array(4)}
-  console.log(p3) // Promise {<rejected>: 555}
+  console.log(p1) // Promise {<fulfilled>: Array(3)}
+  console.log(p2) // Promise {<fulfilled>: Array(4)}
+  console.log(p3) // Promise {<rejected>: 555}
 })
 
 const p1 = new Promise((resolve, reject) => {
@@ -381,9 +381,9 @@ setTimeout(() => {
 })
 
 // 输出顺序如下 :
-// Promise {<pending>}
+// Promise {<pending>}
 // 此时堆栈为空
-// Promise {<pending>}
+// Promise {<pending>}
 ```
 
 注：如果可迭代对象中包含一个或多个非 `Promise` 值和/或已敲定的 `Promise`，则 `Promise.race()` 将以可迭代对象中找到的第一个此类值敲定。
@@ -406,11 +406,11 @@ setTimeout(() => {
 })
 
 // 输出顺序如下：
-// Promise {<pending>}
-// Promise {<pending>}
+// Promise {<pending>}
+// Promise {<pending>}
 // 此时堆栈为空
-// Promise {<fulfilled>: 100}
-// Promise {<fulfilled>: '非 Promise 值'}
+// Promise {<fulfilled>: 100}
+// Promise {<fulfilled>: '非 Promise 值'}
 ```
 
 ### Promise.allSettled()
@@ -518,7 +518,7 @@ Promise.any([p3_300ms_reject, p4_100ms_reject])
   `thenable` 对象实现了 `.then()` 方法，该方法被调用时需要传入两个回调函数，一个用于 `Promise` 被兑现时调用，一个用于 `Promise` 被拒绝时调用。
 
   对于嵌套的 `thenable` 对象将被“深度展平”为单个 `Promise` 对象。
-  
+
   不要在一个解决为自身的 `thenable` 对象上调用 `Promise.resolve()`。这将导致无限递归，因为它试图展平一个无限嵌套的 `Promise`。
 
   ```javascript
@@ -607,7 +607,7 @@ Promise.reject(new Error('失败')).then(
     // 不会被调用
   },
   (error) => {
-    console.error('error : ', error) 
+    console.error('error : ', error)
     // error :  Error: 失败
   }
 )
@@ -725,7 +725,7 @@ console.log('next')
 ```
 
 - 使用 `new Promise()`
-  
+
 ```javascript
 const func = () => console.log('now')
 ;(() => new Promise((resolve) => resolve(func())))()

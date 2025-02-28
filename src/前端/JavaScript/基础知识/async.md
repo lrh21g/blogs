@@ -40,7 +40,6 @@ const foo = async function () {
   console.log('[7] fooFunc fooA : ', fooA)
   const fooB = await resolveAfterOneSeconds('fooB')
   console.log('[9] fooFunc fooB : ', fooB)
-  
 
   return [fooA, fooB]
 }
@@ -178,7 +177,7 @@ console.log('[6] barFunc after')
     b().then(() => c())
   }
   ```
-  
+
   - 函数 `a` 内部运行了一个异步任务 `b()`。
   - 当 `b()` 运行的时候，函数 `a()` 不会中断，而是继续执行。
   - 等到 `b()` 运行结束，可能 `a()` 早就运行结束了，`b()` 所在的上下文环境已经消失了。
@@ -376,7 +375,7 @@ export default to
 
 ## async 函数实现原理
 
-`async` 函数是 `Generator` 函数的语法糖，将 `Generator` 函数的星号（*）替换成 `async`，将 `yield` 替换成 `await`。
+`async` 函数是 `Generator` 函数的语法糖，将 `Generator` 函数的星号（\*）替换成 `async`，将 `yield` 替换成 `await`。
 
 `async` 函数的实现原理是将 `Generator` 函数和自动执行器，包装在一个函数里。
 

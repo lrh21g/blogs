@@ -274,6 +274,7 @@ function remove() {
     - 删除不存在的数据库并不会报错。
 
   - `IDBFactory.cmp(first, second)` ：比较两个值是否为 indexedDB 的相同的主键，并返回一个整数，表示比较结果。
+
     - 如果 `first` 大于 `second` ，返回 `1` 。
     - 如果 `first` 等于 `second` ，返回 `0` 。
     - 如果 `first` 小于 `second` ，返回 `-1` 。
@@ -283,7 +284,7 @@ function remove() {
 #### IDBOpenDBRequest 接口
 
 `IDBOpenDBRequest` 继承了 `IDBRequest` 对象，表示一个打开数据库的请求。提供了额外的事件监听属性如下：
-  
+
 - `IDBOpenDBRequest.onblocked` ：上一次打开数据库的连接未关闭时触发。
 - `IDBOpenDBRequest.onupgradeneeded` ：第一次打开数据库或者数据库版本升级时触发。
 
@@ -356,19 +357,19 @@ function remove() {
 - `IDBRequest` 属性
 
   - `IDBRequest.readyState` ：只读。等于 `pending` 表示操作正在进行，等于 `done` 表示操作正在完成。
-  
+
   - `IDBRequest.result` ：只读。返回请求的结果。如果请求失败、结果不可用，读取该属性会报错。
-  
+
   - `IDBRequest.error` ：只读。请求失败时，返回错误对象。
-  
+
   - `IDBRequest.source` ：只读。返回请求的来源（比如索引对象或 ObjectStore）。
-  
+
   - `IDBRequest.transaction` ：只读。返回当前请求正在进行的事务，如果不包含事务，返回 `null` 。
 
 - `IDBRequest` 事件属性
 
   - `IDBRequest.onsuccess` ：当请求成功完成时触发。
-  
+
   - `IDBRequest.onerror` ：当请求失败时触发。
 
 #### IDBObjectStore
@@ -378,15 +379,15 @@ function remove() {
 - `IDBObjectStore` 属性
 
   - `IDBObjectStore.name` ：只读。返回对象仓库的名称。
-  
+
   - `IDBObjectStore.keyPath` ：只读。返回对象仓库的主键。
-  
+
   - `IDBObjectStore.indexNames` ：只读。返回一个 `DOMStringList` 对象，包含对象仓库中所有索引的名称。
-  
+
   - `IDBObjectStore.transaction` ：只读。返回当前对象仓库所在的事务。
-  
+
   - `IDBObjectStore.autoIncrement` ：只读。返回一个布尔值，表示当前对象仓库是否自增。
-  
+
 - `IDBObjectStore` 方法
 
   - `IDBObjectStore.add()` ：返回一个 `IDBRequest` 对象，用于向对象仓库中添加一条记录。只用于添加数据，如果主键相同会报错，更新数据必须使用 `put()` 方法。
@@ -402,13 +403,13 @@ function remove() {
   - `IDBObjectStore.count()` ：返回一个 `IDBRequest` 对象，用于计算对象仓库中满足给定参数的记录数量。
 
   - `IDBObjectStore.getKey()` ：返回一个 `IDBRequest` 对象，用于获取对象仓库中指定键的主键。
-  
+
   - `IDBObjectStore.get()` ：返回一个 `IDBRequest` 对象，用于获取对象仓库中指定键的记录。
 
   - `IDBObjectStore.getAll()` ：返回一个 `IDBRequest` 对象，用于获取对象仓库中所有记录。
 
   - `IDBObjectStore.getAllKeys()` ：返回一个 `IDBRequest` 对象，用于获取对象仓库中所有记录的主键。
-  
+
   - `IDBObjectStore.index()` ：返回一个 `IDBIndex` 对象，用于获取对象仓库中指定索引的记录。
 
   - `IDBObjectStore.createIndex()` ：返回一个 `IDBIndex` 对象，用于创建一个索引。该方法只能在 `VersionChange` 监听函数里面调用。
@@ -416,7 +417,7 @@ function remove() {
   - `IDBObjectStore.openCursor()` ：返回一个 `IDBRequest` 对象，获取一个指针对象 `IDBCursor` ，指针对象可以用来遍历数据。异步操作，通过监听事件（`success` 和 `error` 事件）处理获取数据的操作结果。
 
   - `IDBObjectStore.openKeyCursor()` ：返回一个 `IDBRequest` 对象，用于获取一个主键指针对象。
-  
+
 #### IDBIndex
 
 `IDBIndex` 允许访问 IndexedDB 数据库中的数据子集，但使用索引来检索记录而不是主键。这有时比使用 `IDBObjectStore` 更快。
@@ -424,13 +425,12 @@ function remove() {
 - `IDBIndex` 属性
 
   - `IDBIndex.name` ：只读。返回索引的名称。
-  
+
   - `IDBIndex.objectStore` ：只读。返回索引所在的对象仓库。
-  
+
   - `IDBIndex.keyPath` ：只读。返回索引的主键。
-  
+
   - `IDBIndex.multiEntry` ：只读。返回一个布尔值，针对 `keyPath` 为数组的情况，如果设为 `true`，创建数组时，每个数组成员都会有一个条目，否则每个数组都只有一个条目。
-  
   - `IDBIndex.unique` ：只读。返回一个布尔值，表示索引的键是否包含重复的值。
 
 - `IDBIndex` 方法
@@ -528,7 +528,7 @@ HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用�
 
     - 如设置无效的日期（比如 `0`），代表着过去的日期，即该资源已经过期。
     - 如果不设置该属性，或者设为 `null`，Cookie 只在当前会话（session）有效，浏览器窗口一旦关闭，当前 Session 结束，Cookie 会被删除。
-  
+
   - `Max-Age` ： 有效期，指定的一段时间后被删除 Cookie 。
 
   如果同时指定了 `Expires` 和 `Max-Age` ，`Max-Age` 的值将优先生效。
@@ -557,7 +557,7 @@ HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用�
   `Secure` 和 `HttpOnly` 属性确保 Cookie 被安全发送，并且不会被意外的参与者或脚本访问。
 
   - `Secure` 属性：指定 Cookie 只应通过被 HTTPS 协议加密过的请求发送给服务端。如果是 HTTP 协议，则无法使用 `Secure` 属性设置 Cookie ，但不会阻止对 Cookie 中敏感信息的访问。
-  
+
   - `HttpOnly` 属性：指定 Cookie 无法通过 JavaScript API （比如： `document.cookie` 属性 、 `XMLHttpRequest` 对象 、 Request API 等）获取，仅用于服务器。
 
 - `SameSite`
@@ -573,6 +573,7 @@ HTTP Cookie（也叫 Web Cookie 或浏览器 Cookie）是服务器发送到用�
 ### Cookie 与 HTTP
 
 - 服务器：收到 HTTP 请求后，服务器可以在响应标头里面添加一个或多个 `Set-Cookie` 选项。
+
   - 一个 `Set-Cookie` 字段里面，可以同时包括多个属性，没有次序的要求。
   - 服务器如果要改变一个已设置的 Cookie，必须同时满足四个条件： Cookie 的 `key`、`domain`、`path` 和 `secure` 都是匹配的。只要有一个属性不同，就会生成一个全新的 Cookie ，而不是替换。
 

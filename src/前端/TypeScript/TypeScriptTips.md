@@ -6,12 +6,12 @@
 
 可辨识联合要求具有两个要素：
 
-+ 具有普通的单例类型属性（单例类型，符合单例模式的数据类型，比如枚举成员类型，字面量类型。）
-+ 一个类型别名，包含了那些类型的联合（即把几个类型封装为联合类型，并起一个别名）。
+- 具有普通的单例类型属性（单例类型，符合单例模式的数据类型，比如枚举成员类型，字面量类型。）
+- 一个类型别名，包含了那些类型的联合（即把几个类型封装为联合类型，并起一个别名）。
 
 ### 利用 strictNullChecks
 
-``` typescript
+```typescript
 interface Square {
   kind: "square";
   size: number;
@@ -55,7 +55,7 @@ function getArea(s: Shape) {
 
 采用这种方式，需要定义一个额外的 `asserNever` 函数，但是这种方式不仅能够在编译阶段提示遗漏了判断条件，而且在运行时也会报错。
 
-``` typescript
+```typescript
 function assertNever(value: never): never {
   throw new Error("Unexpected object: " + value);
 }
@@ -81,9 +81,9 @@ TypeScript 1.7+，编译器对有继承行为的类中 `this` 的类型有推断
 
 对象的属性值可以是一个函数（也称为方法），在方法内如果访问`this`，`this` 的类型的规则有：
 
-+ 如果该方法具有显式声明的此参数，则该参数具有该参数的类型。
+- 如果该方法具有显式声明的此参数，则该参数具有该参数的类型。
 
-  ``` typescript
+  ```typescript
   let info = {
     name: 'Tom',
     getName(this: { age: number }) {
@@ -92,9 +92,9 @@ TypeScript 1.7+，编译器对有继承行为的类中 `this` 的类型有推断
   };
   ```
 
-+ 否则，如果该方法由具有此参数的签名进行上下文类型化，则该参数具有该参数的类型。
+- 否则，如果该方法由具有此参数的签名进行上下文类型化，则该参数具有该参数的类型。
 
-  ``` typescript
+  ```typescript
   let info = {
     name: 'Tom',
     getName () {
@@ -104,23 +104,23 @@ TypeScript 1.7+，编译器对有继承行为的类中 `this` 的类型有推断
   }
   ```
 
-+ 否则，如果在 `tsconfig.json` 里将 `noImplicitThis` 设为 `true`，且包含的对象文字具有包含 `ThisType<T>` 的上下文类型，则其类型为 `T`。
+- 否则，如果在 `tsconfig.json` 里将 `noImplicitThis` 设为 `true`，且包含的对象文字具有包含 `ThisType<T>` 的上下文类型，则其类型为 `T`。
 
-  ``` typescript
+  ```typescript
   // 使用类型别名定义一个接口，这里用了泛型，两个泛型变量 D 和 M
   type ObjectDescriptor<D, M> = {
     data?: D; // 可选字段，类型为D
-    // methods: 可选字段，类型为 M 和 ThisType<D & M> 组成的交叉类型；  
+    // methods: 可选字段，类型为 M 和 ThisType<D & M> 组成的交叉类型；
     // ThisType 是一个内置的接口，用来在对象字面量中键入 this
-    // 这里指定this的类型为 D & M  
-    methods?: M & ThisType<D & M>;  
+    // 这里指定this的类型为 D & M
+    methods?: M & ThisType<D & M>;
   }
 
   // 参数desc的类型为 ObjectDescriptor<D, M>
   function makeObject<D, M>(desc: ObjectDescriptor<D, M>): D & M {
     let data: object = desc.data || {};
     let methods: object = desc.methods || {};
-    // 返回对象的类型是 D & M，因为同时包含 D 和 M 两个类型的字段  
+    // 返回对象的类型是 D & M，因为同时包含 D 和 M 两个类型的字段
     return { ...data, ...methods } as D & M;
   }
 
@@ -142,14 +142,13 @@ TypeScript 1.7+，编译器对有继承行为的类中 `this` 的类型有推断
   obj.moveBy(5, 5);
   ```
 
-+ 否则，如果启用了 `--noImplicitThis` 并且包含的对象文字具有不包含 `ThisType<T>` 的上下文类型，则它具有上下文类型。
+- 否则，如果启用了 `--noImplicitThis` 并且包含的对象文字具有不包含 `ThisType<T>` 的上下文类型，则它具有上下文类型。
 
   使用了 `ThisType<T>` 的例子中，`ObjectDescriptor<D, M>` 类型中指定 `methods` 的类型中的 `& ThisType<D & M>` 去掉
 
   会发现 `moveBy` 方法中 `this.x` 和 `this.y` 报错，因为此时 `this` 的类型是 `methods` 这个对象字面量的类型。
 
-+ 否则，`this` 的类型为 `any` 任何类型。
-
+- 否则，`this` 的类型为 `any` 任何类型。
 
 ## 使用模块封装代码
 
@@ -157,7 +156,7 @@ TypeScript 1.7+，编译器对有继承行为的类中 `this` 的类型有推断
 
 `export` 能够导出声明、变量、函数、类，还包括 TypeScript 特有的类型别名和接口。
 
-``` typescript
+```typescript
 // funcInterface.ts
 export interface Func {
   (arg: number): string;
@@ -181,7 +180,7 @@ export { name as nameProp } from "./moduleB";
 
 使用 `import` 引入模块
 
-``` typescript
+```typescript
 // main.ts
 import { name } from "./moduleB";
 // main.ts
@@ -194,7 +193,7 @@ import "./set-title.ts";
 
 ### export default
 
-``` typescript
+```typescript
 // 在 TypeScript 中使用 export default 默认导出
 // moduleB.ts
 export default "lison";
@@ -209,7 +208,7 @@ TypeScript 为了兼容 CommonJS 和 AMD 两种模块系统语法，使得编译
 
 使用 `export =` 导出的模块，必须使用 `import xx = require()` 来引入
 
-``` typescript
+```typescript
 // moduleC.ts
 class C {}
 export = C;
@@ -224,31 +223,31 @@ const c = new ClassC();
 
 根据引入模块的路径是相对还是非相对，模块的导入会以不同的方式解析。
 
-+ 相对导入
-  
+- 相对导入
+
   相对导入是以 `./`（当前目录） 或 `../`（当前目录的上一级目录） 开头的。
 
   模块解析策略：
 
-  ``` typescript
+  ```typescript
   import moduleA from "../module/moduleA";
   ```
 
-  + 编译器在解析模块引用的时候，如果遇到**省略后缀**的情况，会依次查找以该名称为文件名的`.ts`、`.tsx`、`.d.ts`文件。
-  + 如果没找到，会在当前文件夹下的 package.json 文件里查找 types 字段指定的模块路径，然后通过这个路径去查找模块
-  + 如果没找到 package.json 文件或者 types 字段，则会将 moduleA 当做文件夹去查找，如果它确实是文件夹，将会在这个文件夹下依次查找 `index.ts`、`index.tsx`、`index.d.ts`。
-  + 如果还没找到，会在上面例子中 module 文件夹的上级文件夹继续查找，查找规则和前面这些顺序一致。
+  - 编译器在解析模块引用的时候，如果遇到**省略后缀**的情况，会依次查找以该名称为文件名的`.ts`、`.tsx`、`.d.ts`文件。
+  - 如果没找到，会在当前文件夹下的 package.json 文件里查找 types 字段指定的模块路径，然后通过这个路径去查找模块
+  - 如果没找到 package.json 文件或者 types 字段，则会将 moduleA 当做文件夹去查找，如果它确实是文件夹，将会在这个文件夹下依次查找 `index.ts`、`index.tsx`、`index.d.ts`。
+  - 如果还没找到，会在上面例子中 module 文件夹的上级文件夹继续查找，查找规则和前面这些顺序一致。
 
-+ 非相对导入
-  
+- 非相对导入
+
   除了 `./` 或 `../` 开头的路径，都被当做非相对路径。非相对模块的导入可以相对于 baseUrl，也可以通过路径映射，还可以解析为外部模块。
 
 ## 使用命名空间封装代码
 
 命名空间与模块的区别：
 
-+ 当在程序内部用于防止全局污染，把相关的内容都放在一起的时候，使用命名空间
-+ 当封装了一个工具或者库，要适用于模块系统中引入使用时，适合使用模块。
+- 当在程序内部用于防止全局污染，把相关的内容都放在一起的时候，使用命名空间
+- 当封装了一个工具或者库，要适用于模块系统中引入使用时，适合使用模块。
 
 ### 定义和使用
 
@@ -258,7 +257,7 @@ const c = new ClassC();
 
 注意：使用 outFile 只支持amd和system两种模块标准，所以需要在tsconfig.json里，设置 module 编译选项。
 
-``` typescript
+```typescript
 // Validation.ts
 namespace Validation {
   const isLetterReg = /^[A-Za-z]+$/; // 定义正则
@@ -319,7 +318,7 @@ console.log(reg); // /^[0-9]+$/
 
 使用 `reference` 引入的命名空间都会被编译在一个文件，而且是按照引入的顺序编译的。
 
-``` typescript
+```typescript
 // Validation.ts
 namespace Validation {
   const isLetterReg = /^[A-Za-z]+$/;
@@ -361,7 +360,7 @@ console.log(isLetter); // true
 
 使用 `import` 关键字来定义命名空间中某个输出元素的别名，可以减少我们深层次获取属性的成本。
 
-``` typescript
+```typescript
 namespace Shapes {
   export namespace Polygons {
     export class Triangle {}
@@ -379,9 +378,9 @@ let sq = new polygons.Square();
 
 TypeScript的所有声明概括起来，会创建这三种实体之一：
 
-+ 命名空间: 创建一个对象，对象的属性是在命名空间里 export 导出的内容
-+ 类型: 创建一个类型并赋给一个名字
-+ 值: 创建一个在 JavaScript 中可以使用的值
+- 命名空间: 创建一个对象，对象的属性是在命名空间里 export 导出的内容
+- 类型: 创建一个类型并赋给一个名字
+- 值: 创建一个在 JavaScript 中可以使用的值
 
 | 声明类型            | 创建了命名空间 | 创建了类型 | 创建了值 |
 | :------------------ | :------------: | :--------: | :------: |
@@ -399,7 +398,7 @@ TypeScript的所有声明概括起来，会创建这三种实体之一：
 
 多个同名接口，定义的非函数的成员命名应该是不重复的，如果重复了，类型应该是相同的，否则将会报错。
 
-``` typescript
+```typescript
 interface Info { name: string }
 interface Info { age: number }
 // error 后续属性声明必须属于同一类型。
@@ -409,7 +408,7 @@ interface Info { age: boolean }
 
 对于函数成员，每个同名函数成员都会被当成这个函数的重载，且合并时后面的接口具有更高的优先级。
 
-``` typescript
+```typescript
 interface Res {
   getRes(input: string): number
 }
@@ -430,7 +429,7 @@ res.getRes('123').length
 
 同名命名空间最后会将多个命名空间导出的内容进行合并
 
-``` typescript
+```typescript
 namespace Validation {
   export const checkNumber = () => {}
 }
@@ -447,7 +446,7 @@ namespace Validation {
 
 在命名空间里，有时并不是把所有内容都对外部可见，对于没有导出的内容，在其它同名命名空间内是无法访问的
 
-``` typescript
+```typescript
 namespace Validation {
   const numberReg = /^[0-9]+$/
   export const stringReg = /^[A-Za-z]+$/
@@ -464,11 +463,11 @@ namespace Validation {
 
 ### 不同类型合并
 
-+ 命名空间和类
+- 命名空间和类
 
   要求同名的类和命名空间在定义的时候，类的定义必须在命名空间前面，最后合并之后的效果，一个包含一些以命名空间导出内容为静态属性的类
 
-  ``` typescript
+  ```typescript
   class Validation { checkType() {} }
   namespace Validation {
     export const numberReg = /^[0-9]+$/
@@ -491,11 +490,11 @@ namespace Validation {
   } */
   ```
 
-+ 命名空间和函数
+- 命名空间和函数
 
   在JavaScript中，函数也是对象，所以可以给一个函数设置属性，在TypeScript中，可以通过声明合并实现。要求函数的定义要在同名命名空间前面
 
-  ``` typescript
+  ```typescript
   function countUp () {
     countUp.count++
   }
@@ -507,11 +506,11 @@ namespace Validation {
   console.log(countUp.count) // 2
   ```
 
-+ 命名空间和枚举
+- 命名空间和枚举
 
   通过命名空间和枚举的合并，为枚举拓展内容，枚举和同名命名空间的先后顺序没有要求
 
-  ``` typescript
+  ```typescript
   enum Colors { red, green, blue }
   namespace Colors {
     export const yellow = 3
@@ -534,7 +533,7 @@ namespace Validation {
 
 混入即把两个对象或者类的内容，混合起来，从而实现一些功能的复用。
 
-``` typescript
+```typescript
 class ClassAa {
   isA: boolean;
   funcA() {}
@@ -586,7 +585,7 @@ console.log(ab);
 
 ## Promise
 
-``` typescript
+```typescript
 // 定义接口，用来定义接口返回结果的结构
 interface Res {
   data: {

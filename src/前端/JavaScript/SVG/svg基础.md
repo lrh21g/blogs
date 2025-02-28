@@ -49,12 +49,7 @@ tag:
 ::: normal-demo
 
 ```html
-<svg
-  width="100%"
-  height="80px"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
->
+<svg width="100%" height="80px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <style>
     .classA {
       fill: red;
@@ -62,7 +57,7 @@ tag:
   </style>
   <defs>
     <g id="Port">
-      <circle style="fill:inherit" r="10" />
+      <circle style="fill: inherit" r="10" />
     </g>
   </defs>
 
@@ -71,7 +66,7 @@ tag:
   <text y="35">red</text>
   <use x="50" y="30" xlink:href="#Port" class="classA" />
   <text y="55">blue</text>
-  <use x="50" y="50" xlink:href="#Port" style="fill:blue" />
+  <use x="50" y="50" xlink:href="#Port" style="fill: blue" />
 </svg>
 ```
 
@@ -84,12 +79,7 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 ::: normal-demo
 
 ```html
-<svg
-  width="80px"
-  height="30px"
-  viewBox="0 0 80 30"
-  xmlns="http://www.w3.org/2000/svg"
->
+<svg width="80px" height="30px" viewBox="0 0 80 30" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="Gradient01">
       <stop offset="20%" stop-color="#39F" />
@@ -114,14 +104,7 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
   <!-- symbol definition  NEVER draw -->
   <symbol id="sym01" viewBox="0 0 150 110">
     <circle cx="50" cy="50" r="40" stroke-width="8" stroke="red" fill="red" />
-    <circle
-      cx="90"
-      cy="60"
-      r="40"
-      stroke-width="8"
-      stroke="green"
-      fill="white"
-    />
+    <circle cx="90" cy="60" r="40" stroke-width="8" stroke="green" fill="white" />
   </symbol>
 
   <!-- actual drawing by "use" element -->
@@ -140,12 +123,7 @@ SVG 允许定义需要**重复使用**的图形元素。建议把所有需要再
 ::: normal-demo
 
 ```html
-<svg
-  width="140"
-  height="30"
-  xmlns="http://www.w3.org/2000/svg"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
->
+<svg width="140" height="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <a xlink:href="https://lrh21g.github.io/blogs/" target="_blank">
     <rect height="30" width="120" y="0" x="0" rx="15" />
     <text fill="white" text-anchor="middle" y="21" x="60">MR.LRH BLOGS</text>
@@ -183,33 +161,18 @@ svg|a {}
 ::: normal-demo
 
 ```html
-<svg
-  x="0px"
-  y="0px"
-  width="500px"
-  height="100px"
-  viewBox="0 0 500 100"
-  xmlns="http://www.w3.org/2000/svg"
->
+<svg x="0px" y="0px" width="500px" height="100px" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
   <line x1="10" y1="10" x2="20" y2="90" fill="none" stroke="black" />
   <rect x="30" y="10" width="80" height="80" fill="none" stroke="black" />
   <circle cx="160" cy="50" r="40 " fill="none" stroke="black" />
   <ellipse cx="270" cy="50" rx="60" ry="40" fill="none" stroke="black" />
-  <polygon
-    points="340,50 360,10 380,10 400,50 380,90 360,90 340,50"
-    fill="none"
-    stroke="black"
-  />
+  <polygon points="340,50 360,10 380,10 400,50 380,90 360,90 340,50" fill="none" stroke="black" />
   <!-- <polygon
     points="340 50, 360 10, 380 10, 400 50, 380 90, 360 90, 340 50"
     fill="none"
     stroke="black"
   /> -->
-  <polyline
-    points="420,50 440,10 460,10 480,50 460,90 440,90 420,50"
-    fill="none"
-    stroke="black"
-  />
+  <polyline points="420,50 440,10 460,10 480,50 460,90 440,90 420,50" fill="none" stroke="black" />
   <!-- <polyline
     points="420 50, 440 10, 460 10, 480 50, 460 90, 440 90, 420 50"
     fill="none"
@@ -243,23 +206,13 @@ svg|a {}
 ::: normal-demo
 
 ```html
-<svg
-  x="0px"
-  y="0px"
-  width="400px"
-  height="300px"
-  viewBox="0 0 400 300"
-  xmlns="http://www.w3.org/2000/svg"
->
+<svg x="0px" y="0px" width="400px" height="300px" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
   <!-- 灰色阴影 -->
   <ellipse cx="154" cy="154" rx="150" ry="120" style="fill: #999"></ellipse>
   <!-- 浅蓝色椭圆 -->
   <ellipse cx="152" cy="152" rx="150" ry="120" style="fill: #cceeff"></ellipse>
   <!-- 浅红色大半圆填充符合的上半部分，其下方“侵入”符号左下方的浅红色小半圆 -->
-  <path
-    d="M 302 152 A 150 120, 0, 1, 0, 2, 152 A 75 60, 0, 1, 0, 152, 152"
-    style="fill: #ffcccc"
-  ></path>
+  <path d="M 302 152 A 150 120, 0, 1, 0, 2, 152 A 75 60, 0, 1, 0, 152, 152" style="fill: #ffcccc"></path>
   <!-- 浅蓝色小半圆，填充符号右上方 -->
   <path d="M 152 152 A 75 60, 0, 1, 1, 302, 152" style="fill: #cceeff"></path>
 </svg>
@@ -293,14 +246,7 @@ svg|a {}
 ::: normal-demo
 
 ```html
-<svg
-  x="0px"
-  y="0px"
-  width="400px"
-  height="300px"
-  viewBox="0 0 400 300"
-  xmlns="http://www.w3.org/2000/svg"
->
+<svg x="0px" y="0px" width="400px" height="300px" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
   <g>
     <path
       id="svg_5"

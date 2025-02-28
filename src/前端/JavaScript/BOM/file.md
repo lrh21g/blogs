@@ -44,7 +44,7 @@ const blob = new Blob(['Hello World'], { type: 'text/plain' })
 ### Blob 实例属性和方法
 
 - `Blob` 实例属性
-  
+
   - `size` ： 返回 `Blob` 或 `File` 的字节数。
   - `type` ： 返回文件的 `MIME` 类型（媒体类型，用来表示文档、文件或一组数据的性质和格式）。如果无法确定类型则返回空字符串。
 
@@ -138,43 +138,43 @@ function getBlob(url, callback) {
 - `FileReader` 实例属性
 
   - `FileReader.error` ： 只读。读取文件时发生的错误对象。
-  
+
   - `FileReader.readyState` ： 只读。表示读取文件时的当前状态。状态值如下：
+
     - `EMPTY` （值为 `0`） ： 表示尚未加载任何数据。
     - `LOADING` （值为 `1`） ： 表示数据正在被加载。
     - `DONE` （值为 `2`） ： 表示数据加载完成。
-  
+
   - `FileReader.result` ： 只读。读取完成后的文件内容，有可能是字符串，也可能是一个 ArrayBuffer 实例。
 
 - `FileReader` 事件处理
-  
+
   - `FileReader.onabort` ： `abort` 事件（用户终止读取操作）的监听函数。
-  
+
   - `FileReader.onerror` ： `error` 事件（读取错误）的监听函数。
-  
+
   - `FileReader.onload` ： `load` 事件（读取操作完成）的监听函数，通常函数中使用 `result` 属性，获取文件内容。
-  
   - `FileReader.onloadstart` ： `loadstart` 事件（读取操作开始）的监听函数。
-  
+
   - `FileReader.onloadend` ： `loadend` 事件（读取操作结束）的监听函数。
-  
+
   - `FileReader.onprogress` ： `progress` 事件（读取操作进行中）的监听函数。
 
 - `FileReader` 方法
 
   - `FileReader.abort()` ： 中止读取操作。 `readyState` 属性为 `DONE` （值为 `2`）。
-  
+
   - `FileReader.readAsArrayBuffer(blob)` ：读取完成文件内容后，`result` 属性返回一个 `ArrayBuffer` 对象以表示所读取文件的数据。
-  
+
   - `FileReader.readAsDataURL(blob)` ： 读取完成文件内容后，`result` 属性返回一个 `data:URL` 格式的字符串（Base64 编码）以表示所读取文件的内容。
 
     注：返回 Base64 字符串不能直接进行 Base64 解码，必须把前缀 `data:*/*;base64,` 从字符串里删除后，再进行解码。
-  
+
   - `FileReader.readAsText(blob[, encoding])` ： 读取完成文件内容后，`result` 属性返回根据特殊的编码格式 `encoding` （默认为 utf-8 类型） 转化为内容 (字符串形式)。
 
     - `readAsText()` 方法是异步的，只有当执行完成后才能够查看到结果，如果直接查看是无结果的，并返回 `undefined` 。
     - 必须要挂载实例下的 `onload` 或 `onloadend` 的方法处理转化后的结果。
-  
+
   - `FileReader.readAsBinaryString(blob)` ： 非标准。读取完成文件内容后，`result` 属性返回读取文件原始二进制格式。
 
   注： 当读取操作完成时，`readyState` 属性为 `DONE` （值为 `2`），并触发 `loadend` 事件。
@@ -200,7 +200,7 @@ JavaScript 字符串是 16 位编码的字符串，如果一个字符超过了 8
 - 第一种：先对整个字符串转义，然后进行编码；
 - 第二种：将 UTF-16 字符串转换为 UTF-8 字符数组，然后进行编码。
 
-``` javascript
+```javascript
 function utf8_to_b64(str) {
   return window.btoa(unescape(encodeURIComponent(str)))
 }

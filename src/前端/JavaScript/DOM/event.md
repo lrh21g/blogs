@@ -149,12 +149,13 @@ element.removeEventListener('click', doSomething, false)
 
   | 常量                    | 值  | 描述                   |
   | :---------------------- | :-: | :--------------------- |
-  | `Event.NONE`            |  `0`  | 表示事件还未触发。     |
-  | `Event.CAPTURING_PHASE` |  `1`  | 表示事件处于捕获阶段。 |
-  | `Event.AT_TARGET`       |  `2`  | 表示事件处于目标阶段。 |
-  | `Event.BUBBLING_PHASE`  |  `3`  | 表示事件处于冒泡阶段。 |
+  | `Event.NONE`            | `0` | 表示事件还未触发。     |
+  | `Event.CAPTURING_PHASE` | `1` | 表示事件处于捕获阶段。 |
+  | `Event.AT_TARGET`       | `2` | 表示事件处于目标阶段。 |
+  | `Event.BUBBLING_PHASE`  | `3` | 表示事件处于冒泡阶段。 |
 
 - `event.cancelable` ： 只读属性。返回一个布尔值，表示当前事件是否可以取消。
+
   - `Event` 构造函数生成的事件，默认不可以取消。
   - `event.cancelable` 为 `true` 时，可以调用 `Event.preventDefault()` 方法取消该事件，阻止浏览器对该事件的默认行为。
 
@@ -202,10 +203,12 @@ element.removeEventListener('click', doSomething, false)
 ### 用户界面事件
 
 - `DOMContentLoaded` 事件 ： 当 HTML 文档完全解析，且所有延迟脚本下载和执行完毕后触发。
+
   - 该事件不会等待图片、子框架和异步脚本等其他内容完成加载。
   - 该事件比 `load` 事件更早触发。
 
 - `load` 事件 ： 在页面或者某个资源（比如图片）加载完成后触发。
+
   - 如果页面或者资源从浏览器缓存加载，并不会触发 `load` 事件。
   - 该事件可以使用 `pageshow` 事件代替。
 
@@ -233,11 +236,13 @@ element.removeEventListener('click', doSomething, false)
   ```
 
 - `pageshow` 事件 ： 在页面加载时触发，包括第一次加载和从浏览器缓存加载。只在浏览器的 `history` 对象发生变化时触发。
+
   - 第一次加载时，`pageshow` 事件触发顺序在 `load` 事件后面。`pageshow` 事件属性 `persisted` 为 `false` 时，表示页面第一次加载。
   - 从浏览器缓存加载时，`load` 事件不会触发。 `pageshow` 事件属性 `persisted` 为 `true` 时，表示页面从浏览器缓存加载。
   - 如果页面包含 `<iframe>` 元素，则 `<iframe>` 页面的 `pageshow` 事件和 `pagehide` 事件，都会在主页面之前触发。
 
 - `beforeunload` 事件 ： 在页面或者某个资源将要关闭或者刷新时触发。
+
   - 如果该事件对象 `returnValue` 属性为非空字符串，浏览器会弹出一个对话框，询问用户是否需要卸载该资源。但是，指定字符串可能无法显示，浏览器会展示预定义字符串。用户点击取消按钮，浏览器不会卸载资源。
   - 在大多数手机浏览器中会默认忽略该事件，所以可能无法生效，不能依赖该事件阻止用户关闭浏览器窗口。
 
@@ -251,6 +256,7 @@ element.removeEventListener('click', doSomething, false)
   ```
 
 - `unload` 事件 ： 在页面或者某个资源卸载完成后触发。事件触发时，所有资源依然存在，但对用户不可见，UI 互动失效。
+
   - 该事件触发顺序在 `beforeunload`、`pagehide` 事件后面。
   - 该事件可以使用 `pagehide` 事件代替。
 
@@ -271,6 +277,7 @@ element.removeEventListener('click', doSomething, false)
   ```
 
 - `pagehide` 事件 ： 当用户通过 “前进/后退” 按钮，离开当前页面时触发。只在浏览器的 `history` 对象发生变化时触发。
+
   - 如果在 `window` 对象上定义了 `unload` 事件监听函数，页面不会保存在缓存中。使用了 `pagehide` 事件，页面会保存在缓存中。
   - `pagehide` 事件属性 `persisted` 为 `false` 时，表示页面保存在缓存中。
   - 如果页面包含 `<iframe>` 元素，则 `<iframe>` 页面的 `pageshow` 事件和 `pagehide` 事件，都会在主页面之前触发。
@@ -293,6 +300,7 @@ element.removeEventListener('click', doSomething, false)
 ### 表单事件
 
 - `input` 事件 ： 当 `<input>`, `<select>`, 或 `<textarea>` 元素的 `value` 被修改时触发。
+
   - 对于启用了 `contenteditable` 属性的元素，以及开启了 `designMode` 的任意元素，当元素内容被修改时，也会触发 `input` 事件。
   - `input` 事件在元素值发生变化后会立即触发，而 `change` 事件在元素失去焦点时触发。
   - `input` 事件对象继承了 `InputEvent` 接口（该接口继承了 `Event` 接口，并定义了自己的属性和实例方法）。
@@ -300,6 +308,7 @@ element.removeEventListener('click', doSomething, false)
 - `select` ： 在文本框（`<input type="text">` 或 `<textarea>`）上，选择了一个或多个字符时触发。选中的文本可以通过 `event.target` 的 `selectionDirection`、`selectionEnd`、`selectionStart` 和 `value` 属性获取。
 
 - `change` 事件 ： 当 `<input>`, `<select>`, 或 `<textarea>` 元素的值发生变化时触发。
+
   - `change` 事件不会连续触发，只有当全部修改完成时才触发，`input` 事件必伴随着 `change` 事件
   - `change` 事件触发的场景：
     - 当 `<input type="checkbox">` 元素被选中或取消选中时触发。
@@ -316,10 +325,12 @@ element.removeEventListener('click', doSomething, false)
 ### 鼠标和滚轮事件
 
 - `click` 事件 ： 在用户单击鼠标主键（通常是左键）时触发。
+
   - 该事件可看成由两个事件组成：先触发 `mousedown`，再触发 `mouseup` 。
   - 该事件触发顺序为：`mousedown --> mouseup --> click` 。
 
 - `dblclick` 事件 ： 在用户双击鼠标主键（通常是左键）时触发。
+
   - 该事件触发顺序为 `mousedown --> mouseup --> click --> mousedown --> mouseup --> click --> dblclick` 。
 
 - `mousemove` 事件 ： 当鼠标光标在元素内部移动时触发。鼠标持续移动时，该事件反复触发。
@@ -401,23 +412,28 @@ element.removeEventListener('click', doSomething, false)
 - `drag` 事件 ： 拖拉过程中，在被拖拉的节点上持续触发（相隔几百毫秒）。
 
 - `dragstart` 事件 ： 在用户开始拖拉时，在被拖拉的节点上触发。
+
   - 该事件的 `event.target` 属性是被拖拉的节点。
   - 通常在该事件的监听函数中，指定拖拉的数据。
 
 - `dragend` 事件 ： 在拖拉结束时（释放鼠标键或按下 `ESC` 键）在被拖拉的节点上触发。
+
   - 该事件的 `event.target` 属性是被拖拉的节点。
   - 它与 `dragstart` 事件，在同一个节点上触发。不管拖拉是否跨窗口，或者中途被取消，`dragend` 事件总是会触发的。
 
 - `dragenter` 事件 ： 在拖拉进入当前节点时，在当前节点上触发一次。
+
   - 该事件的 `event.target` 属性是当前节点。
   - 通常在这个事件的监听函数中，指定是否允许在当前节点放下（drop）拖拉的数据。
   - 如果当前节点没有该事件的监听函数，或者监听函数不执行任何操作，就意味着不允许在当前节点放下数据。
   - 在视觉上显示拖拉进入当前节点，需要在这个事件的监听函数中设置。
 
 - `dragover` 事件 ： 在拖拉到当前节点上方时，在当前节点上持续触发（相隔几百毫秒）。
+
   - 该事件的 `event.target` 属性是当前节点。
 
 - `dragleave` 事件 ： 在拖拉操作离开当前节点范围时，在当前节点上触发。
+
   - 该事件的 `event.target` 属性是当前节点。
   - 如果要在视觉上显示拖拉离开操作当前节点，需要在这个事件的监听函数中设置。
 
@@ -533,10 +549,10 @@ document.addEventListener(
 
   ```javascript
   /*
-    <ul id="myLinks"> 
-      <li id="goSomewhere">Go somewhere</li>  
-      <li id="doSomething">Do something</li>  
-      <li id="sayHi">Say hi</li>  
+    <ul id="myLinks">
+      <li id="goSomewhere">Go somewhere</li>
+      <li id="doSomething">Do something</li>
+      <li id="sayHi">Say hi</li>
     </ul>
   */
 
@@ -561,8 +577,8 @@ document.addEventListener(
 
   ```javascript
   /*
-    <div id="myDiv"> 
-      <input type="button" value="Click Me" id="myBtn">  
+    <div id="myDiv">
+      <input type="button" value="Click Me" id="myBtn">
     </div>
   */
 

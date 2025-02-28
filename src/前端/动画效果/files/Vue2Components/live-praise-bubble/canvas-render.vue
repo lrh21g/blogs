@@ -1,3 +1,19 @@
+<script>
+import ThumbsUpAni from './canvas-praise-bubble.js'
+
+export default {
+  name: 'LivePraiseBubbleCanvasRender',
+  methods: {
+    clickLikeThumb() {
+      const thumbsUpAni = new ThumbsUpAni()
+      setInterval(() => {
+        thumbsUpAni.start()
+      }, 300)
+    },
+  },
+}
+</script>
+
 <template>
   <div class="like-container">
     <canvas
@@ -5,26 +21,10 @@
       width="200"
       height="400"
       style="width:100px;height:200px"
-    ></canvas>
-    <div class="like-thumb" @click="clickLikeThumb"></div>
+    />
+    <div class="like-thumb" @click="clickLikeThumb" />
   </div>
 </template>
-
-<script>
-import ThumbsUpAni from './canvas-praise-bubble.js';
-
-export default {
-  name: 'LivePraiseBubbleCanvasRender',
-  methods: {
-    clickLikeThumb() {
-      const thumbsUpAni = new ThumbsUpAni();
-      setInterval(() => {
-        thumbsUpAni.start();
-      }, 300);
-    },
-  },
-};
-</script>
 
 <style lang="scss">
 .like-container {

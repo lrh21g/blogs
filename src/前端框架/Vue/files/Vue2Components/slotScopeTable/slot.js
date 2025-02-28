@@ -14,7 +14,7 @@ export default {
         row: ctx.props.row,
         column: ctx.props.column,
         index: ctx.props.index,
-      })
-    );
+      }),
+    )
   },
-};
+}

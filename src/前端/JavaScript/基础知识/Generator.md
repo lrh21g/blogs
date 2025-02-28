@@ -10,7 +10,7 @@
   - `function` 关键字后跟一个星号： `function* name([param[, param[, ... param]]]) { statements }` 。
   - 函数体内部使用 `yield` 表达式，定义不同的内部状态。
 
-可以使用构造函数 `GeneratorFunction` 或  `function*` 定义一个生成器函数（generator function），返回一个 `Generator` 对象。
+可以使用构造函数 `GeneratorFunction` 或 `function*` 定义一个生成器函数（generator function），返回一个 `Generator` 对象。
 
 - 构造函数 `GeneratorFunction`
 
@@ -402,7 +402,7 @@ function* outer1() {
 
 var gen = outer1()
 gen.next().value // '[outer1] open'
-gen.next().value // 返回生成器对象 : { [Generator] } 
+gen.next().value // 返回生成器对象 : { [Generator] }
 gen.next().value // '[outer1] close'
 
 function* outer2() {
@@ -728,7 +728,7 @@ for (let task of doStuff()) {
 
 ## 异步 AsyncGenerator
 
-可以使用构造函数 `AsyncGeneratorFunction` 或  `async function*` 定义一个异步生成器函数（async generator function），返回一个 `AsyncGenerator` 对象。
+可以使用构造函数 `AsyncGeneratorFunction` 或 `async function*` 定义一个异步生成器函数（async generator function），返回一个 `AsyncGenerator` 对象。
 
 - 构造函数 `AsyncGeneratorFunction`
 
@@ -798,7 +798,7 @@ for (let task of doStuff()) {
   - `value`属性：表示当前的内部状态的值，是 `yield` 表达式后面那个表达式的值。
   - `done`属性：布尔值，表示是否遍历结束。
 - `next` 方法是可以连续调用的，不必等到上一步产生的 `Promise` 对象 `resolve` 以后再调用。`next` 方法会累积起来，自动按照每一步的顺序运行下去。
-  
+
   ```javascript
   async function* asyncGenerator() {
     yield await Promise.resolve('a')

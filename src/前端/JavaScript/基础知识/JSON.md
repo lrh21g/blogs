@@ -100,7 +100,7 @@ var foo = {
   month: 7,
 }
 
-JSON.stringify(foo, replacer) 
+JSON.stringify(foo, replacer)
 // {"week":45,"month":7}
 
 JSON.stringify(foo, ['week', 'month'])
@@ -129,6 +129,7 @@ JSON.stringify({ x: obj }) // '{"x":"bar"}'
 
 - `text` ： 要被解析成 JavaScript 值的字符串，它是一个 JSON 格式的字符串。
 - `reviver` ： 可选值。
+
   - 如果指定了 `reviver` 函数，则解析出的 JavaScript 值（解析值）会经过一次转换后才将被最终返回（返回值）。
 
     解析值本身以及它所包含的所有属性，会按照一定的顺序（从最最里层的属性开始，一级级往外，最终到达顶层，也就是解析值本身）分别的去调用 `reviver` 函数。
@@ -147,14 +148,14 @@ JSON.parse('null') // null
 JSON.parse('{"p": 5}', function (k, v) {
   if (k === '') return v // 如果到了最顶层，则直接返回属性值，
   return v * 2 // 否则将属性值变为原来的 2 倍。
-}) 
+})
 // { p: 10 }
 
 JSON.parse('{"1": 1, "2": 2,"3": {"4": 4, "5": {"6": 6}}}', function (key, value) {
   // 输出当前的属性名，从而得知遍历顺序是从内向外的，
   // 最后一个属性名会是个空字符串。
-  console.log(key) 
-  
+  console.log(key)
+
   return value // 返回原始属性值，相当于没有传递 reviver 参数。
 })
 // 输出结果如下：

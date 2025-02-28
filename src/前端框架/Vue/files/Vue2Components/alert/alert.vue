@@ -1,51 +1,54 @@
-
-<template>
-  <div class="alert">
-    <div class="alert-main" v-for="item in notices" :key="item.name">
-      <div class="alert-content">{{ item.content }}</div>
-    </div>
-  </div>
-</template>
 <script>
-let seed = 0;
+let seed = 0
 
 function getUuid() {
-  return "alert_" + seed++;
+  return `alert_${seed++}`
 }
 export default {
   data() {
     return {
-      notices: []
-    };
+      notices: [],
+    }
   },
   methods: {
     add(notice) {
-      const name = getUuid();
-      let _notice = Object.assign(
+      const name = getUuid()
+      const _notice = Object.assign(
         {
-          name: name
+          name,
         },
-        notice
-      );
-      this.notices.push(_notice);
+        notice,
+      )
+      this.notices.push(_notice)
       // 定时移除，单位：秒
-      const duration = notice.duration;
+      const duration = notice.duration
       setTimeout(() => {
-        this.remove(name);
-      }, duration * 1000);
+        this.remove(name)
+      }, duration * 1000)
     },
     remove(name) {
-      const notices = this.notices;
+      const notices = this.notices
       for (let i = 0; i < notices.length; i++) {
         if (notices[i].name === name) {
-          this.notices.splice(i, 1);
-          break;
+          this.notices.splice(i, 1)
+          break
         }
       }
-    }
-  }
-};
+    },
+  },
+}
 </script>
+
+<template>
+  <div class="alert">
+    <div v-for="item in notices" :key="item.name" class="alert-main">
+      <div class="alert-content">
+        {{ item.content }}
+      </div>
+    </div>
+  </div>
+</template>
+
 <style>
 .alert {
   position: fixed;

@@ -424,7 +424,7 @@ let vm = new Vue({
   - 会执行`processElement(element, options)` 方法，调用 `processSlotContent(element)` 和 `processSlotOutlet(element)` 方法处理 `slot-scope`。会读取 `slot-scope` 属性并赋值给当前 AST 元素节点的 `slotScope` 属性。
   - 在构造 AST 数的时候，对 `scopedSlot` 属性的 AST 元素节点而言，是不会作为 `children` 添加到当前 AST 树中，而是存到父 AST 元素节点的 `scopedSlots` 属性上，它是一个对象，以插槽名称 `name` 为 `key`。
 
-- 父组件，在 `generate` 生成可执行代码阶段，在调用 `genData(el, state)` 方法根据 AST 元素节点的属性构造出一个 `data` 对象字符串时，会执行 `` if (el.scopedSlots) { data += `${genScopedSlots(el.scopedSlots, state)},` } `` 对 `scopedSlots` 做处理。
+- 父组件，在 `generate` 生成可执行代码阶段，在调用 `genData(el, state)` 方法根据 AST 元素节点的属性构造出一个 `data` 对象字符串时，会执行 ``if (el.scopedSlots) { data += `${genScopedSlots(el.scopedSlots, state)},` }`` 对 `scopedSlots` 做处理。
 
   在 `genScopedSlots` 方法中,会对 `scopedSlots` 对象遍历，执行 `genScopedSlot` 方法，并把结果用逗号拼接。
 

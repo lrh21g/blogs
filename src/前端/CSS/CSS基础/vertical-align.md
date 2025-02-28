@@ -6,7 +6,7 @@ tag:
 
 # vertical-align
 
-`vertical-align` 起作用的前提条件是：只能应用于 **内联元素** 以及设置 **`display: inline / inline-block / inine-table / table-cell` 的元素上**。
+`vertical-align` 起作用的前提条件是：只能应用于 **内联元素** 以及设置 **`display: inline / inline-block / inline-table / table-cell` 的元素上**。
 
 ## vertical-align 属性值
 
@@ -23,7 +23,7 @@ tag:
   - super : 垂直对齐文本的上标
 - 数值百分比类 : 比如 20px、 2em、 20% 等。根据计算值的不同，相对于基线往上或往下偏移（取决于 `vertical-align` 计算值的正负）。
 
-### vertial-align: baseline
+### vertical-align: baseline
 
 - 对于非替换元素的纯内联元素，该元素的基线（baseline）为字符 x 的下边缘
 - 对于替换元素的内联元素，该元素的基线（baseline）为替换元素的下边缘
@@ -151,21 +151,21 @@ export default {}
 
 :::
 
-### vertial-align: top / bottom
+### vertical-align: top / bottom
 
-`vertial-align: top` ：垂直上边缘对齐
+`vertical-align: top` ：垂直上边缘对齐
 
 - 内联元素：元素底部和当前行框盒子的顶部对齐
 - `table-cell` 元素：元素底 `padding` 边缘和表格行的顶部对齐
 
-`vertial-align: bottom` ：垂直下边缘对齐
+`vertical-align: bottom` ：垂直下边缘对齐
 
 - 内联元素：元素底部和当前行框盒子的底部对齐
 - `table-cell` 元素：元素底 `padding` 边缘和表格行的底部对齐
 
 注意： 内联元素的上下边缘对齐的 “边缘” 是当前 “行框盒子” 的上下边缘，并不是块状容器的上下边缘。
 
-### vertial-align: middle
+### vertical-align: middle
 
 - 内联元素：元素的垂直中心点和行框盒子基线往上 1/2 x-height 处对齐。可以理解为，内联元素的垂直中心位置和字符 x 的交叉点对齐
 - `table-cell` 元素：单元格填充盒子相对于外面的表格行居中对齐
@@ -328,7 +328,7 @@ export default {}
 
 **【现象】**
 
-为实现图片如下示例排列，可使用 `text-align: jusitfy` （规定元素中的文本的水平对齐方式，`jusitfy` 属性为实现两端对齐文本效果），为了让任意个数的列表最后一行也是左对齐排列，在列表最后辅助和列表宽度一样的空标签元素来占位，类似 `<i>` 标签 （示例中已使用 `outline: 1px solid #db5860;` 标出）
+为实现图片如下示例排列，可使用 `text-align: justify` （规定元素中的文本的水平对齐方式，`justify` 属性为实现两端对齐文本效果），为了让任意个数的列表最后一行也是左对齐排列，在列表最后辅助和列表宽度一样的空标签元素来占位，类似 `<i>` 标签 （示例中已使用 `outline: 1px solid #db5860;` 标出）
 
 ::: vue-demo
 
@@ -393,31 +393,34 @@ export default {}
 
 ```html
 <div class="container">
-  <div class="dialog"></dialog>
+  <div class="dialog"></div>
 </div>
 
 <style>
-.container {
-  position: fixed;
-  top: 0; right: 0; bottom: 0; left: 0;
-  background-color: rgba(0,0,0,.5);
-  text-align: center;
-  font-size: 0;
-  white-space: nowrap;
-  overflow: auto;
-}
-.container:after {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
-.dialog {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: left;
-  font-size: 14px;
-  white-space: normal;
-}
+  .container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    font-size: 0;
+    white-space: nowrap;
+    overflow: auto;
+  }
+  .container:after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .dialog {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+    font-size: 14px;
+    white-space: normal;
+  }
 </style>
 ```

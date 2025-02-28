@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const ncname = '[a-zA-Z_][\\w\\-\\.]*'
 const singleAttrIdentifier = /([^\s"'<>/=]+)/
 const singleAttrAssign = /(?:=)/
@@ -7,21 +9,21 @@ const singleAttrValues = [
   /([^\s"'=<>`]+)/.source,
 ]
 const attribute = new RegExp(
-  '^\\s*' +
-    singleAttrIdentifier.source +
-    '(?:\\s*(' +
-    singleAttrAssign.source +
-    ')' +
-    '\\s*(?:' +
-    singleAttrValues.join('|') +
-    '))?'
+  `^\\s*${
+    singleAttrIdentifier.source
+  }(?:\\s*(${
+    singleAttrAssign.source
+  })`
+  + `\\s*(?:${
+    singleAttrValues.join('|')
+  }))?`,
 )
 
-const qnameCapture = '((?:' + ncname + '\\:)?' + ncname + ')'
-const startTagOpen = new RegExp('^<' + qnameCapture)
+const qnameCapture = `((?:${ncname}\\:)?${ncname})`
+const startTagOpen = new RegExp(`^<${qnameCapture}`)
 const startTagClose = /^\s*(\/?)>/
 
-const endTag = new RegExp('^<\\/' + qnameCapture + '[^>]*>')
+const endTag = new RegExp(`^<\\/${qnameCapture}[^>]*>`)
 
 const defaultTagRE = /\{\{((?:.|\n)+?)\}\}/g
 
@@ -57,8 +59,8 @@ function parseStartTag() {
 
     let end, attr
     while (
-      !(end = html.match(startTagClose)) &&
-      (attr = html.match(attribute))
+      !(end = html.match(startTagClose))
+      && (attr = html.match(attribute))
     ) {
       advance(attr[0].length)
       match.attrs.push({
@@ -86,7 +88,8 @@ function parseEndTag(tagName) {
   if (pos >= 0) {
     if (pos > 0) {
       currentParent = stack[pos - 1]
-    } else {
+    }
+    else {
       currentParent = null
     }
     stack.length = pos
@@ -94,7 +97,7 @@ function parseEndTag(tagName) {
 }
 
 function parseText(text) {
-  if (!defaultTagRE.test(text)) return
+  if (!defaultTagRE.test(text)) { return }
 
   const tokens = []
   let lastIndex = (defaultTagRE.lastIndex = 0)
@@ -148,7 +151,7 @@ function processIf(el) {
       el.ifConditions = []
     }
     el.ifConditions.push({
-      exp: exp,
+      exp,
       block: el,
     })
   }
@@ -156,7 +159,7 @@ function processIf(el) {
 
 function parseHTML() {
   while (html) {
-    let textEnd = html.indexOf('<')
+    const textEnd = html.indexOf('<')
     if (textEnd === 0) {
       const endTagMatch = html.match(endTag)
       if (endTagMatch) {
@@ -193,7 +196,8 @@ function parseHTML() {
         }
         continue
       }
-    } else {
+    }
+    else {
       text = html.substring(0, textEnd)
       advance(textEnd)
       let expression
@@ -203,7 +207,8 @@ function parseHTML() {
           text,
           expression,
         })
-      } else {
+      }
+      else {
         currentParent.children.push({
           type: 3,
           text,
@@ -245,13 +250,13 @@ function optimize(rootAst) {
   function markStaticRoots(node) {
     if (node.type === 1) {
       if (
-        node.static &&
-        node.children.length &&
-        !(node.children.length === 1 && node.children[0].type === 3)
+        node.static
+        && node.children.length
+        && !(node.children.length === 1 && node.children[0].type === 3)
       ) {
         node.staticRoot = true
-        return
-      } else {
+      }
+      else {
         node.staticRoot = false
       }
     }
@@ -268,7 +273,7 @@ function generate(rootAst) {
       return '_e()'
     }
     return `(${el.ifConditions[0].exp})?${genElement(
-      el.ifConditions[0].block
+      el.ifConditions[0].block,
     )}: _e()`
   }
 
@@ -281,10 +286,10 @@ function generate(rootAst) {
     const iterator2 = el.iterator2 ? `,${el.iterator2}` : ''
 
     return (
-      `_l((${exp}),` +
-      `function(${alias}${iterator1}${iterator2}){` +
-      `return ${genElement(el)}` +
-      '})'
+      `_l((${exp}),`
+      + `function(${alias}${iterator1}${iterator2}){`
+      + `return ${genElement(el)}`
+      + '})'
     )
   }
 
@@ -295,7 +300,8 @@ function generate(rootAst) {
   function genNode(el) {
     if (el.type === 1) {
       return genElement(el)
-    } else {
+    }
+    else {
       return genText(el)
     }
   }
@@ -311,14 +317,16 @@ function generate(rootAst) {
   function genElement(el) {
     if (el.if && !el.ifProcessed) {
       return genIf(el)
-    } else if (el.for && !el.forProcessed) {
+    }
+    else if (el.for && !el.forProcessed) {
       return genFor(el)
-    } else {
+    }
+    else {
       const children = genChildren(el)
       let code
       code = `_c('${el.tag},'{
                 staticClass: ${el.attrsMap && el.attrsMap[':class']},
-                class: ${el.attrsMap && el.attrsMap['class']},
+                class: ${el.attrsMap && el.attrsMap.class},
             }${children ? `,${children}` : ''})`
       return code
     }
@@ -330,8 +338,8 @@ function generate(rootAst) {
   }
 }
 
-var html =
-  '<div :class="c" class="demo" v-if="isShow"><span v-for="item in sz">{{item}}</span></div>'
+var html
+  = '<div :class="c" class="demo" v-if="isShow"><span v-for="item in sz">{{item}}</span></div>'
 
 const ast = parse()
 optimize(ast)

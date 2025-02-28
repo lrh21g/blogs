@@ -1,3 +1,3 @@
 # 代码规范
 
-+ [BEM](BEM.md)
+- [BEM](BEM.md)

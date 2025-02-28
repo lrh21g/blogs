@@ -1,6 +1,6 @@
 ---
 category: Canvas
-tag: 
+tag:
   - Canvas
 ---
 
@@ -8,13 +8,14 @@ tag:
 
 ## 状态的保存和恢复 Saving and restoring state
 
-+ `save()` : 通过将当前状态放入栈中，保存 canvas 全部状态的方法。保存到栈中的绘制状态有下面部分组成：
-  + 当前的变换矩阵。
-  + 当前的剪切区域。
-  + 当前的虚线列表.
-  + 以下属性当前的值： `strokeStyle`, `fillStyle`, `globalAlpha`, `lineWidth`, `lineCap`, `lineJoin`, `miterLimit`, `lineDashOffset`, `shadowOffsetX`, `shadowOffsetY`, `shadowBlur`, `shadowColor`, `globalCompositeOperation`, `font`, `textAlign`, `textBaseline`, `direction`, `imageSmoothingEnabled`
+- `save()` : 通过将当前状态放入栈中，保存 canvas 全部状态的方法。保存到栈中的绘制状态有下面部分组成：
 
-+ `restore()` : 恢复画布(canvas)状态。在绘图状态栈中弹出顶端的状态，将 canvas 恢复到最近的保存状态的方法。如果没有保存状态，此方法不做任何改变。
+  - 当前的变换矩阵。
+  - 当前的剪切区域。
+  - 当前的虚线列表.
+  - 以下属性当前的值： `strokeStyle`, `fillStyle`, `globalAlpha`, `lineWidth`, `lineCap`, `lineJoin`, `miterLimit`, `lineDashOffset`, `shadowOffsetX`, `shadowOffsetY`, `shadowBlur`, `shadowColor`, `globalCompositeOperation`, `font`, `textAlign`, `textBaseline`, `direction`, `imageSmoothingEnabled`
+
+- `restore()` : 恢复画布(canvas)状态。在绘图状态栈中弹出顶端的状态，将 canvas 恢复到最近的保存状态的方法。如果没有保存状态，此方法不做任何改变。
 
 ::: normal-demo
 
@@ -54,8 +55,8 @@ draw()
 
 `translate(x, y)` : 通过移动 canvas 和它的原点到一个不同的位置。实际开发常用于改变其他变换方法的变换中心点。
 
-+ `x` : 水平方向的移动距离。
-+ `y` : 垂直方向的移动距离。
+- `x` : 水平方向的移动距离。
+- `y` : 垂直方向的移动距离。
 
 ![canvas_translating](./files/images/canvas_translating.drawio.png)
 
@@ -88,7 +89,7 @@ draw()
 
 `rotate(angle)` : 以原点为中心旋转 canvas。默认旋转中心点为 canvas 的原点 (0, 0) 坐标点。如果需要改变，可以使用 `translate()` 方法进行调整。
 
-+ `angle` : 旋转的角度 angle ，顺时针方向旋转，以弧度为单位的值。计算公式 : `degree * Math.PI / 180` 。例如，旋转 45°，旋转弧度就是 `45 * Math.PI / 180` 。
+- `angle` : 旋转的角度 angle ，顺时针方向旋转，以弧度为单位的值。计算公式 : `degree * Math.PI / 180` 。例如，旋转 45°，旋转弧度就是 `45 * Math.PI / 180` 。
 
 ![canvas_rotating](./files/images/canvas_rotating.drawio.png)
 
@@ -126,8 +127,8 @@ draw()
 
 `scale(x, y)` : 根据 x 水平方向和 y 垂直方向，为 canvas 单位添加缩放变换的方法。默认缩放中心点为 canvas 的原点 (0, 0) 坐标点。如果需要改变，可以使用 `translate()` 方法进行调整。
 
-+ `x` : 水平方向的缩放因子。
-+ `y` : 垂直方向的缩放因子。
+- `x` : 水平方向的缩放因子。
+- `y` : 垂直方向的缩放因子。
 
 画布初始情况下， 是以左上角坐标为原点的第一象限。如果参数为负实数，相当于以 x 或 y 轴作为对称轴镜像反转。（例如，使用 `translate(0, canvas.height); scale(1, -1);` 以y轴作为对称轴镜像反转，就可得到著名的笛卡尔坐标系，左下角为原点）。
 
@@ -157,27 +158,29 @@ draw()
 
 ## 变形 Transforms
 
-+ `transform(a, b, c, d, e, f)` : 使用矩阵**多次叠加（累加）**当前变换的方法。可以缩放、旋转、移动和倾斜上下文。将当前的变形矩阵乘上一个基于自身参数的矩阵
-  + `a (m11)` : 水平缩放。
-  + `b (m12)` : 垂直倾斜。
-  + `c (m21)` : 水平倾斜。
-  + `d (m22)` : 垂直缩放。
-  + `e (dx)` : 水平移动。
-  + `f (dy)` : 垂直移动。
+- `transform(a, b, c, d, e, f)` : 使用矩阵**多次叠加（累加）**当前变换的方法。可以缩放、旋转、移动和倾斜上下文。将当前的变形矩阵乘上一个基于自身参数的矩阵
 
-  `a - f` 参数对应的变换矩阵描述为：  $\left[ \begin{array}{ccc} a & c & e \\ b & d & f \\ 0 & 0 & 1 \end{array} \right ]$
+  - `a (m11)` : 水平缩放。
+  - `b (m12)` : 垂直倾斜。
+  - `c (m21)` : 水平倾斜。
+  - `d (m22)` : 垂直缩放。
+  - `e (dx)` : 水平移动。
+  - `f (dy)` : 垂直移动。
 
-+ `setTransform(a, b, c, d, e, f)` : 使用单位矩阵**重新设置（覆盖）**当前的变换并调用变换的方法
-  + `a (m11)` : 水平缩放。
-  + `b (m12)` : 垂直倾斜。
-  + `c (m21)` : 水平倾斜。
-  + `d (m22)` : 垂直缩放。
-  + `e (dx)` : 水平移动。
-  + `f (dy)` : 垂直移动。
+  `a - f` 参数对应的变换矩阵描述为： $\left[ \begin{array}{ccc} a & c & e \\ b & d & f \\ 0 & 0 & 1 \end{array} \right ]$
 
-  `a - f` 参数对应的变换矩阵描述为：  $\left[ \begin{array}{ccc} a & c & e \\ b & d & f \\ 0 & 0 & 1 \end{array} \right ]$
+- `setTransform(a, b, c, d, e, f)` : 使用单位矩阵**重新设置（覆盖）**当前的变换并调用变换的方法
 
-+ `resetTransform()` : 重置当前变形为单位矩阵，它和调用以下语句是一样的：`ctx.setTransform(1, 0, 0, 1, 0, 0)`
+  - `a (m11)` : 水平缩放。
+  - `b (m12)` : 垂直倾斜。
+  - `c (m21)` : 水平倾斜。
+  - `d (m22)` : 垂直缩放。
+  - `e (dx)` : 水平移动。
+  - `f (dy)` : 垂直移动。
+
+  `a - f` 参数对应的变换矩阵描述为： $\left[ \begin{array}{ccc} a & c & e \\ b & d & f \\ 0 & 0 & 1 \end{array} \right ]$
+
+- `resetTransform()` : 重置当前变形为单位矩阵，它和调用以下语句是一样的：`ctx.setTransform(1, 0, 0, 1, 0, 0)`
 
 ::: normal-demo
 

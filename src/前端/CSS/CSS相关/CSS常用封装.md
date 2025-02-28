@@ -2,7 +2,7 @@
 
 ## 文本超出 n行 显示省略号
 
-``` less
+```less
 // 超过固定宽度显示 ...
 .ellipsis () {
   overflow: hidden;
@@ -26,7 +26,7 @@
 
 ## 1px边框
 
-``` less
+```less
 .hairline-common () {
   position: absolute;
   box-sizing: border-box;
@@ -118,7 +118,7 @@
 
 ## 去除input默认填充的背景颜色
 
-``` css
+```css
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
@@ -126,7 +126,7 @@ input:-webkit-autofill {
 
 ## 清除input[type=number]的默认样式
 
-``` css
+```css
 input[type=number] {
   -moz-appearance: textfield;
 }
@@ -140,7 +140,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 ## 清除移动端 a 标签等点击区域变色
 
-``` css
+```css
 *{
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
@@ -148,7 +148,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 ## 避免ios滑动滚动条卡顿
 
-``` css
+```css
 *{
   -webkit-overflow-scrolling : touch
 }
@@ -156,7 +156,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 ## 清楚移动端 `input` 样式
 
-``` css
+```css
 input{
   border: none;
   -moz-appearance:none;
@@ -169,7 +169,7 @@ input{
 
 ## 重置样式(reset.css)
 
-``` css
+```css
 @charset "utf-8";
 html{background-color:#fff;color:#000;font-size:12px}
 body,ul,ol,dl,dd,h1,h2,h3,h4,h5,h6,figure,form,fieldset,legend,input,textarea,button,p,blockquote,th,td,pre,xmp{margin:0;padding:0}
@@ -200,4 +200,4 @@ a {color: #25a4bb;text-decoration: none;}
 
 参考:
 
-+ [CSS-Tricks - 清楚默认样式](http://css-tricks.neatbang.com/reset/#reset)
+- [CSS-Tricks - 清楚默认样式](http://css-tricks.neatbang.com/reset/#reset)

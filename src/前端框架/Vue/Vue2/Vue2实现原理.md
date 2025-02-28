@@ -10,27 +10,27 @@ Vue 2.x 基于 [`Object.defineProperty`](https://developer.mozilla.org/zh-CN/doc
 
 `Object.defineProperty(obj, prop, descriptor)` 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
 
-+ **参数**
-  + `obj` : 要定义属性的对象。
-  + `prop` : 需要操作的目标对象的属性名。
-  + `descriptor` : 要定义或修改的属性描述符。
-    + `enumerable` : 属性是否可枚举，默认 false 。
-    + `configurable` : 属性是否可以被修改或者删除，默认 false 。
-    + `writable` : 当且仅当该属性为 true 时，属性的值，才能被赋值运算符改变。属性值假如是数组时，将不受 push, splice 等方法的影响。默认为 false。
-    + `value` : 该属性对应的值。
-    + `get` : 属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数，默认为 undefined。
-    + `set` : 属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数，默认为 undefined。
-+ **返回值** ：被传递给函数的对象。
-+ **API 存在的缺陷**
-  + 深度监听，需要递归到底，一次性计算量大
-  + 对于对象，无法检测到属性的添加或移除。
-  + 对于数组，无法检测到利用索引直接设置一个数组项和修改数组的长度。
+- **参数**
+  - `obj` : 要定义属性的对象。
+  - `prop` : 需要操作的目标对象的属性名。
+  - `descriptor` : 要定义或修改的属性描述符。
+    - `enumerable` : 属性是否可枚举，默认 false 。
+    - `configurable` : 属性是否可以被修改或者删除，默认 false 。
+    - `writable` : 当且仅当该属性为 true 时，属性的值，才能被赋值运算符改变。属性值假如是数组时，将不受 push, splice 等方法的影响。默认为 false。
+    - `value` : 该属性对应的值。
+    - `get` : 属性的 getter 函数，如果没有 getter，则为 undefined。当访问该属性时，会调用此函数，默认为 undefined。
+    - `set` : 属性的 setter 函数，如果没有 setter，则为 undefined。当属性值被修改时，会调用此函数，默认为 undefined。
+- **返回值** ：被传递给函数的对象。
+- **API 存在的缺陷**
+  - 深度监听，需要递归到底，一次性计算量大
+  - 对于对象，无法检测到属性的添加或移除。
+  - 对于数组，无法检测到利用索引直接设置一个数组项和修改数组的长度。
 
 ## 响应式简单实现
 
 ::: details 基于 Object.defineProperty 响应式简单实现
 
-``` javascript
+```javascript
 /* 订阅者 Dep：用来存放 Watcher 观察者对象 */
 class Dep {
   constructor() {
@@ -130,7 +130,7 @@ Virtual DOM 其实是一棵以 JavaScript 对象（VNode 节点）作为基础�
 
 ::: details Virtual DOM
 
-``` vue
+```vue
 <template>
   <span class="demo" v-show="isShow">
     This is a span.
@@ -213,7 +213,7 @@ function render () {
 
 使用 `nodeOps` 对象做适配，根据 platform 区分不同平台来执行当前平台对应的API，而对外则是提供了一致的接口，供 Virtual DOM 来调用。
 
-``` javascript
+```javascript
 const nodeOps = {
   setTextContent (text) {
     if (platform === 'weex') {
@@ -241,9 +241,9 @@ const nodeOps = {
 
 `compile` 编译可以分成 `parse`、`optimize` 与 `generate` 三个阶段，最终需要得到 `render` function。
 
-+ `parse` : 用正则表达式解析 template 模板中的指令、class、style 等数据形成 AST
-+ `optimize` : 标记 static 静态节点。当 update 更新界面时，会有一个 patch 的过程，diff 算法会直接跳过静态节点，从而减少比较过程，优化 patch 的性能
-+ `generate` : AST 转换为 render function 字符串的过程，得到结构是 render 的字符串以及 staticRenderFns 字符串
+- `parse` : 用正则表达式解析 template 模板中的指令、class、style 等数据形成 AST
+- `optimize` : 标记 static 静态节点。当 update 更新界面时，会有一个 patch 的过程，diff 算法会直接跳过静态节点，从而减少比较过程，优化 patch 的性能
+- `generate` : AST 转换为 render function 字符串的过程，得到结构是 render 的字符串以及 staticRenderFns 字符串
 
 ::: details Compile 编译 template 模板 Demo
 
@@ -259,15 +259,15 @@ const nodeOps = {
 
 diff 算法特点：
 
-+ 只会做同级比较，不跨级比较
-+ tag 不相同，则直接删除重建，不再深度比较
-+ tag 和 key，两者都相同，则认为是相同节点，不再深度比较
+- 只会做同级比较，不跨级比较
+- tag 不相同，则直接删除重建，不再深度比较
+- tag 和 key，两者都相同，则认为是相同节点，不再深度比较
 
 `patch`过程中需要使用到的 API：
 
-+ `insert`: 在 `parent` 这个父节点下插入一个子节点，如果指定了 `ref` 则插入到 `ref` 这个子节点前面
+- `insert`: 在 `parent` 这个父节点下插入一个子节点，如果指定了 `ref` 则插入到 `ref` 这个子节点前面
 
-  ``` javascript
+  ```javascript
   function insert (parent, elm, ref) {
     if (parent) {
       if (ref) {
@@ -281,9 +281,9 @@ diff 算法特点：
   }
   ```
 
-+ `createElm`: 用来新建一个节点， `tag` 存在创建一个标签节点，否则创建一个文本节点。
+- `createElm`: 用来新建一个节点， `tag` 存在创建一个标签节点，否则创建一个文本节点。
 
-  ``` javascript
+  ```javascript
   function createElm (vnode, parentElm, refElm) {
     if (vnode.tag) {
       insert(parentElm, nodeOps.createElement(vnode.tag), refElm);
@@ -293,9 +293,9 @@ diff 算法特点：
   }
   ```
 
-+ `addVnodes`: 用来批量调用 `createElm` 新建节点。
+- `addVnodes`: 用来批量调用 `createElm` 新建节点。
 
-  ``` javascript
+  ```javascript
   function addVnodes (parentElm, refElm, vnodes, startIdx, endIdx) {
     for (; startIdx <= endIdx; ++startIdx) {
       createElm(vnodes[startIdx], parentElm, refElm);
@@ -303,9 +303,9 @@ diff 算法特点：
   }
   ```
 
-+ `removeNode`: 用来移除一个节点。
+- `removeNode`: 用来移除一个节点。
 
-  ``` javascript
+  ```javascript
   function removeNode (el) {
     const parent = nodeOps.parentNode(el);
     if (parent) {
@@ -314,9 +314,9 @@ diff 算法特点：
   }
   ```
 
-+ `removeVnodes`: 会批量调用 `removeNode` 移除节点。
+- `removeVnodes`: 会批量调用 `removeNode` 移除节点。
 
-  ``` javascript
+  ```javascript
   function removeVnodes (parentElm, vnodes, startIdx, endIdx) {
     for (; startIdx <= endIdx; ++startIdx) {
       const ch = vnodes[startIdx]
@@ -327,9 +327,9 @@ diff 算法特点：
   }
   ```
 
-+ `sameVnode`: 判断两个 VNode 是否属于相同的节点。只需要判断 `key`、 `tag`、 `isComment`（是否为注释节点）、 `data`同时定义（或不定义），同时满足当标签类型为 `input` 的时候 `type` 相同（某些浏览器不支持动态修改`<input>`类型，所以他们被视为不同类型）即可
+- `sameVnode`: 判断两个 VNode 是否属于相同的节点。只需要判断 `key`、 `tag`、 `isComment`（是否为注释节点）、 `data`同时定义（或不定义），同时满足当标签类型为 `input` 的时候 `type` 相同（某些浏览器不支持动态修改`<input>`类型，所以他们被视为不同类型）即可
 
-  ``` javascript
+  ```javascript
   function sameVnode () {
     return (
       a.key === b.key &&
@@ -351,7 +351,7 @@ diff 算法特点：
 
 `patch` 的主要功能是比对两个 VNode 节点，将**差异**更新到视图上。`patch` 的过程很复杂，其简单代码如下：
 
-``` javascript
+```javascript
 /*
   oldVnode: 老的 VNode
   vnode: 新的 VNode
@@ -389,7 +389,7 @@ function patch (oldVnode, vnode, parentElm) {
 
 ::: details patchVnode 函数实现
 
-``` javascript
+```javascript
 function patchVnode (oldVnode, vnode) {
   // 新老 VNode 节点相同，不做任何改变，直接 return
   if (oldVnode === vnode) {
@@ -445,7 +445,7 @@ function patchVnode (oldVnode, vnode) {
 
 ::: details updateChildren 函数实现
 
-``` javascript
+```javascript
 function updateChildren(parentElm, oldCh, newCh) {
   let oldStartIdx = 0; // 老VNode的开始索引
   let newStartIdx = 0; // 新VNode的开始索引
@@ -600,7 +600,7 @@ Vue 在内部对异步队列尝试使用原生的 `Promise.then`、`MutationObse
 
 `Vue.nextTick( [callback, context] )` ： 在下次 DOM 更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的 DOM。
 
-``` javascript
+```javascript
 // 修改数据
 vm.msg = 'Hello'
 // DOM 还没有更新
@@ -619,12 +619,12 @@ Vue.nextTick()
 
 Vue.js 中分别使用 `Promise` 、 `setTimeout` 、 `MutationObserver` 、 `setImmediate` 等方式在 **microtask（或是task）** 中创建一个事件，目的是在当前调用栈执行完毕以后（不一定立即）才会去执行这个事件。
 
-+ 首先定义一个 `callbacks` 数组，用于存储 `nextTick`，在下一个 **microtask（或是task）** 处理这些回调函数之前，所有 `cb` 都会被存储在 `callbacks` 数组中。
-+ 在 **microtask（或是task）** 中创建一个事件 `flushCallbacks` 。 `flushCallbacks` 则会在执行时，将 `callbacks` 中的所有 `cb` 依次执行。
+- 首先定义一个 `callbacks` 数组，用于存储 `nextTick`，在下一个 **microtask（或是task）** 处理这些回调函数之前，所有 `cb` 都会被存储在 `callbacks` 数组中。
+- 在 **microtask（或是task）** 中创建一个事件 `flushCallbacks` 。 `flushCallbacks` 则会在执行时，将 `callbacks` 中的所有 `cb` 依次执行。
 
 ::: details nextTick 实现源码
 
-``` javascript
+```javascript
 /* globals MutationObserver */
 
 import { noop } from 'shared/util'
@@ -752,12 +752,12 @@ export function nextTick(cb?: (...args: any[]) => any, ctx?: object) {
 
 `Vue.set( target, propertyName/index, value )` : 向响应式对象中添加一个 property，并确保这个新 property 同样是响应式的，且触发视图更新。它必须用于向响应式对象上添加新 property，因为 Vue 无法探测普通的新增 property (比如 `this.myObject.newProperty = 'hi'`)
 
-+ Vue 在初始化实例时，对属性执行 `getter/setter` 转化，属性必须在 `data` 对象上存在才能让 Vue 将它转换为响应式。
-+ 解决方法：
-  + 单个属性：`Vue.set()`(或者`vm.$set`) / `Vue.delete()`
-  + 多个属性：使用原对象与要混合进去的对象的属性一起创建一个新的对象。
+- Vue 在初始化实例时，对属性执行 `getter/setter` 转化，属性必须在 `data` 对象上存在才能让 Vue 将它转换为响应式。
+- 解决方法：
+  - 单个属性：`Vue.set()`(或者`vm.$set`) / `Vue.delete()`
+  - 多个属性：使用原对象与要混合进去的对象的属性一起创建一个新的对象。
 
-``` javascript
+```javascript
 var vm = new Vue({
   data: {
     items: ['a', 'b', 'c']
@@ -774,7 +774,7 @@ vm.items.splice(indexOfItem, 1, newValue)
 
 ::: details Vue.set 实现源码
 
-``` typescript
+```typescript
 export function set<T>(array: T[], key: number, value: T): T
 export function set<T>(object: object, key: string | number, value: T): T
 export function set(
@@ -846,7 +846,7 @@ Vue.js 内部通过重写 `push` 、 `pop` 、 `shift` 、 `unshift` 、 `splice
 
 ::: details 监听数组变化
 
-``` javascript
+```javascript
 /*
  * not type checking this file because flow doesn't play well with
  * dynamically accessing methods on Array prototype

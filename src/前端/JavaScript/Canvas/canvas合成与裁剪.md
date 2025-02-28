@@ -1,6 +1,6 @@
 ---
 category: Canvas
-tag: 
+tag:
   - Canvas
 ---
 
@@ -329,14 +329,14 @@ var op_8x8 = createInterlace(8, '#FFF', '#eee');
 
 `clip(fillRule)` : 路径剪裁。使用的时候，先绘制剪裁路径，执行 `clip()` 方法，再绘制的内容就在这个剪裁路径中呈现。
 
-+ `fillRule` : 填充规则。
-  + `nonzero`: 非零环绕原则，默认的原则。
-  + `evenodd`: 奇偶环绕原则。
+- `fillRule` : 填充规则。
+  - `nonzero`: 非零环绕原则，默认的原则。
+  - `evenodd`: 奇偶环绕原则。
 
 ::: normal-demo
 
 ```html
-<canvas id="drawClipCanvas">
+<canvas id="drawClipCanvas"> </canvas>
 ```
 
 ```js

@@ -81,7 +81,7 @@ fruitsWithDescription.filter((descr) => /(en|ed)\b/.test(descr))
 'hello'.replace(/(?<!l)e/g, '#') // 'h#llo'
 ```
 
-### 相关示例
+### 位置匹配示例
 
 ```javascript
 // 不匹配任何字符
@@ -161,7 +161,7 @@ passwordVerifyRegExpTwo.test('abc123ABC') // true
 - `x{n,m}` ：其中 `n` 是 0 或一个正整数，`m` 是一个正整数，`m > n`。将前一项 `'x'` 匹配**至少 n 次**，匹配**最多 m 次**。
 - 量词后添加 `?` 号表示**非贪婪匹配，一旦匹配到就会停止**。比如：`x*?` 、`x+?` 、`x??` 、`x{n}?` 、`x{n,}?` 、`x{n,m}?`
 
-### 相关示例
+### 字符类与量词示例
 
 ```javascript
 // 匹配 16 进制颜色值
@@ -280,7 +280,7 @@ backReferenceNamedRegExp.test('abc!abc!a') // false
 backReferenceNamedRegExp.test('abc!abc!ab') // false
 ```
 
-### 相关示例
+### 分组与范围示例
 
 ```javascript
 // 模拟 trim 方法
@@ -374,7 +374,7 @@ htmlTagRegex.test(string3) // false
 
 Unicode property escapes 正则表达式 支持根据 Unicode 属性进行匹配，可以用它来匹配出表情、标点符号、字母（甚至适用特定语言或文字）等。同一符号可以拥有多种 Unicode 属性，属性则有 binary ("boolean-like") 和 non-binary 之分。
 
-```md
+```txt
 // Non-binary 属性
 \p{Unicode 属性值}
 \p{Unicode 属性名=Unicode 属性值}
@@ -438,6 +438,7 @@ sentence.match(regexpEmojiPresentation) // [ '👌' ]
 **返回值：**
 
 - 如果匹配成功，`exec()` 方法返回一个数组，并更新正则表达式对象的 `lastIndex` 属性。
+
   - 返回的数组
     - 数组第一项为完全匹配成功的文本。
     - 从数组第二项起，后续每项都对应一个匹配的捕获组。

@@ -61,9 +61,7 @@ function CSSModules() {
 ```
 
 ```html
-<div class="src-components-CSSModules-index-module__text_color--bdxf5">
-  CSS Modules
-</div>
+<div class="src-components-CSSModules-index-module__text_color--bdxf5">CSS Modules</div>
 ```
 
 ### 自定义命名规则
@@ -132,9 +130,7 @@ function CSSModules() {
 ```
 
 ```html
-<div class="src-components-CSSModules-index-module__text_color--bdxf5">
-  CSS Modules
-</div>
+<div class="src-components-CSSModules-index-module__text_color--bdxf5">CSS Modules</div>
 ```
 
 ### 全局作用域
@@ -173,11 +169,7 @@ function CSSModules() {
 
 ```html
 <div>
-  <div
-    class="text_color src-components-CSSModules-index-module__text_color--bdxf5"
-  >
-    CSS Modules
-  </div>
+  <div class="text_color src-components-CSSModules-index-module__text_color--bdxf5">CSS Modules</div>
   <div class="text_color">CSS Modules - :global(.className)</div>
 </div>
 ```

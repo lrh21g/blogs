@@ -4,20 +4,21 @@
 
 <kbd>Ctrl</kbd> + <kbd>K</kbd> <kbd>Ctrl</kbd> + <kbd>S</kbd> 打开快捷键列表
 
-+ <kbd>Ctrl</kbd> + <kbd>P</kbd>：转到文件
-+ <kbd>Ctrl</kbd> + <kbd>`</kbd>：在 VS Code 中打开 terminal
-+ <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd>：代码格式化（推荐使用 Prettier）
-+ <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>↑ / ↓</kbd>：向上/下同时编辑
-  
+- <kbd>Ctrl</kbd> + <kbd>P</kbd>：转到文件
+- <kbd>Ctrl</kbd> + <kbd>`</kbd>：在 VS Code 中打开 terminal
+- <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>F</kbd>：代码格式化（推荐使用 Prettier）
+- <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>↑ / ↓</kbd>：向上/下同时编辑
+
   可在属性的单词前添加好同时编辑鼠标点后，可配合 <kbd>Ctrl</kbd> + <kbd>→</kbd> 使用跳转到行末
-+ <kbd>Shift</kbd> + <kbd>Alt</kbd>：多行选中同时编辑
-+ <kbd>Alt</kbd> + <kbd>Down</kbd>：下移一行
-+ <kbd>Alt</kbd> + <kbd>Up</kbd>：上移一行
-+ <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>Down</kbd>：向下复制行
-+ <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>Up</kbd>：向上复制行
-+ <kbd>Ctrl</kbd> + <kbd>D</kbd>：将选定的字符移动到下一个匹配字符串上
-+ <kbd>Ctrl</kbd> + <kbd>Space</kbd>：触发建议
-+ <kbd>Ctrl </kbd> + <kbd>Shift</kbd> + <kbd>T</kbd>：重新打开最新关闭的窗口
+
+- <kbd>Shift</kbd> + <kbd>Alt</kbd>：多行选中同时编辑
+- <kbd>Alt</kbd> + <kbd>Down</kbd>：下移一行
+- <kbd>Alt</kbd> + <kbd>Up</kbd>：上移一行
+- <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>Down</kbd>：向下复制行
+- <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>Up</kbd>：向上复制行
+- <kbd>Ctrl</kbd> + <kbd>D</kbd>：将选定的字符移动到下一个匹配字符串上
+- <kbd>Ctrl</kbd> + <kbd>Space</kbd>：触发建议
+- <kbd>Ctrl </kbd> + <kbd>Shift</kbd> + <kbd>T</kbd>：重新打开最新关闭的窗口
 
 ## 字体
 
@@ -25,7 +26,7 @@
 
 ## 基础配置
 
-``` json
+```json
 {
   // ==================== 【search 查找】 ====================
   "search.followSymlinks": false,
@@ -74,7 +75,7 @@
   // ==================== 【Terminal 终端】 ====================
   // "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
   "terminal.integrated.shell.windows": "D:\\Programming\\Git\\bin\\bash.exe", // 终端在 Windows 上使用的 shell 的路径
-  "terminal.integrated.fontSize": 12, // 控制终端的字号(以像素为单位)
+  "terminal.integrated.fontSize": 12 // 控制终端的字号(以像素为单位)
   // ==================== 【Terminal 终端】 ====================
 }
 ```
@@ -97,11 +98,11 @@ Emmet语法文档：[Emmet Documentation](https://docs.emmet.io/cheat-sheet/)
 
 自动重命名配对的 HTML / XML 标签，也可以在 JSX 中使用。
 
-``` json
+```json
 {
   // ==================== 【Auto Rename Tag】 ====================
   // 设置扩展名将被激活的语言。默认情况下，它是**[“ *”]**，将为所有语言激活。
-  "auto-rename-tag.activationOnLanguage": ["html", "xml", "php", "javascript"],
+  "auto-rename-tag.activationOnLanguage": ["html", "xml", "php", "javascript"]
   // ==================== 【Auto Rename Tag】 ====================
 }
 ```
@@ -134,7 +135,7 @@ Quokka.js 是一个用于 JavaScript 和 TypeScript 的实时运行代码平台�
 
 ### Vetur - Vue开发工具
 
-``` json
+```json
 {
   // 配置格式化 html 文件的时候使用 Prettier 插件
   "[html]": {
@@ -167,10 +168,9 @@ Quokka.js 是一个用于 JavaScript 和 TypeScript 的实时运行代码平台�
   // 禁用vetur的JS格式化，交给eslint处理
   "vetur.format.defaultFormatter.js": "none",
   "vetur.format.defaultFormatter.ts": "prettier",
-  "vetur.format.defaultFormatter.sass": "sass-formatter",
+  "vetur.format.defaultFormatter.sass": "sass-formatter"
   // 【结束】配置相关语言的默认格式化工具
 }
-
 ```
 
 ### ESLint - 代码检测工具
@@ -181,11 +181,11 @@ ESLint 官网： <https://eslint.bootcss.com/>
 
 Prettier 官网： <https://prettier.io/>
 
-``` json
+```json
 {
   // ==================== 【prettier】 ====================
   "prettier.singleQuote": true, // 如果为 true，将使用单引号而不是双引号
-  "prettier.jsxSingleQuote": true, // 在JSX中使用单引号而不是双引号
+  "prettier.jsxSingleQuote": true // 在JSX中使用单引号而不是双引号
   // ==================== 【prettier】 ====================
 }
 ```
@@ -207,43 +207,63 @@ EditorConfig 可以在不同编辑器和 IDE 中，维护一致的编码风格�
 
 支持属性：
 
-``` md
+```md
 # .editorconfig 文件
+
 # 表示为根文件，不用继续往上查找
+
 root = true
 
 # 匹配全部文件
+
 [*]
+
 # 缩进风格，可选 "space"、"tab"
+
 indent_style = space
+
 # 缩进的空格数
+
 indent_size = 2
+
 # 设置整数用于指定替代 tab 的列数。默认值为 indent_size 的值，一般无需指定。
+
 # tab_width = 2
+
 # 结尾换行符，可选"lf"、"cr"、"crlf"
+
 end_of_line = lf
+
 # 设置字符集，支持 latin1、utf-8、utf-8-bom、utf-16be 和 utf-16le
+
 charset = utf-8
+
 # 删除一行中的前后空格
+
 trim_trailing_whitespace = true
+
 # 在文件结尾插入新行
+
 insert_final_newline = true
 
 # 匹配 .md 文件
+
 [*.md]
+
 # 删除一行中的前后空格
+
 trim_trailing_whitespace = false
 ```
 
 ### Manta's Stylus Supremacy - 格式化Stylus
 
-``` json
+```json
 {
   "stylusSupremacy.insertColons": false, // 是否插入冒号（默认是true）
   "stylusSupremacy.insertSemicolons": false, // 是否插入分号
   "stylusSupremacy.insertBraces": false, // 是否插入大括号
   "stylusSupremacy.insertNewLineAroundImports": false, // import之后是否换行
-  "stylusSupremacy.insertNewLineAroundBlocks": false, // 两个选择器中是否换行
+  "stylusSupremacy.insertNewLineAroundBlocks": false // 两个选择器中是否换行
 }
 ```
 
@@ -253,8 +273,9 @@ trim_trailing_whitespace = false
 
 在 VS code 中用于生成文件头部注释和函数注释的插件。
 
-``` json
-// ==================== 【koroFileHeader】 ====================
+```json
+{
+  // ==================== 【koroFileHeader】 ====================
   // https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
   "fileheader.configObj": {
     "autoAdd": false, // 自动添加头部注释开启才能自动添加
@@ -263,8 +284,9 @@ trim_trailing_whitespace = false
   // 头部注释
   "fileheader.customMade": {},
   // 函数注释
-  "fileheader.cursorMode": {},
+  "fileheader.cursorMode": {}
   // ==================== 【koroFileHeader】 ====================
+}
 ```
 
 ### Indent Rainbow - 颜色区分缩进
@@ -275,12 +297,12 @@ trim_trailing_whitespace = false
 
 ### Bracket Pair Colorizer 2 - 不同颜色高亮显示匹配的括号
 
-``` json
+```json
 {
   "workbench.colorCustomizations": {
     // 编辑器活动缩进参考线的颜色
     "editorIndentGuide.activeBackground": "#00ffea"
-  },
+  }
 }
 ```
 
@@ -300,12 +322,12 @@ trim_trailing_whitespace = false
 
 ### Power Mode - 敲代码特效
 
-``` json
+```json
 {
   // ==================== 【Power Mode】 ====================
   "powermode.enabled": true, // 开启 power mode
   "powermode.enableShake": false, // 去除震动
-  "powermode.presets": "particles", // 动效类型
+  "powermode.presets": "particles" // 动效类型
   // ==================== 【Power Mode】 ====================
 }
 ```

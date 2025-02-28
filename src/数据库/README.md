@@ -1,4 +1,4 @@
 # 数据库
 
-+ SQL
-+ MongoDB
+- SQL
+- MongoDB

@@ -2,21 +2,22 @@
 
 ## 基础
 
-+ 装饰器定义
+- 装饰器定义
 
   装饰器能够作用于类声明、方法、访问符、属性和参数上。使用 `@` 符号加一个名字来定义，如 `@decorat`， `decorat` 必须**是一个函数或者求值后是一个函数**。函数在运行的时候被调用，被装饰的声明作为参数会自动传入。
 
   注意：装饰器要紧挨着要修饰的内容的前面，而且所有的装饰器不能用在 `.d.ts` （声明文件）中，和任何外部上下文中。
 
-+ 装饰器工厂
+- 装饰器工厂
 
   装饰器工厂是一个函数，它的返回值是**一个函数**，返回的函数作为装饰器的调用函数。如果使用装饰器工厂，那么在使用的时候，就要加上函数调用。
 
-+ 装饰器组合（对于同一个目标，引用多个装饰器），多个装饰器的执行顺序如下：
-  + 装饰器工厂从上到下依次执行，但是只是用于返回函数但不调用函数；
-  + 装饰器函数从下到上依次执行，也就是执行工厂函数返回的函数。
+- 装饰器组合（对于同一个目标，引用多个装饰器），多个装饰器的执行顺序如下：
 
-  ``` typescript
+  - 装饰器工厂从上到下依次执行，但是只是用于返回函数但不调用函数；
+  - 装饰器函数从下到上依次执行，也就是执行工厂函数返回的函数。
+
+  ```typescript
   function setName () {
     console.log('get setName')
     return function (target) {
@@ -37,18 +38,18 @@
   // 'get setName -> get setAge -> setAge -> setName
   ```
 
-+ 装饰器求值
+- 装饰器求值
 
   类的定义中,不同声明上的装饰器将按以下规定的顺序引用：
 
-  + 参数装饰器，方法装饰器，访问符装饰器或属性装饰器应用到每个实例成员；
-  + 参数装饰器，方法装饰器，访问符装饰器或属性装饰器应用到每个静态成员；
-  + 参数装饰器应用到构造函数；
-  + 类装饰器应用到类。
+  - 参数装饰器，方法装饰器，访问符装饰器或属性装饰器应用到每个实例成员；
+  - 参数装饰器，方法装饰器，访问符装饰器或属性装饰器应用到每个静态成员；
+  - 参数装饰器应用到构造函数；
+  - 类装饰器应用到类。
 
-+ 装饰器 JavaScript 实现
+- 装饰器 JavaScript 实现
 
-  ``` typescript
+  ```typescript
   function FirstClassDecorator(targetClass: any) {
     console.log(targetClass.prototype.constructor.name + '信息');
     Object.keys(targetClass.prototype).forEach((methodname) => {
@@ -153,7 +154,7 @@
 
 通过装饰器，可以修改类的原型对象和构造函数。
 
-``` typescript
+```typescript
 // 装饰器，返回一个类，这个类继承要修饰的类
 // 所以最后创建的实例不仅包含原 Greeter 类中定义的实例属性，还包含装饰器中定义的实例属性。
 // 在装饰器里给实例添加的属性，设置的属性值会覆盖被修饰的类里定义的实例属性
@@ -187,20 +188,20 @@ console.log(new Greeter("world"));
 
 方法装饰器用来处理类中方法，它可以处理方法的**属性描述符**，可以处理**方法定义**。方法装饰器在运行时，也是被当做函数调用，含 3 个参数：
 
-+ 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
-+ 成员的名字。
-+ 成员的属性描述符。
+- 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
+- 成员的名字。
+- 成员的属性描述符。
 
   对象可以设置属性，如果属性值是函数，那这个函数称为方法。每一个属性和方法在定义的时候，都伴随三个属性描述符 `configurable`、 `writable` 和 `enumerable`，分别用来描述这个属性的可配置性、可写性和可枚举性。这三个描述符，需要使用 ES5 的 `Object.defineProperty` 方法来设置。
 
-  + `writable` : 设置为 false 时，为无法修改它起初定义的属性值的
-  + `enumerable` : 设置为 false 时，为不可枚举的，就遍历不到了
-  + `configurable` : 设置为 false 时，为无法通过 `Object.defineProperty` 修改该属性的三个描述符的值了，所以这是个不可逆的设置
-  + `value` : 该属性对应的值。
+  - `writable` : 设置为 false 时，为无法修改它起初定义的属性值的
+  - `enumerable` : 设置为 false 时，为不可枚举的，就遍历不到了
+  - `configurable` : 设置为 false 时，为无法通过 `Object.defineProperty` 修改该属性的三个描述符的值了，所以这是个不可逆的设置
+  - `value` : 该属性对应的值。
 
 如果方法装饰器返回一个值，那么会用这个值作为方法的**属性描述符对象**。
 
-``` typescript
+```typescript
 function log(target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
   let originalMethod = descriptor.value;
   descriptor.value = function (...args: any[]) {
@@ -229,7 +230,7 @@ console.log('result: ' + result);
 
 方法拦截器示例：
 
-``` typescript
+```typescript
 class StringUtil {
   public static trimSpace(str: string): string {
     return str.replace(/\s+/g, '');
@@ -385,11 +386,11 @@ TypeScript 不允许同时装饰一个成员的 `get` 和 `set` 访问器，只�
 
 访问器装饰器也有三个参数，和方法装饰器是一样。如果访问器装饰器有返回值，这个值会被作为属性的属性描述符。
 
-+ 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
-+ 成员的名字。
-+ 成员的属性描述符。
+- 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
+- 成员的名字。
+- 成员的属性描述符。
 
-``` typescript
+```typescript
 function enumerable(bool: boolean) {
   return function(
     target: any,
@@ -419,12 +420,12 @@ class Info {
 
 属性装饰器声明在属性声明之前，它有 2 个参数：
 
-+ 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
-+ 成员的名字。
+- 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
+- 成员的名字。
 
 属性装饰器无法操作属性的属性描述符，它只能用来**判断某各类中是否声明了某个名字的属性**。
 
-``` typescript
+```typescript
 function logProperty(target: any, key: string) {
   delete target[key];
   const backingField = '_' + key;
@@ -471,11 +472,11 @@ p1.name = 'kakuqo';
 
 参数装饰器有 3 个参数：
 
-+ 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
-+ 成员的名字。
-+ 参数在函数参数列表中的索引。
+- 装饰静态成员时，是类的**构造函数**；装饰实例成员时，是类的**原型对象**。
+- 成员的名字。
+- 参数在函数参数列表中的索引。
 
-``` typescript
+```typescript
 function required(target: any, propertName: string, index: number) {
   console.log(`修饰的是${propertName}的第${index + 1}个参数`);
 }
@@ -505,10 +506,10 @@ info.getInfo("hihi", "age"); // 修饰的是getInfo的第2个参数
 
 当存在多个装饰器来装饰同一个声明时，则会有以下的顺序：
 
-+ 首先，由上至下依次对装饰器表达式求值，得到返回的真实函数（如果有的话）。
-+ 而后，求值的结果会由下至上依次调用。
+- 首先，由上至下依次对装饰器表达式求值，得到返回的真实函数（如果有的话）。
+- 而后，求值的结果会由下至上依次调用。
 
-``` typescript
+```typescript
 function firstMethodDecorator(
   targetClassPrototype: any,
   methodName: string,
@@ -597,7 +598,7 @@ class URLInfo {
 
 npm 库：`npm install reflect-metadata`
 
-``` typescript
+```typescript
 // Reflect.defineMetadata : 在对象或属性上定义元数据值
 // 在【类】或者【对象】上定义元数据值
 Reflect.defineMetadata(metadataKey, metadataValue, target);

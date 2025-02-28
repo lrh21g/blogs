@@ -4,16 +4,18 @@
 
 `setup` 函数，接受两个参数。
 
-+ `props` ： 父组件传递的属性。
+- `props` ： 父组件传递的属性。
 
   `props` 是响应式的，**不能使用 ES6 解构**，它会消除 prop 的响应式。
 
   如需要解构 prop，可使用 `toRefs` 函数。如果传递的参数为 **可选的 prop** ， `toRefs` 函数不会为该参数创建一个 `ref` ，可使用 `toRef` 代替（eg : `const title = toRef(props, 'title')`）。
-+ `context` ： `context` 是一个普通 JavaScript 对象，包含三个属性
-  + `attrs` ： Attribute
-  + `slots` ： 父组件传递过来的插槽
-  + `emit` ： 组件内部需要触发的自定义事件
-  + `expose` ： 一个将暴露在公共组件实例上的 property 列表。
+
+- `context` ： `context` 是一个普通 JavaScript 对象，包含三个属性
+
+  - `attrs` ： Attribute
+  - `slots` ： 父组件传递过来的插槽
+  - `emit` ： 组件内部需要触发的自定义事件
+  - `expose` ： 一个将暴露在公共组件实例上的 property 列表。
 
     默认情况下，通过 `$refs`、`$parent` 或 `$root` 访问到的公共实例与模板使用的组件内部实例是一样的。`expose` 选项将**限制**公共实例可以访问的 property。Vue 自身定义的 property，比如 `$el` 和 `$parent`，将始终可以被公共实例访问
 
@@ -27,8 +29,8 @@
 
 |    选项式 API     | Hook inside `setup` |
 | :---------------: | :-----------------: |
-|  `beforeCreate`   |     Not needed*     |
-|     `created`     |     Not needed*     |
+|  `beforeCreate`   |    Not needed\*     |
+|     `created`     |    Not needed\*     |
 |   `beforeMount`   |   `onBeforeMount`   |
 |     `mounted`     |     `onMounted`     |
 |  `beforeUpdate`   |  `onBeforeUpdate`   |
@@ -39,7 +41,7 @@
 |  `renderTracked`  |  `onRenderTracked`  |
 | `renderTriggered` | `onRenderTriggered` |
 
-``` vue
+```vue
 <script setup>
 import { ref, toRef, toRefs, useSlots, useAttrs } from 'vue';
 
@@ -87,21 +89,21 @@ defineExpose({ count });
 
 ### 核心函数
 
-+ `ref()` ： 接受一个值，将其用作内部值来返回一个响应式的、可更改的 `ref` 对象。只有一个属性 `.value` 用来指向内部的值。
-  + 将一个对象赋值给 `ref`，这个对象将通过 `reactive()` 转为具有深层次响应性的对象。也意味着如果对象中包含了嵌套的 `ref`，它们将被深层地解包。
-  + 在模板中引入 `ref` 的值，Vue **会自动解包**。
-+ `reactive()` ： 返回一个对象的响应式代理。传入类型必须是 **对象或者数组**。
-  + `reactive()` 响应式对象可以深层地 **解包** 任何为 `ref` 的属性，同时保持响应性。
-  + 当访问到某个响应式数组或 `Map` 原生集合类型中为 `ref` 的元素时， **不会执行** `ref` 的解包。
-  + 返回的对象以及其中嵌套的对象都会通过 `ES Proxy` 包裹，因此 **不等于** 源对象，建议只使用响应式代理。
-  + 只需要保留对对象 **顶层次** 访问的响应性，可使用 `shallowReactive()` 作替代
-  + 将一个 `ref` 赋值给为一个 `reactive()` 属性时，该 `ref` 会被自动解包
-+ `readonly()` ： 接受一个对象（不论是响应式还是一般的）或是一个 `ref`，返回一个原值的只读代理。
-  + 一个只读的代理是深层生效的，对 **任何内部层级** 的属性的访问都是 **只读** 的。
-  + 与 `reactive()` 有相同的 `ref` **解包** 行为，而解包得的值也同样是 **只读** 的。
-  + 需要 **避免** 深层级的转换行为，可使用 `shallowReadonly()` 作替代。
+- `ref()` ： 接受一个值，将其用作内部值来返回一个响应式的、可更改的 `ref` 对象。只有一个属性 `.value` 用来指向内部的值。
+  - 将一个对象赋值给 `ref`，这个对象将通过 `reactive()` 转为具有深层次响应性的对象。也意味着如果对象中包含了嵌套的 `ref`，它们将被深层地解包。
+  - 在模板中引入 `ref` 的值，Vue **会自动解包**。
+- `reactive()` ： 返回一个对象的响应式代理。传入类型必须是 **对象或者数组**。
+  - `reactive()` 响应式对象可以深层地 **解包** 任何为 `ref` 的属性，同时保持响应性。
+  - 当访问到某个响应式数组或 `Map` 原生集合类型中为 `ref` 的元素时， **不会执行** `ref` 的解包。
+  - 返回的对象以及其中嵌套的对象都会通过 `ES Proxy` 包裹，因此 **不等于** 源对象，建议只使用响应式代理。
+  - 只需要保留对对象 **顶层次** 访问的响应性，可使用 `shallowReactive()` 作替代
+  - 将一个 `ref` 赋值给为一个 `reactive()` 属性时，该 `ref` 会被自动解包
+- `readonly()` ： 接受一个对象（不论是响应式还是一般的）或是一个 `ref`，返回一个原值的只读代理。
+  - 一个只读的代理是深层生效的，对 **任何内部层级** 的属性的访问都是 **只读** 的。
+  - 与 `reactive()` 有相同的 `ref` **解包** 行为，而解包得的值也同样是 **只读** 的。
+  - 需要 **避免** 深层级的转换行为，可使用 `shallowReadonly()` 作替代。
 
-``` javascript
+```javascript
 // ========== reactive() ==========
 
 const count = ref(1);
@@ -144,19 +146,19 @@ copy.count++; // warning! （更改该只读副本将会失败，并会得到一
 
 ### 工具函数
 
-+ `unref()` : 若参数值是一个 `ref` ，则取出内部的值，否则返回参数本身。 `val = isRef(val) ? val.value : val` 的语法糖。
-+ `toRef()` ： 可以通过一个响应式对象的属性来创建一个 `ref`。
-  + 创建得到的 `ref` **与源属性保持同步**（对源属性的更改将会同步更新 `ref`，反过来该 `ref` 的变动也会影响源属性）。
-  + 在源属性已经不存在的情况下，也会返回一个可用的 `ref`。可用于处理**可选 `prop`** 。
-+ `toRefs()` ： 将一个响应式对象 **转为一个简单对象** ，其中每个属性都是一个指向**源对象**相应属性的 `ref`，每个独立的 `ref` 都是由 `toRef()` 创建的。
-  + 从一个组合式函数中返回响应式对象，需要解构或展开，而又不想丢失响应性时，可使用 `toRefs` 。
-  + 如果要基于一个可能还不存在的属性创建，使用 `toRef` 来替代。
-+ `isRef()` ： 检查某个值是否为 `ref`。
-+ `isProxy()` ： 检查该对象是否为由 `reactive()`、`readonly()`、`shallowReactive()` 或 `shallowReadonly()` 创建的代理。
-+ `isReactive()` ： 检查该对象是否为由 `reactive()` 或 `shallowReactive()` 创建的代理。
-+ `isReadonly()` ： 检查该对象是否为由 `readonly()` 或 `shallowReadonly()` 创建的代理。
+- `unref()` : 若参数值是一个 `ref` ，则取出内部的值，否则返回参数本身。 `val = isRef(val) ? val.value : val` 的语法糖。
+- `toRef()` ： 可以通过一个响应式对象的属性来创建一个 `ref`。
+  - 创建得到的 `ref` **与源属性保持同步**（对源属性的更改将会同步更新 `ref`，反过来该 `ref` 的变动也会影响源属性）。
+  - 在源属性已经不存在的情况下，也会返回一个可用的 `ref`。可用于处理**可选 `prop`** 。
+- `toRefs()` ： 将一个响应式对象 **转为一个简单对象** ，其中每个属性都是一个指向**源对象**相应属性的 `ref`，每个独立的 `ref` 都是由 `toRef()` 创建的。
+  - 从一个组合式函数中返回响应式对象，需要解构或展开，而又不想丢失响应性时，可使用 `toRefs` 。
+  - 如果要基于一个可能还不存在的属性创建，使用 `toRef` 来替代。
+- `isRef()` ： 检查某个值是否为 `ref`。
+- `isProxy()` ： 检查该对象是否为由 `reactive()`、`readonly()`、`shallowReactive()` 或 `shallowReadonly()` 创建的代理。
+- `isReactive()` ： 检查该对象是否为由 `reactive()` 或 `shallowReactive()` 创建的代理。
+- `isReadonly()` ： 检查该对象是否为由 `readonly()` 或 `shallowReadonly()` 创建的代理。
 
-``` javascript
+```javascript
 // ========== toRef() ==========
 // 创建得到的 `ref` **与源属性保持同步**（对源属性的更改将会同步更新 `ref`，反过来该 `ref` 的变动也会影响源属性）
 const state = reactive({ foo: 1, bar: 2 });
@@ -184,23 +186,23 @@ console.log(state.foo); // 3
 
 ### 进阶函数
 
-+ `shallowRef()` ： `ref()` 的浅层作用形式。
-  + 浅层 `ref` 的内部值将会原样存储和暴露，并且不会被深层递归地转为响应式。只有对 `.value` 的访问是响应式的。
-  + 常常用于对大型数据结构的性能优化或是与外部的状态管理系统集成。
-+ `shallowReactive()` ： `reactive()` 的浅层作用形式。
-  + 浅层响应式对象里只有根级别的属性是响应式的。属性的值会被原样存储和暴露，意味着属性为 `ref` 的值 **不会** 被自动解包了。
-+ `shallowReadonly()` ： `readonly()` 的浅层作用形式。
-  + 只有跟根层级的属性变为了只读。属性值都会被原样存储和暴露，意味着值为 `ref` 的属性 **不会** 被自动解包了。
-+ `triggerRef()` ： 强制触发依赖于一个 `浅层 ref` 的副作用，常用在对浅层 `ref` 的内部值做了变更之后。
-+ `customRef()` ： 创建一个自定义的 `ref`，显式声明对其依赖追踪和更新触发的控制方式。
-  + `customRef()` 预期接受一个工厂函数，这个工厂函数接受 `track` 和 `trigger` 两个函数作为参数，并应该返回一个带 `get` 和 `set` 方法的对象。
-  + 一般来说，`track()` 应该在 `get()` 方法中调用，而 `trigger()` 应该在 `set()` 中调用。
-+ `toRaw()` ： 根据一个 Vue 创建的代理返回其原始对象。
-  + 可以返回由 `reactive()`、`readonly()`、`shallowReactive()` 或者 `shallowReadonly()` 创建的代理对应的源对象
-  + 可以用于临时读取而不引起代理访问/跟踪开销，或是写入而不触发更改的特殊方法
-+ `markRaw()` ： 将一个对象标记为不可被转为代理的对象。返回也是该对象。
+- `shallowRef()` ： `ref()` 的浅层作用形式。
+  - 浅层 `ref` 的内部值将会原样存储和暴露，并且不会被深层递归地转为响应式。只有对 `.value` 的访问是响应式的。
+  - 常常用于对大型数据结构的性能优化或是与外部的状态管理系统集成。
+- `shallowReactive()` ： `reactive()` 的浅层作用形式。
+  - 浅层响应式对象里只有根级别的属性是响应式的。属性的值会被原样存储和暴露，意味着属性为 `ref` 的值 **不会** 被自动解包了。
+- `shallowReadonly()` ： `readonly()` 的浅层作用形式。
+  - 只有跟根层级的属性变为了只读。属性值都会被原样存储和暴露，意味着值为 `ref` 的属性 **不会** 被自动解包了。
+- `triggerRef()` ： 强制触发依赖于一个 `浅层 ref` 的副作用，常用在对浅层 `ref` 的内部值做了变更之后。
+- `customRef()` ： 创建一个自定义的 `ref`，显式声明对其依赖追踪和更新触发的控制方式。
+  - `customRef()` 预期接受一个工厂函数，这个工厂函数接受 `track` 和 `trigger` 两个函数作为参数，并应该返回一个带 `get` 和 `set` 方法的对象。
+  - 一般来说，`track()` 应该在 `get()` 方法中调用，而 `trigger()` 应该在 `set()` 中调用。
+- `toRaw()` ： 根据一个 Vue 创建的代理返回其原始对象。
+  - 可以返回由 `reactive()`、`readonly()`、`shallowReactive()` 或者 `shallowReadonly()` 创建的代理对应的源对象
+  - 可以用于临时读取而不引起代理访问/跟踪开销，或是写入而不触发更改的特殊方法
+- `markRaw()` ： 将一个对象标记为不可被转为代理的对象。返回也是该对象。
 
-``` javascript
+```javascript
 // ========== shallowRef() ==========
 const state = shallowRef({ count: 1 });
 
@@ -278,12 +280,12 @@ console.log(isReactive(bar.foo)); // false
 
 ### diff方法优化：PathFlag(静态标记)
 
-+ Vue2 中的虚拟DOM是进行全量对比
-+ Vue3 中新增静态标记(PathFlag)，只对比带有 PathFlag 的节点，并且可以通过 PathFlag 的信息得知当前节点要对比的具体内容
+- Vue2 中的虚拟DOM是进行全量对比
+- Vue3 中新增静态标记(PathFlag)，只对比带有 PathFlag 的节点，并且可以通过 PathFlag 的信息得知当前节点要对比的具体内容
 
 ![vue2vsvue3diff](./../files/images/vue2vsvue3diff.drawio.png)
 
-``` javascript
+```javascript
 <div>
   <span>{{language}}</span>
   <span>Hello World!</span>
@@ -298,7 +300,7 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
 }
 ```
 
-``` javascript
+```javascript
 export const enum PatchFlags {
   TEXT = 1,                   // 动态文本节点
   CLASS = 1 << 1,             // 2    // 动态 class
@@ -318,10 +320,10 @@ export const enum PatchFlags {
 
 ### hoistStatic(静态提升)
 
-+ Vue2 中无论元素是否参与更新，每次都会重新创建，然后再渲染
-+ Vue3 中对不参与更新的元素，会做静态提升，只会被创建一次，在渲染时复用
+- Vue2 中无论元素是否参与更新，每次都会重新创建，然后再渲染
+- Vue3 中对不参与更新的元素，会做静态提升，只会被创建一次，在渲染时复用
 
-``` javascript
+```javascript
 <div>
   <span>{{language}}</span>
   <span>Hello World!</span>
@@ -352,7 +354,7 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 默认情况下 `@click` 事件被认为是动态变量，每次更新视图的时候都会追踪它的变化。但正常情况下，`@click` 事件在视图渲染前和渲染后，都是同一个事件，基本上不需要去追踪它的变化，所以直接缓存起来复用即可。
 
-``` javascript
+```javascript
 <div>
   <span>{{language}}</span>
   <span @click="handleClick">Hello World!</span>
@@ -386,7 +388,7 @@ export function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 当有大量静态的内容时候，这些内容会被当做纯字符串推进一个 `buffer` 里面，即使存在动态的绑定，会通过模板插值嵌入进去。这样会比通过虚拟DOM来渲染更快。
 
-``` javascript
+```javascript
 <div>
   <span>{{language}}</span>
   <span @click="handleClick">Hello World!</span>
@@ -419,7 +421,7 @@ export function ssrRender(_ctx, _push, _parent, _attrs, $props, $setup, $data, $
 
 当静态内容大到一定量级时候，会用 `_createStaticVNode` 方法在客户端去生成一个 `static node`，这些静态node，会被直接 innerHtml，就不需要创建对象，然后根据对象渲染。
 
-``` javascript
+```javascript
 <div>
   <span>{{language}}</span>
   <span @click="handleClick">Hello World!</span>

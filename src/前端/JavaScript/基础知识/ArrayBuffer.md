@@ -86,8 +86,9 @@ resizableBuffer.resize(12)
 - `little-endian` （小字节序、低字节序）：使用低位储存更重要的信息（类比欧洲通用日期书格式 31 December 2050 ，年份最重要在最后面，月份其次，日期最后）。
 - `big-endian` （大字节序、高字节序）：使用高位储存更重要的信息（类比 ISO 日期格式 2050-12-31 ，年份最重要在最前面，月份其次，日期最后）。
 
-```markdown
+```txt
 使用不同字节序存储数字 0x12345678（即十进制中的 305 419 896）
+
 - little-endian 方式： 0x78 0x56 0x34 0x12
 - big-endian 方法： 0x12 0x34 0x56 0x78
 ```
@@ -165,6 +166,7 @@ const littleEndian = (function () {
 ### TypedArray 构造函数
 
 - `new TypedArray(buffer, byteOffset, length)` ：使用 `ArrayBuffer` 或 `SharedArrayBuffer` 实例，创建一个新的指定缓冲区的类型化数组视图。
+
   - `buffer` ： `ArrayBuffer` 或 `SharedArrayBuffer` 实例。
   - `byteOffset` ：可选值。视图开始的字节序号，默认从 `0` 开始。
   - `length` ：可选值。视图包含的数据个数，默认直到本段内存区域结束。
@@ -197,6 +199,7 @@ const littleEndian = (function () {
   ```
 
 - `new TypedArray(length)` ：`TypedArray` 构造函数可以不通过 `ArrayBuffer` 对象，直接分配内存而生成生成 `TypedArray` 实例。
+
   - `length` ：指定 `TypedArray` 视图的长度。在内存中创建一个内部数组缓冲区，大小长度乘以 `BYTES_PER_ELEMENT` 字节（每个元素占用的字节数），用 `0` 填充。省略所有参数，等同于使用 `0` 作为参数。
 
   ```javascript
@@ -296,6 +299,7 @@ const littleEndian = (function () {
   ```
 
 - `TypedArray.from(source, mapFn, thisArg)` ：从一个类数组或者可迭代对象中创建一个新的 `TypedArray` 实例。
+
   - `source` ：需要转换为 `TypedArray` 的类数组或者可迭代对象。
   - `mapFn` ：可选参数。如果指定了该参数，则最后生成的类型数组会经过该函数的加工处理后再返回。
   - `thisArg` ：可选参数。执行 `mapFn` 函数时 `this` 的值。
@@ -321,6 +325,7 @@ const littleEndian = (function () {
   ```
 
 - `TypedArray.prototype.set(typedarray, targetOffset)` ：用于从指定数组中读取值，并将其存储在类型化数组中。
+
   - `typedarray` / `array`
     - 如果源数组是数组，数组的所有值都会被复制到目标数组中。如果数组的长度加上偏移值 `targetOffset` 的结果超过目标数组的长度，则会抛出异常错误。
     - 如果源数组是 `TypedArray` ，则源数组和目标数组可以共享同一个底层的 `ArrayBuffer` 。
@@ -331,7 +336,7 @@ const littleEndian = (function () {
   var uint8TypedArray = new Uint8Array(buffer)
 
   uint8TypedArray.set([1, 2, 3], 3)
-  console.log(uint8TypedArray) 
+  console.log(uint8TypedArray)
   // Uint8Array [ 0, 0, 0, 1, 2, 3, 0, 0 ]
   ```
 

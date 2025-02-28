@@ -2,7 +2,7 @@
 
 ## 基础配置
 
-``` bash
+```bash
 # 缺省等同于 local
 $ git config
 
@@ -29,7 +29,7 @@ $ git config --global user.email 'your_email@domain.com'
 
 ## 初始化版本库
 
-``` bash
+```bash
 # 克隆远程版本库
 $ git clone <url>
 
@@ -42,7 +42,7 @@ $ git remote add origin <SSH/HTTP>
 
 ## 远程同步
 
-``` bash
+```bash
 # 查看所有的远程仓库
 $ git remote -v
 
@@ -98,7 +98,7 @@ $ git push --tags
 
 ## 修改和提交
 
-``` bash
+```bash
 # 显示修改文件清单
 $ git status
 # -s 选项，可以不显示讲解
@@ -147,7 +147,7 @@ $ git commit --amend
 
 ## 查看提交记录
 
-``` bash
+```bash
 # 查看提交记录
 $ git log
 
@@ -184,7 +184,7 @@ $ gitk
 
 ## 分支
 
-``` bash
+```bash
 # 切换到指定的分支或者标签
 $ git checkout <branch-name/tag-name>
 
@@ -244,7 +244,7 @@ $ git branch -dr remote/<branch-name>
 
 ## 合并
 
-``` bash
+```bash
 # 合并指定分支到当前分支
 $ git merge <branch-name>
 
@@ -278,7 +278,7 @@ $ git mergetool
 
 `rebase` 的准则：**不要对在你的仓库外有副本的分支执行变基。（即只对本地未推送的commit上或自己的分支上进行）**
 
-``` bash
+```bash
 # 将当前分支变基到目标分支（goals-branch）
 $ git rebase <goals-branch>
 
@@ -292,7 +292,7 @@ $ git rebase <goals-branch> <branch>
 
 ## 标签
 
-``` bash
+```bash
 # 切换到指定的标签
 $ git checkout <tag-name>
 
@@ -326,7 +326,7 @@ $ git push origin :refs/tags/<tag-name>
 
 ## 比较差异
 
-``` bash
+```bash
 # 比较工作区与暂存区的区别，即查看变更的内容
 $ git diff
 
@@ -349,11 +349,11 @@ $ git diff <branch-name> <other-branch-name> -- <file-name>
 
 `reset` 语法： `git reset --重置方式(hard/mixed/soft) 提交引用(commit/branch/origin-branch/tag/HEAD)`
 
-+ `--hard`：将当前分支，重置到与指定引用一样的状态，丢弃在这之后的提交，以及工作区和暂存区的提交。
-+ `--soft`：将指定提交之后的提交内容，都放到暂存区
-+ `--mixed`：将指定提交之后的提交内容，以及暂存区中的内容，放到工作区
+- `--hard`：将当前分支，重置到与指定引用一样的状态，丢弃在这之后的提交，以及工作区和暂存区的提交。
+- `--soft`：将指定提交之后的提交内容，都放到暂存区
+- `--mixed`：将指定提交之后的提交内容，以及暂存区中的内容，放到工作区
 
-``` bash
+```bash
 # 恢复暂存区的所有文件到工作区
 $ git reset HEAD
 $ git checkout .
@@ -399,7 +399,7 @@ $ git revert --no-commit
 
 ## 储藏
 
-``` bash
+```bash
 # 储藏未提交的变更内容，并移除未提交的变更内容
 $ git stash
 

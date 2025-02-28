@@ -50,7 +50,7 @@ export default hopeTheme({
   pure: false, // 是否开启纯净模式
 
   // ========== 主题布局选项 - 导航栏 ==========
-  navbar: navbar, // 导航栏配置
+  navbar, // 导航栏配置
   // navbarIcon: true, // 是否在导航栏显示图标
   // navbarLayout: {
   //   left: ['Brand'],
@@ -67,7 +67,7 @@ export default hopeTheme({
   // hideSiteNameonMobile: true, // 是否在移动视图下隐藏站点名称
 
   // ========== 主题布局选项 - 侧边栏 ==========
-  sidebar: sidebar, // 侧边栏配置
+  sidebar, // 侧边栏配置
   // sidebarSorter: ["readme", "order", "title"], // 结构侧边栏排序器
   headerDepth: 2, // 侧边栏嵌套的标题深度
 
@@ -158,10 +158,11 @@ export default hopeTheme({
     // include: true, // 是否启用 Markdown 导入支持
     include: {
       resolvePath: (file) => {
-        if (file.startsWith("@src"))
-          return file.replace("@src", path.resolve(__dirname, ".."));
+        if (file.startsWith('@src')) {
+          return file.replace('@src', path.resolve(__dirname, '..'))
+        }
 
-        return file;
+        return file
       },
     },
     tabs: true, // 是否启用选项卡支持
@@ -183,12 +184,13 @@ export default hopeTheme({
       {
         matcher: 'Recommanded',
         replacer: ({ tag }) => {
-          if (tag === 'em')
+          if (tag === 'em') {
             return {
               tag: 'Badge',
               attrs: { type: 'tip' },
               content: 'Recommended',
             }
+          }
         },
       },
     ],
@@ -199,8 +201,8 @@ export default hopeTheme({
     // flowchart: true, // 是否启用流程图支持
     // mermaid: true, // 是否启用 Mermaid 支持，可以传入一个对象作为 Mermaid 的配置选项
     // plantuml: true, // 是否启用 plantuml 支持
-    
-    // Markdown 代码配置  
+
+    // Markdown 代码配置
     codeTabs: true, // 是否启用选项卡支持
     playground: {
       presets: ['ts', 'vue', 'unocss'],
@@ -215,7 +217,7 @@ export default hopeTheme({
       // codepenLayout: "left", // CodePen 编辑器布局 "top" | "left" | "right"
       // codepenEditors: "101", // CodePen 编辑器状态
       // editors: "101", // CodePen 编辑器显示情况，第一位代表 HTML ，第二位代表 JS，第三位代表演示页面
-    }, // 是否启用代码演示支持   
+    }, // 是否启用代码演示支持
   },
 
   plugins: {
