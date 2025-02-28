@@ -24,7 +24,7 @@
 - `document.scrollingElement` ： 只读属性。返回当前文档的滚动元素（即当文档整体滚动时，滚动的具体元素）。
 - `document.pointerLockElement` ： 只读属性。返回指针锁定时鼠标事件的目标元素。
 - `document.fullscreenEnabled` ： 只读属性。表示全屏模式是否可用。如果指针处于锁定等待中、指针没有被锁定或目标元素在另外一个文档中，返回 `null`。
-- `document.fullscreenElement` ： 只读属性。返回当前以全屏状态展示的 DOM 元素。如果不是全屏状态，该属性返回 `null` 。可以通过该属性判断 `<vidoe>` 元素节点是否处于全屏，判断用户行为。
+- `document.fullscreenElement` ： 只读属性。返回当前以全屏状态展示的 DOM 元素。如果不是全屏状态，该属性返回 `null` 。可以通过该属性判断 `<video>` 元素节点是否处于全屏，判断用户行为。
 - `document.pictureInPictureEnabled` ： 只读属性。表示画中画模式是否可用。
 - `document.pictureInPictureElement` ： 只读属性。返回当前文档中以画中画模式呈现的 DOM 元素。如果没有使用画中画模式，则返回 `null` 。
 
@@ -65,7 +65,7 @@
   - `hidden` ： 页面不可见。即文档处于背景标签页或者窗口处于最小化状态，或者操作系统正处于“锁屏状态”。
   - `prerender` ： 页面正在渲染中。对于用户来说，该页面不可见。
   - `unloaded` ： 页面从内存里面卸载了。
-- `doucment.readyState` ： 返回当前文档的加载状态。
+- `document.readyState` ： 返回当前文档的加载状态。
   - `loading` ： 加载中。加载 HTML 代码阶段，尚未解析完成。
   - `interactive` ： 可交互。文档已被解析，正在加载状态结束，但是图像、样式表和框架之类的子资源仍在加载。
   - `complete` ： 加载完成。文档和所有子资源已完成加载。`load` 状态的事件即将被触发。
@@ -75,7 +75,7 @@
 - `document.designMode` ： 控制整个文档是否可编辑。属性值默认为 `off`，表示不可编辑；`on` 表示为可编辑。
 - `document.cookie` ： 获取并设置当前文档关联的 Cookie 。
 - `document.currentScript` ： 返回当前文档正在运行脚本所在的 `<script>` 元素节点。
-- `doucment.implementation` ： 返回一个和当前文档相关联的 `DOMImplementation` 对象。
+- `document.implementation` ： 返回一个和当前文档相关联的 `DOMImplementation` 对象。
   - `DOMImplementation.createDocument` ： 创建一个 XML 文档。
   - `DOMImplementation.createHTMLDocument` ： 创建一个 HTML 文档。
   - `DOMImplementation.createDocumentType` ： 创建一个 DocumentType 对象。
@@ -112,7 +112,7 @@
 
   **描述** ： 与 `document.write(string)` 方法一致，但会在每次调用后添加一个换行符。
 
-  - `document.writeln()` 方法添加的是 ASCII 码的换行符，渲染成 HTML 网页时不起作用，即在网页上显示不出换行。网页上的换行，必须显式写入` <br>` 。
+  - `document.writeln()` 方法添加的是 ASCII 码的换行符，渲染成 HTML 网页时不起作用，即在网页上显示不出换行。网页上的换行，必须显式写入`<br>` 。
 
 - `document.exitFullscreen()`
 

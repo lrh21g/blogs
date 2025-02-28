@@ -59,7 +59,7 @@ export default class LocalStorage {
 - 静态方法内部不能通过 this 来访问对象属性和方法，但可以通过调用静态方法时把对象变量传递给静态方法来使用。
 
   ```typescript
-  // 将 JavaScript 的 Object 构造函数看成一个 Obejct 类，创建 Object 类的对象
+  // 将 JavaScript 的 Object 构造函数看成一个 Object 类，创建 Object 类的对象
   let obj01 = new Object({ username: "lrh", age: 23 })
   let obj02 = { username: "wangwu", age: 23 }
 

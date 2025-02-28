@@ -119,8 +119,8 @@ export default class Promise<T = any> {
           (resolveSuccess) => {
             resolve(resolveSuccess);
           },
-          (rejectSucess) => {
-            reject(rejectSucess);
+          (rejectSuccess) => {
+            reject(rejectSuccess);
           }
         );
       } else {
