@@ -159,8 +159,8 @@ CSS 中 `1px` 为 CSS像素，导致 CSS像素 根据 设备像素比(dpr) 映�
         `width=device-width,initial-scale=${scale},maximum-scale=${scale},minimum-scale=${scale},user-scalable=no`,
       )
       var docEl = document.documentElement
-      var fontsize = 10 * (docEl.clientWidth / 320) + 'px'
-      docEl.style.fontSize = fontsize
+      var fontSize = 10 * (docEl.clientWidth / 320) + 'px'
+      docEl.style.fontSize = fontSize
     </script>
   </head>
   <body>

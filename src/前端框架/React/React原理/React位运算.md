@@ -256,7 +256,7 @@ const CommitContext = /*                */ 0b100
 
 在 React 整体设计中，更新上下文状态 `ExecutionContext` 作为一个全局状态，指引 React 更新的方向，在 React 运行时上下文中，无论是初始化还是更新，都会走一个入口函数，即 `scheduleUpdateOnFiber` ，这个函数会使用更新上下文来判别更新的下一步走向。
 
-::: detials scheduleUpdateOnFiber 函数
+::: details scheduleUpdateOnFiber 函数
 
 ```js
 export function scheduleUpdateOnFiber(

@@ -2,33 +2,33 @@
 
 plugin 通过监听 `compiler` 的 `hook` 特定时机，然后处理 `stats` （主要包含 `modules`、`chunks` 和 `assets` 三个属性值的对象）。
 
-- Webapck 的插件必须要是一个类
+- Webpack 的插件必须要是一个类
 - 该类必须包含一个 `apply` 的函数，该函数接收 `compiler` 对象参数
 - 该类可以使用 Webpack 的 `compiler` 和 `Compilation` 对象的钩子
 - 可自定义自己的钩子系统
 
 ```javascript
-// 使用了异步的 emit.tapAsync 钩子，然后在 Compilation 对象上增加了一个 assets 文件 filelist.md，内容为获取到的 compilation.assets 的文件名（filename）
-class FileListPlugin {
+// 使用了异步的 emit.tapAsync 钩子，然后在 Compilation 对象上增加了一个 assets 文件 fileList.md，内容为获取到的 compilation.assets 的文件名（filename）
+class fileListPlugin {
   apply(compiler) {
     // emit 是异步 hook，使用 tapAsync 触及它，还可以使用 tapPromise/tap(同步)
-    compiler.hooks.emit.tapAsync('FileListPlugin', (compilation, callback) => {
+    compiler.hooks.emit.tapAsync('fileListPlugin', (compilation, callback) => {
       // 在生成文件中，创建一个头部字符串：
-      var filelist = 'In this build:\n\n';
+      var fileList = 'In this build:\n\n';
 
       // 遍历所有编译过的资源文件，
       // 对于每个文件名称，都添加一行内容。
       for (var filename in compilation.assets) {
-        filelist += '- ' + filename + '\n';
+        fileList += '- ' + filename + '\n';
       }
 
       // 将这个列表作为一个新的文件资源，插入到 webpack 构建中：
-      compilation.assets['filelist.md'] = {
+      compilation.assets['fileList.md'] = {
         source: function () {
-          return filelist;
+          return fileList;
         },
         size: function () {
-          return filelist.length;
+          return fileList.length;
         },
       };
 
@@ -37,7 +37,7 @@ class FileListPlugin {
   }
 }
 
-module.exports = FileListPlugin;
+module.exports = fileListPlugin;
 ```
 
 ## prefetch-webpack-plugin 编写

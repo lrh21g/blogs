@@ -522,7 +522,7 @@ const componentVNodeHooks = {
 
 在 `insert` 函数中，如果 `<keep-alive>` 包裹的组件已经 `mounted`，那么执行 `queueActivatedComponent(componentInstance)`，否则，执行 `activateChildComponent(componentInstance, true)`。
 
-- 包裹组件未 `mounted` 时，执行 `activateChildComponent(vm, direct)` 方法，触发组件的 `acitvated` 钩子函数，并递归执行所有子组件的 `acitvated` 钩子函数。
+- 包裹组件未 `mounted` 时，执行 `activateChildComponent(vm, direct)` 方法，触发组件的 `activated` 钩子函数，并递归执行所有子组件的 `activated` 钩子函数。
 
   ::: details 【activateChildComponent】方法
 
@@ -698,7 +698,7 @@ const componentVNodeHooks = {
 
 ### deactivated 生命周期函数
 
-对于 `deactivated` 生命周期函数，发生在 `vnode` 的 `destory` 的钩子函数中。
+对于 `deactivated` 生命周期函数，发生在 `vnode` 的 `destroy` 的钩子函数中。
 
 ::: details 【componentVNodeHooks- destroy】：组件 VNode 钩子函数
 
@@ -722,7 +722,7 @@ const componentVNodeHooks = {
 
 :::
 
-对于 `<keep-alive>` 包裹的组件而言，会执行 `deactivateChildComponent(componentInstance, true)` 方法，触发组件的 `deacitvated` 钩子函数，并且递归去执行它的所有子组件的 `deactivated` 钩子函数。
+对于 `<keep-alive>` 包裹的组件而言，会执行 `deactivateChildComponent(componentInstance, true)` 方法，触发组件的 `deactivated` 钩子函数，并且递归去执行它的所有子组件的 `deactivated` 钩子函数。
 
 ::: details 【deactivateChildComponent】方法
 

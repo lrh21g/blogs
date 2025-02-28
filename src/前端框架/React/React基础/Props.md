@@ -365,7 +365,7 @@ function Grandchild(props) {
 
 function Child(props) {
   console.log('Child props', props)
-  // 通过 React.cloneElement 对 props.chidren 克隆，再混入新的 props
+  // 通过 React.cloneElement 对 props.children 克隆，再混入新的 props
   return React.cloneElement(props.children, { label: 'Child label' })
 }
 

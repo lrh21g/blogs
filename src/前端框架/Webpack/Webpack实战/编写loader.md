@@ -28,7 +28,7 @@ loader 中 `this` 其他相关的方法和属性：
 - `this.resourcePath` : 当前处理转换的文件的路径；
 - `this.resourceQuery` : 当前处理文件的 `querystring`；
 - `this.target` : Webpack 配置的 `target`；
-- `this.loadMoudle` : 处理文件时，需要依赖其它文件的处理结果时，可以使用 `this.loadMoudle(request: string, callback: function(err, source, sourceMap, module))` 去获取到依赖文件的处理结果；
+- `this.loadModule` : 处理文件时，需要依赖其它文件的处理结果时，可以使用 `this.loadModule(request: string, callback: function(err, source, sourceMap, module))` 去获取到依赖文件的处理结果；
 - `this.resolve` : 获取指定文件的完整路径；
 - `this.addDependency` : 为当前处理文件添加依赖文件，以便依赖文件发生变化时重新调用 Loader 转换该文件，`this.addDependency(file: string)`；
 - `this.addContextDependency` : 为当前处理文件添加依赖文件目录，以便依赖文件目录里文件发生变化时重新调用 Loader 转换该文件，`this.addContextDependency(dir: string)`；
@@ -87,7 +87,7 @@ module.exports = function (source) {
 
 // 告诉 Webpack 给 loader 传入二进制格式的数据
 // 如不设置，则会传入字符串
-moudle.exports.raw = true;
+module.exports.raw = true;
 ```
 
 ## loader 的 pitch

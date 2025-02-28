@@ -104,7 +104,7 @@ tag:
 网格布局允许同一根线有多个名字，比如 `[fifth-line row-5]`。
 
 ```css
-.frid-container {
+.fried-container {
   display: grid;
   grid-template-columns: [c1] 100px [c2] 100px [c3] auto [c4];
   grid-template-rows: [r1] 100px [r2] 100px [r3] auto [r4];

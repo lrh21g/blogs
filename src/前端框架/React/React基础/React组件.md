@@ -60,7 +60,7 @@ class Welcome extends React.Component {
   render() {
     return (
       {/* 触发 onClick 之后，此时输出结果为 handleClick，因为实例对象上方法属性 > 原型链对象上方法属性 */}
-      <div style={{ marginTop: '50px' }} onClick={this.handerClick}>
+      <div style={{ marginTop: '50px' }} onClick={this.handlerClick}>
         hello,React!
       </div>
     )

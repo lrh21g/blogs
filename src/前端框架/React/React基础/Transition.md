@@ -90,7 +90,7 @@ function App() {
 
 ### useTransition 实现原理
 
-`useTranstion` 本质上就是 `useTranstion = useState + startTransition`。
+`useTransition` 本质上就是 `useTransition = useState + startTransition`。
 
 ::: details
 
@@ -186,8 +186,8 @@ function Typeahead() {
 - 相同点
   - `useDeferredValue` 内部实现与 `useTransition` 一样都是标记成了过渡更新任务
 - 不同点
-  - `useTransition` 是把 `startTransition` 内部的更新任务变成了过渡任务 `transtion`，而 `useDeferredValue` 是把原值通过过渡任务得到新的值，这个值作为延时状态。一个是处理一段逻辑，另一个是生产一个新的状态。
-  - `useDeferredValue` 过渡任务本质上在 `useEffect` 内部执行，而 `useEffect` 内部逻辑是异步执行的 ，所以它一定程度上更滞后于 `useTransition`。 `useDeferredValue = useEffect + transtion`
+  - `useTransition` 是把 `startTransition` 内部的更新任务变成了过渡任务 `Transition`，而 `useDeferredValue` 是把原值通过过渡任务得到新的值，这个值作为延时状态。一个是处理一段逻辑，另一个是生产一个新的状态。
+  - `useDeferredValue` 过渡任务本质上在 `useEffect` 内部执行，而 `useEffect` 内部逻辑是异步执行的 ，所以它一定程度上更滞后于 `useTransition`。 `useDeferredValue = useEffect + Transition`
 
 ### useDeferredValue 实现原理
 

@@ -262,7 +262,7 @@ export function genData(el: ASTElement, state: CodegenState): string {
 - 然后，判断 `handler.value` 是一个函数的调用路径还是一个函数表达式
 - 接着，对 `modifiers` 做判断:
   - 对于无 `modifiers` 的情况，就根据 `handler.value` 不同情况处理，要么直接返回，要么返回一个函数包裹的表达式；
-  - 对于有 `modifiers` 的情况，则对各种不同的 `modifer` 情况做不同处理，添加相应的代码串。
+  - 对于有 `modifiers` 的情况，则对各种不同的 `modifier` 情况做不同处理，添加相应的代码串。
 
 ::: details 【genHandlers】方法
 
@@ -467,7 +467,7 @@ function updateDOMListeners(oldVnode: VNodeWithData, vnode: VNodeWithData) {
 
       :::
 
-    - 对于第二次，执行对于回调函数时，判断如果满足 `cur !== old`，则只需要更改 `old.fns = cur` 把之前绑定的 `involer.fns` 赋值为新的回调函数即可，并且通过 `on[name] = old` 保留引用关系，这样就保证了事件回调只添加一次，之后仅仅去修改它的回调函数的引用。
+    - 对于第二次，执行对于回调函数时，判断如果满足 `cur !== old`，则只需要更改 `old.fns = cur` 把之前绑定的 `invoker.fns` 赋值为新的回调函数即可，并且通过 `on[name] = old` 保留引用关系，这样就保证了事件回调只添加一次，之后仅仅去修改它的回调函数的引用。
 
 - 最后，遍历 `oldOn` 获取到事件名称，判断如果满足 `isUndef(on[name])`，则执行 `remove(event.name, oldOn[name], event.capture)` 移除回调事件。
 

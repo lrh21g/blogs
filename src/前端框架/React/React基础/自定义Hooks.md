@@ -97,8 +97,8 @@
     }
   }
 
-  function useDebounceState(defauleValue, time) {
-    const [value, changeValue] = useState(defauleValue)
+  function useDebounceState(defaultValue, time) {
+    const [value, changeValue] = useState(defaultValue)
     // 对 changeValue 做防抖处理
     const newChange = React.useMemo(() => debounce(changeValue, time), [time])
     return [value, newChange]
@@ -380,12 +380,12 @@ function useQueryTable(defaultQuery = {}, api) {
   )
 
   /**
-   * @function handerChange
+   * @function handlerChange
    * @description 处理分页逻辑
    * 函数内部改变分页信息，然后重新请求数据，用 useCallback 做优化缓存处理
-   * 以 getList 作为 handerChange 的依赖项
+   * 以 getList 作为 handlerChange 的依赖项
    */
-  const handerChange = React.useCallback(
+  const handlerChange = React.useCallback(
     async function (page, pageSize) {
       pagination.current = {
         page,
@@ -406,7 +406,7 @@ function useQueryTable(defaultQuery = {}, api) {
     // 组合表格状态
     {
       tableData,
-      handerChange,
+      handlerChange,
       getList,
       pagination: pagination.current,
     },

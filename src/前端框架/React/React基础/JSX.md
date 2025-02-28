@@ -64,7 +64,7 @@ const element = React.createElement(
 ```js {8}
 const MyComponents = {
   DatePicker: function DatePicker(props) {
-    return <div>Imagine a {props.color} datepicker here.</div>
+    return <div>Imagine a {props.color} datePicker here.</div>
   },
 }
 
@@ -407,7 +407,7 @@ JSX 转换规则如下：
 | 三元运算 / 表达式 | 先执行三元运算，然后按照上述规则处理                | 根据三元运算返回结果而定      |
 | 函数执行          | 先执行函数，然后按照上述规则处理                    | 根据函数执行返回结果而定      |
 
-在 React 的调和过程（Reconcilliation）中，通过 JSX 编译转换为 React element 对象的每一个子节点都会形成一个与之对应的 `fiber` 对象，然后通过 `sibling`、`return`、`child` 将每一个 `fiber` 对象联系起来。
+在 React 的调和过程（Reconciliation）中，通过 JSX 编译转换为 React element 对象的每一个子节点都会形成一个与之对应的 `fiber` 对象，然后通过 `sibling`、`return`、`child` 将每一个 `fiber` 对象联系起来。
 
 - `child` ： 一个由父级 `fiber` 指向子级 `fiber` 的指针
 - `return` ：一个子级 `fiber` 指向父级 `fiber` 的指针

@@ -131,7 +131,7 @@ const Detail = () => {
   // 根据当前位置，解析给定 to 值的路径名，即 { pathname, search, hash }
   const resolvedPath = useResolvedPath()
   // 返回一个 URL，该 URL 可以用来链接到指定的位置，即使是在 React 路由器之外
-  const herf = useHref()
+  const href = useHref()
   // 获取当前 URL 的动态参数
   const params = useParams()
   // 父路由与子路由共享的状态或其他值
@@ -146,8 +146,8 @@ const Detail = () => {
 
   console.log('resolvedPath : ', resolvedPath)
   // resolvedPath : {pathname: "/home/page1", search: "", hash: ""}
-  console.log('herf : ', herf)
-  // herf : /home/page1
+  console.log('href : ', href)
+  // href : /home/page1
   console.log('params : ', params)
   // params : {id: "123456"}
   console.log('searchParams : ', searchParams)

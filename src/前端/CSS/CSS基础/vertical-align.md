@@ -128,7 +128,7 @@ export default {}
     /* white-space 属性指定元素内的空白怎样处理。 */
     /* white-space: nowrap; 文本不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止 */
     white-space: nowrap;
-    /* etter-spacing 属性增加或减少字符间的空白（字符间距）。 */
+    /* letter-spacing 属性增加或减少字符间的空白（字符间距）。 */
     letter-spacing: -1em;
     /* text-indent 属性规定文本块中首行文本的缩进。 */
     text-indent: -999em;

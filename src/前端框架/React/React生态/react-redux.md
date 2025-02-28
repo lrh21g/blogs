@@ -51,12 +51,12 @@ Redux Toolkit 是 Redux 官方强烈推荐，开箱即用的一个高效的 Redu
 
 import { Provider } from 'react-redux'
 
-import reduxTookitStore from './store/reduxToolkit.js'
+import reduxToolKitStore from './store/reduxToolkit.js'
 import ViewReduxToolkit from './views/ViewReduxToolkit.js'
 
 export default function App() {
   return (
-    <Provider store={reduxTookitStore}>
+    <Provider store={reduxToolKitStore}>
       <ViewReduxToolkit />
     </Provider>
   )
@@ -272,10 +272,10 @@ const ViewReduxToolkit = () => {
         <div>moduleA_count: {moduleA_count} </div>
         <div>moduleA_dogImage: {moduleA_dogImage} </div>
         <button onClick={() => dispatch(changeModuleACount(++moduleA_count))}>
-          mouduleA count++
+          moduleA count++
         </button>
         <button onClick={() => dispatch(moduleA_asyncGetDogImage())}>
-          mouduleA getDogImage
+          moduleA getDogImage
         </button>
       </div>
     </div>
@@ -527,10 +527,10 @@ const Redux = props => {
         <div>moduleA_count: {moduleA_count} </div>
         <div>moduleA_dogImage: {moduleA_dogImage} </div>
         <button onClick={() => changeModuleACount(++moduleA_count)}>
-          mouduleA count++
+          moduleA count++
         </button>
         <button onClick={() => moduleA_asyncGetDogImage()}>
-          mouduleA getDogImage
+          moduleA getDogImage
         </button>
       </div>
     </div>

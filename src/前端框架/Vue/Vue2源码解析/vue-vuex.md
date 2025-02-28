@@ -1091,7 +1091,7 @@ function resetStoreVM(store, state, hot) {
 
 - 对于 `strict mode` 严格模式而言
 
-  在严格模式下，通过执行 `enableStrictMode(store)` 在 `store._vm` 添加一个 `wathcer` 来观测 `this._data.$$state` 的变化，也就是当 `store.state` 被修改的时候, `store._committing` 必须为 `true`，否则在开发阶段会报警告。 `store._committing` 默认值是 `false`。
+  在严格模式下，通过执行 `enableStrictMode(store)` 在 `store._vm` 添加一个 `watcher` 来观测 `this._data.$$state` 的变化，也就是当 `store.state` 被修改的时候, `store._committing` 必须为 `true`，否则在开发阶段会报警告。 `store._committing` 默认值是 `false`。
 
   ::: details 【enableStrictMode】方法
 
@@ -1155,14 +1155,14 @@ Vuex 最终存储的数据是在 `state` 上的，`store.state` 存储的是 `ro
 
 #### mutation
 
-Vuex 对数据存储的存储本质上就是对 `state` 做修改，并且只允许我们通过提交 `mutaion` 的形式去修改 `state`。
+Vuex 对数据存储的存储本质上就是对 `state` 做修改，并且只允许我们通过提交 `mutation` 的形式去修改 `state`。
 
 `mutations` 的初始化在 `installModule` 安装模块过程中，同时，`Store` 提供了 `commit` 方法可以提交一个 `mutation`。
 
 在 `commit(_type, _payload, _options)` 方法中：
 
 - 传入的 `_type` 就是 `mutation` 的 `type`
-- 可以从 `store._mutations` 找到对应的函数数组，遍历它们执行获取到每个 `handler` 然后执行，实际上就是执行了 `wrappedMutationHandler(playload)`，
+- 可以从 `store._mutations` 找到对应的函数数组，遍历它们执行获取到每个 `handler` 然后执行，实际上就是执行了 `wrappedMutationHandler(payload)`，
 - 接着，会执行我们定义的 `mutation` 函数，并传入当前模块的 `state`，所以 `mutation` 函数也就是对当前模块的 `state` 做修改。
 
 ::: details 【Store】类 - 【commit】方法
@@ -1244,7 +1244,7 @@ function unifyObjectStyle(type, payload, options) {
 - 可以从 `store._actions` 找到对应的函数数组，遍历它们执行获取到每个 `handler` 然后执行，实际上就是执行了 `wrappedActionHandler(payload)`
 - 接着，会执行我们定义的 `action` 函数，并传入一个对象，包含了当前模块下的 `dispatch`、`commit`、`getters`、`state`，以及全局的 `rootState` 和 `rootGetters`，所以我们定义的 `action` 函数能拿到当前模块下的 `commit` 方法。
 
-`action` 比自己写一个函数执行异步操作，然后提交 `muataion` 的好处是在于它可以在参数中获取到当前模块的一些方法和状态。
+`action` 比自己写一个函数执行异步操作，然后提交 `mutation` 的好处是在于它可以在参数中获取到当前模块的一些方法和状态。
 
 ::: details 【Store】类 - 【dispatch】方法
 

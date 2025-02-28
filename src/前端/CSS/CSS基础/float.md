@@ -292,7 +292,7 @@ export default {}
 ```vue
 <template>
   <!-- 外层包裹元素，防止影响其他元素 -->
-  <div class="float-wrapper-anchor-referenc">
+  <div class="float-wrapper-anchor-reference">
     <div class="float-element-father">
       <div class="float-element">
         标题文本01标题文本01标题文本01标题文本01
@@ -309,15 +309,15 @@ export default {}
 </script>
 
 <style>
-.float-wrapper-anchor-referenc {
+.float-wrapper-anchor-reference {
   width: 200px;
 }
 
-.float-wrapper-anchor-referenc .float-element-father {
+.float-wrapper-anchor-reference .float-element-father {
   border: 1px solid #db5860;
 }
 
-.float-wrapper-anchor-referenc
+.float-wrapper-anchor-reference
   .float-element-father
   .float-element
   .float-element-anchor {
@@ -325,7 +325,7 @@ export default {}
   /* background-color: #ff8228; */
 }
 
-.float-wrapper-anchor-referenc
+.float-wrapper-anchor-reference
   .float-element-father
   .float-element
   .float-element-anchor {
@@ -370,7 +370,7 @@ export default {}
 
 .float-wrapper-layout-one .float-element-father {
   border: 1px solid #db5860;
-  overfloat: hidden;
+  overflow: hidden;
 }
 
 .float-wrapper-layout-one .float-element-father .float-element-img {
@@ -418,7 +418,7 @@ export default {}
 
 .float-wrapper-layout-two .float-element-father {
   border: 1px solid #db5860;
-  overfloat: hidden;
+  overflow: hidden;
 }
 
 .float-wrapper-layout-two .float-element-father .float-element-prev {

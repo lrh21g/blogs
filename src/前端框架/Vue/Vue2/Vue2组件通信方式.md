@@ -31,7 +31,7 @@ Event.$on(事件名, data => {});
 
 如果组件中传值**仅仅为传递数据**，不一定需要使用 Vuex，可以使用 —— `$attrs` / `$listeners`
 
-- `$attrs`: 包含了父作用域中不被 prop 所识别 (且获取) 的特性绑定 (**class 和 style 除外**)。当一个组件没有声明任何 prop 时，则会包含所有父作用域的绑定 (class 和 style 除外)，并且可以通过 `v-bind="$attrs"` 传入内部组件。通常配合 `interitAttrs` 选项一起使用。
+- `$attrs`: 包含了父作用域中不被 prop 所识别 (且获取) 的特性绑定 (**class 和 style 除外**)。当一个组件没有声明任何 prop 时，则会包含所有父作用域的绑定 (class 和 style 除外)，并且可以通过 `v-bind="$attrs"` 传入内部组件。通常配合 `inheritAttrs` 选项一起使用。
 - `$listeners`: 包含了父作用域中的 (**不含 .native 修饰器的**) `v-on` 事件监听器。它可以通过 `v-on="$listeners"` 传入内部组件
 
 `$attrs` 与 `$listeners` 是两个对象。
@@ -231,8 +231,8 @@ export { findComponentDownward };
 function findComponentsDownward (context, componentName) {
   return context.$children.reduce((components, child) => {
     if (child.$options.name === componentName) components.push(child);
-    const foundChilds = findComponentsDownward(child, componentName);
-    return components.concat(foundChilds);
+    const found = findComponentsDownward(child, componentName);
+    return components.concat(foundChild);
   }, []);
 }
 export { findComponentsDownward };

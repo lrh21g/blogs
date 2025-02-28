@@ -1341,7 +1341,7 @@ export class History {
 
   :::
 
-- 最后，获取到 `updated`、`activated`、`deactivated` 3 个 `ReouteRecord` 数组后，执行一系列的钩子函数。
+- 最后，获取到 `updated`、`activated`、`deactivated` 3 个 `RouteRecord` 数组后，执行一系列的钩子函数。
 
 ### 导航守卫钩子函数执行逻辑
 
@@ -1970,7 +1970,7 @@ export function pushState(url?: string, replace?: boolean) {
 
 :::
 
-在 `history` 的初始化中，会设置一个监听器，监听历史栈的变化。当点击浏览器返回按钮的时候，如果已经有 `url` 被压入历史栈，则会触发 `popstate` 事件，然后拿到当前要跳转的 `hash`，执行 `transtionTo` 方法做一次路径转换。
+在 `history` 的初始化中，会设置一个监听器，监听历史栈的变化。当点击浏览器返回按钮的时候，如果已经有 `url` 被压入历史栈，则会触发 `popstate` 事件，然后拿到当前要跳转的 `hash`，执行 `transitionTo` 方法做一次路径转换。
 
 ::: details 【HashHistory】类 - 【setupListeners】方法
 
@@ -2543,7 +2543,7 @@ export default {
 
 - 解析完 `router` 获得目标 `location`、`route`、`href` 后，对 `exactActiveClass` 和 `activeClass` 做处理。当配置 `exact` 为 `true` 时，只有当目标路径和当前路径完全匹配的时候，会添加 `exactActiveClass`；当目标路径包含当前路径的时候，会添加 `activeClass`。
 - 接着，创建一个守卫函数 `handler`
-- 然后，会监听点击事件或者其它可以通过 `prop` 传入的事件类型，执行 `hanlder` 函数，最终执行 `router.push` 或者 `router.replace` 函数，实际上执行了 `history` 的 `push` 和 `replace` 方法进行路由跳转
+- 然后，会监听点击事件或者其它可以通过 `prop` 传入的事件类型，执行 `handler` 函数，最终执行 `router.push` 或者 `router.replace` 函数，实际上执行了 `history` 的 `push` 和 `replace` 方法进行路由跳转
 
   ::: details router.push 和 router.replace 函数
 

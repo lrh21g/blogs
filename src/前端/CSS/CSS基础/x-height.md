@@ -10,7 +10,7 @@ tag:
 
 ![x-height](./files/images/x-height.drawio.png)
 
-注：`verticalalign: middle` 与字母中线（median）不是一个意思，`verticalalign: middle` 指的是基线（baseline）往上 1/2 `x-height` 高度。
+注：`vertical-align: middle` 与字母中线（median）不是一个意思，`vertical-align: middle` 指的是基线（baseline）往上 1/2 `x-height` 高度。
 
 `ex` : CSS 中的一个相对单位，相对于字体和字号的单位，指小写字母 x 的高度，即 `x-height` 。
 

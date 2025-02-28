@@ -1017,10 +1017,10 @@ export default {
 
   - `prevChildren` 用来存储上一次的子节点
   - `children` 用来存储当前的子节点
-  - `rawChildren` 表示 `<transtition-group>` 包裹的原始子节点
-  - `transtionData` 是从 `<transtition-group>` 组件上提取出来的一些渲染数据，与 `<transition>` 组件的实现是一样的。
+  - `rawChildren` 表示 `<transition-group>` 包裹的原始子节点
+  - `transitionData` 是从 `<transition-group>` 组件上提取出来的一些渲染数据，与 `<transition>` 组件的实现是一样的。
 
-- 遍历 `rawChidren`，初始化 `children`
+- 遍历 `rawChildren`，初始化 `children`
 
   - 首先，遍历 `rawChildren` 获取到每个 `vnode`
   - 然后，判断每个 vnode 是否设置了 key，这个是 `<transition-group>` 对列表元素的要求。

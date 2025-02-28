@@ -41,7 +41,7 @@ function workLoopConcurrent() {
 }
 ```
 
-在 Schdeduler 中，时间切片周期默认为 5ms （`export const frameYieldMs = 5;`），如果一个 task 运行超过该周期, 下一个 task 执行之前, 会把控制权归还浏览器。
+在 Scheduler 中，时间切片周期默认为 5ms （`export const frameYieldMs = 5;`），如果一个 task 运行超过该周期, 下一个 task 执行之前, 会把控制权归还浏览器。
 
 ## 优先级调度
 

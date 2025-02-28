@@ -174,31 +174,31 @@ export default function model(
 
 对于默认类型的 `input` 元素节点，使用 `v-model` 指令，会执行 `model` 指令方法中的 `genDefaultModel(el, value, modifiers)` 的逻辑。
 
-以 `<input v-model="messgae" />` 为例，在 `genDefaultModel` 逻辑中：
+以 `<input v-model="message" />` 为例，在 `genDefaultModel` 逻辑中：
 
 - 首先，处理 `modifiers` （修饰符），其主要影响的是 `event` 和 `valueExpression` 的值
 - 然后，执行 `genAssignmentCode(value, valueExpression)` 去生成代码。在 `genAssignmentCode` 方法中：
 
   - 执行 `parseModel`，对 `v-model` 对应的 `value` 进行解析与处理相关情况，返回 `exp` 和 `key` 和。例如：
 
-    示例 `<input v-model="messgae" />` 中， `value` 为 `messgae`，返回 `key` 为 `null`
+    示例 `<input v-model="message" />` 中， `value` 为 `message`，返回 `key` 为 `null`
 
   - 通过 `parseModel` 解析之后，对其返回的 `key` 进行判断，如果 `res.key === null`，则获取到 `${value}=${assignment}`
 
-    示例 `<input v-model="messgae" />` 中，获取到的 `${value}=${assignment}` 为 `message=$event.target.value`
+    示例 `<input v-model="message" />` 中，获取到的 `${value}=${assignment}` 为 `message=$event.target.value`
 
 - 如果命中 `needCompositionGuard` 为 `true` 的逻辑，则会执行 `` code = `if($event.target.composing)return;${code}` ``
 
-  示例 `<input v-model="messgae" />` 生成的 `code` 为 `if($event.target.composing)return;message=$event.target.value`
+  示例 `<input v-model="message" />` 生成的 `code` 为 `if($event.target.composing)return;message=$event.target.value`
 
 - 执行 ``addProp(el, 'value', `(${value})`)`` ，修改 AST 元素，给 `el` 添加一个 `prop`,相当于在 `input` 上动态绑定了 `value`
 - 执行 `addHandler(el, event, code, null, true)` ，给 `el` 添加事件处理，相当于在 `input` 上绑定了 `input` 事件
 
-  示例 `<input v-model="messgae" />` 通过 `addProp` 和 `addHandler` 处理之后，转换成模板如下
+  示例 `<input v-model="message" />` 通过 `addProp` 和 `addHandler` 处理之后，转换成模板如下
 
   `<input v-bind:value="message" v-on:input="message=$event.target.value">`
 
-  其实就是动态绑定了 `input` 的 `value` 指向了 `messgae` 变量，并且在触发 `input` 事件的时候，动态把 `message` 设置为目标值，这样就完成了数据双向绑定了，所以说 `v-model` 实际上就是语法糖。
+  其实就是动态绑定了 `input` 的 `value` 指向了 `message` 变量，并且在触发 `input` 事件的时候，动态把 `message` 设置为目标值，这样就完成了数据双向绑定了，所以说 `v-model` 实际上就是语法糖。
 
 ::: details 【genDefaultModel】方法：默认类型的 `input` 元素节点，使用 v-model 指令执行逻辑
 

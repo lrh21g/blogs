@@ -311,9 +311,9 @@ function Parent() {
 
 ### 逐层传递 Provider
 
-- `Provider` 可以逐层传递 `context` ，即一个 `context` 可以用多个 `Provder` 传递。
+- `Provider` 可以逐层传递 `context` ，即一个 `context` 可以用多个 `Provider` 传递。
 - 组件获取 `context` 时，会获取离当前组件最近的上一层 `Provider` 。
-- 下一层级的 `Provder` 会覆盖上一层级的 `Provder` 。
+- 下一层级的 `Provider` 会覆盖上一层级的 `Provider` 。
 
 ```js
 export const themes = {
@@ -331,7 +331,7 @@ function GrandChild() {
         {childThemeContextValue => {
           const { color, background } = childThemeContextValue
           return (
-            <div className="sonbox" style={{ color, background }}>
+            <div className="sonBox" style={{ color, background }}>
               第二层 Provider 消费者
             </div>
           )
