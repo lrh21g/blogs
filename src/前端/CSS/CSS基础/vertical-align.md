@@ -51,9 +51,7 @@ tag:
     </div>
     <div class="baseline-box-lineheight-0">
       <span class="inline-block-span-baseline"></span>
-      <span class="inline-block-span-baseline right-inline"
-        >x-baseline line-height: 0</span
-      >
+      <span class="inline-block-span-baseline right-inline">x-baseline line-height: 0</span>
     </div>
   </div>
 </template>
@@ -78,9 +76,7 @@ export default {}
   margin-top: 10px;
 }
 
-.vertical-align-wrapper-baseline
-  .baseline-box-lineheight-0
-  > .inline-block-span-baseline.right-inline {
+.vertical-align-wrapper-baseline  .baseline-box-lineheight-0  > .inline-block-span-baseline.right-inline {
   line-height: 0;
 }
 </style>
@@ -139,7 +135,7 @@ export default {}
   }
 
   .vertical-align-wrapper-img-align-text .icon-delete {
-    background: url('https://vuepress.vuejs.org/hero.png') no-repeat center;
+    background: url('https://vuepress.vuejs.org/images/hero.png') no-repeat center;
     background-size: 100% 100%;
   }
 
@@ -291,7 +287,7 @@ export default {}
 ```vue
 <template>
   <div class="vertical-align-wrapper-margin-deactivation">
-    x<img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
+    x<img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
   </div>
 </template>
 
@@ -335,10 +331,10 @@ export default {}
 ```vue
 <template>
   <div class="vertical-align-wrapper-img-text-align">
-    <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
-    <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
-    <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
-    <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
+    <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
+    <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
+    <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
+    <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
     <i class="justify-fix"></i>
     <i class="justify-fix"></i>
     <i class="justify-fix"></i>x-baseline

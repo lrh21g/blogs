@@ -7,6 +7,10 @@ export default navbar([
     // prefix: '/zh/basic/', // 为分组的每一个子链接添加一个前缀
     children: [
       {
+        text: 'HTML',
+        link: '/前端/HTML/',
+      },
+      {
         text: 'CSS',
         link: '/前端/CSS/',
       },

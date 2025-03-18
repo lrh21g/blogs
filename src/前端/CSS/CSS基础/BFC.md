@@ -58,7 +58,7 @@ BFC 最重要的用途不是去 `margin` 重叠或者是清除 `float` 影响，
       <!-- <div class="float-element"> -->
       <img
         class="float-element-img"
-        src="https://vuepress.vuejs.org/hero.png"
+        src="https://vuepress.vuejs.org/images/hero.png"
       />
       <p class="float-element-img-desc">
         【设置

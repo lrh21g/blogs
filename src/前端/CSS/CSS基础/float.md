@@ -28,7 +28,7 @@ tag:
           <div class="float-element">
             <img
               class="vuepress-img"
-              src="https://vuepress.vuejs.org/hero.png"
+              src="https://vuepress.vuejs.org/images/hero.png"
             />
           </div>
         </div>
@@ -82,7 +82,7 @@ tag:
           <div class="float-element">
             <img
               class="vuepress-img"
-              src="https://vuepress.vuejs.org/hero.png"
+              src="https://vuepress.vuejs.org/images/hero.png"
             />示例文本01示例文本01示例文本01示例文本01示例文本01
           </div>
         </div>
@@ -146,7 +146,7 @@ tag:
   <div class="float-wrapper-mechanism">
     <div class="float-element-father">
       <div class="float-element">
-        <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
+        <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
       </div>
       <p class="float-after-inline-box">
         示例文本01示例文本01示例文本01示例文本01示例文本01示例文本01示例文本01
@@ -154,7 +154,7 @@ tag:
     </div>
     <div class="float-element-father-brother">
       <div class="float-element">
-        <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
+        <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
       </div>
       <p class="float-after-inline-box">
         示例文本01示例文本01示例文本01示例文本01示例文本01示例文本01示例文本01
@@ -237,7 +237,7 @@ export default {}
   <div class="float-wrapper-question">
     <div class="float-element-father">
       <div class="float-element">
-        <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
+        <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
       </div>
       示例文本01示例文本01示例文本01示例文本01
     </div>
@@ -348,7 +348,7 @@ export default {}
     <div class="float-element-father">
       <img
         class="float-element-img"
-        src="https://vuepress.vuejs.org/hero.png"
+        src="https://vuepress.vuejs.org/images/hero.png"
       />
       <p class="float-element-img-desc">
         示例文本02示例文本02示例文本02示例文本02示例文本02

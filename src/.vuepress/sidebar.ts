@@ -1,6 +1,12 @@
 import { sidebar } from 'vuepress-theme-hope'
 
 export default sidebar({
+  '/前端/HTML/': [
+    {
+      text: '视口（viewport）',
+      link: '/前端/HTML/viewport.md',
+    },
+  ],
   '/前端/CSS/': [
     {
       text: 'CSS基础', // 必要的，分组的标题文字
@@ -10,12 +16,16 @@ export default sidebar({
       collapsible: true, // 可选的, 设置分组是否可以折叠，默认值是 false
       // 必要的，分组的子项目
       children: [
+        'CSS选择器与权重',
         '内联元素',
         'BFC',
         'x-height',
         'line-height',
         'vertical-align',
         'float',
+        'font',
+        'text',
+        'background',
       ],
     },
     {

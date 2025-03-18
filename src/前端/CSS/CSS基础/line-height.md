@@ -8,6 +8,8 @@ tag:
 
 ## line-height 属性值
 
+### line-height 基础属性值
+
 - `normal` : 默认值。和 `font-family` 密切关联的变量值。不同系统不同浏览器的默认 `line-height` 都有差异，需要进行重置。
 
   |   字体   | Chrome | Firefox |  IE   |
@@ -19,29 +21,29 @@ tag:
 - `百分值` : 其最终计算值是和当前 `font-size` 相乘后的值。比如： `line-height: 150%`
 - `长度值（带单位的数值）` : 如 `line-height: 21px` 或者 `line-height: 1.5em` 等
 
-【使用 `line-height` 属性值的异同】
+### 使用 line-height 属性值的异同
 
 - 相同点：数值、百分值、长度值（带单位的数值）计算方式无差别
 - 不同点
   - 使用数值，则所有子元素继承此值
   - 使用百分值或者长度值，则所有子元素继承最终的计算值
 
-【`line-height` 属性值的使用与重置】
+### line-height 属性值的使用与重置
 
 - 重置
   - 使用长度值（带单位的数值），建议使用 `line-height: 20px` ，计算方便。
   - 使用数值，建议使用方便计算的行高值
     - `line-height` 属性值本身方便计算：可以使用 1.5 。
     - `line-height` 默认值计算方便：先得到方便计算的 `line-height` 计算值，再反推 `line-height` 设置的数值。在 CSS 中，计算行高的时候，行高值一定不要向下舍入，而要**向上舍入**。
-- 如何使用
-  - 重图文内容展示的网页或者网站，如博客、论坛、公众号之类的，一定要使用数值作为单位，考虑到文章阅读的舒适度， `line-height` 值可以设置在 1.6 - 1.8 。
+- 按情况使用数值、百分比值、长度值
+  - 重图文内容展示的网页或者网站，如博客、论坛、公众号之类的，一定要使用数值作为单位，考虑到文章阅读的舒适度， `line-height` 值可以设置在 `1.6 - 1.8` 。
   - 偏重布局结构精致的网站，则可使用长度值或者数值。第一，目的是为了兼容；第二，无论使用哪种类型值，都存在需要局部重置的场景。
 
 ## line-height 最大值特性
 
 **无论内联元素 `line-height` 如何设置，最终父级元素的高度都是由数值大的 `line-height` 决定**。
 
-示例：子元素 span 元素是内联元素，因此自身存在一个 “内联盒子” ，则一定会有 “行框盒子”。每一个 “行框盒子” 前面都有一个宽度为 0 的 “幽灵空白节点”。则：
+示例：子元素 `span` 元素是内联元素，因此自身存在一个 “内联盒子” ，则一定会有 “行框盒子”。每一个 “行框盒子” 前面都有一个宽度为 0 的 “幽灵空白节点”。则：
 
 - 当父元素设置为 `line-height: 96px`，则“幽灵空白节点” 高度为 96px
 - 当子元素设置为 `line-height: 96px`，则子元素的高度为 96px
@@ -54,14 +56,10 @@ tag:
 <template>
   <div class="line-height-wrapper-max-value">
     <div class="max-value-box one">
-      <span class="max-value-box-one-text"
-        >父元素 line-height: 96px； 子元素 line-height: 20px;</span
-      >
+      <span class="max-value-box-one-text">父元素 line-height: 96px； 子元素 line-height: 20px;</span>
     </div>
     <div class="max-value-box two">
-      <span class="max-value-box-two-text"
-        >父元素 line-height: 20px； 子元素 line-height: 96px;</span
-      >
+      <span class="max-value-box-two-text">父元素 line-height: 20px； 子元素 line-height: 96px;</span>
     </div>
   </div>
 </template>
@@ -145,17 +143,19 @@ export default {}
 
 :::
 
-### 非替换元素的纯内联元素
+内联元素的高度由固定高度和不固定高度组成，这个不固定的部分就是这里的“行距”。
 
-对于非替换元素的纯内联元素，其可视高度完全由 `line-height` 决定。
+在CSS中，“行距” 分散在当前文字的上方和下方，也就是即使是第一行文字，其上方也是有 “行距” 的，只不过这个 “行距” 的高度仅仅是完整 “行距” 高度的一半，因此，也被称为 “半行距”。
 
-`行距 = 行高 - em-box` 即：`行距 = line-height - font-size`。其中 `em-box` 的高度为 `1em` 。
+一般而言，`行距 = 行高 - em-box` 即：`行距 = line-height - font-size`。其中 `em-box` 的高度为 `1em` （`em` 相对于 `font-size` 大小的 CSS 单位。）。
 
-将 “行距” 一分二，就得到了 “半行距” ，分别加在 `em-box` 上下则构成了文字的完整高度。
+- 将 “行距” 一分二，就得到了 “半行距” ，分别加在 `em-box` 上下则构成了文字的完整高度。
 
-大多数情况下，内容区域和 `em-box` 不一样，内容区域高度受 `font-family` 和 `font-size` 的影响， `em-box` 仅受 `font-size` 的影响，通常内容区域高度要更高一些。但是**当字体是宋体的时候，内容区域和 `em-box` 是等同的**。
+- 大多数情况下，内容区域和 `em-box` 不一样，内容区域高度受 `font-family` 和 `font-size` 的影响， `em-box` 仅受 `font-size` 的影响，通常内容区域高度要更高一些。但是 **当字体是宋体的时候，内容区域和 `em-box` 是等同的**。
 
-注：`em` 相对于 `font-size` 大小的 CSS 单位。
+假设 `line-height` 是 1.5，`font-size` 大小是 14px，那么半行距大小就是（套用上面的行距公式再除以2）：`(14px * 1.5 - 14px) / 2= 14px * 0.25 = 3.5px`。
+
+`border` 以及 `line-height` 等传统 CSS 属性并没有小数像素的概念（从CSS3 动画的细腻程度可以看出），因此，这里的 3.5px 需要取整处理：**如果标注的是文字上边距，则向下取整；如果是文字下边距，则向上取整**。
 
 ::: vue-demo
 
@@ -249,10 +249,28 @@ export default {}
 
 :::
 
+相关说明：
+
+- 替换元素：浏览器根据元素的标签和属性，来决定元素的具体显示内容。
+
+  例如：浏览器会根据 `<img>` 标签的src属性的值来读取图片信息并显示出来，而如果查看 (X)HTML 代码，则看不到图片的实际内容；
+
+  例如：根据 `<input>` 标签的 `type` 属性来决定是显示输入框，还是单选按钮等。(X)HTML 中的 `<img>`、`<input>`、`<textarea>`、`<select>`、`<object>` 都是替换元素。这些元素往往没有实际的内容，即是一个空元素，浏览器会根据元素的标签类型和属性来显示这些元素。可替换元素也在其显示中生成了框。
+
+- 非替换元素：(X)HTML 的大多数元素是不可替换元素，即其内容直接表现给用户端（例如浏览器）。段落 `<p>` 是一个不可替换元素，文字“段落的内容”全被显示。
+
+### 非替换元素的纯内联元素
+
+对于非替换元素的纯内联元素，其可视高度完全由 `line-height` 决定。 `padding`、`border` 属性对可视高度是没有任何影响的，这也是“盒模型”约定俗成说的是块级元素的原因。
+
+### 类似文本的纯内联元素
+
+`line-height` 就是高度计算的基石，用专业说法就是指定了用来计算行框盒子高度的基础高度。比方说，`line-height` 设为 16px，则一行文字高度是16px，两行就是32px，三行就是48px，所有浏览器渲染解析都是这个值，1 像素都不差。
+
 ### 替换元素的内联元素
 
 - 对于替换元素的内联元素，`line-height` 不影响替换元素的高度。
-- 对于同时存在非替换元素与替换元素的场景（即：图文混排），`line-height` 只能决定最小高度。主要因为替换元素不受 `line-height` 的影响，以及受 `vertical-align` 的影响。
+- 对于同时存在非替换元素与替换元素的场景（即：图文混排），因为属于内联元素会形成一个“行框盒子”，`line-height` 只能决定最小高度。主要因为替换元素不受 `line-height` 的影响，以及受 `vertical-align` 的影响。
 
 示例：图片的高度为 `height: 100px` ，包裹图片元素的 div 设置 `line-height: 120px` 的高度为 120px，主要原因是因为每一个 “行框盒子” 前面都有一个宽度为 0 的 “幽灵空白节点”，其内联特性表现和普通字符一样，所以，容器高度等于 `line-height` 设置的属性值 256px 。
 
@@ -261,7 +279,7 @@ export default {}
 ```vue
 <template>
   <div class="line-height-wrapper-image-inline">
-    <img class="vuepress-img" src="https://vuepress.vuejs.org/hero.png" />
+    <img class="vuepress-img" src="https://vuepress.vuejs.org/images/hero.png" />
   </div>
 </template>
 
@@ -290,6 +308,13 @@ export default {}
 对于块级元素，`line-height` 对其本身是没有任何作用的。改变 `line-height`块级元素的高度跟着变化，实际上是通过改变块级元素里面内联级别元素占据的高度实现的。
 
 ## line-height 使内联元素近似垂直居中
+
+“要想让单行文字垂直居中，只要设置 `line-height` 大小和 `height` 高度一样就可以了。” 的误区：
+
+- 误区一：要让单行文字垂直居中，只需要 `line-height` 这一个属性就可以，与 `height` 一点儿关系都没有。
+- 误区二：行高控制文字垂直居中，不仅适用于单行，多行也是可以的。准确的说法应该是 “`line-height` 可以让单行或多行元素近似垂直居中”
+
+行高为何可以实现垂直居中，为何是近似垂直居中：
 
 - 使用 `line-height` 可以实现 “垂直居中” 原因：行距上下等分机制。
 - 近似垂直居中原因：文字的垂直中线位置普遍要比真正的 “行框盒子” 的垂直中线位置要低。
