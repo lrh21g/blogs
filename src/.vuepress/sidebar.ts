@@ -26,6 +26,8 @@ export default sidebar({
         'font',
         'text',
         'background',
+        'border',
+        'scroll-bar',
       ],
     },
     {
