@@ -17,11 +17,9 @@ export default sidebar({
       // 必要的，分组的子项目
       children: [
         'CSS选择器与权重',
-        '内联元素',
+        '流与元素',
         'BFC',
-        'x-height',
-        'line-height',
-        'vertical-align',
+        'line-height-and-vertical-align',
         'float',
         'font',
         'text',
