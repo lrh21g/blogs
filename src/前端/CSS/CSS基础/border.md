@@ -172,7 +172,7 @@ border-color: inherit;
 
 ## 利用 border 绘制多边形
 
-::: normal-demo 实现图片上传按钮
+::: normal-demo 利用 border 绘制多边形
 
 ```html
 <div class="polygon-container">
