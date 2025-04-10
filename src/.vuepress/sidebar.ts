@@ -241,6 +241,12 @@ export default sidebar({
       collapsible: true,
       children: ['基础知识'],
     },
+    {
+      text: 'Nestjs',
+      prefix: 'Nestjs/',
+      collapsible: true,
+      children: ['基础知识'],
+    },
   ],
   '/前端框架/项目搭建/': [
     {
