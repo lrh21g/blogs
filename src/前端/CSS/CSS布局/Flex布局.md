@@ -9,12 +9,15 @@ tag:
 
 ## 基本概念
 
-设置 `display: flex` 或者 `display: inline-flex` 的元素称为 Flex 容器，容器中的子元素称为 Flex 项目。
+设置 `display: flex` 或者 `display: inline-flex` 的元素称为 Flex 容器。在 Flex 容器中的子元素，包括其伪元素 `::before` 、`::after` 和 文本节点都将成为 Flex 项目。
 
 - `display: flex`：保持元素块状特性，宽度默认 100%，不和内联元素一行显示。
 - `display： inline-flex`：inline-flex 容器为 inline 特性，因此可以和图片文字一行显示。
 
-注意：设为 Flex 布局以后，子元素的 `float` 、 `clear` 和 `vertical-align` 属性将失效。
+> 注意
+>
+> - 设为 Flex 容器后，子元素的 `float` 、 `clear` 和 `vertical-align` 属性将失效。
+> - HTML 中的可替代元素是无法成为 Flex 容器的，比如`img`、 `input`、 `select` 等元素。
 
 ![flex_container](./files/images/flex_container.drawio.png)
 
@@ -35,16 +38,38 @@ tag:
 - `wrap`：换行，第一行在上方
 - `wrap-reverse`：换行，第一行在下方
 
+> 注意
+>
+> - Flex 容器没有足够多的空间，Flex 项目在溢出之前，每一个 Flex 项目将会尽可能缩小到其最小内容（`min-content`）的尺寸。即 **Flex 项目一旦达到最小内容（`min-content`）大小， Flex 项目将开始溢出 Flex 容器** ！
+> - 对于 `wrap` 和 `wrap-reverse` ，设置了 `flex:1` 项目，只有在 Flex 容器没有足够空间容纳 Flex 项目时（即，同一 Flex 行所有 Flex 项目最小内容宽度总和大于 Flex 容器宽度），才会让 Flex 项目换行（或列）。
+
 ![flex_container--flex_wrap](./files/images/flex_container--flex_wrap.drawio.png)
 
 ### flex-flow: [flex-direction] || [flex-wrap]
 
-`flex-flow` 属性是 `flex-direction` 属性和 `flex-wrap` 属性的简写形式。默认值为 `flex-flow: row nowrap`
+`flex-flow: [flex-direction] || [flex-wrap]` 属性是 `flex-direction` 属性和 `flex-wrap` 属性的简写形式。
+
+- 默认值为 `flex-flow: row nowrap` 。
+- 只显式设置一个值，并且该值和 `flex-direction` 相匹配时， `flex-wrap` 会取值 `initial` 。
+- 只显式设置一个值，并且该值和 `flex-wrap` 相匹配时，`flex-direction` 会取值 `initial` 。
+- 显式设置两个值时， `flex-direction` 和 `flow-wrap` 没有先后顺序之分，即 `flex-flow: column wrap` 和 `flex-flow: wrap column` 所起作用是等同的。
 
 ```css
-.box {
-  flex-flow: <flex-direction> || <flex-wrap>;
-}
+/* flex-flow：<'flex-direction'> */
+flex-flow: row;
+flex-flow: row-reverse;
+flex-flow: column;
+flex-flow: column-reverse;
+
+/* flex-flow：<'flex-wrap'> */
+flex-flow: nowrap;
+flex-flow: wrap;
+flex-flow: wrap-reverse;
+
+/* flex-flow：<'flex-direction'> 和 <'flex-wrap'> */
+flex-flow: row nowrap;
+flex-flow: column wrap;
+flex-flow: column-reverse wrap-reverse;
 ```
 
 ### justify-content：设置项目在主轴的对齐方式
@@ -60,18 +85,6 @@ tag:
 
 ![flex_container--justify_content](./files/images/flex_container--justify_content.drawio.png)
 
-### align-items：设置项目在交叉轴上对齐方式
-
-假设交叉轴从上到下。
-
-- `flex-start`：交叉轴的起点对齐
-- `flex-end`：交叉轴的终点对齐
-- `center`：交叉轴的中点对齐
-- `baseline`: 项目的第一行文字的基线对齐
-- `stretch`：默认值。如果项目未设置高度或设为 auto，将占满整个容器的高度
-
-![flex_container--align-items](./files/images/flex_container--align-items.drawio.png)
-
 ### align-content：设置项目在多根轴线的对齐方式
 
 注意：如果项目只有一根轴线，该属性不起作用。即：如果所有项目只有一行，则 `align-content` 属性是没有任何效果的。
@@ -86,11 +99,46 @@ tag:
 
 ![flex_container--align-content](./files/images/flex_container--align-content.drawio.png)
 
+### place-content: <align-content> <justify-content>
+
+`place-content: <align-content> <justify-content>` 属性是 `align-content` 和 `justify-content` 的简写。
+
+- 如果 `justify-content` 省略，则等同于 `align-content` 。
+- 如果 `align-content` 取值为 `baseline` 且 `justify-content` 省略，则 `justify-content` 被默认为 `start`。
+
+### align-items：设置项目在交叉轴上对齐方式
+
+假设交叉轴从上到下。
+
+- `flex-start`：交叉轴的起点对齐
+- `flex-end`：交叉轴的终点对齐
+- `center`：交叉轴的中点对齐
+- `baseline`: 项目的第一行文字的基线对齐
+- `stretch`：默认值。如果项目未设置高度或设为 auto，将占满整个容器的高度
+
+![flex_container--align-items](./files/images/flex_container--align-items.drawio.png)
+
+### gap：设置行与列之间的间隙
+
+`gap: <row-gap> <column-gap>` 属性是 `row-gap` 和 `column-gap` 的简写。用于设置行与列之间的间隙。
+
+- 只显式设置一个值时，那么第二个值和第一个值等同
+- 显式设置两个值，第一个值是 `row-gap` 属性的值，第二个则是 `column-gap` 属性的值
+
+`gap` 和 `margin` 设置元素之间的间距的差异
+
+- `gap` 运用在 Flex 容器上，但它无法给 Flex 项目设置不同的外间距。
+- `margin` 运用在 Flex 项目上，可以给 Flex 项目设置不同的外间距。使用 `margin` 会让 Flex 项目与 Flex 容器之间有空白间距
+
 ## Flex 项目属性
 
 ### order：设置项目的排列顺序
 
-`order` 属性定义项目的排列顺序。数值越小，排列越靠前，默认为 0 。如果需要将某一个项目放在最前面，可设置比 0 小的整数即可，如： -1 。
+`order` 属性定义项目的排列顺序。
+
+- 默认为 0 ，Flex 项目按照顺序沿着主轴排列。
+- **数值越小，排列越靠前**。
+- 如果需要将某一个项目放在最前面，可设置比 0 小的整数即可，如： -1 。
 
 ![flex_item--order](./files/images/flex_item--order.drawio.png)
 
