@@ -87,15 +87,18 @@ flex-flow: column-reverse wrap-reverse;
 
 ### align-content：设置项目在多根轴线的对齐方式
 
-注意：如果项目只有一根轴线，该属性不起作用。即：如果所有项目只有一行，则 `align-content` 属性是没有任何效果的。
-
+- `stretch`：默认值。轴线占满整个交叉轴。**每一行项目都等比例拉伸**
 - `flex-start`：与交叉轴的起点对齐
 - `flex-end`：与交叉轴的终点对齐
 - `center`：与交叉轴的中点对齐
 - `space-between`：与交叉轴两端对齐，轴线之间的间隔平均分布
 - `space-around`：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍
 - `space-evenly`：每一行的项目都完全上下等分
-- `stretch`：默认值。轴线占满整个交叉轴。每一行项目都等比例拉伸
+
+> 注意：
+>
+> - 如果项目只有一根轴线，该属性不起作用。即：**如果所有项目只有一行，则 `align-content` 属性是没有任何效果的**。
+> - `align-content` 只有当 `flex-wrap` 属性的值为非 `nowrap` （即 `wrap` 或 `wrap-reverse`）时才能生效。
 
 ![flex_container--align-content](./files/images/flex_container--align-content.drawio.png)
 
@@ -106,15 +109,32 @@ flex-flow: column-reverse wrap-reverse;
 - 如果 `justify-content` 省略，则等同于 `align-content` 。
 - 如果 `align-content` 取值为 `baseline` 且 `justify-content` 省略，则 `justify-content` 被默认为 `start`。
 
+使用 `place-content: center` 构建一个 **水平垂直居中** 的布局效果：
+
+```css
+/* 水平垂直居中 */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+}
+```
+
 ### align-items：设置项目在交叉轴上对齐方式
 
 假设交叉轴从上到下。
 
+- `stretch`：默认值。如果项目未设置高度或设为 auto，**将占满整个容器的高度**
 - `flex-start`：交叉轴的起点对齐
 - `flex-end`：交叉轴的终点对齐
 - `center`：交叉轴的中点对齐
 - `baseline`: 项目的第一行文字的基线对齐
-- `stretch`：默认值。如果项目未设置高度或设为 auto，将占满整个容器的高度
+
+> 注意：
+>
+> Flex 容器不存在 `justify-items` 和 `justify-self` ，主要是因为 Flex 项目在 Flex 容器的主轴上被当作一个组。因此，没有将单个 Flex 项目从该组中分离出来的概念，但它们却存在于 CSS Grid 布局中。
+>
+> 可以在 Flex 项目中使用 `margin: auto` 将 Flex 项目在 Flex 容器的主轴上进行分组。需要注意的是，使用 `margin: auto` 会致使 Flex 项目上的 **`align-self`** 属性失效。
 
 ![flex_container--align-items](./files/images/flex_container--align-items.drawio.png)
 
@@ -144,21 +164,32 @@ flex-flow: column-reverse wrap-reverse;
 
 ### flex-grow：设置项目的扩展比例
 
-`flex-grow` 设置项目的扩展比例，不支持负值，默认值为 0 ，表示不占用剩余空间。如果 `flex-grow` 设置大于 0 ，则 flex 容器剩余空间分配规则如下：
+`flex-grow` 设置项目的扩展比例，
 
-- 所有剩余空间总量为 1 。
-- 只存在某一项目设置 `flex-grow`
-  - `flex-grow` 值 **【小于】** 1，则扩展空间为：总剩余空间与当前元素 `flex-grow` 属性值的比例的计算值
-  - `flex-grow` 值 **【大于】** 1，则独享所有剩余空间
-- 多个项目设置 `flex-grow`
-  - `flex-grow` 值总和 **【小于】** 1，则每个项目的扩展空间为：总剩余空间和当前元素 `flex-grow` 属性值的比例的计算值
-  - `flex-grow` 值总和 **【大于】** 1，则所有剩余空间被扩展，分配比例为：`flex-grow` 属性值的比例。例如：如果所有项目都设置为 `flex-grow: 1` ，则表示剩余空间被均分。如果设置 `flex-grow` 比例为 1:2:1 ，则中间项目占一半的剩余空间，剩下项目均分剩余空间
+- 默认值为 0 ，表示不占用剩余空间。
+- 不支持负值。
+- 如果 `flex-grow` 设置大于 0 ，则 flex 容器剩余空间分配规则如下：
+
+  - 所有剩余空间总量为 1 。
+  - **只存在某一项目** 设置 `flex-grow` 的值：
+
+    - 值 **【小于】** 1，则扩展空间为：总剩余空间与当前元素 `flex-grow` 属性值的比例的计算值
+    - 值 **【大于】** 1，则独享所有剩余空间
+
+  - **多个项目** 设置 `flex-grow` 的值：
+
+    - 值总和 **【小于】** 1，则每个项目的扩展空间为：总剩余空间和当前元素 `flex-grow` 属性值的比例的计算值
+    - 值总和 **【大于】** 1，则所有剩余空间被扩展，分配比例为：`flex-grow` 属性值的比例。例如：如果所有项目都设置为 `flex-grow: 1` ，则表示剩余空间被均分。如果设置 `flex-grow` 比例为 1:2:1 ，则中间项目占一半的剩余空间，剩下项目均分剩余空间
 
 ![flex_item--flex-grow](./files/images/flex_item--flex-grow.drawio.png)
 
 ### flex-shrink：设置项目的缩小比例
 
-`flex-shrink` 主要处理当 Flex 容器空间不足时候，单个元素的收缩比例。`flex-shrink` 不支持负值，默认值是 1 ，即：如果空间不足，则项目将缩小。如果设置为 0 ，则表示不收缩。
+`flex-shrink` 主要处理当 Flex 容器空间不足时候，单个元素的收缩比例。
+
+- 默认值是 1 ，即：如果空间不足，则项目将缩小。
+- 不支持负值。
+- 如果设置为 0 ，则表示不收缩。
 
 项目收缩之后的最终宽度计算示例如下：
 
@@ -176,11 +207,27 @@ flex-flow: column-reverse wrap-reverse;
 
 `flex` 属性是 `flex-grow`，`flex-shrink` 和 `flex-basis` 的缩写。
 
-`flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]`
+`flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]` ，其中 `flex-shrink` 与 `flex-basis` 是可选的。
 
-`flex-shrink` 与 `flex-basis` 是可选的。默认值为 `flex: 0 1 auto`
+- `flex` 属性的单值语法时，其值必须为以下其中之一：
 
-- **`flex: initial;`**：等同于 `flex: 0 1 auto;` 。
+  - 一个无单位的数值（`<number>`）。比如 `flex: 1` ，此时 `1` 会被当作 `flex-grow` 属性的值。
+  - 一个有效的长度值（`<length-percentage>` ）。比如 `flex: 30vw` ，此时 `30vw` 会被当作 `flex-basis` 属性的值。
+
+- `flex` 属性的双值语法，其第一个值必须为 **一个无单位的数值（`<number>`）** ，并且它会**被当作 `flex-grow`属性的值** ；第二个值必须为以下之一：
+
+  - 一个无单位的数值（`<number>`），它会被当作 `flex-shrink` 属性的值。
+  - 一个有效的长度值（`<length-percentage>`），它会被当作 `flex-basis` 属性的值。
+
+- `flex` 属性的三值语法：
+
+  - 第一个值必须是一个无单位的数值（`<number>`），并且它会被当作 `flex-grow` 属性的值。
+  - 第二个值必须是一个无单位的数值（`<number>`），并且它会被当作 `flex-shrink` 属性的值。
+  - 第三个值必须是一个有效的长度值（`<length-percentage>`），并且它会被当作 `flex-basis` 属性的值。
+
+常见 `flex` 属性值说明
+
+- **`flex: initial;` 或 `flex: 0 auto;`**：等同于 `flex: 0 1 auto;` （默认值）。
 
   最终表现形式如下：
 
@@ -188,6 +235,43 @@ flex-flow: column-reverse wrap-reverse;
   - Flex 容器**尺寸不足**时，尺寸会收缩变小（`flex-shrink:1;`），**尺寸自适应于内容**（`flex-basis:auto;`）
 
   适用场景：默认的 Flex 状态，无需专门设置，适合小控件元素的分布布局，或者某一项内容动态变化的布局。
+
+- **`flex: auto;`**：等同于 `flex: 1 1 auto;` 。
+
+  最终表现为：元素尺寸可以弹性增大以及变小，**在尺寸不足时，会优先最大化内容尺寸**。
+
+  适用场景：适合基于内容动态适配的布局。例如：导航栏，导航数目不固定，每个导航文字数量也不固定，适合使用 `flex: auto;` 实现。
+
+- **`flex: 1;`**：等同于 `flex: 1 1 0%;` 。
+
+  最终表现为：元素尺寸可以弹性增大以及变小，**在尺寸不足时，会优先最小大内容尺寸**。
+
+  如果需要实现所有 Flex 项目宽度相等，除了在 Flex 项目上设置为 `flex:1` 之外，还需要显式设置 `min-width` 值为 `0` 。
+
+  ```css
+  .item {
+    flex: 1;
+    min-width: 0;
+  }
+  ```
+
+  适用场景：适合等分布局。
+
+  > Q：为什么 `min-width:0` 很重要
+  >
+  > A：
+  >
+  > 在 Flex 项目上显式设置 `flex:1` 时已重置了 `flex` 的初始值（`flex: 0 1 auto`）（即： `flex-grow: 1; flex-shrink: 1; flex-basis: 0%`）
+  >
+  > 当 `flex-basis` 为 `auto` 时， Flex 项目的宽度是 `max-content` （除非 Flex 容器空间完全不足）。也就是说，`flex:1` 时，`flex-basis` 值从 `auto` 变成了 `0%` ，这将覆盖 Flex 项目的内在尺寸（`min-content` ），Flex 项目的基本尺寸现在是 `0` ，但由于 `flex-grow` 的存在，Flex 项目会扩展以填补空的空间（Flex 容器的剩余空间）。
+  >
+  > 而实际上，在这种情况下，`flex-shrink` 不再做任何事情，因为所有 Flex 项目现在的宽度都是 `0` ，并且正在增长以填补可用空间。只不过， Flex 容器有可能存在没有剩余空间的情况，甚至是有不足空间的情况存在。此时，`flex:1` 也就不能均分 Flex 容器的可用空间。
+  >
+  > 事实上，**默认情况之下，设置了 `flex:1` 的 Flex 项目在收缩的时候，其宽度不会小于其最小内容尺寸（`min-content`）。如果要改变这一点，需要显式设置 `min-width` （或 `min-inline-size`）或 `min-height` （或 `min-block-size`）的值**。
+  >
+  > CSS 中它们的值为 `auto` 时，会被浏览器计算为 `0` 。但在 Flexbox 中，Flex 项目的 `min-width` 或 `min-height` 的值又不会被计算为 `0` ，它的值被计算为 `max-content` 。
+  >
+  > 为此，要真正达到均分列，只在 Flex 项目上显式设置 `flex:1` 是不够的，还需要在 Flex 项目上显式设置 `min-width` 值为 `0` 。
 
 - **`flex: 0;`**：等同于 `flex: 0 1 0%;` 。
 
@@ -207,18 +291,6 @@ flex-flow: column-reverse wrap-reverse;
 
   适用场景：适用于不换行的内容固定或者较少的小控件元素上，如按钮。例如：列表右侧的操作按钮，对于按钮元素而言，里面的文字内容不能换行，适合使用 `flex: none;`。
 
-- **`flex: 1;`**：等同于 `flex: 1 1 0%;` 。
-
-  最终表现为：元素尺寸可以弹性增大以及变小，**在尺寸不足时，会优先最小大内容尺寸**。
-
-  适用场景：适合等分布局。
-
-- **`flex: auto;`**：等同于 `flex: 1 1 auto;` 。
-
-  最终表现为：元素尺寸可以弹性增大以及变小，**在尺寸不足时，会优先最大化内容尺寸**。
-
-  适用场景：适合基于内容动态适配的布局。例如：导航栏，导航数目不固定，每个导航文字数量也不固定，适合使用 `flex: auto;` 实现。
-
 ### align-self：设置单个项目与其他项目不一样的对齐方式
 
 可覆盖 `align-items` 属性。与 `align-items` 属性的唯一区别为多了一个 `auto` ，其他属性值含义一致。
@@ -229,6 +301,10 @@ flex-flow: column-reverse wrap-reverse;
 - `center`：交叉轴的中点对齐
 - `baseline`: 项目的第一行文字的基线对齐
 - `stretch`：如果项目未设置高度或设为 auto，将占满整个容器的高度
+
+> 注意
+>
+> 当 `align-self` 碰上了 `align-content` 属性时，只有 `align-content` 属性值为 `stretch` 时，`align-self`属性的值才有效。
 
 ## 参考
 
