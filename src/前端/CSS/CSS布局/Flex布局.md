@@ -102,7 +102,7 @@ flex-flow: column-reverse wrap-reverse;
 
 ![flex_container--align-content](./files/images/flex_container--align-content.drawio.png)
 
-### place-content: <align-content> <justify-content>
+### place-content
 
 `place-content: <align-content> <justify-content>` 属性是 `align-content` 和 `justify-content` 的简写。
 
@@ -203,7 +203,7 @@ flex-flow: column-reverse wrap-reverse;
 - 如果有设置 `width` ，则占据空间为 `width` ，无则为内容宽度
 - 如果同时设置 `width` 和 `flex-basis` ，从渲染表现看，会忽略 `width`
 
-### flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+### flex
 
 `flex` 属性是 `flex-grow`，`flex-shrink` 和 `flex-basis` 的缩写。
 
