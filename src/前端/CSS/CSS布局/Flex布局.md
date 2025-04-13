@@ -168,32 +168,36 @@ flex-flow: column-reverse wrap-reverse;
 
 - 默认值为 0 ，表示不占用剩余空间。
 - 不支持负值。
-- 如果 `flex-grow` 设置大于 0 ，则 flex 容器剩余空间分配规则如下：
+- 所有 Flex 项目扩展因子（即，设置的 `flex-grow` 属性值） **总和小于或等于 1** 时
 
-  - 所有剩余空间总量为 1 。
-  - **只存在某一项目** 设置 `flex-grow` 的值：
+  - `Flex 项目占用的弹性空间 = Flex 容器的剩余空间 * 当前 Flex 项目的扩展因子`
+  - `Flex 项目占用的空间 = Flex 项目占用的弹性空间 + Flex 项目的基础尺寸（即，设置的 flex-basis 属性值）`
 
-    - 值 **【小于】** 1，则扩展空间为：总剩余空间与当前元素 `flex-grow` 属性值的比例的计算值
-    - 值 **【大于】** 1，则独享所有剩余空间
+- 所有 Flex 项目扩展因子（即，设置的 `flex-grow` 属性值） **总和大于 1** 时
 
-  - **多个项目** 设置 `flex-grow` 的值：
+  - `Flex 项目占用的弹性空间 = ( Flex 容器的剩余空间 / 所有 Flex 项目扩展因子的总和 ) * 当前 Flex 项目的扩展因子` 。
+  - `Flex 项目占用的空间 = Flex 项目占用的弹性空间 + Flex 项目的基础尺寸（即，设置的 flex-basis 属性值）`
 
-    - 值总和 **【小于】** 1，则每个项目的扩展空间为：总剩余空间和当前元素 `flex-grow` 属性值的比例的计算值
-    - 值总和 **【大于】** 1，则所有剩余空间被扩展，分配比例为：`flex-grow` 属性值的比例。例如：如果所有项目都设置为 `flex-grow: 1` ，则表示剩余空间被均分。如果设置 `flex-grow` 比例为 1:2:1 ，则中间项目占一半的剩余空间，剩下项目均分剩余空间
-
-![flex_item--flex-grow](./files/images/flex_item--flex-grow.drawio.png)
+> 注意：在 Flex 项目的计算中，不管是使用 `flex-grow` 还是 `flex-shrink` ，对 Flex 项目进收缩扩展计算，计算出来的值不能比 Flex 项目的内容的最小长度（`min-content`）或内部固定元素的长度值还小。
 
 ### flex-shrink：设置项目的缩小比例
 
 `flex-shrink` 主要处理当 Flex 容器空间不足时候，单个元素的收缩比例。
 
-- 默认值是 1 ，即：如果空间不足，则项目将缩小。
+- 默认值是 1 ，表示如果空间不足，则项目将缩小。
 - 不支持负值。
-- 如果设置为 0 ，则表示不收缩。
+- 如果设置为 0 ，表示不收缩。
+- 所有 Flex 项目收缩因子（即，设置的 `flex-shrink` 属性值） **总和小于或等于 1** 时
 
-项目收缩之后的最终宽度计算示例如下：
+  - `Flex 项目占用的弹性空间 = Flex 容器的不足空间 * 当前 Flex 项目的收缩因子`
+  - `Flex 项目占用的空间 = Flex 项目占用的弹性空间 + Flex 项目的基础尺寸（即，设置的 flex-basis 属性值）`
 
-![flex_item--flex-shrink](./files/images/flex_item--flex-shrink.drawio.png)
+- 所有 Flex 项目收缩因子（即，设置的 `flex-shrink` 属性值） **总和大于 1** 时
+
+  - `Flex 项目占用的弹性空间 = ( Flex 容器的不足空间 / 所有 Flex 项目收缩因子的总和 ) * 当前 Flex 项目的收缩因子` 。
+  - `Flex 项目占用的空间 = Flex 项目占用的弹性空间 + Flex 项目的基础尺寸（即，设置的 flex-basis 属性值）`
+
+> 注意：在 Flex 项目的计算中，不管是使用 `flex-grow` 还是 `flex-shrink` ，对 Flex 项目进收缩扩展计算，计算出来的值不能比 Flex 项目的内容的最小长度（`min-content`）或内部固定元素的长度值还小，此时 Flex 项目会以 `min-content` 的大小进行计算。
 
 ### flex-basis：设置项目分配剩余空间，占据的主轴空间
 
@@ -202,6 +206,12 @@ flex-flow: column-reverse wrap-reverse;
 - 默认值为 `auto` ，即项目本来的大小
 - 如果有设置 `width` ，则占据空间为 `width` ，无则为内容宽度
 - 如果同时设置 `width` 和 `flex-basis` ，从渲染表现看，会忽略 `width`
+
+Flex 项目的尺寸
+
+- 首先根据 `content` ➜ `width` ➜ `flex-basis` 来决定用哪个值来初始化 Flex 项目的假设主尺寸。
+- 如果 Flex 项目显式设置了 `flex-basis` 属性，则会忽略 `width` 和 `content` 。
+- 但最终浏览器计算出来的 Flex 项目主尺寸（计算后的 `flex-basis` 属性的值）会受到 CSS 的 `min-*` 和 `max-*` 属性值的限制，其中 `min-*` 用来设置 Flex 项目的下限值，`max-*`用来设置 Flex 项目的上限值 。
 
 ### flex
 
@@ -269,7 +279,7 @@ flex-flow: column-reverse wrap-reverse;
   >
   > 事实上，**默认情况之下，设置了 `flex:1` 的 Flex 项目在收缩的时候，其宽度不会小于其最小内容尺寸（`min-content`）。如果要改变这一点，需要显式设置 `min-width` （或 `min-inline-size`）或 `min-height` （或 `min-block-size`）的值**。
   >
-  > CSS 中它们的值为 `auto` 时，会被浏览器计算为 `0` 。但在 Flexbox 中，Flex 项目的 `min-width` 或 `min-height` 的值又不会被计算为 `0` ，它的值被计算为 `max-content` 。
+  > CSS 中它们的值为 `auto` 时，会被浏览器计算为 `0` 。但在 flexbox 中，Flex 项目的 `min-width` 或 `min-height` 的值又不会被计算为 `0` ，它的值被计算为 `max-content` 。
   >
   > 为此，要真正达到均分列，只在 Flex 项目上显式设置 `flex:1` 是不够的，还需要在 Flex 项目上显式设置 `min-width` 值为 `0` 。
 
@@ -313,5 +323,5 @@ flex-flow: column-reverse wrap-reverse;
 - [写给自己看的 display: flex 布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)
 - [flex:0 flex:1 flex:none flex:auto 应该在什么场景下使用？](https://www.zhangxinxu.com/wordpress/2020/10/css-flex-0-1-none/)
 - [FLEX](https://flexbox.malven.co/)
-- [CSS Tricks: A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
-- [FLEXBOX FROGGY](http://flexboxfroggy.com/)
+- [CSS Tricks: A Complete Guide to flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+- [flexbox FROGGY](http://flexboxfroggy.com/)
