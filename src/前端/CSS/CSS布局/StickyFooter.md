@@ -83,7 +83,7 @@ tag:
 </style>
 ```
 
-## 使用flexbox弹性盒布局
+## 使用 flexbox 弹性盒布局
 
 ```html
 <body>
