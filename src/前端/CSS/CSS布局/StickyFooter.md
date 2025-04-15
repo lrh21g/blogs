@@ -38,6 +38,7 @@ tag:
 /* 模拟 html、body 的高度 */
 .container {
   --var-content-height: 100px;
+  
   height: 300px;
   margin: 0;
   overflow: auto;
@@ -70,6 +71,7 @@ tag:
 
 .footer {
   height: 50px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,96 +94,301 @@ contentInputDOM.addEventListener('input', (event) => {
 
 给内容外增加父元素，并让内容部分的底部内边距与页脚高度的值相等。
 
-``` html
-<body>
-  <div class="content">
-    <div class="content-inside">content</div>
-  </div>
-  <footer class="footer"></footer>
-</body>
+::: normal-demo 通过将页脚的顶部外边距设为负数实现 Sticky Footer
 
-<style>
-html, body {
-  height: 100%;
+```html
+<div class="container">
+  <div class="wrapper">
+    <header class="header">Header</header>
+    <div class="content">
+      <div>Content</div>
+      <div>set content height ： <input class="content-input" type="text" /> px</div>
+    </div>
+    <div class="push"></div>
+  </div>
+  <footer class="footer">Sticky Footer</footer>
+</div>
+```
+
+```css
+/* 模拟 html、body 的高度 */
+.container {
+  --var-content-height: 100px;
+
+  height: 300px;
   margin: 0;
+  overflow: auto;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.wrapper {
+  min-height: 100%;
+
+  background-color: #818c94;
+}
+
+.header {
+  height: 50px;
+  background-color: #db6f53;
 }
 
 .content {
-  min-height: 100%;
+  height: var(--var-content-height);
+  background-color: #59a7d1;
 }
 
-.content-inside {
-  padding: 20px;
-  padding-bottom: 50px;
+.push {
+  height: 50px;
+  background-color:rgba(62, 175, 124, 0.5);
 }
 
-.footer, .push {
+.footer {
   height: 50px;
   margin-top: -50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3eaf7c;
 }
-</style>
 ```
 
-## 使用flexbox弹性盒布局
+```js
+const containerDOM = document.querySelector('.container');
+const contentInputDOM = document.querySelector('.content-input');
+contentInputDOM.addEventListener('input', (event) => {
+  const val = event.target.value
+  containerDOM.style.setProperty("--var-content-height", val + 'px')
+})
+```
 
-``` html
-<body>
-  <div class="content">
-    content
+:::
+
+## Flex 布局
+
+::: normal-demo 通过 Flex 实现 Sticky Footer
+
+```html
+<div class="container">
+  <div class="wrapper">
+    <header class="header">Header</header>
+    <div class="content">
+      <div>Content</div>
+      <div>set content fill height ： <input class="content-input" type="text" /> px</div>
+      <div class="content-fill-height">fill-fill-height-block</div>
+    </div>
+    <footer class="footer">Sticky Footer</footer>
   </div>
-  <footer class="footer"></footer>
-</body>
+</div>
+```
 
-<style>
-html {
-  height: 100%;
+```css
+/* 模拟 html、body 的高度 */
+.container {
+  --var-fill-content-height: 100px;
+
+  height: 300px;
+  margin: 0;
+  overflow: auto;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-body {
+.wrapper {
   min-height: 100%;
   display: flex;
   flex-direction: column;
+
+  background-color: #818c94;
+}
+
+.header {
+  height: 50px;
+  background-color: #db6f53;
 }
 
 .content {
   flex: 1;
+  background-color: #59a7d1;
 }
-</style>
+
+.content-fill-height {
+  height: var(--var-fill-content-height);
+  background-color:rgba(129, 140, 148, 0.5);
+}
+
+.footer {
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3eaf7c;
+}
 ```
+
+```js
+const containerDOM = document.querySelector('.container');
+const contentInputDOM = document.querySelector('.content-input');
+contentInputDOM.addEventListener('input', (event) => {
+  const val = event.target.value
+  containerDOM.style.setProperty("--var-fill-content-height", val + 'px')
+})
+```
+
+:::
+
+## Grid 布局
+
+::: normal-demo 通过 Grid 实现 Sticky Footer
+
+```html
+<div class="container">
+  <div class="wrapper">
+    <header class="header">Header</header>
+    <div class="content">
+      <div>Content</div>
+      <div>set content fill height ： <input class="content-input" type="text" /> px</div>
+      <div class="content-fill-height">fill-height-block</div>
+    </div>
+    <footer class="footer">Sticky Footer</footer>
+  </div>
+</div>
+```
+
+```css
+/* 模拟 html、body 的高度 */
+.container {
+  --var-fill-content-height: 100px;
+
+  height: 300px;
+  margin: 0;
+  overflow: auto;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  background-color: #818c94;
+}
+
+.header {
+  height: 50px;
+  background-color: #db6f53;
+}
+
+.content {
+  background-color: #59a7d1;
+}
+
+.content-fill-height {
+  height: var(--var-fill-content-height);
+  background-color:rgba(129, 140, 148, 0.5);
+}
+
+.footer {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3eaf7c;
+}
+```
+
+```js
+const containerDOM = document.querySelector('.container');
+const contentInputDOM = document.querySelector('.content-input');
+contentInputDOM.addEventListener('input', (event) => {
+  const val = event.target.value
+  containerDOM.style.setProperty("--var-fill-content-height", val + 'px')
+})
+```
+
+:::
 
 ## absolute
 
-``` html
-<div class="wrapper">
-  <div class="content">
-    <!-- 页面主体内容区域 -->
-  </div>
-  <div class="footer">
-    <!-- 需要做到 Sticky Footer 效果的页脚 -->
+::: normal-demo 通过将内容部分的底部外边距设为负数实现 Sticky Footer
+
+```html
+<div class="container">
+  <div class="wrapper">
+    <header class="header">Header</header>
+    <div class="content">
+      <div>Content</div>
+      <div>set content height ： <input class="content-input" type="text" /> px</div>
+    </div>
+    <footer class="footer">Sticky Footer</footer>
   </div>
 </div>
+```
 
-<style>
-html, body {
-  height : 100 %;
+```css
+/* 需指定 `html`、`body` `100%` 的高度 */
+/* 且 `content` 的 `padding-bottom` 需要与 `footer` 的 `height` 一致 */
+
+/* 模拟 html、body 的高度 */
+.container {
+  --var-content-height: 100px;
+  
+  height: 300px;
+  margin: 0;
+  overflow: auto;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .wrapper {
   position: relative;
-  min-height: 100 %;
+  min-height: 100%;
   padding-bottom: 50px;
   box-sizing: border-box;
+
+  background-color: #818c94;
+}
+
+.header {
+  height: 50px;
+  background-color: #db6f53;
+}
+
+.content {
+  height: var(--var-content-height);
+  background-color: #59a7d1;
 }
 
 .footer {
   position: absolute;
+  left: 0;
+  right: 0;
   bottom: 0;
   height: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3eaf7c;
 }
-</style>
 ```
 
-需指定 `html`、`body` `100%` 的高度，且 `content` 的 `padding-bottom` 需要与 `footer` 的 `height` 一致
+```js
+const containerDOM = document.querySelector('.container');
+const contentInputDOM = document.querySelector('.content-input');
+contentInputDOM.addEventListener('input', (event) => {
+  const val = event.target.value
+  containerDOM.style.setProperty("--var-content-height", val + 'px')
+})
+```
+
+:::
 
 ## calc
 
@@ -210,66 +417,6 @@ html, body {
 
 `footer` 的高度值需要与 `content` 其中的计算值一致。
 
-## table
-
-``` html
-<div class="wrapper">
-  <div class="content">
-    <!-- 页面主体内容区域 -->
-  </div>
-  <div class="footer">
-    <!-- 需要做到 Sticky Footer 效果的页脚 -->
-  </div>
-</div>
-
-<style>
-html, body {
-  height: 100%;
-}
-
-.wrapper {
-  display: table;
-  width: 100%;
-  min-height: 100%;
-}
-
-.content {
-  display: table-row;
-  height: 100%;
-}
-</style>
-```
-
-注意：使用 `table` 方案存在一个比较常见的样式限制，通常 `margin`、`padding`、`border` 等属性会不符合预期。 不建议使用这个方案。问题解决方式为：别把其他样式写在 table 上。
-
-## 使用Grid网格布局
-
-``` html
-<body>
-  <div class="content">
-    content
-  </div>
-  <footer class="footer"></footer>
-</body>
-
-<style>
-html {
-  height: 100%;
-}
-
-body {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: 1fr auto;
-}
-
-.footer {
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-</style>
-```
-
-参考：
+## 参考文章
 
 - [各种CSS实现Sticky Footer](https://mp.weixin.qq.com/s?__biz=MzU0OTE3MjE1Mw%3D%3D&mid=2247483693&idx=1&sn=ea846c8a1b404a8a0aa5a5175059e0f4&chksm=fbb2a7fbccc52eed1b62f21503d93449c8425c464d5b4ac576facadf560f95ab9ea8aca5484b&mpshare=1&scene=23&srcid=1120MlKsKxWYxEsbttZ5V0CO)
