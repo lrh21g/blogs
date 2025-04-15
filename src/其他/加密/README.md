@@ -633,7 +633,7 @@ console.log(str);
 
 Nginx 配置开启 gZip 压缩，对传输资源进行体积压缩，可高达 90%
 
-```nginx.conf
+```nginx
 gzip on;
 gzip_min_length 1k;
 gzip_comp_level 6;
@@ -648,7 +648,7 @@ gzip_http_version 1.1;
 
 一个持久的 TCP 连接，节省了连接创建的时间。Nginx默认开启keep alive
 
-```nginx.conf
+```nginx
 keepalive_timeout 64;
 keepalive_requests 100;
 ```
@@ -661,7 +661,7 @@ keepalive_requests 100;
 - Last-Modified + If-Modified-Since
 - Etag + If-None-Match
 
-```nginx.conf
+```nginx
 if ($request_filename ~* .*\.(?:htm|html)$) {
   add_header Cache-Control "no-cache, must-revalidate";
   add_header "Pragma" "no-chache";
