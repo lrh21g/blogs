@@ -316,6 +316,704 @@ Flex 项目的尺寸
 >
 > 当 `align-self` 碰上了 `align-content` 属性时，只有 `align-content` 属性值为 `stretch` 时，`align-self`属性的值才有效。
 
+## Flex 布局实例
+
+### 骰子布局
+
+::: normal-demo 一个项目
+
+```html
+<div class="wrapper">
+  <div class="face-box first-face-1">
+    <span class="pip"></span>
+  </div>
+  <div class="face-box first-face-2">
+    <span class="pip"></span>
+  </div>
+  <div class="face-box first-face-3">
+    <span class="pip"></span>
+  </div>
+  <div class="face-box first-face-4">
+    <span class="pip"></span>
+  </div>
+  <div class="face-box first-face-5">
+    <span class="pip"></span>
+  </div>
+  <div class="face-box first-face-6">
+    <span class="pip"></span>
+  </div>
+  <div class="face-box first-face-7">
+    <span class="pip"></span>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+  align-content: center;
+}
+
+.first-face-1 {
+  display: flex;
+}
+
+.first-face-2 {
+  display: flex;
+  justify-content: center;
+}
+
+.first-face-3 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.first-face-4 {
+  display: flex;
+  align-items: center;
+}
+
+.first-face-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-face-6 {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.first-face-7 {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.face-box {
+  margin: 16px;
+  padding: 4px;
+
+  width: 104px;
+  height: 104px;
+  /* object-fit 指定可替换元素（例如：<img> 或 <video>）的内容应该如何适应到其使用高度和宽度确定的框。 */
+  /* contain : 保持原有尺寸比例。内容被缩放。 */
+  object-fit: contain;
+
+  background-color: #e7e7e7;
+  box-shadow:
+    inset 0 5px white,
+    inset 0 -5px #bbb,
+    inset 5px 0 #d7d7d7,
+    inset -5px 0 #d7d7d7;
+
+  border-radius: 10%;
+}
+
+.pip {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+
+  background-color: #333;
+  box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+```
+
+:::
+
+::: normal-demo 两个项目
+
+```html
+<div class="wrapper">
+  <div class="face-box second-face-1">
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box second-face-2">
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box second-face-3">
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box second-face-4">
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box second-face-5">
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box second-face-6">
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+  align-content: center;
+}
+
+.second-face-1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.second-face-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.second-face-3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.second-face-4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.second-face-5 {
+  display: flex;
+}
+
+.second-face-5 .pip:nth-child(2) {
+  align-self: center;
+}
+
+.second-face-6 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.second-face-6 .pip:nth-of-type(2) {
+  align-self: flex-end;
+}
+
+.face-box {
+  margin: 16px;
+  padding: 4px;
+
+  width: 104px;
+  height: 104px;
+  /* object-fit 指定可替换元素（例如：<img> 或 <video>）的内容应该如何适应到其使用高度和宽度确定的框。 */
+  /* contain : 保持原有尺寸比例。内容被缩放。 */
+  object-fit: contain;
+
+  background-color: #e7e7e7;
+  box-shadow:
+    inset 0 5px white,
+    inset 0 -5px #bbb,
+    inset 5px 0 #d7d7d7,
+    inset -5px 0 #d7d7d7;
+
+  border-radius: 10%;
+}
+
+.pip {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+
+  background-color: #333;
+  box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+```
+
+:::
+
+::: normal-demo 三个项目
+
+```html
+<div class="wrapper">
+  <div class="face-box third-face">
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+  align-content: center;
+}
+
+.third-face {
+  display: flex;
+  justify-content: space-between;
+}
+
+.third-face .pip:nth-of-type(2) {
+  align-self: center;
+}
+
+.third-face .pip:nth-of-type(3) {
+  align-self: flex-end;
+}
+
+.face-box {
+  margin: 16px;
+  padding: 4px;
+
+  width: 104px;
+  height: 104px;
+  /* object-fit 指定可替换元素（例如：<img> 或 <video>）的内容应该如何适应到其使用高度和宽度确定的框。 */
+  /* contain : 保持原有尺寸比例。内容被缩放。 */
+  object-fit: contain;
+
+  background-color: #e7e7e7;
+  box-shadow:
+    inset 0 5px white,
+    inset 0 -5px #bbb,
+    inset 5px 0 #d7d7d7,
+    inset -5px 0 #d7d7d7;
+
+  border-radius: 10%;
+}
+
+.pip {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+
+  background-color: #333;
+  box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+```
+
+:::
+
+::: normal-demo 四个项目
+
+```html
+<div class="wrapper">
+  <div class="face-box fourth-face-1">
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box fourth-face-2">
+    <div class="column">
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+    <div class="column">
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+  align-content: center;
+}
+
+.fourth-face-1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: space-between;
+}
+
+.fourth-face-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fourth-face-2 .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.face-box {
+  margin: 16px;
+  padding: 4px;
+
+  width: 104px;
+  height: 104px;
+  /* object-fit 指定可替换元素（例如：<img> 或 <video>）的内容应该如何适应到其使用高度和宽度确定的框。 */
+  /* contain : 保持原有尺寸比例。内容被缩放。 */
+  object-fit: contain;
+
+  background-color: #e7e7e7;
+  box-shadow:
+    inset 0 5px white,
+    inset 0 -5px #bbb,
+    inset 5px 0 #d7d7d7,
+    inset -5px 0 #d7d7d7;
+
+  border-radius: 10%;
+}
+
+.pip {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+
+  background-color: #333;
+  box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+```
+
+:::
+
+::: normal-demo 五个项目
+
+```html
+<div class="wrapper">
+  <div class="face-box fifth-face">
+    <div class="column">
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+    <div class="column">
+      <span class="pip"></span>
+    </div>
+    <div class="column">
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+  align-content: center;
+}
+
+.fifth-face {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fifth-face .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fifth-face .column:nth-of-type(2) {
+  justify-content: center;
+}
+
+.face-box {
+  margin: 16px;
+  padding: 4px;
+
+  width: 104px;
+  height: 104px;
+  /* object-fit 指定可替换元素（例如：<img> 或 <video>）的内容应该如何适应到其使用高度和宽度确定的框。 */
+  /* contain : 保持原有尺寸比例。内容被缩放。 */
+  object-fit: contain;
+
+  background-color: #e7e7e7;
+  box-shadow:
+    inset 0 5px white,
+    inset 0 -5px #bbb,
+    inset 5px 0 #d7d7d7,
+    inset -5px 0 #d7d7d7;
+
+  border-radius: 10%;
+}
+
+.pip {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+
+  background-color: #333;
+  box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+```
+
+:::
+
+::: normal-demo 六个项目
+
+```html
+<div class="wrapper">
+  <div class="face-box sixth-face-1">
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box sixth-face-2">
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+    <span class="pip"></span>
+  </div>
+  <div class="face-box sixth-face-3">
+    <div class="row">
+      <span class="pip"></span>
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+    <div class="row">
+      <span class="pip"></span>
+    </div>
+    <div class="row">
+      <span class="pip"></span>
+      <span class="pip"></span>
+    </div>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: center;
+  align-content: center;
+}
+
+.sixth-face-1 {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.sixth-face-2 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.sixth-face-3 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sixth-face-3 .row{
+  flex-basis: 100%;
+  display:flex;
+}
+
+.sixth-face-3 .row:nth-child(2){
+  justify-content: center;
+}
+
+.sixth-face-3 .row:nth-child(3){
+  justify-content: space-between;
+}
+
+.face-box {
+  margin: 16px;
+  padding: 4px;
+
+  width: 104px;
+  height: 104px;
+  /* object-fit 指定可替换元素（例如：<img> 或 <video>）的内容应该如何适应到其使用高度和宽度确定的框。 */
+  /* contain : 保持原有尺寸比例。内容被缩放。 */
+  object-fit: contain;
+
+  background-color: #e7e7e7;
+  box-shadow:
+    inset 0 5px white,
+    inset 0 -5px #bbb,
+    inset 5px 0 #d7d7d7,
+    inset -5px 0 #d7d7d7;
+
+  border-radius: 10%;
+}
+
+.pip {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin: 4px;
+
+  background-color: #333;
+  box-shadow: inset 0 3px #111, inset 0 -3px #555;
+}
+```
+
+:::
+
+### 百分比布局
+
+::: normal-demo 使用 Flex 实现百分比布局
+
+```html
+<div class="wrapper">
+  <div class="grid">
+    <div class="column u-1of2">1 of 2</div>
+    <div class="column">auto</div>
+    <div class="column">auto</div>
+  </div>
+
+  <div class="grid">
+    <div class="column">auto</div>
+    <div class="column u-1of3">1 of 3</div>
+  </div>
+
+  <div class="grid">
+    <div class="column u-1of4">1 of 4</div>
+    <div class="column">auto</div>
+    <div class="column u-1of3">1 of 3</div>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  width: 100%;
+  display: grid;
+  gap: 4px;
+}
+
+.grid {
+  display: flex;
+  gap: 4px;
+}
+
+.column {
+  flex: 1;
+  min-width: 0;
+}
+
+.column.u-full {
+  flex: 0 0 100%;
+}
+
+.column.u-1of2 {
+  flex: 0 0 50%;
+}
+
+.column.u-1of3 {
+  flex: 0 0 33.3333%;
+}
+
+.column.u-1of4 {
+  flex: 0 0 25%;
+}
+
+.column {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  min-height: 36px;
+  padding: 4px 6px;
+  border-radius: 2px;
+  color: #555577;
+  white-space: nowrap;
+  font-weight: 500;
+  background-color: #3eaf7c;
+  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.15);
+  box-shadow: 0 0 0.12em 0.012em rgb(0 0 0 / 0.25);
+}
+```
+
+:::
+
+### 流式布局
+
+::: normal-demo 使用 Flex 实现流式布局（每行的项目数固定，会自动分行）
+
+```html
+<div class="parent">
+  <div class="child">1</div>
+  <div class="child">2</div>
+  <div class="child">3</div>
+  <div class="child">4</div>
+  <div class="child">5</div>
+  <div class="child">6</div>
+  <div class="child">7</div>
+  <div class="child">8</div>
+  <div class="child">9</div>
+</div>
+```
+
+```css
+.parent {
+  width: 200px;
+  display: flex;
+  /* flex-direction: row; flex-wrap: wrap; */
+  flex-flow: row wrap;
+  align-content: flex-start;
+
+  background-color: #eee;
+}
+
+.child {
+  flex: 0 0 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-sizing: border-box;
+  height: 50px;
+  color: #555577;
+  white-space: nowrap;
+  font-weight: 500;
+  border: 1px solid #3eaf7c;
+}
+```
+
+:::
+
 ## 参考
 
 - [Flex 布局教程：语法篇](http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
