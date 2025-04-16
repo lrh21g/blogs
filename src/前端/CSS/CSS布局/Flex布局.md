@@ -961,7 +961,6 @@ Flex 项目的尺寸
   white-space: nowrap;
   font-weight: 500;
   background-color: #3eaf7c;
-  text-shadow: 1px 1px 0 rgb(0 0 0 / 0.15);
   box-shadow: 0 0 0.12em 0.012em rgb(0 0 0 / 0.25);
 }
 ```
@@ -1009,6 +1008,78 @@ Flex 项目的尺寸
   white-space: nowrap;
   font-weight: 500;
   border: 1px solid #3eaf7c;
+}
+```
+
+:::
+
+### 九宫格
+
+九宫格布局，是由几行组成的布局。每行中的项目都有固定的宽高比，项目具有相同的高度，并且会填满整行。
+
+::: normal-demo 九宫格布局
+
+```html
+<div class="container">
+  <div class="row">
+    <div class="item" style="--ratio: 16 / 9">16:9</div>
+    <div class="item" style="--ratio: 1 / 1">1:1</div>
+    <div class="item" style="--ratio: 3 / 2">3:2</div>
+  </div>
+  <div class="row">
+    <div class="item" style="--ratio: 1 / 1">1:1</div>
+    <div class="item" style="--ratio: 1 / 1">1:1</div>
+    <div class="item" style="--ratio: 1 / 1">1:1</div>
+  </div>
+  <div class="row">
+    <div class="item" style="--ratio: 4 / 3">4:3</div>
+    <div class="item" style="--ratio: 3 / 2">3:2</div>
+    <div class="item" style="--ratio: 4 / 3">4:3</div>
+  </div>
+  <div class="row">
+    <div class="item" style="--ratio: 16 / 9">16:9</div>
+    <div class="item" style="--ratio: 16 / 9">16:9</div>
+  </div>
+</div>
+```
+
+```css
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  width: 100%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  gap: 4px;
+}
+
+.item {
+  /* 九宫格布局，是由几行组成的布局。每行中的项目都有固定的宽高比，项目具有相同的高度，并且会填满整行  */
+  /* 对于每个 Flex 项目需设置的宽高比 */
+  /* 如果 Flex 项目的宽高比 “分母” 相同时，则只需要在相应的 Flex 项目设置 flex-grow 的值为 “分子” ，同时，显示的设置 flex-basis 为 0% */
+  /* Flex 项目的宽高比 “分母” 不同，可使用 CSS 自定义属性处理，此处为 --ratio */
+
+  /* aspect-ratio 为盒子规定了首选纵横比 width / height 。如果省略 height 和前面的斜杠字符，则 height 默认为 1。 */
+  /* width: 400px; aspect-ratio: 16 / 9; -- 浏览器会根据元素的 width 和宽高比 aspect-ratio 计算出 height */
+  /* height: 400px; aspect-ratio: 16 / 9; -- 浏览器会根据元素的 height 和宽高比 aspect-ratio 计算出 width */
+  aspect-ratio: var(--ratio);
+  flex-grow: calc(var(--ratio));
+  flex-basis: 0%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 32px;
+  color: #555577;
+  white-space: nowrap;
+  font-weight: 500;
+  background-color: #3eaf7c;
 }
 ```
 
