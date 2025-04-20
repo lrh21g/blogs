@@ -442,6 +442,104 @@ tag:
 
 ![grid_item--place-self](./files/images/grid_item--place-self.drawio.png)
 
+## Grid 布局实例
+
+### 图片墙
+
+::: normal-demo 使用子网格（subgrid）实现图片墙布局
+
+```html
+<div class="gallery">
+  <div class="gallery-content">
+    <div>图片墙</div>
+    <div>使用子网格（subgrid）来构建一个图片墙的布局！</div>
+  </div>
+  <div class="gallery-photo">
+    <div class="photo-item">photo 1</div>
+    <div class="photo-item">photo 2</div>
+    <div class="photo-item">photo 3</div>
+    <div class="photo-item">photo 4</div>
+    <div class="photo-item">photo 5</div>
+  </div>
+</div>
+```
+
+```css
+.gallery {
+  display: grid;
+  gap: 2rem;
+
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.gallery-content {
+  grid-column: 1 / span 3;
+  place-self: center;
+}
+
+.gallery-photo {
+  grid-column: 4 / span 3;
+
+  display: inherit;
+  grid-template-columns: subgrid;
+  grid-template-rows: minmax(auto, 180px);
+  row-gap: 1rem;
+
+  grid-auto-flow: dense;
+}
+
+.gallery-photo .photo-item:nth-child(1) {
+  grid-row: 1;
+  grid-column: 1 / span 2;
+}
+
+.gallery-photo .photo-item:nth-child(2) {
+  grid-row: 2;
+  grid-column: 1 / 2;
+}
+
+.gallery-photo .photo-item:nth-child(3) {
+  grid-row: 2;
+  grid-column: 2 / 3;
+}
+
+.gallery-photo .photo-item:nth-child(4) {
+  grid-row: 1 / span 2;
+  grid-column: 3 / 4;
+}
+
+.gallery-photo .photo-item:nth-child(5) {
+  grid-row: 3 / 4;
+  grid-column: 1 / span 3;
+}
+
+.gallery-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  color: #555577;
+  font-weight: 500;
+  background-color: #3eaf7c;
+}
+
+.gallery-photo .photo-item {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 4px;
+  color: #555577;
+  font-weight: 500;
+  background-color: #3eaf7c;
+}
+```
+
+:::
+
 ## 参考
 
 - [CSS Grid 网格布局教程](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)
