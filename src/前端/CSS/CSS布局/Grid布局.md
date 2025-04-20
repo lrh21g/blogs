@@ -540,6 +540,290 @@ tag:
 
 :::
 
+### 九宫格
+
+::: normal-demo 使用 Grid 实现九宫格布局
+
+```html
+<div class="wrapper">
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+
+  <div class="container">
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+  </div>
+</div>
+```
+
+```css
+.wrapper {
+  display: grid;
+  gap: 4px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-auto-rows: 200px;
+}
+
+.container {
+  padding: 4px;
+  border: 2px solid #000;
+  background-color: #fff;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.container:nth-child(2) {
+  gap: 2px;
+  padding: 0;
+}
+
+.container:nth-child(2) .item {
+  border-radius: 0;
+}
+
+.container:nth-child(3) .item:nth-child(1) {
+  grid-area: 1 / 1 / 3 / 2;
+}
+
+.container:nth-child(3) .item:nth-child(2) {
+  grid-area: 1 / 2 / 2 / 4;
+}
+
+.container:nth-child(4) .item:nth-child(1) {
+  grid-area: 1 / 1 / 3 / 3;
+}
+
+.container:nth-child(5) .item:first-child {
+  grid-column: 1 / -1;
+}
+
+.container:nth-child(5) .item:last-child {
+  grid-column: 1 / -1;
+  grid-row: 3;
+}
+
+.container:nth-child(6) .item:nth-child(4) {
+  grid-area: 2 / 1 / 3 / 4;
+}
+
+.container:nth-child(7) .item:nth-child(1) {
+  grid-area: 1 / 1 / 2 / 3;
+}
+.container:nth-child(7) .item:nth-child(3) {
+  grid-area: 2 / 1 / 3 / 4;
+}
+.container:nth-child(7) .item:last-child {
+  grid-area: 3 / 2 / 4 / 4;
+}
+
+.container:nth-child(8) .item:nth-child(3) {
+  grid-area: 1 / 3 / 4 / 4;
+}
+.container:nth-child(8) .item:nth-child(4) {
+  grid-area: 2 / 1 / 4 / 3;
+}
+
+.container:nth-child(9) .item:nth-child(1) {
+  grid-area: 1 / 1 / 4 / 2;
+}
+
+.container:nth-child(9) .item:nth-child(3) {
+  grid-area: 2 / 2 / 4 / 3;
+}
+
+.container:nth-child(9) .item:nth-child(4) {
+  grid-area: 1 / 3 / 3 / 4;
+}
+
+.item {
+  background: #3eaf7c;
+  border-radius: 8px;
+  overflow: hidden;
+}
+```
+
+:::
+
+### 宽高比布局
+
+::: normal-demo 使用 Grid 实现宽高比布局
+
+```html
+<div class="container">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+  <div class="item">5</div>
+</div>
+```
+
+```css
+.container {
+  --gridContainerWidth: 100%; /* 网格容器尺寸 */
+  --columns: 4; /* 网格列轨道数量 */
+  --gap: 0.5rem; /* 网格列轨道之间间距 */
+
+  /* 假设宽高比是 16:9 */
+  --ratioW: 16;
+  --ratioH: 9;
+
+  /* 计算出宽高比 */
+  --ratio: calc(var(--ratioW) / var(--ratioH));
+
+  --factor: calc(1 / var(--ratio));
+
+  --rowSize: calc(
+    (
+      (var(--gridContainerWidth) - ((var(--columns) - 1) * var(--gap))) 
+      / var(--columns)
+    ) * var(--factor)
+  );
+}
+
+/* 定义一个网格 */
+.container {
+  inline-size: var(--gridContainerWidth);
+
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: var(--gap);
+
+  grid-auto-rows: minmax(var(--rowSize), auto);
+  grid-auto-flow: dense;
+}
+
+/* aspect-ratio: 1 / 1 */
+.item:nth-child(1) {
+  grid-row: span 2;
+  grid-column: span 2;
+}
+
+/* aspect-ratio: 2 / 1 */
+.item:nth-child(2) {
+  grid-column: span 2;
+}
+
+/* aspect-ratio: 1 / 1 */
+.item:nth-child(4) {
+  grid-row: 2 / span 2;
+  grid-column: 3 / span 2;
+}
+
+.item:nth-child(1) {
+  background-color: #09f;
+}
+
+.item:nth-child(2) {
+  background-color: #f36;
+}
+
+.item:nth-child(3) {
+  background-color: #aece9f;
+}
+
+.item:nth-child(4) {
+  background-color: #e09ae09f;
+}
+
+.item:nth-child(5) {
+  background-color: #9ae09fe0;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  font-size: 2rem;
+  text-shadow: 1px 1px 0 rgb(255 255 255 / 0.5),
+    -1px -1px 0 rgb(255 255 255 / 0.5);
+}
+```
+
+:::
+
 ## 参考
 
 - [CSS Grid 网格布局教程](http://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)
