@@ -1,12 +1,6 @@
 import { sidebar } from 'vuepress-theme-hope'
 
 export default sidebar({
-  '/前端/HTML/': [
-    {
-      text: '视口（viewport）',
-      link: '/前端/HTML/viewport.md',
-    },
-  ],
   '/前端/CSS/': [
     {
       text: 'CSS基础', // 必要的，分组的标题文字
@@ -195,8 +189,6 @@ export default sidebar({
       children: [
         '移动端基本概念',
         '移动端适配',
-        '1px边框问题',
-        '图片模糊问题',
         '移动端常见问题',
       ],
     },

@@ -7,8 +7,8 @@ export default navbar([
     // prefix: '/zh/basic/', // 为分组的每一个子链接添加一个前缀
     children: [
       {
-        text: 'HTML',
-        link: '/前端/HTML/',
+        text: 'H5',
+        link: '/前端/H5/',
       },
       {
         text: 'CSS',
@@ -17,10 +17,6 @@ export default navbar([
       {
         text: 'JavaScript',
         link: '/前端/JavaScript/',
-      },
-      {
-        text: 'H5',
-        link: '/前端/H5/',
       },
       {
         text: '动画效果',
