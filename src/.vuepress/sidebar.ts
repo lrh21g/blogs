@@ -19,6 +19,7 @@ export default sidebar({
         'position',
         '元素的显隐',
         'CSS动画',
+        '媒体查询与容器查询',
         'font',
         'text',
         'background',
