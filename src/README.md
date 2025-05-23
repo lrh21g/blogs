@@ -1,7 +1,7 @@
 ---
 # 设置为 true 时启用首页样式
 home: true
-layout: BlogHome
+layout: Blog
 icon: home
 # 标题，填入 false 会取消显示
 title: Mr. LRH blogs
