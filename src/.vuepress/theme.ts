@@ -109,7 +109,7 @@ export default hopeTheme({
   // toc: {
   //   // 标题的级别
   //   levels: 2,
-  // }, 
+  // },
 
   // ========== 主题功能选项 - 博客选项 ==========
   blog: {
@@ -118,18 +118,9 @@ export default hopeTheme({
     description: '知足且上进，温柔而坚定。', // 口号、座右铭或介绍语
     intro: '/intro.html', // 博主的个人介绍地址，填写后将可以点击“博主信息”中的头像或姓名进入个人介绍页
     medias: {}, // 博主的媒体链接配置
-    sidebarDisplay: 'mobile', // 是否在侧边栏展示博主信息： mobile - 在移动视图中显示在侧边栏中, always - 总是展示在侧边栏中, none - 永远不在侧边栏展示
     timeline: '昨日不在', // 时间轴的顶部文字
     articlePerPage: 10, // 每页的文章数量
-    articleInfo: [
-      'Author',
-      'Original',
-      'Date',
-      'PageView',
-      'Category',
-      'Tag',
-      'ReadingTime',
-    ], // 文章列表中展示的文章信息
+    articleInfo: ['Author', 'Original', 'Date', 'PageView', 'Category', 'Tag', 'ReadingTime'], // 文章列表中展示的文章信息
   },
 
   // ========== 主题功能选项 - 加密配置 ==========
