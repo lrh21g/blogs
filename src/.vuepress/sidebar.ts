@@ -293,7 +293,10 @@ export default sidebar({
       text: 'Vue3.x',
       prefix: 'Vue3/',
       collapsible: true,
-      children: ['Vue3CompositionAPI'],
+      children: [
+        '响应式API',
+        'Vue3CompositionAPI',
+      ],
     },
   ],
   '/前端框架/React/': [
