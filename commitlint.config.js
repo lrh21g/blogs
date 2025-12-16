@@ -1,12 +1,16 @@
 // cz-git docs : https://cz-git.qbb.sh/zh/
 
-const fs = require('node:fs')
-const path = require('node:path')
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'cz-git'
 
-const packages = fs.readdirSync(path.resolve(__dirname, 'packages'))
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+const packages = fs.readdirSync(path.resolve(__dirname, 'src'))
 
 /** @type { import('cz-git').UserConfig } */
-module.exports = {
+export default defineConfig({
   ignores: [commit => commit.includes('init')],
   // 继承的规则
   extends: ['@commitlint/config-conventional'],
@@ -61,14 +65,14 @@ module.exports = {
       { value: 'feat', name: 'feat:     ✨ 新增功能 | A new feature' },
       { value: 'fix', name: 'fix:      🐛 修复缺陷 | A bug fix' },
       { value: 'docs', name: 'docs:     📝 文档更新 | Documentation only changes' },
-      { value: 'style', name: 'style:    💄 代码格式 | Changes that do not affect the meaning of the code' },
-      { value: 'refactor', name: 'refactor: 📦 代码重构 | A code change that neither fixes a bug nor adds a feature' },
+      { value: 'style', name: 'style:    💄 代码格式（不影响功能，例如空格、分号等格式修正） | Changes that do not affect the meaning of the code' },
+      { value: 'refactor', name: 'refactor: 📦 代码重构（不包括 bug 修复、功能新增） | A code change that neither fixes a bug nor adds a feature' },
       { value: 'perf', name: 'perf:     🚀 性能提升 | A code change that improves performance' },
-      { value: 'test', name: 'test:     🚨 测试相关 | Adding missing tests or correcting existing tests' },
-      { value: 'build', name: 'build:    👷 构建相关 | Changes that affect the build system or external dependencies' },
-      { value: 'ci', name: 'ci:       ⚙️  持续集成 | Changes to our CI configuration files and scripts' },
+      { value: 'test', name: 'test:     🚨 测试相关（添加疏漏测试或已有测试改动） | Adding missing tests or correcting existing tests' },
+      { value: 'build', name: 'build:    👷 构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等） | Changes that affect the build system or external dependencies' },
+      { value: 'ci', name: 'ci:       ⚙️  持续集成（修改 CI 配置、脚本） | Changes to our CI configuration files and scripts' },
       { value: 'revert', name: 'revert:   ⏪ 回退代码 | Revert to a commit' },
-      { value: 'chore', name: 'chore:    ♻️  其他修改 | Other changes that do not modify src or test files' },
+      { value: 'chore', name: 'chore:    ♻️  其他修改（对构建过程或辅助工具和库的更改（不影响源文件、测试用例）） | Other changes that do not modify src or test files' },
     ],
     // 是否开启 commit message 带有 Emoji 字符
     useEmoji: false,
@@ -136,4 +140,4 @@ module.exports = {
     // 在 简短描述 中是否使用显示默认值
     defaultSubject: '',
   },
-}
+})
