@@ -18,12 +18,10 @@ export default sidebar({
         'float',
         'position',
         '元素的显隐',
-        'CSS动画',
         '媒体查询与容器查询',
         'font',
         'text',
         'background',
-        'css-shapes',
         'scroll-bar',
       ],
     },
@@ -44,10 +42,16 @@ export default sidebar({
       ],
     },
     {
-      text: 'CSS相关',
-      prefix: 'CSS相关/',
+      text: 'CSS动画',
+      prefix: 'CSS动画/',
       collapsible: true,
-      children: ['CSS常用封装', 'CSS实现长宽比'],
+      children: ['CSS动画'],
+    },
+    {
+      text: 'CSS实现',
+      prefix: 'CSS实现/',
+      collapsible: true,
+      children: ['CSS常用封装', 'CSS实现长宽比', 'css-shapes'],
     },
   ],
   '/前端/JavaScript/': [
@@ -194,9 +198,9 @@ export default sidebar({
       ],
     },
   ],
-  '/前端/动画效果/': [
+  '/前端/Web动画/': [
     {
-      text: '动画效果',
+      text: 'Web动画',
       prefix: '',
       collapsible: true,
       children: ['H5直播点赞动画'],
@@ -239,20 +243,6 @@ export default sidebar({
       prefix: 'Nestjs/',
       collapsible: true,
       children: ['基础知识'],
-    },
-  ],
-  '/前端框架/项目搭建/': [
-    {
-      text: '编程规范',
-      icon: 'material-symbols:warning-outline-rounded',
-      prefix: '',
-      link: '编程规范',
-    },
-    {
-      text: '脚手架',
-      icon: 'material-symbols:rule-settings-rounded',
-      prefix: '',
-      link: '脚手架',
     },
   ],
   '/前端框架/Vue/': [
@@ -387,10 +377,26 @@ export default sidebar({
       children: ['Q_A'],
     },
   ],
-  '/架构/微前端/': [
+  '/前端工程化/项目搭建/': [
+    {
+      text: '编程规范',
+      icon: 'material-symbols:warning-outline-rounded',
+      prefix: '',
+      link: '编程规范',
+    },
+  ],
+  '/前端工程化/CLI/': [
+    {
+      text: 'CLI',
+      icon: 'material-symbols:rule-settings-rounded',
+      prefix: '',
+      link: '脚手架',
+    },
+  ],
+  '/前端工程化/微前端/': [
     {
       text: '微前端简介',
-      link: '/架构/微前端/',
+      link: '/前端工程化/微前端/',
     },
     {
       text: '实现方式',
@@ -400,7 +406,7 @@ export default sidebar({
     },
     {
       text: '基础模块实现',
-      link: '/架构/微前端/基础模块实现.md',
+      link: '/前端工程化/微前端/基础模块实现.md',
     },
   ],
   '/服务端/Linux/': [

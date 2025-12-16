@@ -15,13 +15,14 @@ export default navbar([
         link: '/前端/CSS/',
       },
       {
+        text: 'Web动画',
+        link: '/前端/Web动画/',
+      },
+      {
         text: 'JavaScript',
         link: '/前端/JavaScript/',
       },
-      {
-        text: '动画效果',
-        link: '/前端/动画效果/',
-      },
+
       {
         text: 'TypeScript',
         link: '/前端/TypeScript/',
@@ -35,10 +36,6 @@ export default navbar([
   {
     text: '前端框架',
     children: [
-      {
-        text: '项目搭建',
-        link: '/前端框架/项目搭建/',
-      },
       {
         text: 'Vue',
         link: '/前端框架/Vue/',
@@ -75,11 +72,19 @@ export default navbar([
     ],
   },
   {
-    text: '架构',
+    text: '前端工程化',
     children: [
       {
+        text: '项目搭建',
+        link: '/前端工程化/项目搭建/',
+      },
+      {
+        text: 'CLI',
+        link: '/前端工程化/CLI/',
+      },
+      {
         text: '微前端',
-        link: '/架构/微前端/',
+        link: '/前端工程化/微前端/',
       },
     ],
   },
