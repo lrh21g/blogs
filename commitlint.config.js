@@ -72,7 +72,7 @@ export default defineConfig({
       { value: 'build', name: 'build:    👷 构建流程、外部依赖变更（如升级 npm 包、修改 webpack 配置等） | Changes that affect the build system or external dependencies' },
       { value: 'ci', name: 'ci:       ⚙️  持续集成（修改 CI 配置、脚本） | Changes to our CI configuration files and scripts' },
       { value: 'revert', name: 'revert:   ⏪ 回退代码 | Revert to a commit' },
-      { value: 'chore', name: 'chore:    ♻️  其他修改（对构建过程或辅助工具和库的更改（不影响源文件、测试用例）） | Other changes that do not modify src or test files' },
+      { value: 'chore', name: 'chore:    ♻️  其他修改（对构建过程或辅助工具和库的更改（不影响源文件、测试用例） | Other changes that do not modify src or test files' },
     ],
     // 是否开启 commit message 带有 Emoji 字符
     useEmoji: false,

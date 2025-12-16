@@ -1,4 +1,3 @@
-
 name: docs
 
 on:
@@ -13,7 +12,7 @@ jobs:
     steps:
       - name: Checkout
         # action 配置详见 https://github.com/actions/checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           # 如果本项目包含了子模块 (git submodules)，需要将此项设置为 true
           # submodules: true
@@ -34,10 +33,10 @@ jobs:
         uses: pnpm/action-setup@v4
 
       - name: 设置 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           # 选择要使用的 node 版本
-          node-version: 18
+          node-version: 24
           # 缓存 pnpm 依赖
           cache: pnpm
 
@@ -48,7 +47,7 @@ jobs:
       - name: 构建 VuePress 站点
         env:
           NODE_OPTIONS: --max_old_space_size=8192
-        run: pnpm run docs:build 
+        run: pnpm run docs:build
 
       - name: 部署 GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
