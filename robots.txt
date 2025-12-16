@@ -1,0 +1,4 @@
+User-agent:*
+Disallow:
+
+Sitemap: https://lrh21g.github.io/blogs/sitemap.xml
