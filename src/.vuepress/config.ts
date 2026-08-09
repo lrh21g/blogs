@@ -1,3 +1,6 @@
+// import { join } from 'node:path'
+// import { snippet } from '@mdit/plugin-snippet'
+import markDownItLivecodes from 'markdown-it-livecodes'
 import { defineUserConfig } from 'vuepress'
 import { getDirname, path } from 'vuepress/utils'
 
@@ -48,6 +51,18 @@ export default defineUserConfig({
     headers: {
       level: [2, 3, 4],
     },
+  },
+  extendsMarkdown: (md) => {
+    // md.use(snippet, {
+    //   currentPath: env => env.filePath,
+    //   resolvePath: (pathStr, cwd) => {
+    //     if (pathStr.startsWith('@snippet')) {
+    //       return pathStr.replace(/^@snippet/, path.resolve(__dirname, '..'))
+    //     }
+    //     return cwd ? join(cwd, pathStr) : pathStr
+    //   },
+    // })
+    md.use(markDownItLivecodes, { /* options */ })
   },
 
   theme,

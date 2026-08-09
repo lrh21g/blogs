@@ -1,0 +1,12 @@
+# shellEmulator 为 true 时，pnpm 将使用 [类 bash shell][bash-like shell] 的 JavaScript 实现来 执行脚本。
+shellEmulator: true
+
+# trustPolicy 为 no-downgrade 时，如果软件包的信任级别与以前的版本相比有所下降，pnpm 将失败。
+trustPolicy: no-downgrade
+
+# allowBuilds 包匹配器映射，用于显式允许（true）或禁止（false）脚本执行。
+# 此字段取代了 onlyBuiltDependencies 和 ignoredBuiltDependencies（这两个字段也已被此新设置弃用），从而提供了一个单一的信任来源。
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  unrs-resolver: true
